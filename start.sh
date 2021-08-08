@@ -75,13 +75,8 @@ terraform-gcp-provisioner() {
      export SOLR_STARTUP_PARAMS=`jq -r '."cluster"."startup-params"' $CONFIGFILE`
      export ZK_NODE=`terraform output -state=terraform/terraform.tfstate -json zookeeper_details|jq '.[] | .name'`
      export ZK_NODE=${ZK_NODE//\"/}
-<<<<<<< HEAD
-     export ZK_TARBALL_NAME="apache-zookeeper-3.6.1-bin.tar.gz"
-     export ZK_TARBALL_PATH="$ORIG_WORKING_DIR/apache-zookeeper-3.6.1-bin.tar.gz"
-=======
      export ZK_TARBALL_NAME="apache-zookeeper-3.6.3-bin.tar.gz"
      export ZK_TARBALL_PATH="$ORIG_WORKING_DIR/apache-zookeeper-3.6.3-bin.tar.gz"
->>>>>>> stress-harness
      export JDK_TARBALL=`jq -r '."cluster"."jdk-tarball"' $CONFIGFILE`
      export BENCH_USER="solruser"
      export BENCH_KEY="terraform/id_rsa"
@@ -107,7 +102,7 @@ vagrant-provisioner() {
      export ZK_NODE_COUNT=1
 
      export JDK_TARBALL=`jq -r '."cluster"."jdk-tarball"' $CONFIGFILE`
-     export ZK_TARBALL_NAME="apache-zookeeper-3.6.1-bin.tar.gz"
+     export ZK_TARBALL_NAME="apache-zookeeper-3.6.3-bin.tar.gz"
 
      echo_blue "Solr servers: $SOLR_NODE_COUNT"
      bash -c 'printf "["; for ((i=1; i<$SOLR_NODE_COUNT; i++)); do printf "$i,"; done; printf $SOLR_NODE_COUNT; printf "]"' | jq 'map({"name":("solr-"+(.|tostring)), "ip": ("192.168.5."+((.+100)|tostring))}) | map( {(.name): .ip}  )|add' > vagrant/solr-servers.json
@@ -132,7 +127,7 @@ vagrant-provisioner() {
 
      export SOLR_STARTUP_PARAMS=`jq -r '."cluster"."startup-params"' $CONFIGFILE`
      export ZK_NODE=`jq -r ".[]" vagrant/zk-servers.json`
-     export ZK_TARBALL_PATH="$ORIG_WORKING_DIR/apache-zookeeper-3.6.1-bin.tar.gz"
+     export ZK_TARBALL_PATH="$ORIG_WORKING_DIR/apache-zookeeper-3.6.3-bin.tar.gz"
      export BENCH_USER="vagrant"
      export BENCH_KEY="vagrant/id_rsa"
 
@@ -243,12 +238,3 @@ then
      vagrant destroy -f
      rm id_rsa*
 fi
-<<<<<<< HEAD
-if [ "vagrant" == `jq -r '.["cluster"]["provisioning-method"]' $CONFIGFILE` ];
-then
-     cd $ORIG_WORKING_DIR/vagrant
-     vagrant destroy -f
-     rm id_rsa*
-fi
-=======
->>>>>>> stress-harness
