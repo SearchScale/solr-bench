@@ -32,14 +32,15 @@
         "dataset-file": "ecommerce-events.json.gz",
         "file-format": "json",
         "offset": 100000,
-        "max-docs": 110000,
-        "batch-size": 5,
+        "max-docs": 101000,
+        "batch-size": 1,
         "id-field": "id",
         "setups": [
           {
             "setup-name": "slow_updates",
             "collection": "ecommerce-events-${INDEX}",
             "create-collection": false,
+	    "rpm": 60,
             "min-threads": 1,
             "max-threads": 1,
             "thread-step": 1
