@@ -1,7 +1,7 @@
 #CONFIGFILE="cluster-test.json"
 BASEDIR=$(realpath $(dirname "$0"))
 
-for CONFIGFILE in  "stress-facets-local.json"
+for CONFIGFILE in  "stress-facets-local.json" "cluster-test.json"
 do
 
 cd $BASEDIR

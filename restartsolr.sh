@@ -18,6 +18,6 @@ ssh -i terraform/id_rsa -oStrictHostKeyChecking=no $USER@$SOLR_NODE "
 
         cd \$SOLR_DIR;
         bin/solr stop;
-        bin/solr -V -c $SOLR_STARTUP_PARAMS -z $ZK_NODE:2181 -Dhost=$SOLR_NODE
+        bin/solr start $SOLR_STARTUP_PARAMS -z $ZK_NODE:2181 -Dhost=$SOLR_NODE
 "
 

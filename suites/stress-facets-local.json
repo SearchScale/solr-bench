@@ -1,5 +1,5 @@
 {
-  "pre-download": ["https://home.apache.org/~ishan/ecommerce-events.json.gz"],
+  "pre-download": ["http://mostly.cool/ecommerce-events.json.gz"],
   "task-types": {
     "indexing": {
       "index-benchmark": {
@@ -85,7 +85,7 @@
   },
   "cluster": {
     "num-solr-nodes": 3,
-    "startup-params": "-m 16g -V -Dsolr.searchThreads=4",
+    "startup-params": "-m 16g -Dsolr.searchThreads=4",
     "provisioning-method": "local"
   },
   "repositories": [

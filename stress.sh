@@ -265,7 +265,7 @@ echo "Prov method: $provisionmethod"
 if [[ "external" != $provisionmethod ]]
 then
   echo "Downloading Zookeeper..."
-  curl  https://dlcdn.apache.org/zookeeper/zookeeper-3.8.4/apache-zookeeper-3.8.4-bin.tar.gz --output apache-zookeeper-3.8.4-bin.tar.gz
+  download  https://dlcdn.apache.org/zookeeper/zookeeper-3.8.4/apache-zookeeper-3.8.4-bin.tar.gz
   # Clone/checkout the git repository and build Solr
   if [[ "null" == `jq -r '.["solr-package"]' $CONFIGFILE` ]] && [ ! -f $BASEDIR/SolrNightlyBenchmarksWorkDirectory/Download/solr-$COMMIT.tgz ]
   then

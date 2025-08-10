@@ -34,5 +34,5 @@ ssh -i terraform/id_rsa -oStrictHostKeyChecking=no $BENCH_USER@$SOLR_NODE "
 	tar -xf $SOLR_TARBALL_NAME;
 
 	cd \$SOLR_DIR;
-	bin/solr -V -c $SOLR_STARTUP_PARAMS -z $ZK_NODE:2181 -Dhost=$SOLR_NODE
+	bin/solr start $SOLR_STARTUP_PARAMS -z $ZK_NODE:2181 -Dhost=$SOLR_NODE
 "
