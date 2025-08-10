@@ -1,0 +1,87 @@
+{
+  "pre-download": [""],
+  "task-types": {
+    "indexing": {
+      "index-benchmark": {
+        "name": "WIKIPEDIA_ARTICLES",
+        "description": "Wikipedia articles dataset",
+        "replication-type": "cloud",
+        "dataset-file": "datasets/wiki_dump_5Mx2048D.csv.gz",
+        "file-format": "csv",
+        "max-docs": 50000,
+        "batch-size": 5000,
+        "id-field": "id",
+        "ignore-fields": ["article"],
+        "min-threads": 2,
+        "max-threads": 2,
+        "setups": [
+          {
+            "setup-name": "cloud_1x1",
+            "collection": "wikipedia-vector-test",
+            "configset": "conf_wikipedia",
+            "replication-factor": 1,
+            "shards": 1,
+            "thread-step": 1
+          }
+        ]
+      }
+    },
+    "querying": {
+      "query-benchmark": {
+        "name": "Wikipedia vector search queries",
+        "collection": "wikipedia-vector-test",
+        "query-file": "queries/wikipedia-vector-queries.json",
+        "min-threads": 4,
+        "max-threads": 4,
+        "json-query": true,
+        "shuffle": false,
+        "rpm": 12000,
+        "total-count": 500,
+        "warm-count": 10,
+        "interrupt-on-failure": true
+      }
+    }
+  },
+  "global-variables": {},
+  "global-constants": {
+    "HOST": "localhost",
+    "PORT": "8983"
+  },
+  "execution-plan": {
+    "task1": {
+      "type": "indexing",
+      "description": "Indexing Wikipedia articles",
+      "instances": 1,
+      "concurrency": 1,
+      "mode": "sync"
+    },
+    "task2": {
+      "description": "Querying with Wikipedia vector search",
+      "type": "querying",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task1",
+      "mode": "sync"
+    }
+  },
+  "cluster": {
+    "num-solr-nodes": 1,
+    "startup-params": "-m 4g",
+    "provisioning-method": "local"
+  },
+  "repositories": [
+    {
+      "commit-id": "939225d256adae7b886a99c7c963e6884bba6664",
+      "description": "Solr main branch",
+      "name": "solr-repository",
+      "package-subdir": "solr/packaging/",
+      "build-command": "git clean -fdx && cd solr && ../gradlew distTar",
+      "submodules": false,
+      "url": "https://github.com/apache/solr",
+      "user": "solr-bench"
+    }
+  ],
+  "metrics": [
+    "jvm/solr.jvm/memory.heap.usage", "jvm/solr.jvm/threads.count"
+  ]
+}

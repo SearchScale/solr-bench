@@ -18,6 +18,12 @@ import org.apache.solr.benchmarks.query.QueryResponseContentsListener;
 import org.apache.solr.benchmarks.solrcloud.SolrCloud;
 import org.apache.solr.benchmarks.solrcloud.SolrNode;
 import org.apache.solr.client.solrj.impl.ConcurrentUpdateSolrClient;
+import org.apache.solr.client.solrj.impl.CloudSolrClient;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.solr.client.solrj.impl.HttpClientUtil;
 import org.apache.solr.client.solrj.impl.HttpClusterStateProvider;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
@@ -217,10 +223,10 @@ public class BenchmarksMain {
 						solrCloud.createCollection(setup, collectionName, configsetName);
 					}
 					log.info("HELLO: Init called.");
-					indexInit(solrCloud.nodes.get(0).getBaseUrl(), collectionName, i, setup, benchmark);
+					indexInit(solrCloud.nodes.get(0).getBaseUrl(), collectionName, i, setup, benchmark, solrCloud);
 					long start = System.nanoTime();
 					log.info("HELLO: Index called.");
-					index(solrCloud.nodes.get(0).getBaseUrl(), collectionName, i, setup, benchmark);
+					index(solrCloud.nodes.get(0).getBaseUrl(), collectionName, i, setup, benchmark, solrCloud);
 					long end = System.nanoTime();
 					log.info("HELLO: Index call ended.");
 
@@ -289,26 +295,29 @@ public class BenchmarksMain {
         }
     }
 
-    public static void indexInit(String baseUrl, String collection, int threads, IndexBenchmark.Setup setup, IndexBenchmark benchmark) throws Exception {
-    	index(true, baseUrl, collection, threads, setup, benchmark);
+    public static void indexInit(String baseUrl, String collection, int threads, IndexBenchmark.Setup setup, IndexBenchmark benchmark, SolrCloud solrCloud) throws Exception {
+    	index(true, baseUrl, collection, threads, setup, benchmark, solrCloud);
     }
-    public static void index(String baseUrl, String collection, int threads, IndexBenchmark.Setup setup, IndexBenchmark benchmark) throws Exception {
-    	index(false, baseUrl, collection, threads, setup, benchmark);
+    public static void index(String baseUrl, String collection, int threads, IndexBenchmark.Setup setup, IndexBenchmark benchmark, SolrCloud solrCloud) throws Exception {
+    	index(false, baseUrl, collection, threads, setup, benchmark, solrCloud);
     }
-    private static void index(boolean init, String baseUrl, String collection, int threads, IndexBenchmark.Setup setup, IndexBenchmark benchmark) throws Exception {
+    private static void index(boolean init, String baseUrl, String collection, int threads, IndexBenchmark.Setup setup, IndexBenchmark benchmark, SolrCloud solrCloud) throws Exception {
     	if (benchmark.fileFormat.equalsIgnoreCase("json")) {
-    		indexJsonComplex(init, baseUrl, collection, threads, setup, benchmark);
+    		indexJsonComplex(init, baseUrl, collection, threads, setup, benchmark, solrCloud);
     	} else if (benchmark.fileFormat.equalsIgnoreCase("tsv")) {
-    		indexTSV(init, baseUrl, collection, threads, setup, benchmark);
+    		indexTSV(init, baseUrl, collection, threads, setup, benchmark, solrCloud);
     	} else if (benchmark.fileFormat.equalsIgnoreCase("csv")) {
-    		indexCSV(init, baseUrl, collection, threads, setup, benchmark);
+    		indexCSV(init, baseUrl, collection, threads, setup, benchmark, solrCloud);
     	}
     }
 
-    static void indexTSV(boolean init, String baseUrl, String collection, int threads, IndexBenchmark.Setup setup, IndexBenchmark benchmark) throws Exception {
+    static void indexTSV(boolean init, String baseUrl, String collection, int threads, IndexBenchmark.Setup setup, IndexBenchmark benchmark, SolrCloud solrCloud) throws Exception {
         if (init && !isInitPhaseNeeded(benchmark)) return; // no-op
         long start = System.currentTimeMillis();
-        ConcurrentUpdateSolrClient client = new ConcurrentUpdateSolrClient.Builder(baseUrl).withThreadCount(threads).build();
+        ConcurrentUpdateSolrClient client = new ConcurrentUpdateSolrClient.Builder(baseUrl)
+            .withThreadCount(threads)
+            .withQueueSize(1000)
+            .build();
         
         BufferedReader br;
         if (benchmark.datasetFile.endsWith("gz")) {
@@ -338,8 +347,13 @@ public class BenchmarksMain {
         	}
         	if (!doc.containsKey(benchmark.idField)) doc.addField(benchmark.idField, UUID.randomUUID().toString());
 
-        	client.add(collection, doc);
-        	docsProcessed++;
+        	try {
+        		client.add(collection, doc);
+        		docsProcessed++;
+        	} catch (Exception e) {
+        		log.error("Failed to add document at position " + docsProcessed + ": " + e.getMessage(), e);
+        		throw new RuntimeException("Failed to add document: " + e.getMessage(), e);
+        	}
         	
         	// Periodic commit for large batches
         	if (docsProcessed % batchSize == 0) {
@@ -347,17 +361,42 @@ public class BenchmarksMain {
         	}
         }
         br.close();
-        client.blockUntilFinished();
-        client.commit(collection);
-        client.close();
+        
+        try {
+            client.blockUntilFinished();
+            client.commit(collection);
+        } catch (Exception e) {
+            log.error("Indexing failed with error: " + e.getMessage(), e);
+            throw new RuntimeException("Indexing failed: " + e.getMessage(), e);
+        } finally {
+            client.close();
+        }
         
         System.out.println("Total documents processed: " + docsProcessed);
     }
 
-    static void indexCSV(boolean init, String baseUrl, String collection, int threads, IndexBenchmark.Setup setup, IndexBenchmark benchmark) throws Exception {
+    private static List<Float> truncateVectorTo1024Dimensions(String vectorString) {
+        if (!vectorString.startsWith("[") || !vectorString.endsWith("]")) {
+            throw new RuntimeException ("Vector field doesn't have [ and/or ]");
+        }
+        String vectorContent = vectorString.substring(1, vectorString.length() - 1); // Remove [ and ]
+        String[] elements = vectorContent.split(",");
+        List<Float> ret = new ArrayList<Float>();
+        for (int i = 0; i < elements.length; i++) {
+            ret.add(new Float(Float.valueOf(elements[i])));
+        }
+        return ret;
+    }
+
+    static void indexCSV(boolean init, String baseUrl, String collection, int threads, IndexBenchmark.Setup setup, IndexBenchmark benchmark, SolrCloud solrCloud) throws Exception {
         if (init && !isInitPhaseNeeded(benchmark)) return; // no-op
         long start = System.currentTimeMillis();
-        ConcurrentUpdateSolrClient client = new ConcurrentUpdateSolrClient.Builder(baseUrl).withThreadCount(threads).build();
+        
+        // Get ZooKeeper URL from SolrCloud context
+        String zkHost = solrCloud.getZookeeperUrl();
+        String zkChroot = solrCloud.getZookeeperChroot();
+        CloudSolrClient client = new CloudSolrClient.Builder(Arrays.asList(zkHost), Optional.ofNullable(zkChroot)).build();
+        client.setDefaultCollection(collection);
         
         BufferedReader br;
         if (benchmark.datasetFile.endsWith("gz")) {
@@ -394,7 +433,13 @@ public class BenchmarksMain {
         }
         System.out.println("CSV Headers: " + headers);
         
-        // Process data rows
+        // Create thread pool for parallel document processing
+        ExecutorService executor = Executors.newFixedThreadPool(threads);
+        List<Future<Void>> futures = new ArrayList<>();
+        AtomicInteger processedCounter = new AtomicInteger(0);
+        
+        // Process data rows with multithreading
+        List<SolrInputDocument> batch = new ArrayList<>();
         while (iterator.hasNext() && docsProcessed < maxDocs) {
             CSVRecord record = iterator.next();
             
@@ -410,7 +455,13 @@ public class BenchmarksMain {
                 
                 String value = record.get(i);
                 if (value != null && !value.trim().isEmpty()) {
-                    doc.addField(fieldName, value);
+                    if (fieldName.endsWith("_vector")) {
+                        // Strip spaces and truncate vector to 1024 dimensions
+                        value = value.replace(" ", "");
+                        List<Float> vec = truncateVectorTo1024Dimensions(value);
+			doc.addField(fieldName, vec);
+                    }
+		    else doc.addField(fieldName, value);
                 }
             }
             
@@ -418,20 +469,55 @@ public class BenchmarksMain {
                 doc.addField(benchmark.idField, UUID.randomUUID().toString());
             }
 
-            client.add(collection, doc);
+            batch.add(doc);
             docsProcessed++;
             
-            // Periodic status update
-            if (docsProcessed % batchSize == 0) {
-                System.out.println("Indexing: Processed " + docsProcessed + " documents...");
+            // Process batch when it reaches batchSize or we've processed all documents
+            if (batch.size() >= batchSize || docsProcessed >= maxDocs || !iterator.hasNext()) {
+                final List<SolrInputDocument> currentBatch = new ArrayList<>(batch);
+                Future<Void> future = executor.submit(() -> {
+                    try {
+                        client.add(currentBatch);
+                        int processed = processedCounter.addAndGet(currentBatch.size());
+                        if (processed % batchSize == 0) {
+                            System.out.println("Indexing: Processed " + processed + " documents...");
+                        }
+                        return null;
+                    } catch (Exception e) {
+                        log.error("Failed to add batch: " + e.getMessage(), e);
+                        throw new RuntimeException("Failed to add batch: " + e.getMessage(), e);
+                    }
+                });
+                futures.add(future);
+                batch.clear();
             }
         }
         
+        // Wait for all batches to complete
+        for (Future<Void> future : futures) {
+            try {
+                future.get(); // This will throw exception if indexing failed
+            } catch (Exception e) {
+                executor.shutdown();
+                throw new RuntimeException("Indexing failed: " + e.getMessage(), e);
+            }
+        }
+        
+        executor.shutdown();
+        
         parser.close();
         br.close();
-        client.blockUntilFinished();
-        client.commit(collection);
-        client.close();
+        
+        try {
+            log.info("Calling commit...");
+            client.commit(collection);
+            log.info("Commit completed successfully");
+        } catch (Exception e) {
+            log.error("Commit failed with error: " + e.getMessage(), e);
+            throw new RuntimeException("Commit failed: " + e.getMessage(), e);
+        } finally {
+            client.close();
+        }
         
         System.out.println("Total documents processed: " + docsProcessed);
     }
@@ -442,7 +528,7 @@ public class BenchmarksMain {
     		return true;
     	} else return false;
     }
-    static void indexJsonComplex(boolean init, String baseUrl, String collection, int threads, IndexBenchmark.Setup setup, IndexBenchmark benchmark) throws Exception {
+    static void indexJsonComplex(boolean init, String baseUrl, String collection, int threads, IndexBenchmark.Setup setup, IndexBenchmark benchmark, SolrCloud solrCloud) throws Exception {
 		log.info("HELLO: indexJsonComplex() with init? " + init);
       if (init && !isInitPhaseNeeded(benchmark)) return; // no-op
 
