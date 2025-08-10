@@ -429,4 +429,13 @@ public class Util {
 		  throw new RuntimeException("File " + input + " doesn't exist.");
 	  }
   }
+
+  /**
+   * Prints the given message in yellow color using ANSI escape codes.
+   * 
+   * @param message the message to print in yellow
+   */
+  public static void printYellow(String message) {
+	  System.out.println("\033[33m" + message + "\033[0m");
+  }
 }

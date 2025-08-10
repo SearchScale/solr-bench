@@ -65,6 +65,7 @@ public class StressMain {
 		Options cliOptions = new Options();
 		cliOptions.addRequiredOption("f", "file", true, "Configuration file");
 		cliOptions.addRequiredOption("c", "commit", true, "Commit ID");
+		cliOptions.addOption("d", "debug", false, "Enable debug mode for detailed query responses");
 		CommandLineParser cliParser = new DefaultParser();
 		CommandLine cli = cliParser.parse(cliOptions, args);
 		return cli;
@@ -73,6 +74,12 @@ public class StressMain {
 	public static void main(String[] args) throws Exception {
 		CommandLine cliParams = getCLIParams(args);		
 		String configFile = cliParams.getOptionValue("f");
+
+		// Set debug mode if flag is present
+		if (cliParams.hasOption("d")) {
+			BenchmarksMain.DEBUG_MODE = true;
+			log.info("Debug mode enabled - detailed query responses will be shown");
+		}
 
 		// Set the suite base directory from the configFile. All resources, like configsets, datasets,
 		// will be fetched off this path

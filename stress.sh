@@ -33,7 +33,7 @@ CONFIGFILE=$i
 
 
 # parse other params
-while getopts "c:j:" option; do
+while getopts "c:j:d" option; do
   case $option in
     "c")
       commitoverrides+=("$OPTARG")
@@ -41,6 +41,10 @@ while getopts "c:j:" option; do
     "j")
       echo "${OPTARG} found for benchmarking jar"
       SOLR_BENCH_JAR=${OPTARG}
+      ;;
+    "d")
+      echo "Debug mode enabled - will show detailed query responses"
+      DEBUG_FLAG="true"
       ;;
     *)
       # any other arguments for future
@@ -288,10 +292,10 @@ EXTRA_JVM_ARGS=`jq -r '.["extra-jvm-args"] // ""' $CONFIGFILE`
 if [ -z "$SOLR_BENCH_JAR" ] #then no explicit jar provided
 then
   java -Xmx12g $EXTRA_JVM_ARGS -cp $BASEDIR/target/org.apache.solr.benchmarks-${SOLR_BENCH_VERSION}-jar-with-dependencies.jar:. \
-   StressMain -f $CONFIGFILE -c $COMMIT
+   StressMain -f $CONFIGFILE -c $COMMIT ${DEBUG_FLAG:+-d}
   java_exit_code=$?
 else
-  java -Xmx12g $EXTRA_JVM_ARGS -cp ${SOLR_BENCH_JAR}:. StressMain -f $CONFIGFILE -c $COMMIT
+  java -Xmx12g $EXTRA_JVM_ARGS -cp ${SOLR_BENCH_JAR}:. StressMain -f $CONFIGFILE -c $COMMIT ${DEBUG_FLAG:+-d}
   java_exit_code=$?
 fi
 
