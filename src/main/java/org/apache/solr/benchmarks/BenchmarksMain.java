@@ -18,12 +18,6 @@ import org.apache.solr.benchmarks.query.QueryResponseContentsListener;
 import org.apache.solr.benchmarks.solrcloud.SolrCloud;
 import org.apache.solr.benchmarks.solrcloud.SolrNode;
 import org.apache.solr.client.solrj.impl.ConcurrentUpdateSolrClient;
-import org.apache.solr.client.solrj.impl.CloudSolrClient;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.solr.client.solrj.impl.HttpClientUtil;
 import org.apache.solr.client.solrj.impl.HttpClusterStateProvider;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
@@ -48,6 +42,10 @@ import java.util.zip.GZIPInputStream;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.mapdb.DB;
+import org.mapdb.DBMaker;
+import org.mapdb.IndexTreeList;
+import org.mapdb.Serializer;
 
 public class BenchmarksMain {
 	public static boolean DEBUG_MODE = false;
@@ -308,6 +306,8 @@ public class BenchmarksMain {
     		indexTSV(init, baseUrl, collection, threads, setup, benchmark, solrCloud);
     	} else if (benchmark.fileFormat.equalsIgnoreCase("csv")) {
     		indexCSV(init, baseUrl, collection, threads, setup, benchmark, solrCloud);
+    	} else if (benchmark.fileFormat.equalsIgnoreCase("mapdb")) {
+    		indexMapDB(init, baseUrl, collection, threads, setup, benchmark, solrCloud);
     	}
     }
 
@@ -391,12 +391,10 @@ public class BenchmarksMain {
     static void indexCSV(boolean init, String baseUrl, String collection, int threads, IndexBenchmark.Setup setup, IndexBenchmark benchmark, SolrCloud solrCloud) throws Exception {
         if (init && !isInitPhaseNeeded(benchmark)) return; // no-op
         long start = System.currentTimeMillis();
-        
-        // Get ZooKeeper URL from SolrCloud context
-        String zkHost = solrCloud.getZookeeperUrl();
-        String zkChroot = solrCloud.getZookeeperChroot();
-        CloudSolrClient client = new CloudSolrClient.Builder(Arrays.asList(zkHost), Optional.ofNullable(zkChroot)).build();
-        client.setDefaultCollection(collection);
+        ConcurrentUpdateSolrClient client = new ConcurrentUpdateSolrClient.Builder(baseUrl)
+            .withThreadCount(threads)
+            .withQueueSize(1000)
+            .build();
         
         BufferedReader br;
         if (benchmark.datasetFile.endsWith("gz")) {
@@ -433,13 +431,7 @@ public class BenchmarksMain {
         }
         System.out.println("CSV Headers: " + headers);
         
-        // Create thread pool for parallel document processing
-        ExecutorService executor = Executors.newFixedThreadPool(threads);
-        List<Future<Void>> futures = new ArrayList<>();
-        AtomicInteger processedCounter = new AtomicInteger(0);
-        
-        // Process data rows with multithreading
-        List<SolrInputDocument> batch = new ArrayList<>();
+        // Process data rows
         while (iterator.hasNext() && docsProcessed < maxDocs) {
             CSVRecord record = iterator.next();
             
@@ -469,57 +461,141 @@ public class BenchmarksMain {
                 doc.addField(benchmark.idField, UUID.randomUUID().toString());
             }
 
-            batch.add(doc);
-            docsProcessed++;
-            
-            // Process batch when it reaches batchSize or we've processed all documents
-            if (batch.size() >= batchSize || docsProcessed >= maxDocs || !iterator.hasNext()) {
-                final List<SolrInputDocument> currentBatch = new ArrayList<>(batch);
-                Future<Void> future = executor.submit(() -> {
-                    try {
-                        client.add(currentBatch);
-                        int processed = processedCounter.addAndGet(currentBatch.size());
-                        if (processed % batchSize == 0) {
-                            System.out.println("Indexing: Processed " + processed + " documents...");
-                        }
-                        return null;
-                    } catch (Exception e) {
-                        log.error("Failed to add batch: " + e.getMessage(), e);
-                        throw new RuntimeException("Failed to add batch: " + e.getMessage(), e);
-                    }
-                });
-                futures.add(future);
-                batch.clear();
-            }
-        }
-        
-        // Wait for all batches to complete
-        for (Future<Void> future : futures) {
             try {
-                future.get(); // This will throw exception if indexing failed
+                client.add(collection, doc);
+                docsProcessed++;
             } catch (Exception e) {
-                executor.shutdown();
-                throw new RuntimeException("Indexing failed: " + e.getMessage(), e);
+                log.error("Failed to add document at position " + docsProcessed + ": " + e.getMessage(), e);
+                throw new RuntimeException("Failed to add document: " + e.getMessage(), e);
+            }
+            
+            // Periodic status update
+            if (docsProcessed % batchSize == 0) {
+                System.out.println("Indexing: Processed " + docsProcessed + " documents...");
             }
         }
-        
-        executor.shutdown();
         
         parser.close();
         br.close();
         
         try {
-            log.info("Calling commit...");
+            client.blockUntilFinished();
             client.commit(collection);
-            log.info("Commit completed successfully");
         } catch (Exception e) {
-            log.error("Commit failed with error: " + e.getMessage(), e);
-            throw new RuntimeException("Commit failed: " + e.getMessage(), e);
+            log.error("Indexing failed with error: " + e.getMessage(), e);
+            throw new RuntimeException("Indexing failed: " + e.getMessage(), e);
         } finally {
             client.close();
         }
         
         System.out.println("Total documents processed: " + docsProcessed);
+    }
+
+    static void indexMapDB(boolean init, String baseUrl, String collection, int threads, IndexBenchmark.Setup setup, IndexBenchmark benchmark, SolrCloud solrCloud) throws Exception {
+        if (init && !isInitPhaseNeeded(benchmark)) return; // no-op
+        long start = System.currentTimeMillis();
+        ConcurrentUpdateSolrClient client = new ConcurrentUpdateSolrClient.Builder(baseUrl)
+            .withThreadCount(threads)
+            .withQueueSize(1000)
+            .build();
+        
+        File mapdbFile = Util.resolveSuitePath(benchmark.datasetFile);
+        if (!mapdbFile.exists()) {
+            throw new RuntimeException("MapDB file not found: " + mapdbFile.getAbsolutePath());
+        }
+        
+        // Get field names from configuration
+        List<String> fieldNames = benchmark.mapdbFieldNames;
+        if (fieldNames == null || fieldNames.isEmpty()) {
+            throw new RuntimeException("mapdb-field-names must be specified in configuration for MapDB files");
+        }
+        
+        // Find the vector field - look for field containing "vector"
+        String vectorFieldName = null;
+        for (String fieldName : fieldNames) {
+            if (fieldName.toLowerCase().contains("vector")) {
+                vectorFieldName = fieldName;
+                break;
+            }
+        }
+        
+        if (vectorFieldName == null) {
+            throw new RuntimeException("No vector field found in mapdb-field-names. Field names should include a field containing 'vector'");
+        }
+        
+        log.info("Using field names from configuration: {}", fieldNames);
+        log.info("Vector field detected: {}", vectorFieldName);
+        
+        // Open the MapDB file
+        DB db = DBMaker.fileDB(mapdbFile).readOnly().make();
+        IndexTreeList<float[]> vectors = db.indexTreeList("vectors", Serializer.FLOAT_ARRAY).createOrOpen();
+        
+        int docsProcessed = 0;
+        int batchSize = benchmark.batchSize > 0 ? benchmark.batchSize : 1000;
+        int maxDocs = benchmark.maxDocs > 0 ? Math.min(benchmark.maxDocs, vectors.size()) : vectors.size();
+        
+        System.out.println("Processing up to " + maxDocs + " documents from MapDB file with " + vectors.size() + " vectors");
+        System.out.println("Field names: " + fieldNames);
+        System.out.println("Vector field: " + vectorFieldName);
+        
+        try {
+            for (int i = 0; i < maxDocs; i++) {
+                float[] vector = vectors.get(i);
+                
+                SolrInputDocument doc = new SolrInputDocument();
+                
+                // Add only the fields specified in mapdb-field-names
+                for (String fieldName : fieldNames) {
+                    // Skip ignored fields
+                    if (benchmark.ignoreFields != null && benchmark.ignoreFields.contains(fieldName)) {
+                        continue;
+                    }
+                    
+                    if (fieldName.equals(vectorFieldName)) {
+                        // Add the vector field with List<Float> format (maintaining existing vector handling)
+                        List<Float> vectorList = new ArrayList<>();
+                        for (float f : vector) {
+                            vectorList.add(f);
+                        }
+                        doc.addField(fieldName, vectorList);
+                    } else if (fieldName.equals(benchmark.idField)) {
+                        // Add ID field - only field besides vector that we can generate
+                        doc.addField(fieldName, "doc_" + i);
+                    }
+                    // For any other fields in mapdb-field-names, we don't add them 
+                    // since MapDB only contains vectors and we should only index what exists
+                }
+                
+                try {
+                    client.add(collection, doc);
+                    docsProcessed++;
+                } catch (Exception e) {
+                    log.error("Failed to add document at position " + docsProcessed + ": " + e.getMessage(), e);
+                    throw new RuntimeException("Failed to add document: " + e.getMessage(), e);
+                }
+                
+                // Periodic status update
+                if (docsProcessed % batchSize == 0) {
+                    System.out.println("Indexing: Processed " + docsProcessed + " documents...");
+                }
+            }
+            
+            try {
+                client.blockUntilFinished();
+                client.commit(collection);
+            } catch (Exception e) {
+                log.error("Indexing failed with error: " + e.getMessage(), e);
+                throw new RuntimeException("Indexing failed: " + e.getMessage(), e);
+            } finally {
+                client.close();
+                db.close();
+            }
+            
+            System.out.println("Total documents processed: " + docsProcessed);
+        } catch (Exception e) {
+            db.close();
+            throw e;
+        }
     }
 
     static boolean isInitPhaseNeeded(IndexBenchmark benchmark) {

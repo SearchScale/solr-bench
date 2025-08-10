@@ -1,19 +1,20 @@
 {
-  "pre-download": [""],
+  "pre-download": ["http://accounts.searchscale.com/wiki_dump_5Mx2048D.csv.gz.mapdb"],
   "task-types": {
     "indexing": {
       "index-benchmark": {
         "name": "WIKIPEDIA_ARTICLES",
         "description": "Wikipedia articles dataset",
         "replication-type": "cloud",
-        "dataset-file": "datasets/wiki_dump_5Mx2048D.csv.gz",
-        "file-format": "csv",
-        "max-docs": 50000,
-        "batch-size": 5000,
+        "dataset-file": "datasets/wiki_dump_5Mx2048D.csv.gz.mapdb",
+        "file-format": "mapdb",
+        "mapdb-field-names": ["id", "article_vector"],
+        "max-docs": 1500000,
+        "batch-size": 50000,
         "id-field": "id",
-        "ignore-fields": ["article"],
-        "min-threads": 2,
-        "max-threads": 2,
+        "ignore-fields": [],
+        "min-threads": 9,
+        "max-threads": 9,
         "setups": [
           {
             "setup-name": "cloud_1x1",
@@ -66,7 +67,7 @@
   },
   "cluster": {
     "num-solr-nodes": 1,
-    "startup-params": "-m 4g",
+    "startup-params": "-m 32g",
     "provisioning-method": "local"
   },
   "repositories": [
