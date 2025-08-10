@@ -8,12 +8,12 @@
         "replication-type": "cloud",
         "dataset-file": "datasets/wiki_dump_5Mx2048D.csv.gz",
         "file-format": "csv",
-        "max-docs": 100000,
-        "batch-size": 20000,
+        "max-docs": 150000,
+        "batch-size": 25000,
         "id-field": "id",
         "ignore-fields": ["article_vector"],
-        "min-threads": 24,
-        "max-threads": 24,
+        "min-threads": 32,
+        "max-threads": 32,
         "setups": [
           {
             "setup-name": "cloud_1x1",
@@ -36,8 +36,8 @@
         "json-query": true,
         "shuffle": false,
         "rpm": 12000,
-        "total-count": 1700,
-        "warm-count": 5,
+        "total-count": 1500,
+        "warm-count": 50,
         "interrupt-on-failure": false
       }
     }

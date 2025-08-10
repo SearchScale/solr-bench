@@ -81,6 +81,12 @@ public class BenchmarksMain {
       String baseUrl = queryNodes.get(benchmark.queryNode-1).getBaseUrl();
       log.info("Query base URL " + baseUrl);
 
+      // Register query file for log collection
+      if (benchmark.queryFile != null) {
+          String queryFilePath = Util.resolveSuitePath(benchmark.queryFile).getAbsolutePath();
+          solrCloud.addQueryFile(queryFilePath);
+      }
+
 			List<ControlledExecutor.ExecutionListener<BenchmarksMain.OperationKey, QueryResponseContents>> listeners = new ArrayList<>();
 			DetailedQueryStatsListener detailedQueryStatsListener = null;
 			ErrorListener errorListener = null;
@@ -239,7 +245,14 @@ public class BenchmarksMain {
       }
       @Override
       public OperationKey getType() {
-        return new OperationKey(queryRequest.getMethod().name(), queryRequest.getPath(), Map.of("query", queryRequest.toString()));
+        // Extract RID from query parameters for correlation
+        String rid = queryRequest.getParams().get("rid");
+        Map<String, Object> attributes = new HashMap<>();
+        attributes.put("query", queryRequest.toString());
+        if (rid != null) {
+          attributes.put("rid", rid);
+        }
+        return new OperationKey(queryRequest.getMethod().name(), queryRequest.getPath(), attributes);
       }
 
       @Override
@@ -513,6 +526,7 @@ public class BenchmarksMain {
 				// DEBUG: Print every query response in yellow (only if debug mode is enabled)
 				if (DEBUG_MODE) {
 					Util.printYellow("########### DEBUG - Query Response ###########");
+					Util.printYellow("RID: " + key.attributes.get("rid"));
 					Util.printYellow("Query: " + key.attributes.get("query"));
 					Util.printYellow("HTTP Success: " + result.isSuccessful());
 					Util.printYellow("Response: " + (responseStr != null ? responseStr.substring(0, Math.min(500, responseStr.length())) + (responseStr.length() > 500 ? "..." : "") : "null"));
@@ -577,6 +591,7 @@ public class BenchmarksMain {
 				// null result indicates an exception was caught and ignored
 				nullResultCount++;
 				Util.printYellow("########### DEBUG - Null Result ###########");
+				Util.printYellow("RID: " + key.attributes.get("rid"));
 				Util.printYellow("Query: " + key.attributes.get("query"));
 				Util.printYellow("Result was null (exception caught)");
 				Util.printYellow("###########################################");

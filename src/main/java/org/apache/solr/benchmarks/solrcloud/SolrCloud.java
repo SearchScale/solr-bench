@@ -78,6 +78,8 @@ public class SolrCloud {
 
   private Set<String> colls = new HashSet<>();
 
+  private Set<String> queryFiles = new HashSet<>();
+
   final Cluster cluster;
   private final String solrPackagePath;
   private final boolean shouldUploadConfigSet;
@@ -229,6 +231,16 @@ public class SolrCloud {
     }
 
 
+  }
+
+  /**
+   * Register a query file to be included in log collection
+   */
+  public void addQueryFile(String queryFilePath) {
+    if (queryFilePath != null && !queryFilePath.isEmpty()) {
+      queryFiles.add(queryFilePath);
+      log.info("Registered query file for log collection: " + queryFilePath);
+    }
   }
 
   private ZkStateReader getZkStateReader() {
@@ -421,6 +433,18 @@ public class SolrCloud {
     		  String tarCommand = "tar -cf " + tarfile + " -C " + localNode.binDirectory.substring(0, localNode.binDirectory.length()-4) + "server/logs .";
     		  log.info("Trying command: " + tarCommand);
     		  Util.execute(tarCommand, Util.getWorkingDir());
+    		  
+    		  // Add query files to the tarball
+    		  for (String queryFilePath : queryFiles) {
+    		      File queryFile = new File(queryFilePath);
+    		      if (queryFile.exists()) {
+    		          String addQueryCommand = "tar -rf " + tarfile + " -C " + Util.getWorkingDir() + " " + queryFilePath.replace(Util.getWorkingDir() + "/", "");
+    		          log.info("Adding query file to logs: " + addQueryCommand);
+    		          Util.execute(addQueryCommand, Util.getWorkingDir());
+    		      } else {
+    		          log.warn("Query file not found, skipping: " + queryFilePath);
+    		      }
+    		  }
     	  }
       }
     
