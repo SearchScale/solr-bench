@@ -1,0 +1,72 @@
+{
+  "solr-package": "solr-11.0.0-SNAPSHOT.tgz",
+  "cluster": {
+    "num-solr-nodes": 1,
+    "provisioning-method": "local",
+    "startup-params": "-m 4g -Dsolr.searchThreads=-1 -Dsolr.autoCommit.maxTime=86400000 -Dsolr.autoSoftCommit.maxTime=86400000"
+  },
+  "task-types": {
+    "indexing": {
+      "index-benchmark": {
+        "name": "INDEX_MTBENCH_NOSEG",
+        "description": "1M docs, NoMergePolicy, small flush buffer, single commit at end",
+        "replication-type": "cloud",
+        "dataset-file": "mtbench-data.tsv",
+        "file-format": "tsv",
+        "max-docs": 1000000,
+        "batch-size": 20000,
+        "id-field": "id",
+        "min-threads": 1,
+        "max-threads": 1,
+        "setups": [
+          {
+            "setup-name": "single_shard_many_segments",
+            "collection": "mtbench-seg",
+            "configset": "conf_ecommerce_noseg",
+            "share-configset": true,
+            "replication-factor": 1,
+            "shards": 1,
+            "thread-step": 1
+          }
+        ]
+      }
+    },
+    "querying": {
+      "query-benchmark": {
+        "name": "SEG_FACET_FALSE",
+        "collection": "mtbench-seg",
+        "query-file": "mtbench-queries.json",
+        "json-query": true,
+        "shuffle": true,
+        "min-threads": 1,
+        "max-threads": 1,
+        "total-count": 3000,
+        "warm-count": 100,
+        "detailed-stats": false,
+        "params": {
+          "multiThreaded": "false"
+        }
+      }
+    }
+  },
+  "global-variables": {},
+  "global-constants": {},
+  "execution-plan": {
+    "task1": {
+      "type": "indexing",
+      "description": "Index 1M docs with no merge, one commit at end",
+      "instances": 1,
+      "concurrency": 1,
+      "mode": "sync"
+    },
+    "task2": {
+      "type": "querying",
+      "description": "Facet queries, multiThreaded=false, many segments",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task1",
+      "mode": "sync"
+    }
+  },
+  "metrics": []
+}

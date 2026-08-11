@@ -101,8 +101,8 @@ public class LocalSolrNode implements SolrNode {
     String startup = (startupParams != null ? startupParams : "");
     if (startupParamsOverrides != null && startupParamsOverrides.size() >= nodeIndex && startupParamsOverrides.get(nodeIndex-1).trim().length()>0) startup = startupParamsOverrides.get(nodeIndex-1);
 
-    returnValue = Util.execute(binDirectory + "solr start -force -Dhost=localhost " + "-p " + port + " "
-			+ startup + " -V " + " -z " + zookeeper.getHost() + ":"
+    returnValue = Util.execute(binDirectory + "solr start --force -Dhost=localhost " + "-p " + port + " "
+			+ startup + " -z " + zookeeper.getHost() + ":"
 			+ zookeeper.getPort(), binDirectory);
 
     end = System.currentTimeMillis();
@@ -120,7 +120,7 @@ public class LocalSolrNode implements SolrNode {
 	  start = System.currentTimeMillis();
 	  new File(binDirectory + "solr").setExecutable(true);
 	  returnValue = Util.execute(
-			  binDirectory + "solr stop -p " + port + " -z " + zookeeper.getHost() + ":" + zookeeper.getPort() + " -force",
+			  binDirectory + "solr stop -p " + port + " -z " + zookeeper.getHost() + ":" + zookeeper.getPort() + " --force",
 			  binDirectory);
 	  end = System.currentTimeMillis();
 
