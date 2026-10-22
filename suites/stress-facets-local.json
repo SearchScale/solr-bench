@@ -1,5 +1,5 @@
 {
-  "pre-download": ["http://mostly.cool/ecommerce-events.json.gz"],
+  "pre-download": ["https://huggingface.co/buckets/searchscale/solr-bench/resolve/ecommerce-events.json.gz"],
   "task-types": {
     "indexing": {
       "index-benchmark": {
