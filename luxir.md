@@ -27,7 +27,8 @@ The workload is the `stress-facets` suite:
 
 It reports indexing time, restart times, query throughput and query latency percentiles.
 
-[Results](#results) from two machines are at the end of this file.
+[Results](#results) from two machines are at the end of this file, followed by [the changes](#how-solrluxir-got-here)
+that made Solr+Luxir fast and what each one changed.
 
 ## What you need
 
@@ -363,3 +364,33 @@ JVM metrics, sampled the same way:
 | Mean heap usage | 0.45–0.47 | 0.40–0.43 |
 | Threads per node | 47–104 | 46–111 |
 | Heap right after a restart (average) | 221 MB | 206 MB |
+
+## How Solr+Luxir got here
+
+The first runs of this benchmark had Solr+Luxir indexing faster but querying slower than Solr+Lucene: on the
+7950X with the earlier mixed workload (5,000 queries of all four types from 16 clients), 94.6 queries/s against
+131.9. Profiling showed where the time went, and these changes, in the order they were made, turned that into
+268.3 queries/s against 130.2 on the same workload. All are in the commits the results above used.
+
+How each effect was measured, on the 7950X:
+
+- **per shard:** one query type sent to a single shard (`distrib=false`) from one client, mean QTime over 30 queries
+  after 5 warm-up queries, on a 3-node cluster with the 100M index;
+- **16-client mix:** the benchmark's first 5,000 mixed queries from 16 clients against a freshly restarted 3-node
+  cluster with the 100M index (Solr+Lucene: 130.3 queries/s, p99 350 ms).
+
+Each "without → with" adds that change to the ones above it.
+
+| Change | Where | Without → with |
+|---|---|---|
+| Pass Solr's filter (`fq`) to Luxir as a FILTER clause of the query, so the planner sees how selective it is and leads with it, checking the date range only on the filter's documents instead of computing the whole range | luxir-lucene `ed0bedc` (`FilterSlotQuery`) | per shard, range facet 27.5 → 25.8 ms, product facet 26.9 → 23.9 ms |
+| Keep the filters Luxir computes for Solr's filter cache as bitsets, and never call `getBits()` on a `SortedIntDocSet` (it hashed every doc of the filter, twice per request: 26% of CPU on filtered queries) | solr `c9e21f7` (`LuxirCodecQueryComponent`) | per shard, range facet 25.8 → 17.5 ms, product facet 23.9 → 16.5 ms |
+| Take a constant-score query's top k from the match bits of its counting pass instead of running it a second time | luxir-lucene `ed0bedc` (`lxl_multi_top_k`) | per shard, range facet 17.5 → 14.2 ms, product facet 16.5 → 10.7 ms, terms facet 25.4 → 19.7 ms |
+| Run joins between string fields natively: values matched through each segment's doc-values dictionary, then one column scan, instead of Solr's join walking every term through the codec (37% of CPU under load, for 0.5% of the queries) | luxir-lucene `ed0bedc` (`LuxirJoin`), solr `c9e21f7` (`LuxirJoinQParserPlugin`) | per shard, one join 3.31 s → 0.61 s (Solr+Lucene: 2.37 s) |
+| Copy match and filter bits between native memory and Java in bulk; word-by-word segment access was slow until the JIT compiled it, so the first queries after a restart took seconds | luxir-lucene `ed0bedc` (`LuxirSearch`, `NativeLeaf`) | 16-client mix, 174.1 → 229.9 queries/s, p99 1,181 → 155 ms |
+| Verify a range per candidate from each column block's relation to it (wholly inside, wholly outside or crossing), reading values only in crossing blocks; and find a range facet bucket by binary search instead of testing all 300 (measured together) | luxir `48a10abe` (`luxir-patches/0004`), luxir-lucene `ed0bedc` (`lxl_facet_collect`) | per shard, range facet 14.2 → 5.3 ms, product facet 10.7 → 9.6 ms; 16-client mix, 229.9 → 275.7 queries/s, p99 155 → 142 ms |
+| Set `OMP_NUM_THREADS=1` for Solr+Luxir nodes: per-query OpenMP thread teams oversubscribed the CPU under concurrency | suite configuration | full benchmark at 32 clients (before the changes above), 80.7 → 92.2 queries/s, p99 3,132 → 508 ms |
+
+Every change returns the same results as before: on a sample of 180 facet queries the counts, top documents,
+scores and facets were identical after each change, the native join matched Solr's join, and the luxir-lucene and
+Solr module test suites pass, with new tests for joins and for filtered ranges.
