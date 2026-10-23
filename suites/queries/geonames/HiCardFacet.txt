@@ -1,0 +1,3 @@
+q=%2A%3A%2A&json.facet=%7Bgeonameids%3A%7Btype%3Aterms%2Cfield%3Ageonameid%2Climit%3A50000%7D%7D
+q=feature_class_raw%3AP&json.facet=%7Bgeonameids%3A%7Btype%3Aterms%2Cfield%3Ageonameid%2Climit%3A50000%7D%7D
+q=feature_class_raw%3AT&json.facet=%7Bgeonameids%3A%7Btype%3Aterms%2Cfield%3Ageonameid%2Climit%3A50000%7D%7D

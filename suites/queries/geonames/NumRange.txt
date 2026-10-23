@@ -1,0 +1,10 @@
+q=population%3A%5B0+TO+%2A%5D
+q=population%3A%5B1+TO+%2A%5D
+q=population%3A%5B100+TO+%2A%5D
+q=population%3A%5B1000+TO+%2A%5D
+q=population%3A%5B5000+TO+%2A%5D
+q=population%3A%5B20000+TO+%2A%5D
+q=population%3A%5B100000+TO+%2A%5D
+q=population%3A%5B500000+TO+%2A%5D
+q=population%3A%5B1000000+TO+%2A%5D
+q=population%3A%5B5000000+TO+%2A%5D

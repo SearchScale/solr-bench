@@ -1,0 +1,2 @@
+q=%2A%3A%2A&sort=geonameid+desc
+q=%2A%3A%2A&sort=geonameid+asc

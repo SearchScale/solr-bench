@@ -15,6 +15,13 @@ public class QueryBenchmark extends BaseBenchmark {
   @JsonProperty("json-query")
   public Boolean isJsonQuery;
 
+  /**
+   * HTTP method for queries given as URL parameters (not json-query): GET or POST. POST carries
+   * parameters too long for a URL, such as a large terms set.
+   */
+  @JsonProperty("http-method")
+  public String httpMethod = "GET";
+
   @JsonProperty("uri")
   public String uri = "/select";
 

@@ -1,0 +1,10 @@
+q=country_code_raw%3AGD&sort=population+desc
+q=country_code_raw%3AGU&sort=population+desc
+q=country_code_raw%3AMV&sort=population+desc
+q=country_code_raw%3AKG&sort=population+desc
+q=country_code_raw%3ACH&sort=population+desc
+q=country_code_raw%3ACX&sort=population+desc
+q=country_code_raw%3AMQ&sort=population+desc
+q=country_code_raw%3AFM&sort=population+desc
+q=country_code_raw%3AFR&sort=population+desc
+q=country_code_raw%3APH&sort=population+desc

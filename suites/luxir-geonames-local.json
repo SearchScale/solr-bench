@@ -1,0 +1,507 @@
+{
+    "task-types": {
+        "indexing": {
+            "index-benchmark": {
+                "name": "GEONAMES",
+                "description": "Geonames: 11.4M places (text, string, numeric and location fields)",
+                "replication-type": "cloud",
+                "dataset-file": "datasets/geonames.json.gz",
+                "file-format": "json",
+                "batch-size": 10000,
+                "id-field": "id",
+                "threads": [
+                    16
+                ],
+                "setups": [
+                    {
+                        "setup-name": "cloud_3x1",
+                        "collection": "geonames",
+                        "configset": "conf_geonames_luxir",
+                        "replication-factor": 1,
+                        "shards": 3
+                    }
+                ]
+            }
+        },
+        "querying-MatchAll": {
+            "query-benchmark": {
+                "name": "MatchAll queries",
+                "description": "*:*; 1 request; 16 concurrent clients",
+                "collection": "geonames",
+                "query-file": "queries/geonames/MatchAll.txt",
+                "http-method": "POST",
+                "threads": [
+                    16
+                ],
+                "shuffle": false,
+                "duration-secs": 15,
+                "warm-count": 16
+            }
+        },
+        "querying-StringTerm": {
+            "query-benchmark": {
+                "name": "StringTerm queries",
+                "description": "a term on a string field (country_code_raw); 20 requests; 16 concurrent clients",
+                "collection": "geonames",
+                "query-file": "queries/geonames/StringTerm.txt",
+                "http-method": "POST",
+                "threads": [
+                    16
+                ],
+                "shuffle": false,
+                "duration-secs": 15,
+                "warm-count": 20
+            }
+        },
+        "querying-TextTerm": {
+            "query-benchmark": {
+                "name": "TextTerm queries",
+                "description": "a term on a text field (name); 30 requests; 16 concurrent clients",
+                "collection": "geonames",
+                "query-file": "queries/geonames/TextTerm.txt",
+                "http-method": "POST",
+                "threads": [
+                    16
+                ],
+                "shuffle": false,
+                "duration-secs": 15,
+                "warm-count": 30
+            }
+        },
+        "querying-TextPhrase": {
+            "query-benchmark": {
+                "name": "TextPhrase queries",
+                "description": "a two-word phrase on name; 30 requests; 16 concurrent clients",
+                "collection": "geonames",
+                "query-file": "queries/geonames/TextPhrase.txt",
+                "http-method": "POST",
+                "threads": [
+                    16
+                ],
+                "shuffle": false,
+                "duration-secs": 15,
+                "warm-count": 30
+            }
+        },
+        "querying-TextOr": {
+            "query-benchmark": {
+                "name": "TextOr queries",
+                "description": "two terms on name, either; 20 requests; 16 concurrent clients",
+                "collection": "geonames",
+                "query-file": "queries/geonames/TextOr.txt",
+                "http-method": "POST",
+                "threads": [
+                    16
+                ],
+                "shuffle": false,
+                "duration-secs": 15,
+                "warm-count": 20
+            }
+        },
+        "querying-TextAnd": {
+            "query-benchmark": {
+                "name": "TextAnd queries",
+                "description": "two terms on name, both; 20 requests; 16 concurrent clients",
+                "collection": "geonames",
+                "query-file": "queries/geonames/TextAnd.txt",
+                "http-method": "POST",
+                "threads": [
+                    16
+                ],
+                "shuffle": false,
+                "duration-secs": 15,
+                "warm-count": 20
+            }
+        },
+        "querying-CatchAllText": {
+            "query-benchmark": {
+                "name": "CatchAllText queries",
+                "description": "a term on the catch-all _text_ field; 20 requests; 16 concurrent clients",
+                "collection": "geonames",
+                "query-file": "queries/geonames/CatchAllText.txt",
+                "http-method": "POST",
+                "threads": [
+                    16
+                ],
+                "shuffle": false,
+                "duration-secs": 15,
+                "warm-count": 20
+            }
+        },
+        "querying-TextFiltered": {
+            "query-benchmark": {
+                "name": "TextFiltered queries",
+                "description": "a term on name with a feature_class_raw filter; 20 requests; 16 concurrent clients",
+                "collection": "geonames",
+                "query-file": "queries/geonames/TextFiltered.txt",
+                "http-method": "POST",
+                "threads": [
+                    16
+                ],
+                "shuffle": false,
+                "duration-secs": 15,
+                "warm-count": 20
+            }
+        },
+        "querying-NumRange": {
+            "query-benchmark": {
+                "name": "NumRange queries",
+                "description": "a population range; 10 requests; 16 concurrent clients",
+                "collection": "geonames",
+                "query-file": "queries/geonames/NumRange.txt",
+                "http-method": "POST",
+                "threads": [
+                    16
+                ],
+                "shuffle": false,
+                "duration-secs": 15,
+                "warm-count": 16
+            }
+        },
+        "querying-SortPopulation": {
+            "query-benchmark": {
+                "name": "SortPopulation queries",
+                "description": "all docs sorted by population; 2 requests; 16 concurrent clients",
+                "collection": "geonames",
+                "query-file": "queries/geonames/SortPopulation.txt",
+                "http-method": "POST",
+                "threads": [
+                    16
+                ],
+                "shuffle": false,
+                "duration-secs": 15,
+                "warm-count": 16
+            }
+        },
+        "querying-SortGeonameid": {
+            "query-benchmark": {
+                "name": "SortGeonameid queries",
+                "description": "all docs sorted by geonameid; 2 requests; 16 concurrent clients",
+                "collection": "geonames",
+                "query-file": "queries/geonames/SortGeonameid.txt",
+                "http-method": "POST",
+                "threads": [
+                    16
+                ],
+                "shuffle": false,
+                "duration-secs": 15,
+                "warm-count": 16
+            }
+        },
+        "querying-TermSortPop": {
+            "query-benchmark": {
+                "name": "TermSortPop queries",
+                "description": "a country_code_raw term sorted by population; 10 requests; 16 concurrent clients",
+                "collection": "geonames",
+                "query-file": "queries/geonames/TermSortPop.txt",
+                "http-method": "POST",
+                "threads": [
+                    16
+                ],
+                "shuffle": false,
+                "duration-secs": 15,
+                "warm-count": 16
+            }
+        },
+        "querying-CountryFacet": {
+            "query-benchmark": {
+                "name": "CountryFacet queries",
+                "description": "terms facet on country_code_raw with sum(population); 9 requests; 16 concurrent clients",
+                "collection": "geonames",
+                "query-file": "queries/geonames/CountryFacet.txt",
+                "http-method": "POST",
+                "threads": [
+                    16
+                ],
+                "shuffle": false,
+                "duration-secs": 15,
+                "warm-count": 16
+            }
+        },
+        "querying-HiCardFacet": {
+            "query-benchmark": {
+                "name": "HiCardFacet queries",
+                "description": "terms facet on geonameid, limit 50,000; 3 requests; 16 concurrent clients",
+                "collection": "geonames",
+                "query-file": "queries/geonames/HiCardFacet.txt",
+                "http-method": "POST",
+                "threads": [
+                    16
+                ],
+                "shuffle": false,
+                "duration-secs": 15,
+                "warm-count": 16
+            }
+        },
+        "querying-TermsPure": {
+            "query-benchmark": {
+                "name": "TermsPure queries",
+                "description": "a {!terms} set of about 45,700 names; 5 requests; 16 concurrent clients",
+                "collection": "geonames",
+                "query-file": "queries/geonames/TermsPure.txt",
+                "http-method": "POST",
+                "threads": [
+                    16
+                ],
+                "shuffle": false,
+                "duration-secs": 15,
+                "warm-count": 16
+            }
+        },
+        "querying-TermsFiltered": {
+            "query-benchmark": {
+                "name": "TermsFiltered queries",
+                "description": "a term query filtered by the {!terms} set; 5 requests; 16 concurrent clients",
+                "collection": "geonames",
+                "query-file": "queries/geonames/TermsFiltered.txt",
+                "http-method": "POST",
+                "threads": [
+                    16
+                ],
+                "shuffle": false,
+                "duration-secs": 15,
+                "warm-count": 16
+            }
+        },
+        "querying-TermsProhibited": {
+            "query-benchmark": {
+                "name": "TermsProhibited queries",
+                "description": "a term query excluding the {!terms} set; 5 requests; 16 concurrent clients",
+                "collection": "geonames",
+                "query-file": "queries/geonames/TermsProhibited.txt",
+                "http-method": "POST",
+                "threads": [
+                    16
+                ],
+                "shuffle": false,
+                "duration-secs": 15,
+                "warm-count": 16
+            }
+        },
+        "querying-All": {
+            "query-benchmark": {
+                "name": "All queries",
+                "description": "all 212 requests, shuffled; 212 requests; 16 concurrent clients",
+                "collection": "geonames",
+                "query-file": "queries/geonames/All.txt",
+                "http-method": "POST",
+                "threads": [
+                    16
+                ],
+                "shuffle": true,
+                "duration-secs": 30,
+                "warm-count": 212
+            }
+        },
+        "restart-solr-node": {
+            "restart-solr-node": "${NODE_INDEX}",
+            "await-recoveries": true
+        }
+    },
+    "global-variables": {
+        "collection-counter": 0,
+        "restart-counter": 0
+    },
+    "global-constants": {
+        "HOST": "localhost",
+        "PORT": "8983"
+    },
+    "execution-plan": {
+        "task1": {
+            "type": "indexing",
+            "description": "Indexing geonames",
+            "instances": 1,
+            "concurrency": 1,
+            "mode": "sync"
+        },
+        "task2": {
+            "description": "Restart Solr node",
+            "instances": 3,
+            "concurrency": 1,
+            "type": "restart-solr-node",
+            "parameters": {
+                "NODE_INDEX": "${restart-counter}"
+            },
+            "wait-for": "task1",
+            "mode": "sync",
+            "pre-task-evals": [
+                "inc(restart-counter,1)"
+            ]
+        },
+        "task3": {
+            "description": "MatchAll queries",
+            "type": "querying-MatchAll",
+            "instances": 1,
+            "concurrency": 1,
+            "wait-for": "task2",
+            "mode": "sync"
+        },
+        "task4": {
+            "description": "StringTerm queries",
+            "type": "querying-StringTerm",
+            "instances": 1,
+            "concurrency": 1,
+            "wait-for": "task3",
+            "mode": "sync"
+        },
+        "task5": {
+            "description": "TextTerm queries",
+            "type": "querying-TextTerm",
+            "instances": 1,
+            "concurrency": 1,
+            "wait-for": "task4",
+            "mode": "sync"
+        },
+        "task6": {
+            "description": "TextPhrase queries",
+            "type": "querying-TextPhrase",
+            "instances": 1,
+            "concurrency": 1,
+            "wait-for": "task5",
+            "mode": "sync"
+        },
+        "task7": {
+            "description": "TextOr queries",
+            "type": "querying-TextOr",
+            "instances": 1,
+            "concurrency": 1,
+            "wait-for": "task6",
+            "mode": "sync"
+        },
+        "task8": {
+            "description": "TextAnd queries",
+            "type": "querying-TextAnd",
+            "instances": 1,
+            "concurrency": 1,
+            "wait-for": "task7",
+            "mode": "sync"
+        },
+        "task9": {
+            "description": "CatchAllText queries",
+            "type": "querying-CatchAllText",
+            "instances": 1,
+            "concurrency": 1,
+            "wait-for": "task8",
+            "mode": "sync"
+        },
+        "task10": {
+            "description": "TextFiltered queries",
+            "type": "querying-TextFiltered",
+            "instances": 1,
+            "concurrency": 1,
+            "wait-for": "task9",
+            "mode": "sync"
+        },
+        "task11": {
+            "description": "NumRange queries",
+            "type": "querying-NumRange",
+            "instances": 1,
+            "concurrency": 1,
+            "wait-for": "task10",
+            "mode": "sync"
+        },
+        "task12": {
+            "description": "SortPopulation queries",
+            "type": "querying-SortPopulation",
+            "instances": 1,
+            "concurrency": 1,
+            "wait-for": "task11",
+            "mode": "sync"
+        },
+        "task13": {
+            "description": "SortGeonameid queries",
+            "type": "querying-SortGeonameid",
+            "instances": 1,
+            "concurrency": 1,
+            "wait-for": "task12",
+            "mode": "sync"
+        },
+        "task14": {
+            "description": "TermSortPop queries",
+            "type": "querying-TermSortPop",
+            "instances": 1,
+            "concurrency": 1,
+            "wait-for": "task13",
+            "mode": "sync"
+        },
+        "task15": {
+            "description": "CountryFacet queries",
+            "type": "querying-CountryFacet",
+            "instances": 1,
+            "concurrency": 1,
+            "wait-for": "task14",
+            "mode": "sync"
+        },
+        "task16": {
+            "description": "HiCardFacet queries",
+            "type": "querying-HiCardFacet",
+            "instances": 1,
+            "concurrency": 1,
+            "wait-for": "task15",
+            "mode": "sync"
+        },
+        "task17": {
+            "description": "TermsPure queries",
+            "type": "querying-TermsPure",
+            "instances": 1,
+            "concurrency": 1,
+            "wait-for": "task16",
+            "mode": "sync"
+        },
+        "task18": {
+            "description": "TermsFiltered queries",
+            "type": "querying-TermsFiltered",
+            "instances": 1,
+            "concurrency": 1,
+            "wait-for": "task17",
+            "mode": "sync"
+        },
+        "task19": {
+            "description": "TermsProhibited queries",
+            "type": "querying-TermsProhibited",
+            "instances": 1,
+            "concurrency": 1,
+            "wait-for": "task18",
+            "mode": "sync"
+        },
+        "task20": {
+            "description": "All queries",
+            "type": "querying-All",
+            "instances": 1,
+            "concurrency": 1,
+            "wait-for": "task19",
+            "mode": "sync"
+        }
+    },
+    "cluster": {
+        "num-solr-nodes": 3,
+        "startup-params": "-m 16g -Dsolr.searchThreads=4",
+        "environment": {
+            "SOLR_MODULES": "luxir-codec",
+            "OMP_NUM_THREADS": "1",
+            "SOLR_SECURITY_MANAGER_ENABLED": "false",
+            "SOLR_OPTS": "--enable-native-access=ALL-UNNAMED -Dluxir.lucene.library=/data2/mitali-backup/solr-luxir/luxir/build/lux4j-release/bin/libluxir_lucene.so"
+        },
+        "provisioning-method": "local"
+    },
+    "repositories": [
+        {
+            "commit-id": "c9e21f7c6ae20a21d3e97795896127ed5e7b62f4",
+            "description": "Solr luxir-codec branch (Luxir codec module)",
+            "name": "solr-luxir-repository",
+            "package-subdir": "solr/packaging/",
+            "build-command": "git clean -fdx && cd solr && ../gradlew -Pluxir.lucene.jar=/data2/mitali-backup/solr-luxir/luxir-lucene/build/libs/luxir-lucene-0.1.0-SNAPSHOT.jar distTar",
+            "submodules": false,
+            "url": "https://github.com/SearchScale/solr",
+            "user": "ishan"
+        }
+    ],
+    "metrics": [
+        "jvm/solr.jvm/memory.heap.usage",
+        "jvm/solr.jvm/threads.count"
+    ],
+    "zk-metrics": [
+        "sum_configs_read_per_namespace",
+        "sum_configs_write_per_namespace"
+    ]
+}

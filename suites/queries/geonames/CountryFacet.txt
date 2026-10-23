@@ -1,0 +1,9 @@
+q=%2A%3A%2A&json.facet=%7Bcountry_population%3A%7Btype%3Aterms%2Cfield%3Acountry_code_raw%2Cfacet%3A%7Bsum_population%3A%27sum%28population%29%27%7D%7D%7D
+q=feature_class_raw%3AA&json.facet=%7Bcountry_population%3A%7Btype%3Aterms%2Cfield%3Acountry_code_raw%2Cfacet%3A%7Bsum_population%3A%27sum%28population%29%27%7D%7D%7D
+q=feature_class_raw%3AL&json.facet=%7Bcountry_population%3A%7Btype%3Aterms%2Cfield%3Acountry_code_raw%2Cfacet%3A%7Bsum_population%3A%27sum%28population%29%27%7D%7D%7D
+q=feature_class_raw%3AP&json.facet=%7Bcountry_population%3A%7Btype%3Aterms%2Cfield%3Acountry_code_raw%2Cfacet%3A%7Bsum_population%3A%27sum%28population%29%27%7D%7D%7D
+q=feature_class_raw%3AS&json.facet=%7Bcountry_population%3A%7Btype%3Aterms%2Cfield%3Acountry_code_raw%2Cfacet%3A%7Bsum_population%3A%27sum%28population%29%27%7D%7D%7D
+q=feature_class_raw%3AT&json.facet=%7Bcountry_population%3A%7Btype%3Aterms%2Cfield%3Acountry_code_raw%2Cfacet%3A%7Bsum_population%3A%27sum%28population%29%27%7D%7D%7D
+q=feature_class_raw%3AH&json.facet=%7Bcountry_population%3A%7Btype%3Aterms%2Cfield%3Acountry_code_raw%2Cfacet%3A%7Bsum_population%3A%27sum%28population%29%27%7D%7D%7D
+q=feature_class_raw%3AU&json.facet=%7Bcountry_population%3A%7Btype%3Aterms%2Cfield%3Acountry_code_raw%2Cfacet%3A%7Bsum_population%3A%27sum%28population%29%27%7D%7D%7D
+q=feature_class_raw%3AV&json.facet=%7Bcountry_population%3A%7Btype%3Aterms%2Cfield%3Acountry_code_raw%2Cfacet%3A%7Bsum_population%3A%27sum%28population%29%27%7D%7D%7D

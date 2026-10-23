@@ -254,9 +254,10 @@ public class ControlledExecutor<R> {
                 }
             }
 
-            //check for back pressure, if we have too many pending actions, then do not submit more
+            //check for back pressure, if we have too many pending actions, then do not submit more.
+            //a short wait: the pending actions of fast queries finish in a few ms, and a longer wait caps throughput
             while ((submissionCount.get() - executionCount.get()) >= maxPendingActions) {
-                TimeUnit.MILLISECONDS.sleep(100);
+                TimeUnit.MILLISECONDS.sleep(1);
             }
         }
 

@@ -8,6 +8,7 @@ import org.apache.solr.benchmarks.beans.QueryBenchmark;
 import org.apache.solr.benchmarks.readers.TarGzFileReader;
 import org.apache.solr.client.solrj.ResponseParser;
 import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.impl.InputStreamResponseParser;
 import org.apache.solr.client.solrj.request.QueryRequest;
 import org.apache.solr.client.solrj.request.RequestWriter;
@@ -146,10 +147,16 @@ public class QueryGenerator {
             // Add RID parameter
             paramsWithRID.put("rid", rid);
             
-            request = new QueryRequest(new MapSolrParams(paramsWithRID)) {
+            request = new QueryRequest(new MapSolrParams(paramsWithRID), SolrRequest.METHOD.valueOf(queryBenchmark.httpMethod.toUpperCase(Locale.ROOT))) {
                 @Override
                 public String getCollection() {
                     return queryBenchmark.collection;
+                }
+
+                // the response is read as a stream (QueryResponseContents), as for JSON queries
+                @Override
+                public ResponseParser getResponseParser() {
+                    return new InputStreamResponseParser("json");
                 }
             };
         }
