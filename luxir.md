@@ -57,8 +57,8 @@ The [results](#results) below used these versions:
 
 | Repository | Branch | Commit |
 |---|---|---|
-| luxir | `luxir-lucene` | `48a10abe` (Luxir `e42cd268` + the 4 patches in `luxir-lucene/luxir-patches/`) |
-| luxir-lucene | `main` | `ed0bedc` |
+| luxir | `luxir-lucene` | `13c80ecc` (Luxir `8cb622ba` + the 4 patches in `luxir-lucene/luxir-patches/`) |
+| luxir-lucene | `main` | `57f953d` |
 | solr | `luxir-codec` | `c9e21f7c6ae20a21d3e97795896127ed5e7b62f4` |
 
 ## 2. Build the native library
@@ -240,19 +240,19 @@ How to read them:
 ## Results
 
 Results from one run of `suites/stress-facets-local-100m.json` (Solr+Lucene) and
-`suites/luxir-stress-facets-local-100m.json` (Solr+Luxir) on each of two machines, on 2026-10-23. Each run indexes
+`suites/luxir-stress-facets-local-100m.json` (Solr+Luxir) on each of two machines, on 2026-10-23 and 2026-10-24. Each run indexes
 the first 100M events of the 150M dataset, restarts each node, then runs the four query tasks from 16 concurrent
 clients. Ratios are how much better Solr+Luxir is: Solr+Lucene's time ÷ Solr+Luxir's, or Solr+Luxir's throughput ÷
 Solr+Lucene's, so above 1× means Solr+Luxir was faster. Throughput counts each task's warm-up queries (20, or 3 for
 joins) over its whole run; latencies are over the measured queries after them. Restart times include waiting for
 replicas to recover.
 
-Both machines used the same versions and settings, everything cloned from GitHub and built on the machine itself:
+Both machines used the same settings, with everything built on the machine itself:
 
 | | |
 |---|---|
 | Solr+Lucene | apache/solr `main` @ `63f2459` (11.0.0-SNAPSHOT), security manager on |
-| Solr+Luxir | SearchScale/solr `luxir-codec` @ `c9e21f7`, with luxir `48a10abe` and luxir-lucene `ed0bedc`; native library built on the machine with `-DLUXIR_CPU_TARGET=native`; `OMP_NUM_THREADS=1`; security manager off |
+| Solr+Luxir | SearchScale/solr `luxir-codec` @ `c9e21f7`, with the Luxir and luxir-lucene versions given for each machine below; native library built on the machine with `-DLUXIR_CPU_TARGET=native`; `OMP_NUM_THREADS=1`; security manager off |
 | JDK | Oracle JDK 22.0.2, for both Solr and the solr-bench client |
 | Solr nodes | 3 on the same machine, each with `-m 16g -Dsolr.searchThreads=4` |
 | Client | solr-bench (`java -Xmx12g`) on the same machine: 16 indexing threads with 50,000-document batches, 16 query threads with no rate cap |
@@ -264,17 +264,17 @@ On both machines, both runs indexed exactly 100,000,000 documents, with identica
 
 | | 7950X: Solr+Luxir better by | 5950X: Solr+Luxir better by |
 |---|---|---|
-| Indexing | **1.80×** | **2.09×** |
-| Terms facet throughput | **2.11×** | **2.03×** |
+| Indexing | **1.84×** | **2.09×** |
+| Terms facet throughput | **2.14×** | **2.03×** |
 | Range facet throughput | **2.69×** | **2.83×** |
-| Product facet throughput | **0.57×** | **0.55×** |
-| Join throughput | **5.92×** | **6.01×** |
-| All four query tasks (total time) | **2.15×** | **2.09×** |
+| Product facet throughput | **0.58×** | **0.55×** |
+| Join throughput | **5.82×** | **6.01×** |
+| All four query tasks (total time) | **2.16×** | **2.09×** |
 
 - **Indexing:** Solr+Luxir indexed 1.8–2.1× faster.
 - **Terms and range facets:** Solr+Luxir handled 2.0–2.8× the queries per second, with lower latency at every
   percentile.
-- **Product facet:** Solr+Lucene was faster on this query type, with about 1.8× the throughput on both machines. Each
+- **Product facet:** Solr+Lucene was faster on this query type, with about 1.7–1.8× the throughput. Each
   query buckets about 12,000 distinct `product_id` values per shard and computes `avg(price)`; this is the query type
   left to optimize in Solr+Luxir.
 - **Joins:** Solr+Luxir runs joins between string fields natively (`LuxirJoinQParserPlugin`), about 6× the throughput
@@ -282,6 +282,9 @@ On both machines, both runs indexed exactly 100,000,000 documents, with identica
 - **Overall:** the four query tasks took about 2.1× less time on Solr+Luxir.
 
 ### AMD Ryzen 9 7950X
+
+Solr+Luxir used Luxir `8cb622ba` with the 4 patches (`13c80ecc`) and luxir-lucene `57f953d`. The same run on the
+previous base (Luxir `e42cd268`, luxir-lucene `ed0bedc`) was within 1% of these numbers on every task.
 
 | | |
 |---|---|
@@ -292,38 +295,39 @@ On both machines, both runs indexed exactly 100,000,000 documents, with identica
 
 | | Solr+Lucene | Solr+Luxir | Solr+Luxir better by |
 |---|---|---|---|
-| Indexing 100M documents | 701.5 s (142,500 docs/s) | 390.5 s (256,100 docs/s) | **1.80×** |
-| Node restarts | 5.78 s, 5.86 s, 5.79 s | 5.85 s, 5.81 s, 5.78 s | same |
+| Indexing 100M documents | 716.2 s (139,600 docs/s) | 389.1 s (257,000 docs/s) | **1.84×** |
+| Node restarts | 5.84 s, 5.90 s, 5.84 s | 5.77 s, 5.80 s, 5.81 s | same |
 
 | Query task | | Solr+Lucene | Solr+Luxir | Solr+Luxir better by |
 |---|---|---|---|---|
-| Terms facet (6,000 queries) | throughput | 129.7 queries/s | 273.3 queries/s | **2.11×** |
-| | p50 / p95 / p99 | 144.0 / 217.0 / 254.6 ms | 66.8 / 99.1 / 114.3 ms | 2.16× / 2.19× / 2.23× |
-| | mean | 122.3 ms | 57.8 ms | 2.12× |
-| Range facet (6,000) | throughput | 172.6 queries/s | 463.5 queries/s | **2.69×** |
-| | p50 / p95 / p99 | 105.6 / 162.3 / 193.0 ms | 38.9 / 58.5 / 68.6 ms | 2.71× / 2.77× / 2.82× |
-| | mean | 91.4 ms | 34.3 ms | 2.66× |
-| Product facet (6,000) | throughput | 501.7 queries/s | 285.9 queries/s | **0.57×** |
-| | p50 / p95 / p99 | 37.2 / 53.8 / 61.8 ms | 65.3 / 89.9 / 101.9 ms | 0.57× / 0.60× / 0.61× |
-| | mean | 31.4 ms | 55.4 ms | 0.57× |
-| Join (100) | throughput | 2.4 queries/s | 14.2 queries/s | **5.92×** |
-| | p50 / p95 / p99 | 6,967 / 9,303 / 9,612 ms | 1,384 / 1,837 / 2,013 ms | 5.04× / 5.06× / 4.77× |
-| | mean | 6,449 ms | 1,102 ms | 5.85× |
-| All four tasks | total time | 136.2 s | 63.3 s | **2.15×** |
+| Terms facet (6,000 queries) | throughput | 126.7 queries/s | 270.6 queries/s | **2.14×** |
+| | p50 / p95 / p99 | 147.8 / 222.9 / 263.5 ms | 67.3 / 99.5 / 117.4 ms | 2.20× / 2.24× / 2.24× |
+| | mean | 125.4 ms | 58.2 ms | 2.15× |
+| Range facet (6,000) | throughput | 172.2 queries/s | 462.7 queries/s | **2.69×** |
+| | p50 / p95 / p99 | 106.4 / 164.1 / 188.5 ms | 38.7 / 59.3 / 71.4 ms | 2.75× / 2.77× / 2.64× |
+| | mean | 91.7 ms | 34.4 ms | 2.66× |
+| Product facet (6,000) | throughput | 502.2 queries/s | 289.3 queries/s | **0.58×** |
+| | p50 / p95 / p99 | 37.0 / 52.5 / 62.5 ms | 64.6 / 90.1 / 101.9 ms | 0.57× / 0.58× / 0.61× |
+| | mean | 31.2 ms | 54.9 ms | 0.57× |
+| Join (100) | throughput | 2.4 queries/s | 14.1 queries/s | **5.82×** |
+| | p50 / p95 / p99 | 6,919 / 8,933 / 9,587 ms | 1,397 / 1,896 / 2,217 ms | 4.95× / 4.71× / 4.32× |
+| | mean | 6,384 ms | 1,101 ms | 5.80× |
+| All four tasks | total time | 137.0 s | 63.4 s | **2.16×** |
 
 JVM metrics, sampled every 2 seconds (plus the time each sample takes) on each of the 3 nodes over the whole run:
 
 | | Solr+Lucene | Solr+Luxir |
 |---|---|---|
-| Peak heap usage (of 16 GB) | 0.89–0.90 | 0.85–0.90 |
-| Mean heap usage | 0.44–0.45 | 0.40–0.42 |
-| Threads per node | 47–116 | 46–121 |
-| Heap right after a restart (average) | 235 MB | 224 MB |
+| Peak heap usage (of 16 GB) | 0.88–0.89 | 0.85–0.89 |
+| Mean heap usage | 0.45 | 0.40–0.43 |
+| Threads per node | 47–118 | 46–120 |
+| Heap right after a restart (average) | 234 MB | 214 MB |
 
 ### AMD Ryzen 9 5950X
 
-The machine's other workloads were stopped for the runs. The Luxir native library was compiled for the 5950X's Zen 3
-cores, which have no AVX-512.
+Solr+Luxir used Luxir `e42cd268` with the 4 patches (`48a10abe`) and luxir-lucene `ed0bedc`, all cloned from GitHub
+on the machine. The machine's other workloads were stopped for the runs. The Luxir native library was compiled for
+the 5950X's Zen 3 cores, which have no AVX-512.
 
 | | |
 |---|---|
@@ -370,7 +374,8 @@ JVM metrics, sampled the same way:
 The first runs of this benchmark had Solr+Luxir indexing faster but querying slower than Solr+Lucene: on the
 7950X with the earlier mixed workload (5,000 queries of all four types from 16 clients), 94.6 queries/s against
 131.9. Profiling showed where the time went, and these changes, in the order they were made, turned that into
-268.3 queries/s against 130.2 on the same workload. All are in the commits the results above used.
+268.3 queries/s against 130.2 on the same workload. The commits below are where each change was made; the
+Luxir one is `luxir-patches/0004`, which the rebased Luxir above (`13c80ecc`) carries too.
 
 How each effect was measured, on the 7950X:
 
