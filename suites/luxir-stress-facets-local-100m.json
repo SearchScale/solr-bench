@@ -13,32 +13,78 @@
         "max-docs": 100000000,
         "batch-size": 50000,
         "id-field": "id",
-        "min-threads": 8,
-        "max-threads": 8,
+        "threads": [
+          16
+        ],
         "setups": [
           {
             "setup-name": "cloud_3x1",
             "collection": "ecommerce-events",
             "configset": "conf_ecommerce_events_luxir",
             "replication-factor": 1,
-            "shards": 3,
-            "thread-step": 1
+            "shards": 3
           }
         ]
       }
     },
-    "querying": {
+    "querying-terms": {
       "query-benchmark": {
-        "name": "Facet queries",
+        "name": "Terms facet queries",
+        "description": "event_type terms facet over a 7-day event_time range; 16 concurrent clients",
         "collection": "ecommerce-events",
-        "query-file": "queries/facets2.json",
-        "min-threads": 1,
-        "max-threads": 1,
+        "query-file": "queries/facets-terms.json",
+        "threads": [
+          16
+        ],
         "json-query": true,
         "shuffle": false,
-        "rpm": 3000,
-        "total-count": 5000,
+        "total-count": 6020,
         "warm-count": 20
+      }
+    },
+    "querying-range": {
+      "query-benchmark": {
+        "name": "Range facet queries",
+        "description": "price range facet (300 buckets) over purchases in a 7-day range; 16 concurrent clients",
+        "collection": "ecommerce-events",
+        "query-file": "queries/facets-range.json",
+        "threads": [
+          16
+        ],
+        "json-query": true,
+        "shuffle": false,
+        "total-count": 6020,
+        "warm-count": 20
+      }
+    },
+    "querying-product": {
+      "query-benchmark": {
+        "name": "Product facet queries",
+        "description": "product_id terms facet and avg(price) over purchases in a 7-day range; 16 concurrent clients",
+        "collection": "ecommerce-events",
+        "query-file": "queries/facets-product.json",
+        "threads": [
+          16
+        ],
+        "json-query": true,
+        "shuffle": false,
+        "total-count": 6020,
+        "warm-count": 20
+      }
+    },
+    "querying-join": {
+      "query-benchmark": {
+        "name": "Join queries",
+        "description": "all docs filtered by a join on user_session from a 1-day event_time range; 16 concurrent clients",
+        "collection": "ecommerce-events",
+        "query-file": "queries/facets-join.json",
+        "threads": [
+          16
+        ],
+        "json-query": true,
+        "shuffle": false,
+        "total-count": 103,
+        "warm-count": 3
       }
     },
     "restart-solr-node": {
@@ -77,11 +123,35 @@
       ]
     },
     "task3": {
-      "description": "Querying with facet queries",
-      "type": "querying",
+      "description": "Terms facet queries",
+      "type": "querying-terms",
       "instances": 1,
       "concurrency": 1,
       "wait-for": "task2",
+      "mode": "sync"
+    },
+    "task4": {
+      "description": "Range facet queries",
+      "type": "querying-range",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task3",
+      "mode": "sync"
+    },
+    "task5": {
+      "description": "Product facet queries",
+      "type": "querying-product",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task4",
+      "mode": "sync"
+    },
+    "task6": {
+      "description": "Join queries",
+      "type": "querying-join",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task5",
       "mode": "sync"
     }
   },
@@ -90,6 +160,7 @@
     "startup-params": "-m 16g -Dsolr.searchThreads=4",
     "environment": {
       "SOLR_MODULES": "luxir-codec",
+      "OMP_NUM_THREADS": "1",
       "SOLR_SECURITY_MANAGER_ENABLED": "false",
       "SOLR_OPTS": "--enable-native-access=ALL-UNNAMED -Dluxir.lucene.library=/data2/mitali-backup/solr-luxir/luxir/build/lux4j-release/bin/libluxir_lucene.so"
     },
@@ -97,7 +168,7 @@
   },
   "repositories": [
     {
-      "commit-id": "d2d7cf1eddf55a4586c55ecb828a53c4c3fde738",
+      "commit-id": "c9e21f7c6ae20a21d3e97795896127ed5e7b62f4",
       "description": "Solr luxir-codec branch (Luxir codec module)",
       "name": "solr-luxir-repository",
       "package-subdir": "solr/packaging/",
