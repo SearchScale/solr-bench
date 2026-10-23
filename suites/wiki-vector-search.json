@@ -13,16 +13,14 @@
         "batch-size": 50000,
         "id-field": "id",
         "ignore-fields": [],
-        "min-threads": 9,
-        "max-threads": 9,
+        "threads": [9],
         "setups": [
           {
             "setup-name": "cloud_1x1",
             "collection": "wikipedia-vector-test",
             "configset": "conf_wikipedia",
             "replication-factor": 1,
-            "shards": 1,
-            "thread-step": 1
+            "shards": 1
           }
         ]
       }
@@ -32,8 +30,7 @@
         "name": "Wikipedia vector search queries",
         "collection": "wikipedia-vector-test",
         "query-file": "queries/wikipedia-vector-queries.json",
-        "min-threads": 4,
-        "max-threads": 4,
+        "threads": [4],
         "json-query": true,
         "shuffle": false,
         "rpm": 12000,

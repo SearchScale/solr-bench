@@ -12,16 +12,14 @@
         "batch-size": 25000,
         "id-field": "id",
         "ignore-fields": ["article_vector"],
-        "min-threads": 32,
-        "max-threads": 32,
+        "threads": [32],
         "setups": [
           {
             "setup-name": "cloud_1x1",
             "collection": "wikipeida-test",
             "configset": "conf_wikipedia",
             "replication-factor": 1,
-            "shards": 1,
-            "thread-step": 1
+            "shards": 1
           }
         ]
       }
@@ -31,8 +29,7 @@
         "name": "Wikipedia queries",
         "collection": "wikipeida-test",
         "query-file": "queries/wikipedia-queries.json",
-        "min-threads": 4,
-        "max-threads": 4,
+        "threads": [4],
         "json-query": true,
         "shuffle": false,
         "rpm": 12000,

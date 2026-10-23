@@ -14,9 +14,7 @@
             "collection": "small-wikipedia-${INDEX}",
             "replication-factor": 3,
             "shards": 1,
-            "min-threads": 2,
-            "max-threads": 2,
-            "thread-step": 1
+            "threads": [2]
           }
         ]
       }

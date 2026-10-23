@@ -110,8 +110,9 @@ public class BenchmarksMain {
 				listeners.add(new PrometheusHttpRequestDurationListener<>(benchmark.prometheusTypeLabel, collection));
 			}
 
-			for (int threads = benchmark.minThreads; threads <= benchmark.maxThreads; threads++) {
-				QueryGenerator queryGenerator = new QueryGenerator(benchmark);
+			// one generator for all the runs, so each run continues through the query file where the previous one stopped
+			QueryGenerator queryGenerator = new QueryGenerator(benchmark);
+			for (int threads : benchmark.threadCounts()) {
 				HttpSolrClient client = new HttpSolrClient.Builder(baseUrl).build();
 				ControlledExecutor<QueryResponseContents> controlledExecutor = new ControlledExecutor(
 					benchmark.name + " " + collection,
@@ -136,7 +137,8 @@ public class BenchmarksMain {
 										", 95th latency: " + controlledExecutor.stats.getPercentile(95));
 						((List)results.get("query-benchmarks").get(benchmark.name)).add(
 								Util.map("threads", threads, "50th", controlledExecutor.stats.getPercentile(50), "90th", controlledExecutor.stats.getPercentile(90),
-										"95th", controlledExecutor.stats.getPercentile(95), "mean", controlledExecutor.stats.getMean(), "total-queries", controlledExecutor.stats.getN(), "total-time", time));
+										"95th", controlledExecutor.stats.getPercentile(95), "99th", controlledExecutor.stats.getPercentile(99), "mean", controlledExecutor.stats.getMean(), "total-queries", controlledExecutor.stats.getN(), "total-time", time,
+										"qps", controlledExecutor.getThroughput())); // queries per second, warmups included
 					if (detailedQueryStatsListener != null) {
 						Map detailedStats = (Map) results.get("query-benchmarks").computeIfAbsent("detailed-stats", key -> new LinkedHashMap<>());
 						//add the detailed stats (per query in the input query file) collected by the listener
@@ -188,7 +190,8 @@ public class BenchmarksMain {
 				List setupMetrics = new ArrayList();
 				((Map)(results.get("indexing-benchmarks").get(benchmark.name))).put(setup.name, setupMetrics);
 
-				for (int i = benchmark.minThreads; i <= benchmark.maxThreads; i += setup.threadStep) {
+				List<Integer> threadCounts = benchmark.threadCounts();
+				for (int i : threadCounts) {
           log.info("Starting indexing benchmark: {} setup: {} threads: {}", benchmark.name, setup.name, i);
 					String collectionName = collectionNameOverride != null ? collectionNameOverride: setup.collection;
 					String configsetName = setup.configset==null? null: collectionName+".SOLRBENCH";
@@ -229,7 +232,7 @@ public class BenchmarksMain {
 					long end = System.nanoTime();
 					log.info("HELLO: Index call ended.");
 
-					if (i != benchmark.maxThreads && setup.createCollection) {
+					if (i != threadCounts.get(threadCounts.size() - 1) && setup.createCollection) {
 						if (deleteAfter) {
 							solrCloud.deleteCollection(collectionName);
 						}

@@ -30,7 +30,7 @@ public abstract class AbstractTask<T> implements Task<T> {
 
   @Override
   public final Map<String, Object> runTask() throws Exception {
-    int threads = Math.min(taskSpec.minThreads, taskSpec.maxThreads);
+    int threads = taskSpec.threadCounts().get(0);
     if (threads <= 0) {
       threads = 1;
     }

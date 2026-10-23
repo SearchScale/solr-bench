@@ -11,8 +11,7 @@ In the solr-bench config, for example under `task-types`, use `task-by-class` an
         "task-by-class": {
             "task-class": "org.apache.solr.benchmarks.task.SegmentMonitoringTask",
             "name": "Monitor segment status in collection",
-            "min-threads": 1,
-            "max-threads": 1,
+            "threads": [1],
             "rpm": 1,
             "duration-secs" : 600,
             "params" : {
@@ -77,8 +76,7 @@ The below config will issue cores status request to each data node (in round-rob
       "command" : "${SOLRURL}admin/cores?action=STATUS",
       "node-role": "DATA"
     },
-    "min-threads": 1,
-    "max-threads": 1,
+    "threads": [1],
     "rpm": 4,
     "duration-secs" : 600
   }

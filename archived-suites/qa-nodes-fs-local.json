@@ -17,9 +17,7 @@
             "configset": "conf_ecommerce_events",
             "replication-factor": 1,
             "shards": 6,
-            "min-threads": 4,
-            "max-threads": 4,
-            "thread-step": 1
+            "threads": [4]
           }
         ]
       }
@@ -29,8 +27,7 @@
         "name": "Facet queries",
         "collection": "ecommerce-events-${INDEX}",
         "query-file": "facets.json",
-        "min-threads": 2,
-        "max-threads": 2,
+        "threads": [2],
         "json-query": true,
         "shuffle": false,
         "rpm": 3000,

@@ -165,11 +165,11 @@ def export_to_query_details_csv(output_key, stats):
     # Each element in stats array is results on a query, but the result for that
     # (either timings, percentile (for doc hit count) or error_count) are in an array.
     # Each element in that array is actually the result for a task run on n threads (a single run can execute the same
-    # query many times though), which n goes from min-threads to max-threads in benchmark settings.
+    # query many times though), one per entry in the benchmark's "threads" list.
     #
-    # Usually min-threads is equal to max-threads, which means the task is only run once.
+    # Usually "threads" has one entry, which means the task is only run once.
     #
-    # In case if max-threads > min-threads, then we will export to multiple CSV file, one for task run on n threads
+    # In case it has several, then we will export to multiple CSV file, one for task run on n threads
 
     # First figure out and validate # of runs based on the result array size. And group the elements by metricType
     run_count = 0
@@ -229,11 +229,11 @@ def export_to_generic_stats_csv(output_key, stats):
     # Each element in stats array is results on a query, but the result for that
     # (either timings, percentile (for doc hit count) or error_count) are in an array.
     # Each element in that array is actually the result for a task run on n threads (a single run can execute the same
-    # query many times though), which n goes from min-threads to max-threads in benchmark settings.
+    # query many times though), one per entry in the benchmark's "threads" list.
     #
-    # Usually min-threads is equal to max-threads, which means the task is only run once.
+    # Usually "threads" has one entry, which means the task is only run once.
     #
-    # In case if max-threads > min-threads, then we will export to multiple CSV file, one for task run on n threads
+    # In case it has several, then we will export to multiple CSV file, one for task run on n threads
 
     # First figure out and validate # of runs based on the result array size. And group the elements by metricType
     run_count = 0

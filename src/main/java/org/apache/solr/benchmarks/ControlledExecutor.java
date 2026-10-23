@@ -41,6 +41,8 @@ public class ControlledExecutor<R> {
     private final int warmCount; //executions before this would not be tracked in stats
 
     final SynchronizedDescriptiveStatistics stats;
+    private long executionCount; //all executions of the last run, warmups included
+    private long elapsedMillis; //wall time of the last run
 
     public interface ExecutionListener<T, R> {
         /**
@@ -162,8 +164,15 @@ public class ControlledExecutor<R> {
             throw exception; //re-throw the exception so the caller can handle it
         }
         long currTime = System.currentTimeMillis();
+        executionCount = checker.getExecutionCount();
+        elapsedMillis = currTime - startTime;
         long rpm = (currTime - startTime) > 0 ? checker.getExecutionCount() * 1000 * 60 / (currTime - startTime) : checker.getExecutionCount() * 1000 * 60;
         System.out.println("Time elapsed : " + (currTime - startTime)  + " total execution count : "+ checker.getExecutionCount() + " rpm : " + rpm + " benchmarked executions: "+stats.getN()) ;
+    }
+
+    /** Executions per second over the last run, warmups included; 0 before a run. */
+    public double getThroughput() {
+        return elapsedMillis > 0 ? executionCount * 1000.0 / elapsedMillis : 0;
     }
 
     /**

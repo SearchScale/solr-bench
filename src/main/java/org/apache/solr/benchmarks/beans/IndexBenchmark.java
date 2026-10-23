@@ -119,9 +119,6 @@ public class IndexBenchmark extends BaseBenchmark {
      */
     @JsonProperty("delete-collection-on-start")
     public Boolean deleteCollectionOnStart;
-
-    @JsonProperty("thread-step")
-    public int threadStep;
   }
 }
 

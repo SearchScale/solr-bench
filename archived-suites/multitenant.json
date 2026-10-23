@@ -14,9 +14,7 @@
             "collection": "small-wikipedia-${INDEX}",
             "replication-factor": 1,
             "shards": 4,
-            "min-threads": 1,
-            "max-threads": 1,
-            "thread-step": 1
+            "threads": [1]
           }
         ]
       }
@@ -35,9 +33,7 @@
             "setup-name": "slow_updates",
             "collection": "small-wikipedia-${INDEX}",
             "create-collection": false,
-            "min-threads": 1,
-            "max-threads": 1,
-            "thread-step": 1
+            "threads": [1]
           }
         ]
       }
@@ -47,8 +43,7 @@
         "name": "Ongoing queries",
         "collection": "ecommerce-events-${INDEX}",
         "query-file": "queries-ecommerce.json",
-        "min-threads": 1,
-        "max-threads": 1,
+        "threads": [1],
         "json-query": true,
         "shuffle": false,
         "rpm": 300,

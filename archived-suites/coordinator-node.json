@@ -18,9 +18,7 @@
             "share-configset": true,
             "replication-factor": 1,
             "shards": 256,
-            "min-threads": 1,
-            "max-threads": 1,
-            "thread-step": 1
+            "threads": [1]
           }
         ]
       }
@@ -30,8 +28,7 @@
         "name": "Facet queries",
         "collection": "ecommerce-events-${INDEX}",
         "query-file": "queries-ecommerce-heavy.json",
-        "min-threads": 1,
-        "max-threads": 1,
+        "threads": [1],
         "json-query": true,
         "shuffle": false,
         "rpm": 3000,

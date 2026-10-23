@@ -12,16 +12,14 @@
         "max-docs": 2000000,
         "batch-size": 5000,
         "id-field": "id",
-        "min-threads": 4,
-        "max-threads": 4,
+        "threads": [4],
         "setups": [
           {
             "setup-name": "cloud_3x1",
             "collection": "ecommerce-events",
             "configset": "conf_ecommerce_events",
             "replication-factor": 1,
-            "shards": 3,
-            "thread-step": 1
+            "shards": 3
           }
         ]
       }
@@ -31,8 +29,7 @@
         "name": "Facet queries",
         "collection": "ecommerce-events",
         "query-file": "facets2.json",
-        "min-threads": 1,
-        "max-threads": 1,
+        "threads": [1],
         "json-query": true,
         "shuffle": false,
         "rpm": 3000,

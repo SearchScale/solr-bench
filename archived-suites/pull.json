@@ -18,9 +18,7 @@
             "nrt-replicas": 1,
             "pull-replicas": 1,
             "shards": 3,
-            "min-threads": 8,
-            "max-threads": 8,
-            "thread-step": 1
+            "threads": [8]
           }
         ]
       }
@@ -30,8 +28,7 @@
         "name": "Facet queries",
         "collection": "ecommerce-events",
         "query-file": "queries-ecommerce.json",
-        "min-threads": 1,
-        "max-threads": 1,
+        "threads": [1],
         "json-query": true,
         "shuffle": false,
         "params": {

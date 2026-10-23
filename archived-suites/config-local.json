@@ -31,9 +31,7 @@
           "collection": "small-wikipedia",
           "replication-factor": 1,
           "shards": 1,
-          "min-threads": 2,
-          "max-threads": 2,
-          "thread-step": 1
+          "threads": [2]
         }
       ]
     }
@@ -43,8 +41,7 @@
       "name": "Terms queries",
       "collection": "small-wikipedia",
       "query-file": "small-data/queryFile",
-      "min-threads": 1,
-      "max-threads": 2,
+      "threads": [1, 2],
       "json-query": false,
       "rpm": 3000,
       "total-count": 21,

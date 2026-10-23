@@ -1066,8 +1066,8 @@ public class StressMain {
 				if (type.indexBenchmark.setups.size() != 1) {
 					throw new RuntimeException("Indexing benchmark task type " + typeName + " should have only 1 setup, but has " + type.indexBenchmark.setups.size() + ".");
 				}
-				if (type.indexBenchmark.setups.get(0).threadStep != 1) {
-					throw new RuntimeException("Indexing benchmark task type " + typeName + " should have threadStep=1, but has " + type.indexBenchmark.setups.get(0).threadStep + ".");
+				if (type.indexBenchmark.threadCounts().size() != 1) {
+					throw new RuntimeException("Indexing benchmark task type " + typeName + " should have one thread count, but has " + type.indexBenchmark.threadCounts() + ".");
 				}
 			}
 		}
