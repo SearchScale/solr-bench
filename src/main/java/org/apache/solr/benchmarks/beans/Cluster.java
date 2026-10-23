@@ -26,7 +26,11 @@ public class Cluster {
 
   @JsonProperty("startup-params-overrides")
   public List<String> startupParamsOverrides;
-  
+
+  /** Extra environment variables for local Solr nodes, e.g. SOLR_MODULES or SOLR_OPTS */
+  @JsonProperty("environment")
+  public Map<String, String> environment;
+
   @JsonProperty("terraform-gcp-config")
   public Map<String, Object> terraformGCPConfig;
 

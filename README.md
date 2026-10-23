@@ -46,7 +46,7 @@ In the coordinator VM, check out this solr-bench repository.
 1. `mvn clean compile assembly:single`
 2. `./cleanup.sh && ./stress.sh -c <commit> <config-file>`
 
-Example: `./cleanup.sh ./stress.sh -c dfde16a004206cc92e21cc5a6cad9030fbe13c20 suites/stress-facets-local.json`
+Example: `./cleanup.sh ./stress.sh -c dfde16a004206cc92e21cc5a6cad9030fbe13c20 suites/stress-facets-local-100m.json`
 
 
 #### Available tests
@@ -55,7 +55,7 @@ Note: This is subject to change
 ```
 
 1. `cluster-test.json` : Creates an 8 node cluster and create 1000 collections of various `numShards` and measure shutdown & restart performance
-2. `stress-facets-local.json` : Indexes 20 million documents from an ecommerce events dataset, issues 5k facet queries against it.
+2. `stress-facets-local-100m.json` : Indexes 100 million documents from an ecommerce events dataset, restarts each node, then issues 5k facet queries against it. `luxir-stress-facets-local-100m.json` runs the same workload on Solr with the Luxir codec; see [luxir.md](luxir.md).
 3. `prs-vs-nonprs.json` : Creates 1k collections using non-PRS mode (default), then restarts 7 nodes, then cleans up, and repeats the same for PRS.
 
 ### Results

@@ -60,6 +60,18 @@ public class IndexBenchmark extends BaseBenchmark {
    */
   @JsonProperty("live-state")
   public boolean liveState;
+
+  /**
+   * List of field names to ignore during indexing (e.g., large vectors or unused fields)
+   */
+  @JsonProperty("ignore-fields")
+  public List<String> ignoreFields;
+
+  /**
+   * Field names for MapDB files (in order: id, title, article, vector_field, etc.)
+   */
+  @JsonProperty("mapdb-field-names")
+  public List<String> mapdbFieldNames;
   static public class Setup {
     @JsonProperty("setup-name")
     public String name;

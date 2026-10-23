@@ -21,7 +21,7 @@
       <dependency>
          <groupId>org.apache.solr</groupId>
          <artifactId>solr-solrj</artifactId>
-         <version>9.2.0</version>
+         <version>9.5.0</version>
          <exclusions>
             <exclusion>
                <groupId>org.mortbay</groupId>
@@ -116,7 +116,7 @@
       <dependency>
          <groupId>org.apache.lucene</groupId>
          <artifactId>lucene-test-framework</artifactId>
-         <version>8.7.0</version>
+         <version>9.5.0</version>
       </dependency>
 
       <dependency>
@@ -204,13 +204,19 @@
       <dependency>
          <groupId>org.apache.solr</groupId>
          <artifactId>solr-core</artifactId>
-         <version>9.2.0</version>
+         <version>9.5.0</version>
       </dependency>
 
       <dependency>
          <groupId>io.prometheus</groupId>
          <artifactId>simpleclient_httpserver</artifactId>
          <version>0.16.0</version>
+      </dependency>
+
+      <dependency>
+         <groupId>org.mapdb</groupId>
+         <artifactId>mapdb</artifactId>
+         <version>3.1.0</version>
       </dependency>
 
    </dependencies>

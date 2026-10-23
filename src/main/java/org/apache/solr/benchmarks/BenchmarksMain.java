@@ -39,8 +39,16 @@ import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Supplier;
 import java.util.zip.GZIPInputStream;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+import org.mapdb.DB;
+import org.mapdb.DBMaker;
+import org.mapdb.IndexTreeList;
+import org.mapdb.Serializer;
 
 public class BenchmarksMain {
+	public static boolean DEBUG_MODE = false;
 
     private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
@@ -77,14 +85,25 @@ public class BenchmarksMain {
       String baseUrl = queryNodes.get(benchmark.queryNode-1).getBaseUrl();
       log.info("Query base URL " + baseUrl);
 
+      // Register query file for log collection
+      if (benchmark.queryFile != null) {
+          String queryFilePath = Util.resolveSuitePath(benchmark.queryFile).getAbsolutePath();
+          solrCloud.addQueryFile(queryFilePath);
+      }
+
 			List<ControlledExecutor.ExecutionListener<BenchmarksMain.OperationKey, QueryResponseContents>> listeners = new ArrayList<>();
 			DetailedQueryStatsListener detailedQueryStatsListener = null;
+			ErrorListener errorListener = null;
 
 			if (benchmark.detailedStats) {  //add either DetailedQueryStatsListener or ErrorListener
 				detailedQueryStatsListener = new DetailedQueryStatsListener();
 				listeners.add(detailedQueryStatsListener);
+				// Also add error tracking for detailed stats
+				errorListener = new ErrorListener();
+				listeners.add(errorListener);
 			} else {
-				listeners.add(new ErrorListener());
+				errorListener = new ErrorListener();
+				listeners.add(errorListener);
 			}
 			if (PrometheusExportManager.isEnabled()) {
 				log.info("Adding Prometheus listener for query benchmark [" + benchmark.name + "]");
@@ -127,6 +146,29 @@ public class BenchmarksMain {
 							stats.setExtraProperty("threads", threads);
 							stats.setExtraProperty("total-time", time);
 							outputStats.add(Util.map(stats.getMetricType().getDataCategory(), stats)); //forced by the design that this has to be a map, otherwise we shouldn't need to do this one entry map
+						}
+					}
+					
+					// Report query errors
+					if (errorListener != null) {
+						int totalErrors = errorListener.getTotalErrors();
+						if (totalErrors > 0) {
+							// Print error summary in red
+							System.out.println("\033[31m########### QUERY ERRORS DETECTED ###########\033[0m");
+							System.out.println("\033[31mTotal query errors: " + totalErrors + "\033[0m");
+							System.out.println("\033[31m- HTTP errors: " + errorListener.getHttpErrorCount() + "\033[0m");
+							System.out.println("\033[31m- Solr response errors: " + errorListener.getSolrErrorCount() + "\033[0m");
+							System.out.println("\033[31m- Response parse errors: " + errorListener.getResponseParseErrorCount() + "\033[0m");
+							System.out.println("\033[31m- Exception/null results: " + errorListener.getNullResultCount() + "\033[0m");
+							System.out.println("\033[31m############################################\033[0m");
+							
+							// Also add errors to results for tracking
+							((List)results.get("query-benchmarks").get(benchmark.name)).add(
+								Util.map("threads", threads, "total-errors", totalErrors, 
+								        "http-errors", errorListener.getHttpErrorCount(),
+								        "solr-errors", errorListener.getSolrErrorCount(),
+								        "parse-errors", errorListener.getResponseParseErrorCount(),
+								        "null-results", errorListener.getNullResultCount()));
 						}
 					}
 				}
@@ -179,11 +221,13 @@ public class BenchmarksMain {
 						}
 						solrCloud.createCollection(setup, collectionName, configsetName);
 					}
-
-					indexInit(solrCloud.nodes.get(0).getBaseUrl(), collectionName, i, setup, benchmark);
+					log.info("HELLO: Init called.");
+					indexInit(solrCloud.nodes.get(0).getBaseUrl(), collectionName, i, setup, benchmark, solrCloud);
 					long start = System.nanoTime();
-					index(solrCloud.nodes.get(0).getBaseUrl(), collectionName, i, setup, benchmark);
+					log.info("HELLO: Index called.");
+					index(solrCloud.nodes.get(0).getBaseUrl(), collectionName, i, setup, benchmark, solrCloud);
 					long end = System.nanoTime();
+					log.info("HELLO: Index call ended.");
 
 					if (i != benchmark.maxThreads && setup.createCollection) {
 						if (deleteAfter) {
@@ -206,7 +250,14 @@ public class BenchmarksMain {
       }
       @Override
       public OperationKey getType() {
-        return new OperationKey(queryRequest.getMethod().name(), queryRequest.getPath(), Map.of("query", queryRequest.toString()));
+        // Extract RID from query parameters for correlation
+        String rid = queryRequest.getParams().get("rid");
+        Map<String, Object> attributes = new HashMap<>();
+        attributes.put("query", queryRequest.toString());
+        if (rid != null) {
+          attributes.put("rid", rid);
+        }
+        return new OperationKey(queryRequest.getMethod().name(), queryRequest.getPath(), attributes);
       }
 
       @Override
@@ -243,23 +294,31 @@ public class BenchmarksMain {
         }
     }
 
-    public static void indexInit(String baseUrl, String collection, int threads, IndexBenchmark.Setup setup, IndexBenchmark benchmark) throws Exception {
-    	index(true, baseUrl, collection, threads, setup, benchmark);
+    public static void indexInit(String baseUrl, String collection, int threads, IndexBenchmark.Setup setup, IndexBenchmark benchmark, SolrCloud solrCloud) throws Exception {
+    	index(true, baseUrl, collection, threads, setup, benchmark, solrCloud);
     }
-    public static void index(String baseUrl, String collection, int threads, IndexBenchmark.Setup setup, IndexBenchmark benchmark) throws Exception {
-    	index(false, baseUrl, collection, threads, setup, benchmark);
+    public static void index(String baseUrl, String collection, int threads, IndexBenchmark.Setup setup, IndexBenchmark benchmark, SolrCloud solrCloud) throws Exception {
+    	index(false, baseUrl, collection, threads, setup, benchmark, solrCloud);
     }
-    private static void index(boolean init, String baseUrl, String collection, int threads, IndexBenchmark.Setup setup, IndexBenchmark benchmark) throws Exception {
+    private static void index(boolean init, String baseUrl, String collection, int threads, IndexBenchmark.Setup setup, IndexBenchmark benchmark, SolrCloud solrCloud) throws Exception {
     	if (benchmark.fileFormat.equalsIgnoreCase("json")) {
-    		indexJsonComplex(init, baseUrl, collection, threads, setup, benchmark);
+    		indexJsonComplex(init, baseUrl, collection, threads, setup, benchmark, solrCloud);
     	} else if (benchmark.fileFormat.equalsIgnoreCase("tsv")) {
-    		indexTSV(baseUrl, collection, threads, setup, benchmark);
+    		indexTSV(init, baseUrl, collection, threads, setup, benchmark, solrCloud);
+    	} else if (benchmark.fileFormat.equalsIgnoreCase("csv")) {
+    		indexCSV(init, baseUrl, collection, threads, setup, benchmark, solrCloud);
+    	} else if (benchmark.fileFormat.equalsIgnoreCase("mapdb")) {
+    		indexMapDB(init, baseUrl, collection, threads, setup, benchmark, solrCloud);
     	}
     }
 
-    static void indexTSV(String baseUrl, String collection, int threads, IndexBenchmark.Setup setup, IndexBenchmark benchmark) throws Exception {
+    static void indexTSV(boolean init, String baseUrl, String collection, int threads, IndexBenchmark.Setup setup, IndexBenchmark benchmark, SolrCloud solrCloud) throws Exception {
+        if (init && !isInitPhaseNeeded(benchmark)) return; // no-op
         long start = System.currentTimeMillis();
-        ConcurrentUpdateSolrClient client = new ConcurrentUpdateSolrClient.Builder(baseUrl).withThreadCount(threads).build();
+        ConcurrentUpdateSolrClient client = new ConcurrentUpdateSolrClient.Builder(baseUrl)
+            .withThreadCount(threads)
+            .withQueueSize(1000)
+            .build();
         
         BufferedReader br;
         if (benchmark.datasetFile.endsWith("gz")) {
@@ -273,7 +332,13 @@ public class BenchmarksMain {
         for (int i=0; i<headers.size(); i++) if (headers.get(i).endsWith("#")) headers.remove(i--);
         System.out.println(headers);
         
-        while ((line = br.readLine()) != null) {
+        int docsProcessed = 0;
+        int batchSize = benchmark.batchSize > 0 ? benchmark.batchSize : 1000;
+        int maxDocs = benchmark.maxDocs > 0 ? benchmark.maxDocs : Integer.MAX_VALUE;
+        
+        System.out.println("Processing up to " + maxDocs + " documents in batches of " + batchSize);
+        
+        while ((line = br.readLine()) != null && docsProcessed < maxDocs) {
         	if (line.trim().equals("")) continue; // ignore empty lines
         	String fields[] = line.split("\\t");
         	if (fields.length != headers.size()) throw new RuntimeException("Mismatch in field lengths against TSV header: " + line);
@@ -283,12 +348,255 @@ public class BenchmarksMain {
         	}
         	if (!doc.containsKey(benchmark.idField)) doc.addField(benchmark.idField, UUID.randomUUID().toString());
 
-        	client.add(collection, doc);
+        	try {
+        		client.add(collection, doc);
+        		docsProcessed++;
+        	} catch (Exception e) {
+        		log.error("Failed to add document at position " + docsProcessed + ": " + e.getMessage(), e);
+        		throw new RuntimeException("Failed to add document: " + e.getMessage(), e);
+        	}
+        	
+        	// Periodic commit for large batches
+        	if (docsProcessed % batchSize == 0) {
+        		System.out.println("Processed " + docsProcessed + " documents...");
+        	}
         }
         br.close();
-        client.blockUntilFinished();
-        client.commit(collection);
-        client.close();        
+        
+        try {
+            client.blockUntilFinished();
+            client.commit(collection);
+        } catch (Exception e) {
+            log.error("Indexing failed with error: " + e.getMessage(), e);
+            throw new RuntimeException("Indexing failed: " + e.getMessage(), e);
+        } finally {
+            client.close();
+        }
+        
+        System.out.println("Total documents processed: " + docsProcessed);
+    }
+
+    private static List<Float> truncateVectorTo1024Dimensions(String vectorString) {
+        if (!vectorString.startsWith("[") || !vectorString.endsWith("]")) {
+            throw new RuntimeException ("Vector field doesn't have [ and/or ]");
+        }
+        String vectorContent = vectorString.substring(1, vectorString.length() - 1); // Remove [ and ]
+        String[] elements = vectorContent.split(",");
+        List<Float> ret = new ArrayList<Float>();
+        for (int i = 0; i < elements.length; i++) {
+            ret.add(new Float(Float.valueOf(elements[i])));
+        }
+        return ret;
+    }
+
+    static void indexCSV(boolean init, String baseUrl, String collection, int threads, IndexBenchmark.Setup setup, IndexBenchmark benchmark, SolrCloud solrCloud) throws Exception {
+        if (init && !isInitPhaseNeeded(benchmark)) return; // no-op
+        long start = System.currentTimeMillis();
+        ConcurrentUpdateSolrClient client = new ConcurrentUpdateSolrClient.Builder(baseUrl)
+            .withThreadCount(threads)
+            .withQueueSize(1000)
+            .build();
+        
+        BufferedReader br;
+        if (benchmark.datasetFile.endsWith("gz")) {
+            GZIPInputStream gzis = new GZIPInputStream(new FileInputStream(Util.resolveSuitePath(benchmark.datasetFile)));
+            br = new BufferedReader(new InputStreamReader(gzis));
+        } else {
+            br = new BufferedReader(new FileReader(Util.resolveSuitePath(benchmark.datasetFile)));
+        }
+        
+        CSVParser parser = CSVFormat.DEFAULT.parse(br);
+
+        int docsProcessed = 0;
+        int batchSize = benchmark.batchSize > 0 ? benchmark.batchSize : 1000;
+        int maxDocs = benchmark.maxDocs > 0 ? benchmark.maxDocs : Integer.MAX_VALUE;
+        
+        System.out.println("Processing up to " + maxDocs + " documents in batches of " + batchSize);
+        
+        // Fields to ignore from configuration
+        Set<String> ignoreFieldSet = new HashSet<>();
+        if (benchmark.ignoreFields != null) {
+            ignoreFieldSet.addAll(benchmark.ignoreFields);
+        }
+        
+        // Read header row first
+        Iterator<CSVRecord> iterator = parser.iterator();
+        if (!iterator.hasNext()) {
+            throw new RuntimeException("CSV file is empty or has no header");
+        }
+        
+        CSVRecord headerRecord = iterator.next();
+        List<String> headers = new ArrayList<>();
+        for (String header : headerRecord) {
+            headers.add(header);
+        }
+        System.out.println("CSV Headers: " + headers);
+        
+        // Process data rows
+        while (iterator.hasNext() && docsProcessed < maxDocs) {
+            CSVRecord record = iterator.next();
+            
+            SolrInputDocument doc = new SolrInputDocument();
+            
+            for (int i = 0; i < headers.size() && i < record.size(); i++) {
+                String fieldName = headers.get(i);
+                
+                // Skip ignored fields
+                if (ignoreFieldSet.contains(fieldName)) {
+                    continue;
+                }
+                
+                String value = record.get(i);
+                if (value != null && !value.trim().isEmpty()) {
+                    if (fieldName.endsWith("_vector")) {
+                        // Strip spaces and truncate vector to 1024 dimensions
+                        value = value.replace(" ", "");
+                        List<Float> vec = truncateVectorTo1024Dimensions(value);
+			doc.addField(fieldName, vec);
+                    }
+		    else doc.addField(fieldName, value);
+                }
+            }
+            
+            if (!doc.containsKey(benchmark.idField)) {
+                doc.addField(benchmark.idField, UUID.randomUUID().toString());
+            }
+
+            try {
+                client.add(collection, doc);
+                docsProcessed++;
+            } catch (Exception e) {
+                log.error("Failed to add document at position " + docsProcessed + ": " + e.getMessage(), e);
+                throw new RuntimeException("Failed to add document: " + e.getMessage(), e);
+            }
+            
+            // Periodic status update
+            if (docsProcessed % batchSize == 0) {
+                System.out.println("Indexing: Processed " + docsProcessed + " documents...");
+            }
+        }
+        
+        parser.close();
+        br.close();
+        
+        try {
+            client.blockUntilFinished();
+            client.commit(collection);
+        } catch (Exception e) {
+            log.error("Indexing failed with error: " + e.getMessage(), e);
+            throw new RuntimeException("Indexing failed: " + e.getMessage(), e);
+        } finally {
+            client.close();
+        }
+        
+        System.out.println("Total documents processed: " + docsProcessed);
+    }
+
+    static void indexMapDB(boolean init, String baseUrl, String collection, int threads, IndexBenchmark.Setup setup, IndexBenchmark benchmark, SolrCloud solrCloud) throws Exception {
+        if (init && !isInitPhaseNeeded(benchmark)) return; // no-op
+        long start = System.currentTimeMillis();
+        ConcurrentUpdateSolrClient client = new ConcurrentUpdateSolrClient.Builder(baseUrl)
+            .withThreadCount(threads)
+            .withQueueSize(1000)
+            .build();
+        
+        File mapdbFile = Util.resolveSuitePath(benchmark.datasetFile);
+        if (!mapdbFile.exists()) {
+            throw new RuntimeException("MapDB file not found: " + mapdbFile.getAbsolutePath());
+        }
+        
+        // Get field names from configuration
+        List<String> fieldNames = benchmark.mapdbFieldNames;
+        if (fieldNames == null || fieldNames.isEmpty()) {
+            throw new RuntimeException("mapdb-field-names must be specified in configuration for MapDB files");
+        }
+        
+        // Find the vector field - look for field containing "vector"
+        String vectorFieldName = null;
+        for (String fieldName : fieldNames) {
+            if (fieldName.toLowerCase().contains("vector")) {
+                vectorFieldName = fieldName;
+                break;
+            }
+        }
+        
+        if (vectorFieldName == null) {
+            throw new RuntimeException("No vector field found in mapdb-field-names. Field names should include a field containing 'vector'");
+        }
+        
+        log.info("Using field names from configuration: {}", fieldNames);
+        log.info("Vector field detected: {}", vectorFieldName);
+        
+        // Open the MapDB file
+        DB db = DBMaker.fileDB(mapdbFile).readOnly().make();
+        IndexTreeList<float[]> vectors = db.indexTreeList("vectors", Serializer.FLOAT_ARRAY).createOrOpen();
+        
+        int docsProcessed = 0;
+        int batchSize = benchmark.batchSize > 0 ? benchmark.batchSize : 1000;
+        int maxDocs = benchmark.maxDocs > 0 ? Math.min(benchmark.maxDocs, vectors.size()) : vectors.size();
+        
+        System.out.println("Processing up to " + maxDocs + " documents from MapDB file with " + vectors.size() + " vectors");
+        System.out.println("Field names: " + fieldNames);
+        System.out.println("Vector field: " + vectorFieldName);
+        
+        try {
+            for (int i = 0; i < maxDocs; i++) {
+                float[] vector = vectors.get(i);
+                
+                SolrInputDocument doc = new SolrInputDocument();
+                
+                // Add only the fields specified in mapdb-field-names
+                for (String fieldName : fieldNames) {
+                    // Skip ignored fields
+                    if (benchmark.ignoreFields != null && benchmark.ignoreFields.contains(fieldName)) {
+                        continue;
+                    }
+                    
+                    if (fieldName.equals(vectorFieldName)) {
+                        // Add the vector field with List<Float> format (maintaining existing vector handling)
+                        List<Float> vectorList = new ArrayList<>();
+                        for (float f : vector) {
+                            vectorList.add(f);
+                        }
+                        doc.addField(fieldName, vectorList);
+                    } else if (fieldName.equals(benchmark.idField)) {
+                        // Add ID field - only field besides vector that we can generate
+                        doc.addField(fieldName, "doc_" + i);
+                    }
+                    // For any other fields in mapdb-field-names, we don't add them 
+                    // since MapDB only contains vectors and we should only index what exists
+                }
+                
+                try {
+                    client.add(collection, doc);
+                    docsProcessed++;
+                } catch (Exception e) {
+                    log.error("Failed to add document at position " + docsProcessed + ": " + e.getMessage(), e);
+                    throw new RuntimeException("Failed to add document: " + e.getMessage(), e);
+                }
+                
+                // Periodic status update
+                if (docsProcessed % batchSize == 0) {
+                    System.out.println("Indexing: Processed " + docsProcessed + " documents...");
+                }
+            }
+            
+            try {
+                client.blockUntilFinished();
+                client.commit(collection);
+            } catch (Exception e) {
+                log.error("Indexing failed with error: " + e.getMessage(), e);
+                throw new RuntimeException("Indexing failed: " + e.getMessage(), e);
+            } finally {
+                client.close();
+                db.close();
+            }
+            
+            System.out.println("Total documents processed: " + docsProcessed);
+        } catch (Exception e) {
+            db.close();
+            throw e;
+        }
     }
 
     static boolean isInitPhaseNeeded(IndexBenchmark benchmark) {
@@ -297,7 +605,8 @@ public class BenchmarksMain {
     		return true;
     	} else return false;
     }
-    static void indexJsonComplex(boolean init, String baseUrl, String collection, int threads, IndexBenchmark.Setup setup, IndexBenchmark benchmark) throws Exception {
+    static void indexJsonComplex(boolean init, String baseUrl, String collection, int threads, IndexBenchmark.Setup setup, IndexBenchmark benchmark, SolrCloud solrCloud) throws Exception {
+		log.info("HELLO: indexJsonComplex() with init? " + init);
       if (init && !isInitPhaseNeeded(benchmark)) return; // no-op
 
         long start = System.currentTimeMillis();
@@ -348,7 +657,12 @@ public class BenchmarksMain {
                 0,
                 indexBatchSupplier,
                 listeners);
+
+			  log.info("HELLO: Running controlled executor: " + controlledExecutor);
+
               controlledExecutor.run();
+			  log.info("HELLO: Done running the controlled executor: " + controlledExecutor);
+
               HttpSolrClient client = new HttpSolrClient.Builder(baseUrl).build();
               client.commit(collection);
               client.close();
@@ -362,16 +676,109 @@ public class BenchmarksMain {
     }
 
 	private static class ErrorListener implements QueryResponseContentsListener {
+		private int httpErrorCount = 0;
+		private int solrErrorCount = 0;
+		private int nullResultCount = 0;
+		private int responseParseErrorCount = 0;
 
 		@Override
 		public void onExecutionComplete(OperationKey key, QueryResponseContents result, long duration) {
-			try {
-				if (result != null) {
-					printErrOutput((String) key.attributes.get("query"), result.getResponseStreamAsString());
+			if (result != null) {
+				String responseStr = result.getResponseStreamAsString();
+				
+				// DEBUG: Print every query response in yellow (only if debug mode is enabled)
+				if (DEBUG_MODE) {
+					Util.printYellow("########### DEBUG - Query Response ###########");
+					Util.printYellow("RID: " + key.attributes.get("rid"));
+					Util.printYellow("Query: " + key.attributes.get("query"));
+					Util.printYellow("HTTP Success: " + result.isSuccessful());
+					Util.printYellow("Response: " + (responseStr != null ? responseStr.substring(0, Math.min(500, responseStr.length())) + (responseStr.length() > 500 ? "..." : "") : "null"));
+					Util.printYellow("############################################");
 				}
-			} catch (IOException e) {
-				log.warn("Failed to invoke printErrOutput");
+				
+				// Check HTTP status first
+				if (!result.isSuccessful()) {
+					httpErrorCount++;
+					System.out.println("########### HTTP ERROR - Query failed ");
+					System.out.println("failed query " + key.attributes.get("query"));
+					System.out.println("HTTP Error response " + responseStr);
+					return;
+				}
+				
+				// Check Solr response status
+				if (responseStr == null) {
+					responseParseErrorCount++;
+					System.out.println("########### RESPONSE PARSE ERROR - Query failed ");
+					System.out.println("failed query " + key.attributes.get("query"));
+					System.out.println("Could not read response stream");
+					return;
+				}
+				
+				if (!responseStr.trim().startsWith("{")) {
+					responseParseErrorCount++;
+					System.out.println("########### INVALID RESPONSE FORMAT - Query failed ");
+					System.out.println("failed query " + key.attributes.get("query"));
+					System.out.println("Non-JSON response " + responseStr);
+					return;
+				}
+				
+				// Parse JSON to check Solr status
+				try {
+					if (responseStr.contains("\"responseHeader\"")) {
+						// Look for status field in responseHeader
+						int statusStart = responseStr.indexOf("\"status\":");
+						if (statusStart != -1) {
+							// Extract status value
+							statusStart += 9; // length of "status":
+							int statusEnd = responseStr.indexOf(',', statusStart);
+							if (statusEnd == -1) statusEnd = responseStr.indexOf('}', statusStart);
+							if (statusEnd != -1) {
+								String statusStr = responseStr.substring(statusStart, statusEnd).trim();
+								int status = Integer.parseInt(statusStr);
+								if (status != 0) {
+									solrErrorCount++;
+									System.out.println("########### SOLR ERROR - Query failed ");
+									System.out.println("failed query " + key.attributes.get("query"));
+									System.out.println("Solr status: " + status);
+									System.out.println("Response: " + responseStr);
+									return;
+								}
+							}
+						}
+					}
+				} catch (Exception e) {
+					// If we can't parse the status, don't count it as an error but log it
+					log.debug("Could not parse Solr status from response for query: " + key.attributes.get("query"));
+				}
+			} else {
+				// null result indicates an exception was caught and ignored
+				nullResultCount++;
+				Util.printYellow("########### DEBUG - Null Result ###########");
+				Util.printYellow("RID: " + key.attributes.get("rid"));
+				Util.printYellow("Query: " + key.attributes.get("query"));
+				Util.printYellow("Result was null (exception caught)");
+				Util.printYellow("###########################################");
 			}
+		}
+		
+		public int getTotalErrors() {
+			return httpErrorCount + solrErrorCount + responseParseErrorCount + nullResultCount;
+		}
+		
+		public int getHttpErrorCount() {
+			return httpErrorCount;
+		}
+		
+		public int getSolrErrorCount() {
+			return solrErrorCount;
+		}
+		
+		public int getResponseParseErrorCount() {
+			return responseParseErrorCount;
+		}
+		
+		public int getNullResultCount() {
+			return nullResultCount;
 		}
 	}
 

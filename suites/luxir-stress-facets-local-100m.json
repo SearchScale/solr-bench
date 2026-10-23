@@ -1,0 +1,118 @@
+{
+  "pre-download": [
+    "https://huggingface.co/buckets/searchscale/solr-bench/resolve/ecommerce-events-150m.json.gz"
+  ],
+  "task-types": {
+    "indexing": {
+      "index-benchmark": {
+        "name": "ECOMMERCE_EVENTS",
+        "description": "E-Commerce Events dataset",
+        "replication-type": "cloud",
+        "dataset-file": "datasets/ecommerce-events-150m.json.gz",
+        "file-format": "json",
+        "max-docs": 100000000,
+        "batch-size": 50000,
+        "id-field": "id",
+        "min-threads": 8,
+        "max-threads": 8,
+        "setups": [
+          {
+            "setup-name": "cloud_3x1",
+            "collection": "ecommerce-events",
+            "configset": "conf_ecommerce_events_luxir",
+            "replication-factor": 1,
+            "shards": 3,
+            "thread-step": 1
+          }
+        ]
+      }
+    },
+    "querying": {
+      "query-benchmark": {
+        "name": "Facet queries",
+        "collection": "ecommerce-events",
+        "query-file": "queries/facets2.json",
+        "min-threads": 1,
+        "max-threads": 1,
+        "json-query": true,
+        "shuffle": false,
+        "rpm": 3000,
+        "total-count": 5000,
+        "warm-count": 20
+      }
+    },
+    "restart-solr-node": {
+      "restart-solr-node": "${NODE_INDEX}",
+      "await-recoveries": true
+    }
+  },
+  "global-variables": {
+    "collection-counter": 0,
+    "restart-counter": 0
+  },
+  "global-constants": {
+    "HOST": "localhost",
+    "PORT": "8983"
+  },
+  "execution-plan": {
+    "task1": {
+      "type": "indexing",
+      "description": "Indexing events",
+      "instances": 1,
+      "concurrency": 1,
+      "mode": "sync"
+    },
+    "task2": {
+      "description": "Restart Solr node",
+      "instances": 3,
+      "concurrency": 1,
+      "type": "restart-solr-node",
+      "parameters": {
+        "NODE_INDEX": "${restart-counter}"
+      },
+      "wait-for": "task1",
+      "mode": "sync",
+      "pre-task-evals": [
+        "inc(restart-counter,1)"
+      ]
+    },
+    "task3": {
+      "description": "Querying with facet queries",
+      "type": "querying",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task2",
+      "mode": "sync"
+    }
+  },
+  "cluster": {
+    "num-solr-nodes": 3,
+    "startup-params": "-m 16g -Dsolr.searchThreads=4",
+    "environment": {
+      "SOLR_MODULES": "luxir-codec",
+      "SOLR_SECURITY_MANAGER_ENABLED": "false",
+      "SOLR_OPTS": "--enable-native-access=ALL-UNNAMED -Dluxir.lucene.library=/data2/mitali-backup/solr-luxir/luxir/build/lux4j-release/bin/libluxir_lucene.so"
+    },
+    "provisioning-method": "local"
+  },
+  "repositories": [
+    {
+      "commit-id": "d2d7cf1eddf55a4586c55ecb828a53c4c3fde738",
+      "description": "Solr luxir-codec branch (Luxir codec module)",
+      "name": "solr-luxir-repository",
+      "package-subdir": "solr/packaging/",
+      "build-command": "git clean -fdx && cd solr && ../gradlew -Pluxir.lucene.jar=/data2/mitali-backup/solr-luxir/luxir-lucene/build/libs/luxir-lucene-0.1.0-SNAPSHOT.jar distTar",
+      "submodules": false,
+      "url": "https://github.com/SearchScale/solr",
+      "user": "ishan"
+    }
+  ],
+  "metrics": [
+    "jvm/solr.jvm/memory.heap.usage",
+    "jvm/solr.jvm/threads.count"
+  ],
+  "zk-metrics": [
+    "sum_configs_read_per_namespace",
+    "sum_configs_write_per_namespace"
+  ]
+}

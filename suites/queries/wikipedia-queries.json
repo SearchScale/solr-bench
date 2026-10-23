@@ -1,0 +1,1797 @@
+{"query":"archaeology river","limit":10,"fields":["title","namespace"]}
+{"query":"forest","limit":10,"fields":["title","namespace"]}
+{"query":"mountain","limit":10,"fields":["title","namespace"]}
+{"query":"molecular astronomy","limit":10,"fields":["title","namespace"]}
+{"query":"\"economic development\"","limit":10,"fields":["title","namespace"]}
+{"query":"art continent","limit":10,"fields":["title","namespace"]}
+{"query":"engineering","limit":10,"fields":["title","namespace"]}
+{"query":"conservation geography","limit":10,"fields":["title","namespace"]}
+{"query":"\"ancient civilization\"","limit":10,"fields":["title","namespace"]}
+{"query":"evolution","limit":10,"fields":["title","namespace"]}
+{"query":"valley","limit":10,"fields":["title","namespace"]}
+{"query":"mathematics","limit":10,"fields":["title","namespace"]}
+{"query":"tradition ancient","limit":10,"fields":["title","namespace"]}
+{"query":"medieval","limit":10,"fields":["title","namespace"]}
+{"query":"quantum","limit":10,"fields":["title","namespace"]}
+{"query":"\"climate change\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"social media\"","limit":10,"fields":["title","namespace"]}
+{"query":"language molecular","limit":10,"fields":["title","namespace"]}
+{"query":"philosophy","limit":10,"fields":["title","namespace"]}
+{"query":"\"industrial revolution\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"civilization","limit":10,"fields":["title","namespace"]}
+{"query":"democracy valley","limit":10,"fields":["title","namespace"]}
+{"query":"ocean revolution","limit":10,"fields":["title","namespace"]}
+{"query":"civilization","limit":10,"fields":["title","namespace"]}
+{"query":"custom","limit":10,"fields":["title","namespace"]}
+{"query":"discovery cold war","limit":10,"fields":["title","namespace"]}
+{"query":"country quantum","limit":10,"fields":["title","namespace"]}
+{"query":"analysis mathematics","limit":10,"fields":["title","namespace"]}
+{"query":"quantum","limit":10,"fields":["title","namespace"]}
+{"query":"\"genetic engineering\"","limit":10,"fields":["title","namespace"]}
+{"query":"tradition psychology","limit":10,"fields":["title","namespace"]}
+{"query":"\"genetic engineering\"","limit":10,"fields":["title","namespace"]}
+{"query":"language","limit":10,"fields":["title","namespace"]}
+{"query":"\"economic development\"","limit":10,"fields":["title","namespace"]}
+{"query":"hypothesis","limit":10,"fields":["title","namespace"]}
+{"query":"heritage republic","limit":10,"fields":["title","namespace"]}
+{"query":"geography culture","limit":10,"fields":["title","namespace"]}
+{"query":"engineering art","limit":10,"fields":["title","namespace"]}
+{"query":"genetic history","limit":10,"fields":["title","namespace"]}
+{"query":"energy city","limit":10,"fields":["title","namespace"]}
+{"query":"island astronomy","limit":10,"fields":["title","namespace"]}
+{"query":"\"economic development\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"civilization climate","limit":10,"fields":["title","namespace"]}
+{"query":"custom","limit":10,"fields":["title","namespace"]}
+{"query":"\"economic development\"","limit":10,"fields":["title","namespace"]}
+{"query":"technology","limit":10,"fields":["title","namespace"]}
+{"query":"mythology country","limit":10,"fields":["title","namespace"]}
+{"query":"\"ancient civilization\"","limit":10,"fields":["title","namespace"]}
+{"query":"story mathematics","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"monarchy revolution","limit":10,"fields":["title","namespace"]}
+{"query":"biology","limit":10,"fields":["title","namespace"]}
+{"query":"science world war","limit":10,"fields":["title","namespace"]}
+{"query":"folklore","limit":10,"fields":["title","namespace"]}
+{"query":"\"quantum mechanics\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"economic development\"","limit":10,"fields":["title","namespace"]}
+{"query":"economics","limit":10,"fields":["title","namespace"]}
+{"query":"custom","limit":10,"fields":["title","namespace"]}
+{"query":"civilization","limit":10,"fields":["title","namespace"]}
+{"query":"revolution","limit":10,"fields":["title","namespace"]}
+{"query":"quantum","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"evolution literature","limit":10,"fields":["title","namespace"]}
+{"query":"empire story","limit":10,"fields":["title","namespace"]}
+{"query":"ritual world war","limit":10,"fields":["title","namespace"]}
+{"query":"\"social media\"","limit":10,"fields":["title","namespace"]}
+{"query":"tale forest","limit":10,"fields":["title","namespace"]}
+{"query":"ocean folklore","limit":10,"fields":["title","namespace"]}
+{"query":"ancient","limit":10,"fields":["title","namespace"]}
+{"query":"experiment democracy","limit":10,"fields":["title","namespace"]}
+{"query":"\"climate change\"","limit":10,"fields":["title","namespace"]}
+{"query":"geography river","limit":10,"fields":["title","namespace"]}
+{"query":"culture","limit":10,"fields":["title","namespace"]}
+{"query":"island climate","limit":10,"fields":["title","namespace"]}
+{"query":"invention art","limit":10,"fields":["title","namespace"]}
+{"query":"sociology","limit":10,"fields":["title","namespace"]}
+{"query":"analysis","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"social media\"","limit":10,"fields":["title","namespace"]}
+{"query":"hypothesis monarchy","limit":10,"fields":["title","namespace"]}
+{"query":"conservation archaeology","limit":10,"fields":["title","namespace"]}
+{"query":"ancient","limit":10,"fields":["title","namespace"]}
+{"query":"tale analysis","limit":10,"fields":["title","namespace"]}
+{"query":"heritage","limit":10,"fields":["title","namespace"]}
+{"query":"desert peninsula","limit":10,"fields":["title","namespace"]}
+{"query":"evolution","limit":10,"fields":["title","namespace"]}
+{"query":"renaissance","limit":10,"fields":["title","namespace"]}
+{"query":"language heritage","limit":10,"fields":["title","namespace"]}
+{"query":"valley","limit":10,"fields":["title","namespace"]}
+{"query":"\"genetic engineering\"","limit":10,"fields":["title","namespace"]}
+{"query":"mythology","limit":10,"fields":["title","namespace"]}
+{"query":"legend medieval","limit":10,"fields":["title","namespace"]}
+{"query":"molecular tale","limit":10,"fields":["title","namespace"]}
+{"query":"cold war revolution","limit":10,"fields":["title","namespace"]}
+{"query":"religion politics","limit":10,"fields":["title","namespace"]}
+{"query":"ritual","limit":10,"fields":["title","namespace"]}
+{"query":"religion","limit":10,"fields":["title","namespace"]}
+{"query":"psychology ceremony","limit":10,"fields":["title","namespace"]}
+{"query":"tradition mountain","limit":10,"fields":["title","namespace"]}
+{"query":"engineering custom","limit":10,"fields":["title","namespace"]}
+{"query":"\"industrial revolution\"","limit":10,"fields":["title","namespace"]}
+{"query":"energy","limit":10,"fields":["title","namespace"]}
+{"query":"invention analysis","limit":10,"fields":["title","namespace"]}
+{"query":"conservation revolution","limit":10,"fields":["title","namespace"]}
+{"query":"science","limit":10,"fields":["title","namespace"]}
+{"query":"biology","limit":10,"fields":["title","namespace"]}
+{"query":"nuclear","limit":10,"fields":["title","namespace"]}
+{"query":"climate","limit":10,"fields":["title","namespace"]}
+{"query":"\"natural selection\"","limit":10,"fields":["title","namespace"]}
+{"query":"geography","limit":10,"fields":["title","namespace"]}
+{"query":"legend politics","limit":10,"fields":["title","namespace"]}
+{"query":"ceremony biology","limit":10,"fields":["title","namespace"]}
+{"query":"valley","limit":10,"fields":["title","namespace"]}
+{"query":"city","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"mythology","limit":10,"fields":["title","namespace"]}
+{"query":"politics","limit":10,"fields":["title","namespace"]}
+{"query":"politics","limit":10,"fields":["title","namespace"]}
+{"query":"\"artificial intelligence\"","limit":10,"fields":["title","namespace"]}
+{"query":"mountain civilization","limit":10,"fields":["title","namespace"]}
+{"query":"literature","limit":10,"fields":["title","namespace"]}
+{"query":"revolution","limit":10,"fields":["title","namespace"]}
+{"query":"quantum","limit":10,"fields":["title","namespace"]}
+{"query":"cold war","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty","limit":10,"fields":["title","namespace"]}
+{"query":"mythology","limit":10,"fields":["title","namespace"]}
+{"query":"analysis energy","limit":10,"fields":["title","namespace"]}
+{"query":"research climate","limit":10,"fields":["title","namespace"]}
+{"query":"molecular","limit":10,"fields":["title","namespace"]}
+{"query":"religion","limit":10,"fields":["title","namespace"]}
+{"query":"biodiversity legend","limit":10,"fields":["title","namespace"]}
+{"query":"monarchy","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"chemistry","limit":10,"fields":["title","namespace"]}
+{"query":"medieval story","limit":10,"fields":["title","namespace"]}
+{"query":"ecosystem","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"mathematics custom","limit":10,"fields":["title","namespace"]}
+{"query":"\"quantum mechanics\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"artificial intelligence\"","limit":10,"fields":["title","namespace"]}
+{"query":"climate civilization","limit":10,"fields":["title","namespace"]}
+{"query":"ecosystem","limit":10,"fields":["title","namespace"]}
+{"query":"ritual","limit":10,"fields":["title","namespace"]}
+{"query":"chemistry","limit":10,"fields":["title","namespace"]}
+{"query":"analysis mythology","limit":10,"fields":["title","namespace"]}
+{"query":"climate","limit":10,"fields":["title","namespace"]}
+{"query":"quantum","limit":10,"fields":["title","namespace"]}
+{"query":"folklore","limit":10,"fields":["title","namespace"]}
+{"query":"religion","limit":10,"fields":["title","namespace"]}
+{"query":"invention","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"mythology analysis","limit":10,"fields":["title","namespace"]}
+{"query":"philosophy","limit":10,"fields":["title","namespace"]}
+{"query":"\"ancient civilization\"","limit":10,"fields":["title","namespace"]}
+{"query":"festival","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"physics","limit":10,"fields":["title","namespace"]}
+{"query":"ecosystem colonialism","limit":10,"fields":["title","namespace"]}
+{"query":"island cold war","limit":10,"fields":["title","namespace"]}
+{"query":"\"quantum mechanics\"","limit":10,"fields":["title","namespace"]}
+{"query":"evolution","limit":10,"fields":["title","namespace"]}
+{"query":"chemistry medicine","limit":10,"fields":["title","namespace"]}
+{"query":"tradition","limit":10,"fields":["title","namespace"]}
+{"query":"quantum population","limit":10,"fields":["title","namespace"]}
+{"query":"\"world war\"","limit":10,"fields":["title","namespace"]}
+{"query":"colonialism","limit":10,"fields":["title","namespace"]}
+{"query":"heritage legend","limit":10,"fields":["title","namespace"]}
+{"query":"\"industrial revolution\"","limit":10,"fields":["title","namespace"]}
+{"query":"invention","limit":10,"fields":["title","namespace"]}
+{"query":"astronomy world war","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"tradition","limit":10,"fields":["title","namespace"]}
+{"query":"language","limit":10,"fields":["title","namespace"]}
+{"query":"literature","limit":10,"fields":["title","namespace"]}
+{"query":"feudalism engineering","limit":10,"fields":["title","namespace"]}
+{"query":"psychology ocean","limit":10,"fields":["title","namespace"]}
+{"query":"mythology analysis","limit":10,"fields":["title","namespace"]}
+{"query":"climate","limit":10,"fields":["title","namespace"]}
+{"query":"sociology story","limit":10,"fields":["title","namespace"]}
+{"query":"genetic science","limit":10,"fields":["title","namespace"]}
+{"query":"science","limit":10,"fields":["title","namespace"]}
+{"query":"hypothesis religion","limit":10,"fields":["title","namespace"]}
+{"query":"politics art","limit":10,"fields":["title","namespace"]}
+{"query":"climate republic","limit":10,"fields":["title","namespace"]}
+{"query":"\"industrial revolution\"","limit":10,"fields":["title","namespace"]}
+{"query":"archaeology world war","limit":10,"fields":["title","namespace"]}
+{"query":"tradition medicine","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"cold war population","limit":10,"fields":["title","namespace"]}
+{"query":"democracy culture","limit":10,"fields":["title","namespace"]}
+{"query":"revolution folklore","limit":10,"fields":["title","namespace"]}
+{"query":"custom","limit":10,"fields":["title","namespace"]}
+{"query":"kingdom","limit":10,"fields":["title","namespace"]}
+{"query":"history","limit":10,"fields":["title","namespace"]}
+{"query":"literature mythology","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"city","limit":10,"fields":["title","namespace"]}
+{"query":"civilization","limit":10,"fields":["title","namespace"]}
+{"query":"theory population","limit":10,"fields":["title","namespace"]}
+{"query":"biodiversity ceremony","limit":10,"fields":["title","namespace"]}
+{"query":"sociology forest","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"legend","limit":10,"fields":["title","namespace"]}
+{"query":"climate","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"festival","limit":10,"fields":["title","namespace"]}
+{"query":"peninsula art","limit":10,"fields":["title","namespace"]}
+{"query":"custom","limit":10,"fields":["title","namespace"]}
+{"query":"archaeology","limit":10,"fields":["title","namespace"]}
+{"query":"mathematics","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty technology","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"tale","limit":10,"fields":["title","namespace"]}
+{"query":"archaeology language","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty research","limit":10,"fields":["title","namespace"]}
+{"query":"empire","limit":10,"fields":["title","namespace"]}
+{"query":"\"genetic engineering\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"world war\"","limit":10,"fields":["title","namespace"]}
+{"query":"industrial revolution","limit":10,"fields":["title","namespace"]}
+{"query":"astronomy folklore","limit":10,"fields":["title","namespace"]}
+{"query":"conservation","limit":10,"fields":["title","namespace"]}
+{"query":"astronomy desert","limit":10,"fields":["title","namespace"]}
+{"query":"theory conservation","limit":10,"fields":["title","namespace"]}
+{"query":"evolution folklore","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"artificial intelligence\"","limit":10,"fields":["title","namespace"]}
+{"query":"geography physics","limit":10,"fields":["title","namespace"]}
+{"query":"ritual climate","limit":10,"fields":["title","namespace"]}
+{"query":"\"world war\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"engineering","limit":10,"fields":["title","namespace"]}
+{"query":"republic dynasty","limit":10,"fields":["title","namespace"]}
+{"query":"feudalism renaissance","limit":10,"fields":["title","namespace"]}
+{"query":"story","limit":10,"fields":["title","namespace"]}
+{"query":"culture","limit":10,"fields":["title","namespace"]}
+{"query":"mythology heritage","limit":10,"fields":["title","namespace"]}
+{"query":"technology","limit":10,"fields":["title","namespace"]}
+{"query":"\"ancient civilization\"","limit":10,"fields":["title","namespace"]}
+{"query":"ritual","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"economic development\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"industrial revolution\"","limit":10,"fields":["title","namespace"]}
+{"query":"forest","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"economics nuclear","limit":10,"fields":["title","namespace"]}
+{"query":"\"genetic engineering\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"culture philosophy","limit":10,"fields":["title","namespace"]}
+{"query":"ecosystem","limit":10,"fields":["title","namespace"]}
+{"query":"conservation biology","limit":10,"fields":["title","namespace"]}
+{"query":"culture invention","limit":10,"fields":["title","namespace"]}
+{"query":"world war","limit":10,"fields":["title","namespace"]}
+{"query":"desert","limit":10,"fields":["title","namespace"]}
+{"query":"\"natural selection\"","limit":10,"fields":["title","namespace"]}
+{"query":"ceremony","limit":10,"fields":["title","namespace"]}
+{"query":"experiment","limit":10,"fields":["title","namespace"]}
+{"query":"ocean","limit":10,"fields":["title","namespace"]}
+{"query":"ceremony research","limit":10,"fields":["title","namespace"]}
+{"query":"valley","limit":10,"fields":["title","namespace"]}
+{"query":"\"social media\"","limit":10,"fields":["title","namespace"]}
+{"query":"hypothesis","limit":10,"fields":["title","namespace"]}
+{"query":"music","limit":10,"fields":["title","namespace"]}
+{"query":"nuclear music","limit":10,"fields":["title","namespace"]}
+{"query":"culture","limit":10,"fields":["title","namespace"]}
+{"query":"science conservation","limit":10,"fields":["title","namespace"]}
+{"query":"history","limit":10,"fields":["title","namespace"]}
+{"query":"ecosystem custom","limit":10,"fields":["title","namespace"]}
+{"query":"mountain","limit":10,"fields":["title","namespace"]}
+{"query":"feudalism","limit":10,"fields":["title","namespace"]}
+{"query":"mountain","limit":10,"fields":["title","namespace"]}
+{"query":"monarchy","limit":10,"fields":["title","namespace"]}
+{"query":"economics","limit":10,"fields":["title","namespace"]}
+{"query":"mathematics","limit":10,"fields":["title","namespace"]}
+{"query":"economics revolution","limit":10,"fields":["title","namespace"]}
+{"query":"archaeology culture","limit":10,"fields":["title","namespace"]}
+{"query":"forest","limit":10,"fields":["title","namespace"]}
+{"query":"democracy","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"cold war","limit":10,"fields":["title","namespace"]}
+{"query":"\"economic development\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"economic development\"","limit":10,"fields":["title","namespace"]}
+{"query":"archaeology physics","limit":10,"fields":["title","namespace"]}
+{"query":"\"quantum mechanics\"","limit":10,"fields":["title","namespace"]}
+{"query":"cold war","limit":10,"fields":["title","namespace"]}
+{"query":"ceremony","limit":10,"fields":["title","namespace"]}
+{"query":"tale atomic","limit":10,"fields":["title","namespace"]}
+{"query":"continent","limit":10,"fields":["title","namespace"]}
+{"query":"\"world war\"","limit":10,"fields":["title","namespace"]}
+{"query":"architecture plateau","limit":10,"fields":["title","namespace"]}
+{"query":"geography river","limit":10,"fields":["title","namespace"]}
+{"query":"world war","limit":10,"fields":["title","namespace"]}
+{"query":"conservation","limit":10,"fields":["title","namespace"]}
+{"query":"architecture valley","limit":10,"fields":["title","namespace"]}
+{"query":"peninsula population","limit":10,"fields":["title","namespace"]}
+{"query":"peninsula","limit":10,"fields":["title","namespace"]}
+{"query":"folklore","limit":10,"fields":["title","namespace"]}
+{"query":"molecular","limit":10,"fields":["title","namespace"]}
+{"query":"research","limit":10,"fields":["title","namespace"]}
+{"query":"peninsula mountain","limit":10,"fields":["title","namespace"]}
+{"query":"\"natural selection\"","limit":10,"fields":["title","namespace"]}
+{"query":"desert atomic","limit":10,"fields":["title","namespace"]}
+{"query":"language","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"quantum mechanics\"","limit":10,"fields":["title","namespace"]}
+{"query":"renaissance forest","limit":10,"fields":["title","namespace"]}
+{"query":"\"natural selection\"","limit":10,"fields":["title","namespace"]}
+{"query":"feudalism river","limit":10,"fields":["title","namespace"]}
+{"query":"quantum heritage","limit":10,"fields":["title","namespace"]}
+{"query":"world war","limit":10,"fields":["title","namespace"]}
+{"query":"economics politics","limit":10,"fields":["title","namespace"]}
+{"query":"island cold war","limit":10,"fields":["title","namespace"]}
+{"query":"invention","limit":10,"fields":["title","namespace"]}
+{"query":"\"ancient civilization\"","limit":10,"fields":["title","namespace"]}
+{"query":"folklore","limit":10,"fields":["title","namespace"]}
+{"query":"heritage","limit":10,"fields":["title","namespace"]}
+{"query":"world war island","limit":10,"fields":["title","namespace"]}
+{"query":"tale","limit":10,"fields":["title","namespace"]}
+{"query":"\"economic development\"","limit":10,"fields":["title","namespace"]}
+{"query":"custom","limit":10,"fields":["title","namespace"]}
+{"query":"politics","limit":10,"fields":["title","namespace"]}
+{"query":"conservation","limit":10,"fields":["title","namespace"]}
+{"query":"sociology","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"peninsula","limit":10,"fields":["title","namespace"]}
+{"query":"medicine","limit":10,"fields":["title","namespace"]}
+{"query":"continent engineering","limit":10,"fields":["title","namespace"]}
+{"query":"kingdom hypothesis","limit":10,"fields":["title","namespace"]}
+{"query":"kingdom","limit":10,"fields":["title","namespace"]}
+{"query":"anthropology atomic","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty","limit":10,"fields":["title","namespace"]}
+{"query":"invention","limit":10,"fields":["title","namespace"]}
+{"query":"chemistry","limit":10,"fields":["title","namespace"]}
+{"query":"culture astronomy","limit":10,"fields":["title","namespace"]}
+{"query":"biodiversity mountain","limit":10,"fields":["title","namespace"]}
+{"query":"politics","limit":10,"fields":["title","namespace"]}
+{"query":"geography","limit":10,"fields":["title","namespace"]}
+{"query":"geography","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"custom sociology","limit":10,"fields":["title","namespace"]}
+{"query":"discovery psychology","limit":10,"fields":["title","namespace"]}
+{"query":"ecosystem","limit":10,"fields":["title","namespace"]}
+{"query":"medicine culture","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"research biology","limit":10,"fields":["title","namespace"]}
+{"query":"tradition technology","limit":10,"fields":["title","namespace"]}
+{"query":"religion","limit":10,"fields":["title","namespace"]}
+{"query":"astronomy art","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"tale geography","limit":10,"fields":["title","namespace"]}
+{"query":"river","limit":10,"fields":["title","namespace"]}
+{"query":"architecture","limit":10,"fields":["title","namespace"]}
+{"query":"ritual mythology","limit":10,"fields":["title","namespace"]}
+{"query":"revolution","limit":10,"fields":["title","namespace"]}
+{"query":"quantum tale","limit":10,"fields":["title","namespace"]}
+{"query":"ecosystem quantum","limit":10,"fields":["title","namespace"]}
+{"query":"civilization","limit":10,"fields":["title","namespace"]}
+{"query":"island","limit":10,"fields":["title","namespace"]}
+{"query":"analysis","limit":10,"fields":["title","namespace"]}
+{"query":"engineering ancient","limit":10,"fields":["title","namespace"]}
+{"query":"energy","limit":10,"fields":["title","namespace"]}
+{"query":"river","limit":10,"fields":["title","namespace"]}
+{"query":"art medieval","limit":10,"fields":["title","namespace"]}
+{"query":"colonialism","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty analysis","limit":10,"fields":["title","namespace"]}
+{"query":"\"social media\"","limit":10,"fields":["title","namespace"]}
+{"query":"festival","limit":10,"fields":["title","namespace"]}
+{"query":"culture","limit":10,"fields":["title","namespace"]}
+{"query":"ritual climate","limit":10,"fields":["title","namespace"]}
+{"query":"language world war","limit":10,"fields":["title","namespace"]}
+{"query":"mythology","limit":10,"fields":["title","namespace"]}
+{"query":"climate","limit":10,"fields":["title","namespace"]}
+{"query":"\"artificial intelligence\"","limit":10,"fields":["title","namespace"]}
+{"query":"conservation","limit":10,"fields":["title","namespace"]}
+{"query":"cold war","limit":10,"fields":["title","namespace"]}
+{"query":"archaeology","limit":10,"fields":["title","namespace"]}
+{"query":"colonialism","limit":10,"fields":["title","namespace"]}
+{"query":"nuclear archaeology","limit":10,"fields":["title","namespace"]}
+{"query":"custom atomic","limit":10,"fields":["title","namespace"]}
+{"query":"atomic","limit":10,"fields":["title","namespace"]}
+{"query":"anthropology","limit":10,"fields":["title","namespace"]}
+{"query":"physics republic","limit":10,"fields":["title","namespace"]}
+{"query":"\"industrial revolution\"","limit":10,"fields":["title","namespace"]}
+{"query":"festival","limit":10,"fields":["title","namespace"]}
+{"query":"\"ancient civilization\"","limit":10,"fields":["title","namespace"]}
+{"query":"music country","limit":10,"fields":["title","namespace"]}
+{"query":"ritual","limit":10,"fields":["title","namespace"]}
+{"query":"island","limit":10,"fields":["title","namespace"]}
+{"query":"genetic","limit":10,"fields":["title","namespace"]}
+{"query":"physics island","limit":10,"fields":["title","namespace"]}
+{"query":"ceremony","limit":10,"fields":["title","namespace"]}
+{"query":"\"ancient civilization\"","limit":10,"fields":["title","namespace"]}
+{"query":"republic politics","limit":10,"fields":["title","namespace"]}
+{"query":"city biodiversity","limit":10,"fields":["title","namespace"]}
+{"query":"mountain population","limit":10,"fields":["title","namespace"]}
+{"query":"mythology","limit":10,"fields":["title","namespace"]}
+{"query":"civilization","limit":10,"fields":["title","namespace"]}
+{"query":"nuclear genetic","limit":10,"fields":["title","namespace"]}
+{"query":"ocean nuclear","limit":10,"fields":["title","namespace"]}
+{"query":"engineering","limit":10,"fields":["title","namespace"]}
+{"query":"island energy","limit":10,"fields":["title","namespace"]}
+{"query":"economics","limit":10,"fields":["title","namespace"]}
+{"query":"psychology","limit":10,"fields":["title","namespace"]}
+{"query":"\"genetic engineering\"","limit":10,"fields":["title","namespace"]}
+{"query":"religion philosophy","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"industrial revolution\"","limit":10,"fields":["title","namespace"]}
+{"query":"ancient","limit":10,"fields":["title","namespace"]}
+{"query":"religion economics","limit":10,"fields":["title","namespace"]}
+{"query":"sociology genetic","limit":10,"fields":["title","namespace"]}
+{"query":"genetic experiment","limit":10,"fields":["title","namespace"]}
+{"query":"plateau colonialism","limit":10,"fields":["title","namespace"]}
+{"query":"evolution","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"genetic engineering\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"ancient civilization\"","limit":10,"fields":["title","namespace"]}
+{"query":"mountain","limit":10,"fields":["title","namespace"]}
+{"query":"river","limit":10,"fields":["title","namespace"]}
+{"query":"music","limit":10,"fields":["title","namespace"]}
+{"query":"population","limit":10,"fields":["title","namespace"]}
+{"query":"literature mythology","limit":10,"fields":["title","namespace"]}
+{"query":"medicine","limit":10,"fields":["title","namespace"]}
+{"query":"chemistry language","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty mythology","limit":10,"fields":["title","namespace"]}
+{"query":"\"genetic engineering\"","limit":10,"fields":["title","namespace"]}
+{"query":"conservation anthropology","limit":10,"fields":["title","namespace"]}
+{"query":"geography mathematics","limit":10,"fields":["title","namespace"]}
+{"query":"industrial revolution","limit":10,"fields":["title","namespace"]}
+{"query":"tradition","limit":10,"fields":["title","namespace"]}
+{"query":"conservation economics","limit":10,"fields":["title","namespace"]}
+{"query":"analysis","limit":10,"fields":["title","namespace"]}
+{"query":"architecture","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"mythology","limit":10,"fields":["title","namespace"]}
+{"query":"\"industrial revolution\"","limit":10,"fields":["title","namespace"]}
+{"query":"river architecture","limit":10,"fields":["title","namespace"]}
+{"query":"river","limit":10,"fields":["title","namespace"]}
+{"query":"feudalism","limit":10,"fields":["title","namespace"]}
+{"query":"ancient","limit":10,"fields":["title","namespace"]}
+{"query":"\"economic development\"","limit":10,"fields":["title","namespace"]}
+{"query":"folklore","limit":10,"fields":["title","namespace"]}
+{"query":"philosophy desert","limit":10,"fields":["title","namespace"]}
+{"query":"custom","limit":10,"fields":["title","namespace"]}
+{"query":"\"quantum mechanics\"","limit":10,"fields":["title","namespace"]}
+{"query":"republic","limit":10,"fields":["title","namespace"]}
+{"query":"\"ancient civilization\"","limit":10,"fields":["title","namespace"]}
+{"query":"river","limit":10,"fields":["title","namespace"]}
+{"query":"tale technology","limit":10,"fields":["title","namespace"]}
+{"query":"plateau","limit":10,"fields":["title","namespace"]}
+{"query":"architecture","limit":10,"fields":["title","namespace"]}
+{"query":"cold war","limit":10,"fields":["title","namespace"]}
+{"query":"city folklore","limit":10,"fields":["title","namespace"]}
+{"query":"festival astronomy","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty tradition","limit":10,"fields":["title","namespace"]}
+{"query":"\"ancient civilization\"","limit":10,"fields":["title","namespace"]}
+{"query":"mythology ocean","limit":10,"fields":["title","namespace"]}
+{"query":"\"social media\"","limit":10,"fields":["title","namespace"]}
+{"query":"molecular evolution","limit":10,"fields":["title","namespace"]}
+{"query":"history","limit":10,"fields":["title","namespace"]}
+{"query":"heritage language","limit":10,"fields":["title","namespace"]}
+{"query":"kingdom","limit":10,"fields":["title","namespace"]}
+{"query":"\"natural selection\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"world war\"","limit":10,"fields":["title","namespace"]}
+{"query":"peninsula","limit":10,"fields":["title","namespace"]}
+{"query":"chemistry","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty","limit":10,"fields":["title","namespace"]}
+{"query":"desert biodiversity","limit":10,"fields":["title","namespace"]}
+{"query":"chemistry sociology","limit":10,"fields":["title","namespace"]}
+{"query":"ocean","limit":10,"fields":["title","namespace"]}
+{"query":"\"world war\"","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty","limit":10,"fields":["title","namespace"]}
+{"query":"research invention","limit":10,"fields":["title","namespace"]}
+{"query":"\"quantum mechanics\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"natural selection\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"chemistry heritage","limit":10,"fields":["title","namespace"]}
+{"query":"forest","limit":10,"fields":["title","namespace"]}
+{"query":"quantum kingdom","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"nuclear","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"mathematics","limit":10,"fields":["title","namespace"]}
+{"query":"\"climate change\"","limit":10,"fields":["title","namespace"]}
+{"query":"quantum","limit":10,"fields":["title","namespace"]}
+{"query":"physics religion","limit":10,"fields":["title","namespace"]}
+{"query":"feudalism","limit":10,"fields":["title","namespace"]}
+{"query":"psychology","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"molecular","limit":10,"fields":["title","namespace"]}
+{"query":"science","limit":10,"fields":["title","namespace"]}
+{"query":"nuclear culture","limit":10,"fields":["title","namespace"]}
+{"query":"\"climate change\"","limit":10,"fields":["title","namespace"]}
+{"query":"ocean","limit":10,"fields":["title","namespace"]}
+{"query":"folklore ancient","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"medicine democracy","limit":10,"fields":["title","namespace"]}
+{"query":"revolution","limit":10,"fields":["title","namespace"]}
+{"query":"tale","limit":10,"fields":["title","namespace"]}
+{"query":"geography desert","limit":10,"fields":["title","namespace"]}
+{"query":"analysis astronomy","limit":10,"fields":["title","namespace"]}
+{"query":"ocean","limit":10,"fields":["title","namespace"]}
+{"query":"feudalism climate","limit":10,"fields":["title","namespace"]}
+{"query":"\"climate change\"","limit":10,"fields":["title","namespace"]}
+{"query":"atomic","limit":10,"fields":["title","namespace"]}
+{"query":"culture biodiversity","limit":10,"fields":["title","namespace"]}
+{"query":"\"quantum mechanics\"","limit":10,"fields":["title","namespace"]}
+{"query":"kingdom","limit":10,"fields":["title","namespace"]}
+{"query":"physics","limit":10,"fields":["title","namespace"]}
+{"query":"mythology analysis","limit":10,"fields":["title","namespace"]}
+{"query":"energy","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"festival","limit":10,"fields":["title","namespace"]}
+{"query":"technology","limit":10,"fields":["title","namespace"]}
+{"query":"art world war","limit":10,"fields":["title","namespace"]}
+{"query":"heritage monarchy","limit":10,"fields":["title","namespace"]}
+{"query":"cold war","limit":10,"fields":["title","namespace"]}
+{"query":"atomic ancient","limit":10,"fields":["title","namespace"]}
+{"query":"research heritage","limit":10,"fields":["title","namespace"]}
+{"query":"\"world war\"","limit":10,"fields":["title","namespace"]}
+{"query":"medicine","limit":10,"fields":["title","namespace"]}
+{"query":"\"social media\"","limit":10,"fields":["title","namespace"]}
+{"query":"climate","limit":10,"fields":["title","namespace"]}
+{"query":"discovery history","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"story dynasty","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"medieval","limit":10,"fields":["title","namespace"]}
+{"query":"engineering theory","limit":10,"fields":["title","namespace"]}
+{"query":"mathematics","limit":10,"fields":["title","namespace"]}
+{"query":"colonialism","limit":10,"fields":["title","namespace"]}
+{"query":"geography","limit":10,"fields":["title","namespace"]}
+{"query":"ecosystem","limit":10,"fields":["title","namespace"]}
+{"query":"tale","limit":10,"fields":["title","namespace"]}
+{"query":"story","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"tale energy","limit":10,"fields":["title","namespace"]}
+{"query":"geography peninsula","limit":10,"fields":["title","namespace"]}
+{"query":"city","limit":10,"fields":["title","namespace"]}
+{"query":"literature experiment","limit":10,"fields":["title","namespace"]}
+{"query":"continent","limit":10,"fields":["title","namespace"]}
+{"query":"politics empire","limit":10,"fields":["title","namespace"]}
+{"query":"discovery democracy","limit":10,"fields":["title","namespace"]}
+{"query":"\"industrial revolution\"","limit":10,"fields":["title","namespace"]}
+{"query":"cold war","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"story geography","limit":10,"fields":["title","namespace"]}
+{"query":"medieval","limit":10,"fields":["title","namespace"]}
+{"query":"anthropology ocean","limit":10,"fields":["title","namespace"]}
+{"query":"physics","limit":10,"fields":["title","namespace"]}
+{"query":"engineering","limit":10,"fields":["title","namespace"]}
+{"query":"legend mathematics","limit":10,"fields":["title","namespace"]}
+{"query":"history","limit":10,"fields":["title","namespace"]}
+{"query":"\"artificial intelligence\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"evolution","limit":10,"fields":["title","namespace"]}
+{"query":"mythology","limit":10,"fields":["title","namespace"]}
+{"query":"industrial revolution","limit":10,"fields":["title","namespace"]}
+{"query":"feudalism","limit":10,"fields":["title","namespace"]}
+{"query":"sociology","limit":10,"fields":["title","namespace"]}
+{"query":"experiment energy","limit":10,"fields":["title","namespace"]}
+{"query":"biodiversity","limit":10,"fields":["title","namespace"]}
+{"query":"custom","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"chemistry folklore","limit":10,"fields":["title","namespace"]}
+{"query":"quantum","limit":10,"fields":["title","namespace"]}
+{"query":"\"social media\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"technology","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"technology language","limit":10,"fields":["title","namespace"]}
+{"query":"physics","limit":10,"fields":["title","namespace"]}
+{"query":"population valley","limit":10,"fields":["title","namespace"]}
+{"query":"analysis","limit":10,"fields":["title","namespace"]}
+{"query":"economics mathematics","limit":10,"fields":["title","namespace"]}
+{"query":"\"world war\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"social media\"","limit":10,"fields":["title","namespace"]}
+{"query":"plateau climate","limit":10,"fields":["title","namespace"]}
+{"query":"evolution democracy","limit":10,"fields":["title","namespace"]}
+{"query":"custom","limit":10,"fields":["title","namespace"]}
+{"query":"archaeology","limit":10,"fields":["title","namespace"]}
+{"query":"art colonialism","limit":10,"fields":["title","namespace"]}
+{"query":"feudalism physics","limit":10,"fields":["title","namespace"]}
+{"query":"archaeology","limit":10,"fields":["title","namespace"]}
+{"query":"analysis","limit":10,"fields":["title","namespace"]}
+{"query":"experiment","limit":10,"fields":["title","namespace"]}
+{"query":"island","limit":10,"fields":["title","namespace"]}
+{"query":"continent","limit":10,"fields":["title","namespace"]}
+{"query":"science","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"cold war research","limit":10,"fields":["title","namespace"]}
+{"query":"chemistry","limit":10,"fields":["title","namespace"]}
+{"query":"history technology","limit":10,"fields":["title","namespace"]}
+{"query":"climate revolution","limit":10,"fields":["title","namespace"]}
+{"query":"city","limit":10,"fields":["title","namespace"]}
+{"query":"climate","limit":10,"fields":["title","namespace"]}
+{"query":"climate research","limit":10,"fields":["title","namespace"]}
+{"query":"psychology","limit":10,"fields":["title","namespace"]}
+{"query":"tradition","limit":10,"fields":["title","namespace"]}
+{"query":"tradition","limit":10,"fields":["title","namespace"]}
+{"query":"custom","limit":10,"fields":["title","namespace"]}
+{"query":"science literature","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"psychology","limit":10,"fields":["title","namespace"]}
+{"query":"\"climate change\"","limit":10,"fields":["title","namespace"]}
+{"query":"music","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"architecture","limit":10,"fields":["title","namespace"]}
+{"query":"quantum","limit":10,"fields":["title","namespace"]}
+{"query":"evolution sociology","limit":10,"fields":["title","namespace"]}
+{"query":"population desert","limit":10,"fields":["title","namespace"]}
+{"query":"population research","limit":10,"fields":["title","namespace"]}
+{"query":"philosophy story","limit":10,"fields":["title","namespace"]}
+{"query":"revolution climate","limit":10,"fields":["title","namespace"]}
+{"query":"engineering plateau","limit":10,"fields":["title","namespace"]}
+{"query":"\"ancient civilization\"","limit":10,"fields":["title","namespace"]}
+{"query":"custom","limit":10,"fields":["title","namespace"]}
+{"query":"folklore","limit":10,"fields":["title","namespace"]}
+{"query":"\"industrial revolution\"","limit":10,"fields":["title","namespace"]}
+{"query":"astronomy","limit":10,"fields":["title","namespace"]}
+{"query":"politics anthropology","limit":10,"fields":["title","namespace"]}
+{"query":"art","limit":10,"fields":["title","namespace"]}
+{"query":"biodiversity","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"heritage","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"anthropology desert","limit":10,"fields":["title","namespace"]}
+{"query":"industrial revolution mythology","limit":10,"fields":["title","namespace"]}
+{"query":"festival","limit":10,"fields":["title","namespace"]}
+{"query":"medieval","limit":10,"fields":["title","namespace"]}
+{"query":"\"social media\"","limit":10,"fields":["title","namespace"]}
+{"query":"desert","limit":10,"fields":["title","namespace"]}
+{"query":"chemistry","limit":10,"fields":["title","namespace"]}
+{"query":"empire","limit":10,"fields":["title","namespace"]}
+{"query":"feudalism","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"energy","limit":10,"fields":["title","namespace"]}
+{"query":"nuclear art","limit":10,"fields":["title","namespace"]}
+{"query":"continent","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"population","limit":10,"fields":["title","namespace"]}
+{"query":"population ocean","limit":10,"fields":["title","namespace"]}
+{"query":"hypothesis theory","limit":10,"fields":["title","namespace"]}
+{"query":"ritual","limit":10,"fields":["title","namespace"]}
+{"query":"feudalism continent","limit":10,"fields":["title","namespace"]}
+{"query":"\"economic development\"","limit":10,"fields":["title","namespace"]}
+{"query":"custom","limit":10,"fields":["title","namespace"]}
+{"query":"mathematics biodiversity","limit":10,"fields":["title","namespace"]}
+{"query":"civilization nuclear","limit":10,"fields":["title","namespace"]}
+{"query":"forest anthropology","limit":10,"fields":["title","namespace"]}
+{"query":"revolution","limit":10,"fields":["title","namespace"]}
+{"query":"astronomy city","limit":10,"fields":["title","namespace"]}
+{"query":"literature chemistry","limit":10,"fields":["title","namespace"]}
+{"query":"music","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"literature archaeology","limit":10,"fields":["title","namespace"]}
+{"query":"city","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"science","limit":10,"fields":["title","namespace"]}
+{"query":"climate","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty","limit":10,"fields":["title","namespace"]}
+{"query":"music research","limit":10,"fields":["title","namespace"]}
+{"query":"archaeology","limit":10,"fields":["title","namespace"]}
+{"query":"astronomy","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty biology","limit":10,"fields":["title","namespace"]}
+{"query":"analysis","limit":10,"fields":["title","namespace"]}
+{"query":"revolution","limit":10,"fields":["title","namespace"]}
+{"query":"\"artificial intelligence\"","limit":10,"fields":["title","namespace"]}
+{"query":"language chemistry","limit":10,"fields":["title","namespace"]}
+{"query":"music","limit":10,"fields":["title","namespace"]}
+{"query":"tale art","limit":10,"fields":["title","namespace"]}
+{"query":"cold war","limit":10,"fields":["title","namespace"]}
+{"query":"analysis","limit":10,"fields":["title","namespace"]}
+{"query":"ecosystem","limit":10,"fields":["title","namespace"]}
+{"query":"feudalism psychology","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty psychology","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"engineering","limit":10,"fields":["title","namespace"]}
+{"query":"empire","limit":10,"fields":["title","namespace"]}
+{"query":"revolution","limit":10,"fields":["title","namespace"]}
+{"query":"ancient science","limit":10,"fields":["title","namespace"]}
+{"query":"genetic","limit":10,"fields":["title","namespace"]}
+{"query":"ceremony mountain","limit":10,"fields":["title","namespace"]}
+{"query":"art","limit":10,"fields":["title","namespace"]}
+{"query":"revolution","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"tradition","limit":10,"fields":["title","namespace"]}
+{"query":"engineering","limit":10,"fields":["title","namespace"]}
+{"query":"astronomy","limit":10,"fields":["title","namespace"]}
+{"query":"population","limit":10,"fields":["title","namespace"]}
+{"query":"\"world war\"","limit":10,"fields":["title","namespace"]}
+{"query":"custom","limit":10,"fields":["title","namespace"]}
+{"query":"music civilization","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"island","limit":10,"fields":["title","namespace"]}
+{"query":"nuclear cold war","limit":10,"fields":["title","namespace"]}
+{"query":"folklore","limit":10,"fields":["title","namespace"]}
+{"query":"population","limit":10,"fields":["title","namespace"]}
+{"query":"archaeology anthropology","limit":10,"fields":["title","namespace"]}
+{"query":"literature","limit":10,"fields":["title","namespace"]}
+{"query":"music","limit":10,"fields":["title","namespace"]}
+{"query":"ocean heritage","limit":10,"fields":["title","namespace"]}
+{"query":"history technology","limit":10,"fields":["title","namespace"]}
+{"query":"ocean","limit":10,"fields":["title","namespace"]}
+{"query":"\"genetic engineering\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"social media\"","limit":10,"fields":["title","namespace"]}
+{"query":"politics discovery","limit":10,"fields":["title","namespace"]}
+{"query":"research sociology","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"peninsula","limit":10,"fields":["title","namespace"]}
+{"query":"colonialism","limit":10,"fields":["title","namespace"]}
+{"query":"\"quantum mechanics\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"artificial intelligence\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"artificial intelligence\"","limit":10,"fields":["title","namespace"]}
+{"query":"conservation theory","limit":10,"fields":["title","namespace"]}
+{"query":"\"economic development\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"industrial revolution\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"artificial intelligence\"","limit":10,"fields":["title","namespace"]}
+{"query":"legend","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"research","limit":10,"fields":["title","namespace"]}
+{"query":"mythology","limit":10,"fields":["title","namespace"]}
+{"query":"ecosystem","limit":10,"fields":["title","namespace"]}
+{"query":"biology literature","limit":10,"fields":["title","namespace"]}
+{"query":"\"social media\"","limit":10,"fields":["title","namespace"]}
+{"query":"industrial revolution","limit":10,"fields":["title","namespace"]}
+{"query":"philosophy legend","limit":10,"fields":["title","namespace"]}
+{"query":"archaeology folklore","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"economic development\"","limit":10,"fields":["title","namespace"]}
+{"query":"ritual","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"climate change\"","limit":10,"fields":["title","namespace"]}
+{"query":"ecosystem music","limit":10,"fields":["title","namespace"]}
+{"query":"\"genetic engineering\"","limit":10,"fields":["title","namespace"]}
+{"query":"technology peninsula","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"science","limit":10,"fields":["title","namespace"]}
+{"query":"\"economic development\"","limit":10,"fields":["title","namespace"]}
+{"query":"discovery ocean","limit":10,"fields":["title","namespace"]}
+{"query":"music biology","limit":10,"fields":["title","namespace"]}
+{"query":"politics","limit":10,"fields":["title","namespace"]}
+{"query":"chemistry","limit":10,"fields":["title","namespace"]}
+{"query":"feudalism medieval","limit":10,"fields":["title","namespace"]}
+{"query":"river peninsula","limit":10,"fields":["title","namespace"]}
+{"query":"ocean research","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"folklore","limit":10,"fields":["title","namespace"]}
+{"query":"analysis","limit":10,"fields":["title","namespace"]}
+{"query":"heritage","limit":10,"fields":["title","namespace"]}
+{"query":"biodiversity river","limit":10,"fields":["title","namespace"]}
+{"query":"archaeology","limit":10,"fields":["title","namespace"]}
+{"query":"festival desert","limit":10,"fields":["title","namespace"]}
+{"query":"culture","limit":10,"fields":["title","namespace"]}
+{"query":"island","limit":10,"fields":["title","namespace"]}
+{"query":"festival","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"world war\"","limit":10,"fields":["title","namespace"]}
+{"query":"festival","limit":10,"fields":["title","namespace"]}
+{"query":"music atomic","limit":10,"fields":["title","namespace"]}
+{"query":"evolution","limit":10,"fields":["title","namespace"]}
+{"query":"valley","limit":10,"fields":["title","namespace"]}
+{"query":"population festival","limit":10,"fields":["title","namespace"]}
+{"query":"\"artificial intelligence\"","limit":10,"fields":["title","namespace"]}
+{"query":"medicine","limit":10,"fields":["title","namespace"]}
+{"query":"folklore","limit":10,"fields":["title","namespace"]}
+{"query":"ocean","limit":10,"fields":["title","namespace"]}
+{"query":"invention","limit":10,"fields":["title","namespace"]}
+{"query":"atomic climate","limit":10,"fields":["title","namespace"]}
+{"query":"feudalism story","limit":10,"fields":["title","namespace"]}
+{"query":"climate","limit":10,"fields":["title","namespace"]}
+{"query":"molecular","limit":10,"fields":["title","namespace"]}
+{"query":"psychology","limit":10,"fields":["title","namespace"]}
+{"query":"revolution medieval","limit":10,"fields":["title","namespace"]}
+{"query":"evolution","limit":10,"fields":["title","namespace"]}
+{"query":"physics","limit":10,"fields":["title","namespace"]}
+{"query":"continent","limit":10,"fields":["title","namespace"]}
+{"query":"ritual","limit":10,"fields":["title","namespace"]}
+{"query":"custom quantum","limit":10,"fields":["title","namespace"]}
+{"query":"science history","limit":10,"fields":["title","namespace"]}
+{"query":"psychology","limit":10,"fields":["title","namespace"]}
+{"query":"experiment","limit":10,"fields":["title","namespace"]}
+{"query":"climate","limit":10,"fields":["title","namespace"]}
+{"query":"legend hypothesis","limit":10,"fields":["title","namespace"]}
+{"query":"revolution island","limit":10,"fields":["title","namespace"]}
+{"query":"geography country","limit":10,"fields":["title","namespace"]}
+{"query":"archaeology hypothesis","limit":10,"fields":["title","namespace"]}
+{"query":"discovery","limit":10,"fields":["title","namespace"]}
+{"query":"tale colonialism","limit":10,"fields":["title","namespace"]}
+{"query":"\"world war\"","limit":10,"fields":["title","namespace"]}
+{"query":"plateau continent","limit":10,"fields":["title","namespace"]}
+{"query":"story","limit":10,"fields":["title","namespace"]}
+{"query":"atomic","limit":10,"fields":["title","namespace"]}
+{"query":"medieval","limit":10,"fields":["title","namespace"]}
+{"query":"continent mythology","limit":10,"fields":["title","namespace"]}
+{"query":"nuclear feudalism","limit":10,"fields":["title","namespace"]}
+{"query":"philosophy population","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty research","limit":10,"fields":["title","namespace"]}
+{"query":"technology","limit":10,"fields":["title","namespace"]}
+{"query":"valley","limit":10,"fields":["title","namespace"]}
+{"query":"geography","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"philosophy festival","limit":10,"fields":["title","namespace"]}
+{"query":"analysis","limit":10,"fields":["title","namespace"]}
+{"query":"population","limit":10,"fields":["title","namespace"]}
+{"query":"medieval","limit":10,"fields":["title","namespace"]}
+{"query":"\"social media\"","limit":10,"fields":["title","namespace"]}
+{"query":"festival","limit":10,"fields":["title","namespace"]}
+{"query":"archaeology","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"energy cold war","limit":10,"fields":["title","namespace"]}
+{"query":"valley","limit":10,"fields":["title","namespace"]}
+{"query":"medicine","limit":10,"fields":["title","namespace"]}
+{"query":"\"industrial revolution\"","limit":10,"fields":["title","namespace"]}
+{"query":"feudalism","limit":10,"fields":["title","namespace"]}
+{"query":"energy hypothesis","limit":10,"fields":["title","namespace"]}
+{"query":"continent","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty culture","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"mathematics","limit":10,"fields":["title","namespace"]}
+{"query":"nuclear","limit":10,"fields":["title","namespace"]}
+{"query":"climate","limit":10,"fields":["title","namespace"]}
+{"query":"medieval","limit":10,"fields":["title","namespace"]}
+{"query":"\"artificial intelligence\"","limit":10,"fields":["title","namespace"]}
+{"query":"history","limit":10,"fields":["title","namespace"]}
+{"query":"politics religion","limit":10,"fields":["title","namespace"]}
+{"query":"\"quantum mechanics\"","limit":10,"fields":["title","namespace"]}
+{"query":"island","limit":10,"fields":["title","namespace"]}
+{"query":"\"economic development\"","limit":10,"fields":["title","namespace"]}
+{"query":"architecture","limit":10,"fields":["title","namespace"]}
+{"query":"atomic quantum","limit":10,"fields":["title","namespace"]}
+{"query":"\"artificial intelligence\"","limit":10,"fields":["title","namespace"]}
+{"query":"sociology","limit":10,"fields":["title","namespace"]}
+{"query":"folklore","limit":10,"fields":["title","namespace"]}
+{"query":"\"climate change\"","limit":10,"fields":["title","namespace"]}
+{"query":"civilization","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"molecular","limit":10,"fields":["title","namespace"]}
+{"query":"colonialism","limit":10,"fields":["title","namespace"]}
+{"query":"biology","limit":10,"fields":["title","namespace"]}
+{"query":"nuclear geography","limit":10,"fields":["title","namespace"]}
+{"query":"renaissance","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"renaissance tradition","limit":10,"fields":["title","namespace"]}
+{"query":"city molecular","limit":10,"fields":["title","namespace"]}
+{"query":"\"genetic engineering\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"industrial revolution\"","limit":10,"fields":["title","namespace"]}
+{"query":"economics","limit":10,"fields":["title","namespace"]}
+{"query":"heritage kingdom","limit":10,"fields":["title","namespace"]}
+{"query":"analysis monarchy","limit":10,"fields":["title","namespace"]}
+{"query":"politics","limit":10,"fields":["title","namespace"]}
+{"query":"plateau","limit":10,"fields":["title","namespace"]}
+{"query":"art","limit":10,"fields":["title","namespace"]}
+{"query":"religion country","limit":10,"fields":["title","namespace"]}
+{"query":"hypothesis","limit":10,"fields":["title","namespace"]}
+{"query":"\"ancient civilization\"","limit":10,"fields":["title","namespace"]}
+{"query":"island politics","limit":10,"fields":["title","namespace"]}
+{"query":"psychology","limit":10,"fields":["title","namespace"]}
+{"query":"evolution","limit":10,"fields":["title","namespace"]}
+{"query":"music","limit":10,"fields":["title","namespace"]}
+{"query":"mathematics physics","limit":10,"fields":["title","namespace"]}
+{"query":"folklore ecosystem","limit":10,"fields":["title","namespace"]}
+{"query":"sociology","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"ceremony mathematics","limit":10,"fields":["title","namespace"]}
+{"query":"tale","limit":10,"fields":["title","namespace"]}
+{"query":"peninsula research","limit":10,"fields":["title","namespace"]}
+{"query":"revolution","limit":10,"fields":["title","namespace"]}
+{"query":"forest genetic","limit":10,"fields":["title","namespace"]}
+{"query":"world war feudalism","limit":10,"fields":["title","namespace"]}
+{"query":"science","limit":10,"fields":["title","namespace"]}
+{"query":"\"natural selection\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty peninsula","limit":10,"fields":["title","namespace"]}
+{"query":"ecosystem story","limit":10,"fields":["title","namespace"]}
+{"query":"feudalism medicine","limit":10,"fields":["title","namespace"]}
+{"query":"renaissance","limit":10,"fields":["title","namespace"]}
+{"query":"energy","limit":10,"fields":["title","namespace"]}
+{"query":"valley","limit":10,"fields":["title","namespace"]}
+{"query":"psychology","limit":10,"fields":["title","namespace"]}
+{"query":"democracy","limit":10,"fields":["title","namespace"]}
+{"query":"plateau climate","limit":10,"fields":["title","namespace"]}
+{"query":"\"economic development\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"medicine mathematics","limit":10,"fields":["title","namespace"]}
+{"query":"energy","limit":10,"fields":["title","namespace"]}
+{"query":"invention psychology","limit":10,"fields":["title","namespace"]}
+{"query":"legend","limit":10,"fields":["title","namespace"]}
+{"query":"population","limit":10,"fields":["title","namespace"]}
+{"query":"democracy kingdom","limit":10,"fields":["title","namespace"]}
+{"query":"theory","limit":10,"fields":["title","namespace"]}
+{"query":"culture chemistry","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"energy","limit":10,"fields":["title","namespace"]}
+{"query":"nuclear cold war","limit":10,"fields":["title","namespace"]}
+{"query":"anthropology valley","limit":10,"fields":["title","namespace"]}
+{"query":"economics","limit":10,"fields":["title","namespace"]}
+{"query":"legend","limit":10,"fields":["title","namespace"]}
+{"query":"culture country","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"engineering","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"renaissance ecosystem","limit":10,"fields":["title","namespace"]}
+{"query":"river island","limit":10,"fields":["title","namespace"]}
+{"query":"river","limit":10,"fields":["title","namespace"]}
+{"query":"valley","limit":10,"fields":["title","namespace"]}
+{"query":"psychology","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"history","limit":10,"fields":["title","namespace"]}
+{"query":"theory","limit":10,"fields":["title","namespace"]}
+{"query":"civilization mythology","limit":10,"fields":["title","namespace"]}
+{"query":"feudalism molecular","limit":10,"fields":["title","namespace"]}
+{"query":"mythology engineering","limit":10,"fields":["title","namespace"]}
+{"query":"heritage energy","limit":10,"fields":["title","namespace"]}
+{"query":"biology revolution","limit":10,"fields":["title","namespace"]}
+{"query":"astronomy","limit":10,"fields":["title","namespace"]}
+{"query":"revolution mathematics","limit":10,"fields":["title","namespace"]}
+{"query":"ecosystem","limit":10,"fields":["title","namespace"]}
+{"query":"invention economics","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"experiment economics","limit":10,"fields":["title","namespace"]}
+{"query":"genetic music","limit":10,"fields":["title","namespace"]}
+{"query":"world war","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"festival world war","limit":10,"fields":["title","namespace"]}
+{"query":"heritage desert","limit":10,"fields":["title","namespace"]}
+{"query":"tradition","limit":10,"fields":["title","namespace"]}
+{"query":"ancient","limit":10,"fields":["title","namespace"]}
+{"query":"climate continent","limit":10,"fields":["title","namespace"]}
+{"query":"technology","limit":10,"fields":["title","namespace"]}
+{"query":"genetic","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty","limit":10,"fields":["title","namespace"]}
+{"query":"ceremony","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"world war","limit":10,"fields":["title","namespace"]}
+{"query":"mythology","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"festival","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"experiment","limit":10,"fields":["title","namespace"]}
+{"query":"desert biology","limit":10,"fields":["title","namespace"]}
+{"query":"religion renaissance","limit":10,"fields":["title","namespace"]}
+{"query":"chemistry","limit":10,"fields":["title","namespace"]}
+{"query":"industrial revolution","limit":10,"fields":["title","namespace"]}
+{"query":"philosophy","limit":10,"fields":["title","namespace"]}
+{"query":"art feudalism","limit":10,"fields":["title","namespace"]}
+{"query":"\"quantum mechanics\"","limit":10,"fields":["title","namespace"]}
+{"query":"anthropology engineering","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"climate change\"","limit":10,"fields":["title","namespace"]}
+{"query":"folklore","limit":10,"fields":["title","namespace"]}
+{"query":"\"climate change\"","limit":10,"fields":["title","namespace"]}
+{"query":"folklore dynasty","limit":10,"fields":["title","namespace"]}
+{"query":"climate","limit":10,"fields":["title","namespace"]}
+{"query":"mountain tale","limit":10,"fields":["title","namespace"]}
+{"query":"folklore","limit":10,"fields":["title","namespace"]}
+{"query":"tale philosophy","limit":10,"fields":["title","namespace"]}
+{"query":"\"genetic engineering\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"climate change\"","limit":10,"fields":["title","namespace"]}
+{"query":"tradition cold war","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"theory legend","limit":10,"fields":["title","namespace"]}
+{"query":"medieval","limit":10,"fields":["title","namespace"]}
+{"query":"art","limit":10,"fields":["title","namespace"]}
+{"query":"river story","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty","limit":10,"fields":["title","namespace"]}
+{"query":"theory climate","limit":10,"fields":["title","namespace"]}
+{"query":"engineering","limit":10,"fields":["title","namespace"]}
+{"query":"\"ancient civilization\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"industrial revolution\"","limit":10,"fields":["title","namespace"]}
+{"query":"nuclear heritage","limit":10,"fields":["title","namespace"]}
+{"query":"medicine","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"language","limit":10,"fields":["title","namespace"]}
+{"query":"science","limit":10,"fields":["title","namespace"]}
+{"query":"civilization","limit":10,"fields":["title","namespace"]}
+{"query":"biodiversity technology","limit":10,"fields":["title","namespace"]}
+{"query":"astronomy story","limit":10,"fields":["title","namespace"]}
+{"query":"story empire","limit":10,"fields":["title","namespace"]}
+{"query":"monarchy renaissance","limit":10,"fields":["title","namespace"]}
+{"query":"archaeology","limit":10,"fields":["title","namespace"]}
+{"query":"monarchy","limit":10,"fields":["title","namespace"]}
+{"query":"astronomy","limit":10,"fields":["title","namespace"]}
+{"query":"engineering ceremony","limit":10,"fields":["title","namespace"]}
+{"query":"theory","limit":10,"fields":["title","namespace"]}
+{"query":"colonialism island","limit":10,"fields":["title","namespace"]}
+{"query":"sociology analysis","limit":10,"fields":["title","namespace"]}
+{"query":"genetic","limit":10,"fields":["title","namespace"]}
+{"query":"heritage","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"peninsula","limit":10,"fields":["title","namespace"]}
+{"query":"\"artificial intelligence\"","limit":10,"fields":["title","namespace"]}
+{"query":"plateau","limit":10,"fields":["title","namespace"]}
+{"query":"engineering","limit":10,"fields":["title","namespace"]}
+{"query":"continent","limit":10,"fields":["title","namespace"]}
+{"query":"engineering","limit":10,"fields":["title","namespace"]}
+{"query":"story democracy","limit":10,"fields":["title","namespace"]}
+{"query":"physics science","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"economic development\"","limit":10,"fields":["title","namespace"]}
+{"query":"plateau","limit":10,"fields":["title","namespace"]}
+{"query":"invention","limit":10,"fields":["title","namespace"]}
+{"query":"experiment","limit":10,"fields":["title","namespace"]}
+{"query":"\"artificial intelligence\"","limit":10,"fields":["title","namespace"]}
+{"query":"empire","limit":10,"fields":["title","namespace"]}
+{"query":"city nuclear","limit":10,"fields":["title","namespace"]}
+{"query":"city","limit":10,"fields":["title","namespace"]}
+{"query":"experiment quantum","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"continent","limit":10,"fields":["title","namespace"]}
+{"query":"monarchy physics","limit":10,"fields":["title","namespace"]}
+{"query":"empire conservation","limit":10,"fields":["title","namespace"]}
+{"query":"economics","limit":10,"fields":["title","namespace"]}
+{"query":"\"genetic engineering\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"ancient civilization\"","limit":10,"fields":["title","namespace"]}
+{"query":"technology","limit":10,"fields":["title","namespace"]}
+{"query":"literature mythology","limit":10,"fields":["title","namespace"]}
+{"query":"\"natural selection\"","limit":10,"fields":["title","namespace"]}
+{"query":"conservation story","limit":10,"fields":["title","namespace"]}
+{"query":"religion","limit":10,"fields":["title","namespace"]}
+{"query":"democracy","limit":10,"fields":["title","namespace"]}
+{"query":"\"genetic engineering\"","limit":10,"fields":["title","namespace"]}
+{"query":"ecosystem","limit":10,"fields":["title","namespace"]}
+{"query":"monarchy","limit":10,"fields":["title","namespace"]}
+{"query":"\"social media\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"natural selection\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"engineering","limit":10,"fields":["title","namespace"]}
+{"query":"folklore","limit":10,"fields":["title","namespace"]}
+{"query":"revolution","limit":10,"fields":["title","namespace"]}
+{"query":"colonialism","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"climate tale","limit":10,"fields":["title","namespace"]}
+{"query":"\"social media\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"ancient civilization\"","limit":10,"fields":["title","namespace"]}
+{"query":"folklore republic","limit":10,"fields":["title","namespace"]}
+{"query":"peninsula science","limit":10,"fields":["title","namespace"]}
+{"query":"colonialism","limit":10,"fields":["title","namespace"]}
+{"query":"tale","limit":10,"fields":["title","namespace"]}
+{"query":"climate civilization","limit":10,"fields":["title","namespace"]}
+{"query":"forest river","limit":10,"fields":["title","namespace"]}
+{"query":"culture ecosystem","limit":10,"fields":["title","namespace"]}
+{"query":"culture religion","limit":10,"fields":["title","namespace"]}
+{"query":"astronomy","limit":10,"fields":["title","namespace"]}
+{"query":"language","limit":10,"fields":["title","namespace"]}
+{"query":"industrial revolution","limit":10,"fields":["title","namespace"]}
+{"query":"valley","limit":10,"fields":["title","namespace"]}
+{"query":"sociology mythology","limit":10,"fields":["title","namespace"]}
+{"query":"medieval","limit":10,"fields":["title","namespace"]}
+{"query":"desert sociology","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty","limit":10,"fields":["title","namespace"]}
+{"query":"\"artificial intelligence\"","limit":10,"fields":["title","namespace"]}
+{"query":"psychology tradition","limit":10,"fields":["title","namespace"]}
+{"query":"psychology","limit":10,"fields":["title","namespace"]}
+{"query":"politics","limit":10,"fields":["title","namespace"]}
+{"query":"plateau","limit":10,"fields":["title","namespace"]}
+{"query":"world war","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"conservation","limit":10,"fields":["title","namespace"]}
+{"query":"world war","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty anthropology","limit":10,"fields":["title","namespace"]}
+{"query":"\"natural selection\"","limit":10,"fields":["title","namespace"]}
+{"query":"revolution","limit":10,"fields":["title","namespace"]}
+{"query":"music colonialism","limit":10,"fields":["title","namespace"]}
+{"query":"forest feudalism","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"politics","limit":10,"fields":["title","namespace"]}
+{"query":"culture","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty hypothesis","limit":10,"fields":["title","namespace"]}
+{"query":"climate language","limit":10,"fields":["title","namespace"]}
+{"query":"ocean astronomy","limit":10,"fields":["title","namespace"]}
+{"query":"population","limit":10,"fields":["title","namespace"]}
+{"query":"world war","limit":10,"fields":["title","namespace"]}
+{"query":"valley","limit":10,"fields":["title","namespace"]}
+{"query":"forest economics","limit":10,"fields":["title","namespace"]}
+{"query":"mathematics population","limit":10,"fields":["title","namespace"]}
+{"query":"history","limit":10,"fields":["title","namespace"]}
+{"query":"\"economic development\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"quantum mechanics\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"genetic engineering\"","limit":10,"fields":["title","namespace"]}
+{"query":"city","limit":10,"fields":["title","namespace"]}
+{"query":"ocean mountain","limit":10,"fields":["title","namespace"]}
+{"query":"republic","limit":10,"fields":["title","namespace"]}
+{"query":"biodiversity colonialism","limit":10,"fields":["title","namespace"]}
+{"query":"monarchy","limit":10,"fields":["title","namespace"]}
+{"query":"\"economic development\"","limit":10,"fields":["title","namespace"]}
+{"query":"ecosystem","limit":10,"fields":["title","namespace"]}
+{"query":"culture","limit":10,"fields":["title","namespace"]}
+{"query":"continent","limit":10,"fields":["title","namespace"]}
+{"query":"quantum","limit":10,"fields":["title","namespace"]}
+{"query":"nuclear chemistry","limit":10,"fields":["title","namespace"]}
+{"query":"renaissance","limit":10,"fields":["title","namespace"]}
+{"query":"forest","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"legend","limit":10,"fields":["title","namespace"]}
+{"query":"biology genetic","limit":10,"fields":["title","namespace"]}
+{"query":"biology revolution","limit":10,"fields":["title","namespace"]}
+{"query":"desert","limit":10,"fields":["title","namespace"]}
+{"query":"ocean","limit":10,"fields":["title","namespace"]}
+{"query":"architecture forest","limit":10,"fields":["title","namespace"]}
+{"query":"republic story","limit":10,"fields":["title","namespace"]}
+{"query":"ocean mathematics","limit":10,"fields":["title","namespace"]}
+{"query":"\"artificial intelligence\"","limit":10,"fields":["title","namespace"]}
+{"query":"republic","limit":10,"fields":["title","namespace"]}
+{"query":"engineering","limit":10,"fields":["title","namespace"]}
+{"query":"atomic","limit":10,"fields":["title","namespace"]}
+{"query":"energy","limit":10,"fields":["title","namespace"]}
+{"query":"republic politics","limit":10,"fields":["title","namespace"]}
+{"query":"\"world war\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"ancient biodiversity","limit":10,"fields":["title","namespace"]}
+{"query":"climate","limit":10,"fields":["title","namespace"]}
+{"query":"biology festival","limit":10,"fields":["title","namespace"]}
+{"query":"legend","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"ecosystem","limit":10,"fields":["title","namespace"]}
+{"query":"discovery","limit":10,"fields":["title","namespace"]}
+{"query":"democracy continent","limit":10,"fields":["title","namespace"]}
+{"query":"renaissance","limit":10,"fields":["title","namespace"]}
+{"query":"religion","limit":10,"fields":["title","namespace"]}
+{"query":"\"climate change\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"social media\"","limit":10,"fields":["title","namespace"]}
+{"query":"analysis","limit":10,"fields":["title","namespace"]}
+{"query":"valley plateau","limit":10,"fields":["title","namespace"]}
+{"query":"economics","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"republic mythology","limit":10,"fields":["title","namespace"]}
+{"query":"festival","limit":10,"fields":["title","namespace"]}
+{"query":"\"climate change\"","limit":10,"fields":["title","namespace"]}
+{"query":"language hypothesis","limit":10,"fields":["title","namespace"]}
+{"query":"\"economic development\"","limit":10,"fields":["title","namespace"]}
+{"query":"biodiversity","limit":10,"fields":["title","namespace"]}
+{"query":"\"ancient civilization\"","limit":10,"fields":["title","namespace"]}
+{"query":"ritual","limit":10,"fields":["title","namespace"]}
+{"query":"biology","limit":10,"fields":["title","namespace"]}
+{"query":"festival","limit":10,"fields":["title","namespace"]}
+{"query":"festival population","limit":10,"fields":["title","namespace"]}
+{"query":"religion","limit":10,"fields":["title","namespace"]}
+{"query":"\"social media\"","limit":10,"fields":["title","namespace"]}
+{"query":"mountain","limit":10,"fields":["title","namespace"]}
+{"query":"energy","limit":10,"fields":["title","namespace"]}
+{"query":"democracy","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"sociology","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"world war\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"artificial intelligence\"","limit":10,"fields":["title","namespace"]}
+{"query":"experiment","limit":10,"fields":["title","namespace"]}
+{"query":"science politics","limit":10,"fields":["title","namespace"]}
+{"query":"mathematics","limit":10,"fields":["title","namespace"]}
+{"query":"\"ancient civilization\"","limit":10,"fields":["title","namespace"]}
+{"query":"colonialism ritual","limit":10,"fields":["title","namespace"]}
+{"query":"folklore","limit":10,"fields":["title","namespace"]}
+{"query":"colonialism","limit":10,"fields":["title","namespace"]}
+{"query":"custom","limit":10,"fields":["title","namespace"]}
+{"query":"renaissance","limit":10,"fields":["title","namespace"]}
+{"query":"colonialism theory","limit":10,"fields":["title","namespace"]}
+{"query":"theory","limit":10,"fields":["title","namespace"]}
+{"query":"ceremony monarchy","limit":10,"fields":["title","namespace"]}
+{"query":"science","limit":10,"fields":["title","namespace"]}
+{"query":"engineering music","limit":10,"fields":["title","namespace"]}
+{"query":"\"artificial intelligence\"","limit":10,"fields":["title","namespace"]}
+{"query":"mythology anthropology","limit":10,"fields":["title","namespace"]}
+{"query":"psychology ceremony","limit":10,"fields":["title","namespace"]}
+{"query":"geography","limit":10,"fields":["title","namespace"]}
+{"query":"hypothesis","limit":10,"fields":["title","namespace"]}
+{"query":"technology","limit":10,"fields":["title","namespace"]}
+{"query":"custom renaissance","limit":10,"fields":["title","namespace"]}
+{"query":"ancient climate","limit":10,"fields":["title","namespace"]}
+{"query":"quantum heritage","limit":10,"fields":["title","namespace"]}
+{"query":"forest colonialism","limit":10,"fields":["title","namespace"]}
+{"query":"continent ritual","limit":10,"fields":["title","namespace"]}
+{"query":"monarchy archaeology","limit":10,"fields":["title","namespace"]}
+{"query":"tale","limit":10,"fields":["title","namespace"]}
+{"query":"forest","limit":10,"fields":["title","namespace"]}
+{"query":"river heritage","limit":10,"fields":["title","namespace"]}
+{"query":"city","limit":10,"fields":["title","namespace"]}
+{"query":"folklore nuclear","limit":10,"fields":["title","namespace"]}
+{"query":"tradition","limit":10,"fields":["title","namespace"]}
+{"query":"evolution","limit":10,"fields":["title","namespace"]}
+{"query":"archaeology ritual","limit":10,"fields":["title","namespace"]}
+{"query":"philosophy","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"hypothesis","limit":10,"fields":["title","namespace"]}
+{"query":"civilization mountain","limit":10,"fields":["title","namespace"]}
+{"query":"astronomy","limit":10,"fields":["title","namespace"]}
+{"query":"\"artificial intelligence\"","limit":10,"fields":["title","namespace"]}
+{"query":"research","limit":10,"fields":["title","namespace"]}
+{"query":"evolution","limit":10,"fields":["title","namespace"]}
+{"query":"desert astronomy","limit":10,"fields":["title","namespace"]}
+{"query":"mountain","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"quantum","limit":10,"fields":["title","namespace"]}
+{"query":"architecture","limit":10,"fields":["title","namespace"]}
+{"query":"language","limit":10,"fields":["title","namespace"]}
+{"query":"medieval","limit":10,"fields":["title","namespace"]}
+{"query":"biodiversity","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"evolution literature","limit":10,"fields":["title","namespace"]}
+{"query":"sociology island","limit":10,"fields":["title","namespace"]}
+{"query":"evolution mathematics","limit":10,"fields":["title","namespace"]}
+{"query":"ancient kingdom","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty","limit":10,"fields":["title","namespace"]}
+{"query":"politics psychology","limit":10,"fields":["title","namespace"]}
+{"query":"cold war legend","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"music ecosystem","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"colonialism","limit":10,"fields":["title","namespace"]}
+{"query":"economics","limit":10,"fields":["title","namespace"]}
+{"query":"ocean tale","limit":10,"fields":["title","namespace"]}
+{"query":"republic","limit":10,"fields":["title","namespace"]}
+{"query":"city evolution","limit":10,"fields":["title","namespace"]}
+{"query":"river","limit":10,"fields":["title","namespace"]}
+{"query":"invention","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"music heritage","limit":10,"fields":["title","namespace"]}
+{"query":"engineering","limit":10,"fields":["title","namespace"]}
+{"query":"physics","limit":10,"fields":["title","namespace"]}
+{"query":"politics","limit":10,"fields":["title","namespace"]}
+{"query":"art","limit":10,"fields":["title","namespace"]}
+{"query":"research analysis","limit":10,"fields":["title","namespace"]}
+{"query":"ecosystem tale","limit":10,"fields":["title","namespace"]}
+{"query":"empire industrial revolution","limit":10,"fields":["title","namespace"]}
+{"query":"geography medicine","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"kingdom quantum","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"social media\"","limit":10,"fields":["title","namespace"]}
+{"query":"hypothesis","limit":10,"fields":["title","namespace"]}
+{"query":"ecosystem","limit":10,"fields":["title","namespace"]}
+{"query":"science folklore","limit":10,"fields":["title","namespace"]}
+{"query":"astronomy","limit":10,"fields":["title","namespace"]}
+{"query":"river chemistry","limit":10,"fields":["title","namespace"]}
+{"query":"\"world war\"","limit":10,"fields":["title","namespace"]}
+{"query":"technology","limit":10,"fields":["title","namespace"]}
+{"query":"science","limit":10,"fields":["title","namespace"]}
+{"query":"language","limit":10,"fields":["title","namespace"]}
+{"query":"theory","limit":10,"fields":["title","namespace"]}
+{"query":"population genetic","limit":10,"fields":["title","namespace"]}
+{"query":"discovery","limit":10,"fields":["title","namespace"]}
+{"query":"medieval plateau","limit":10,"fields":["title","namespace"]}
+{"query":"cold war","limit":10,"fields":["title","namespace"]}
+{"query":"renaissance medieval","limit":10,"fields":["title","namespace"]}
+{"query":"energy","limit":10,"fields":["title","namespace"]}
+{"query":"population feudalism","limit":10,"fields":["title","namespace"]}
+{"query":"archaeology","limit":10,"fields":["title","namespace"]}
+{"query":"mythology","limit":10,"fields":["title","namespace"]}
+{"query":"mythology","limit":10,"fields":["title","namespace"]}
+{"query":"festival architecture","limit":10,"fields":["title","namespace"]}
+{"query":"engineering","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"research theory","limit":10,"fields":["title","namespace"]}
+{"query":"\"industrial revolution\"","limit":10,"fields":["title","namespace"]}
+{"query":"ancient theory","limit":10,"fields":["title","namespace"]}
+{"query":"hypothesis","limit":10,"fields":["title","namespace"]}
+{"query":"custom experiment","limit":10,"fields":["title","namespace"]}
+{"query":"ceremony","limit":10,"fields":["title","namespace"]}
+{"query":"\"quantum mechanics\"","limit":10,"fields":["title","namespace"]}
+{"query":"nuclear","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"politics energy","limit":10,"fields":["title","namespace"]}
+{"query":"republic mythology","limit":10,"fields":["title","namespace"]}
+{"query":"chemistry","limit":10,"fields":["title","namespace"]}
+{"query":"tale monarchy","limit":10,"fields":["title","namespace"]}
+{"query":"theory city","limit":10,"fields":["title","namespace"]}
+{"query":"\"economic development\"","limit":10,"fields":["title","namespace"]}
+{"query":"desert","limit":10,"fields":["title","namespace"]}
+{"query":"story legend","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"ancient","limit":10,"fields":["title","namespace"]}
+{"query":"\"genetic engineering\"","limit":10,"fields":["title","namespace"]}
+{"query":"architecture country","limit":10,"fields":["title","namespace"]}
+{"query":"\"natural selection\"","limit":10,"fields":["title","namespace"]}
+{"query":"ritual","limit":10,"fields":["title","namespace"]}
+{"query":"literature cold war","limit":10,"fields":["title","namespace"]}
+{"query":"peninsula literature","limit":10,"fields":["title","namespace"]}
+{"query":"ecosystem","limit":10,"fields":["title","namespace"]}
+{"query":"energy","limit":10,"fields":["title","namespace"]}
+{"query":"empire revolution","limit":10,"fields":["title","namespace"]}
+{"query":"molecular population","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty atomic","limit":10,"fields":["title","namespace"]}
+{"query":"democracy","limit":10,"fields":["title","namespace"]}
+{"query":"hypothesis democracy","limit":10,"fields":["title","namespace"]}
+{"query":"legend cold war","limit":10,"fields":["title","namespace"]}
+{"query":"\"world war\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"sociology evolution","limit":10,"fields":["title","namespace"]}
+{"query":"\"genetic engineering\"","limit":10,"fields":["title","namespace"]}
+{"query":"science","limit":10,"fields":["title","namespace"]}
+{"query":"republic","limit":10,"fields":["title","namespace"]}
+{"query":"genetic","limit":10,"fields":["title","namespace"]}
+{"query":"experiment biology","limit":10,"fields":["title","namespace"]}
+{"query":"\"artificial intelligence\"","limit":10,"fields":["title","namespace"]}
+{"query":"island anthropology","limit":10,"fields":["title","namespace"]}
+{"query":"\"economic development\"","limit":10,"fields":["title","namespace"]}
+{"query":"ritual","limit":10,"fields":["title","namespace"]}
+{"query":"mythology","limit":10,"fields":["title","namespace"]}
+{"query":"anthropology","limit":10,"fields":["title","namespace"]}
+{"query":"nuclear desert","limit":10,"fields":["title","namespace"]}
+{"query":"colonialism republic","limit":10,"fields":["title","namespace"]}
+{"query":"geography monarchy","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"archaeology","limit":10,"fields":["title","namespace"]}
+{"query":"atomic","limit":10,"fields":["title","namespace"]}
+{"query":"mountain chemistry","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"artificial intelligence\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"economics dynasty","limit":10,"fields":["title","namespace"]}
+{"query":"ritual","limit":10,"fields":["title","namespace"]}
+{"query":"empire nuclear","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty","limit":10,"fields":["title","namespace"]}
+{"query":"festival","limit":10,"fields":["title","namespace"]}
+{"query":"feudalism ancient","limit":10,"fields":["title","namespace"]}
+{"query":"river custom","limit":10,"fields":["title","namespace"]}
+{"query":"\"industrial revolution\"","limit":10,"fields":["title","namespace"]}
+{"query":"art dynasty","limit":10,"fields":["title","namespace"]}
+{"query":"continent","limit":10,"fields":["title","namespace"]}
+{"query":"hypothesis archaeology","limit":10,"fields":["title","namespace"]}
+{"query":"colonialism","limit":10,"fields":["title","namespace"]}
+{"query":"republic","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"natural selection\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"natural selection\"","limit":10,"fields":["title","namespace"]}
+{"query":"monarchy","limit":10,"fields":["title","namespace"]}
+{"query":"hypothesis","limit":10,"fields":["title","namespace"]}
+{"query":"continent population","limit":10,"fields":["title","namespace"]}
+{"query":"architecture festival","limit":10,"fields":["title","namespace"]}
+{"query":"\"ancient civilization\"","limit":10,"fields":["title","namespace"]}
+{"query":"world war","limit":10,"fields":["title","namespace"]}
+{"query":"continent plateau","limit":10,"fields":["title","namespace"]}
+{"query":"\"world war\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"river music","limit":10,"fields":["title","namespace"]}
+{"query":"medieval","limit":10,"fields":["title","namespace"]}
+{"query":"theory medicine","limit":10,"fields":["title","namespace"]}
+{"query":"country","limit":10,"fields":["title","namespace"]}
+{"query":"civilization","limit":10,"fields":["title","namespace"]}
+{"query":"conservation","limit":10,"fields":["title","namespace"]}
+{"query":"ecosystem","limit":10,"fields":["title","namespace"]}
+{"query":"chemistry","limit":10,"fields":["title","namespace"]}
+{"query":"psychology art","limit":10,"fields":["title","namespace"]}
+{"query":"theory research","limit":10,"fields":["title","namespace"]}
+{"query":"physics","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"hypothesis custom","limit":10,"fields":["title","namespace"]}
+{"query":"legend","limit":10,"fields":["title","namespace"]}
+{"query":"desert","limit":10,"fields":["title","namespace"]}
+{"query":"literature","limit":10,"fields":["title","namespace"]}
+{"query":"peninsula anthropology","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"language","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"conservation","limit":10,"fields":["title","namespace"]}
+{"query":"experiment mythology","limit":10,"fields":["title","namespace"]}
+{"query":"festival population","limit":10,"fields":["title","namespace"]}
+{"query":"industrial revolution","limit":10,"fields":["title","namespace"]}
+{"query":"theory story","limit":10,"fields":["title","namespace"]}
+{"query":"sociology","limit":10,"fields":["title","namespace"]}
+{"query":"\"quantum mechanics\"","limit":10,"fields":["title","namespace"]}
+{"query":"country","limit":10,"fields":["title","namespace"]}
+{"query":"\"quantum mechanics\"","limit":10,"fields":["title","namespace"]}
+{"query":"valley folklore","limit":10,"fields":["title","namespace"]}
+{"query":"music","limit":10,"fields":["title","namespace"]}
+{"query":"chemistry","limit":10,"fields":["title","namespace"]}
+{"query":"culture feudalism","limit":10,"fields":["title","namespace"]}
+{"query":"revolution","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"valley invention","limit":10,"fields":["title","namespace"]}
+{"query":"empire","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"technology","limit":10,"fields":["title","namespace"]}
+{"query":"architecture discovery","limit":10,"fields":["title","namespace"]}
+{"query":"nuclear","limit":10,"fields":["title","namespace"]}
+{"query":"renaissance","limit":10,"fields":["title","namespace"]}
+{"query":"civilization philosophy","limit":10,"fields":["title","namespace"]}
+{"query":"\"quantum mechanics\"","limit":10,"fields":["title","namespace"]}
+{"query":"city desert","limit":10,"fields":["title","namespace"]}
+{"query":"island evolution","limit":10,"fields":["title","namespace"]}
+{"query":"literature","limit":10,"fields":["title","namespace"]}
+{"query":"genetic research","limit":10,"fields":["title","namespace"]}
+{"query":"folklore","limit":10,"fields":["title","namespace"]}
+{"query":"continent industrial revolution","limit":10,"fields":["title","namespace"]}
+{"query":"philosophy","limit":10,"fields":["title","namespace"]}
+{"query":"kingdom","limit":10,"fields":["title","namespace"]}
+{"query":"cold war heritage","limit":10,"fields":["title","namespace"]}
+{"query":"culture","limit":10,"fields":["title","namespace"]}
+{"query":"world war tradition","limit":10,"fields":["title","namespace"]}
+{"query":"\"social media\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"economic development\"","limit":10,"fields":["title","namespace"]}
+{"query":"theory medicine","limit":10,"fields":["title","namespace"]}
+{"query":"medieval geography","limit":10,"fields":["title","namespace"]}
+{"query":"chemistry energy","limit":10,"fields":["title","namespace"]}
+{"query":"kingdom tale","limit":10,"fields":["title","namespace"]}
+{"query":"island","limit":10,"fields":["title","namespace"]}
+{"query":"folklore tradition","limit":10,"fields":["title","namespace"]}
+{"query":"heritage tradition","limit":10,"fields":["title","namespace"]}
+{"query":"climate","limit":10,"fields":["title","namespace"]}
+{"query":"legend","limit":10,"fields":["title","namespace"]}
+{"query":"atomic","limit":10,"fields":["title","namespace"]}
+{"query":"anthropology","limit":10,"fields":["title","namespace"]}
+{"query":"tale","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"hypothesis mythology","limit":10,"fields":["title","namespace"]}
+{"query":"language","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"anthropology peninsula","limit":10,"fields":["title","namespace"]}
+{"query":"city climate","limit":10,"fields":["title","namespace"]}
+{"query":"evolution genetic","limit":10,"fields":["title","namespace"]}
+{"query":"festival colonialism","limit":10,"fields":["title","namespace"]}
+{"query":"peninsula","limit":10,"fields":["title","namespace"]}
+{"query":"literature","limit":10,"fields":["title","namespace"]}
+{"query":"river","limit":10,"fields":["title","namespace"]}
+{"query":"hypothesis","limit":10,"fields":["title","namespace"]}
+{"query":"\"social media\"","limit":10,"fields":["title","namespace"]}
+{"query":"ocean","limit":10,"fields":["title","namespace"]}
+{"query":"\"climate change\"","limit":10,"fields":["title","namespace"]}
+{"query":"cold war theory","limit":10,"fields":["title","namespace"]}
+{"query":"\"genetic engineering\"","limit":10,"fields":["title","namespace"]}
+{"query":"language nuclear","limit":10,"fields":["title","namespace"]}
+{"query":"physics world war","limit":10,"fields":["title","namespace"]}
+{"query":"mountain","limit":10,"fields":["title","namespace"]}
+{"query":"republic","limit":10,"fields":["title","namespace"]}
+{"query":"history","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"engineering kingdom","limit":10,"fields":["title","namespace"]}
+{"query":"art ecosystem","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"world war","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"civilization","limit":10,"fields":["title","namespace"]}
+{"query":"heritage","limit":10,"fields":["title","namespace"]}
+{"query":"\"industrial revolution\"","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty","limit":10,"fields":["title","namespace"]}
+{"query":"tradition","limit":10,"fields":["title","namespace"]}
+{"query":"technology","limit":10,"fields":["title","namespace"]}
+{"query":"architecture","limit":10,"fields":["title","namespace"]}
+{"query":"\"industrial revolution\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"mountain religion","limit":10,"fields":["title","namespace"]}
+{"query":"politics archaeology","limit":10,"fields":["title","namespace"]}
+{"query":"atomic","limit":10,"fields":["title","namespace"]}
+{"query":"geography world war","limit":10,"fields":["title","namespace"]}
+{"query":"nuclear","limit":10,"fields":["title","namespace"]}
+{"query":"molecular","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"plateau forest","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"economics","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"analysis","limit":10,"fields":["title","namespace"]}
+{"query":"mythology sociology","limit":10,"fields":["title","namespace"]}
+{"query":"peninsula festival","limit":10,"fields":["title","namespace"]}
+{"query":"\"genetic engineering\"","limit":10,"fields":["title","namespace"]}
+{"query":"religion legend","limit":10,"fields":["title","namespace"]}
+{"query":"desert experiment","limit":10,"fields":["title","namespace"]}
+{"query":"engineering","limit":10,"fields":["title","namespace"]}
+{"query":"technology","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty mythology","limit":10,"fields":["title","namespace"]}
+{"query":"\"world war\"","limit":10,"fields":["title","namespace"]}
+{"query":"city ocean","limit":10,"fields":["title","namespace"]}
+{"query":"cold war theory","limit":10,"fields":["title","namespace"]}
+{"query":"philosophy language","limit":10,"fields":["title","namespace"]}
+{"query":"politics revolution","limit":10,"fields":["title","namespace"]}
+{"query":"democracy philosophy","limit":10,"fields":["title","namespace"]}
+{"query":"desert","limit":10,"fields":["title","namespace"]}
+{"query":"music","limit":10,"fields":["title","namespace"]}
+{"query":"history","limit":10,"fields":["title","namespace"]}
+{"query":"custom","limit":10,"fields":["title","namespace"]}
+{"query":"story","limit":10,"fields":["title","namespace"]}
+{"query":"mythology theory","limit":10,"fields":["title","namespace"]}
+{"query":"literature energy","limit":10,"fields":["title","namespace"]}
+{"query":"\"climate change\"","limit":10,"fields":["title","namespace"]}
+{"query":"energy","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"valley","limit":10,"fields":["title","namespace"]}
+{"query":"valley","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty architecture","limit":10,"fields":["title","namespace"]}
+{"query":"politics","limit":10,"fields":["title","namespace"]}
+{"query":"\"social media\"","limit":10,"fields":["title","namespace"]}
+{"query":"anthropology chemistry","limit":10,"fields":["title","namespace"]}
+{"query":"\"social media\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"anthropology politics","limit":10,"fields":["title","namespace"]}
+{"query":"civilization","limit":10,"fields":["title","namespace"]}
+{"query":"\"genetic engineering\"","limit":10,"fields":["title","namespace"]}
+{"query":"energy tradition","limit":10,"fields":["title","namespace"]}
+{"query":"language","limit":10,"fields":["title","namespace"]}
+{"query":"\"social media\"","limit":10,"fields":["title","namespace"]}
+{"query":"ritual","limit":10,"fields":["title","namespace"]}
+{"query":"mythology","limit":10,"fields":["title","namespace"]}
+{"query":"plateau literature","limit":10,"fields":["title","namespace"]}
+{"query":"science","limit":10,"fields":["title","namespace"]}
+{"query":"feudalism","limit":10,"fields":["title","namespace"]}
+{"query":"city tale","limit":10,"fields":["title","namespace"]}
+{"query":"\"quantum mechanics\"","limit":10,"fields":["title","namespace"]}
+{"query":"cold war democracy","limit":10,"fields":["title","namespace"]}
+{"query":"custom ceremony","limit":10,"fields":["title","namespace"]}
+{"query":"literature plateau","limit":10,"fields":["title","namespace"]}
+{"query":"archaeology chemistry","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"mountain","limit":10,"fields":["title","namespace"]}
+{"query":"hypothesis","limit":10,"fields":["title","namespace"]}
+{"query":"revolution desert","limit":10,"fields":["title","namespace"]}
+{"query":"analysis","limit":10,"fields":["title","namespace"]}
+{"query":"technology","limit":10,"fields":["title","namespace"]}
+{"query":"molecular","limit":10,"fields":["title","namespace"]}
+{"query":"literature","limit":10,"fields":["title","namespace"]}
+{"query":"energy","limit":10,"fields":["title","namespace"]}
+{"query":"mythology","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"physics literature","limit":10,"fields":["title","namespace"]}
+{"query":"\"ancient civilization\"","limit":10,"fields":["title","namespace"]}
+{"query":"quantum literature","limit":10,"fields":["title","namespace"]}
+{"query":"country molecular","limit":10,"fields":["title","namespace"]}
+{"query":"biodiversity","limit":10,"fields":["title","namespace"]}
+{"query":"festival forest","limit":10,"fields":["title","namespace"]}
+{"query":"\"social media\"","limit":10,"fields":["title","namespace"]}
+{"query":"mountain","limit":10,"fields":["title","namespace"]}
+{"query":"research","limit":10,"fields":["title","namespace"]}
+{"query":"philosophy","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"analysis","limit":10,"fields":["title","namespace"]}
+{"query":"\"industrial revolution\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"religion","limit":10,"fields":["title","namespace"]}
+{"query":"monarchy ecosystem","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"mathematics","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"hypothesis river","limit":10,"fields":["title","namespace"]}
+{"query":"history hypothesis","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"island revolution","limit":10,"fields":["title","namespace"]}
+{"query":"folklore","limit":10,"fields":["title","namespace"]}
+{"query":"mythology","limit":10,"fields":["title","namespace"]}
+{"query":"culture story","limit":10,"fields":["title","namespace"]}
+{"query":"custom empire","limit":10,"fields":["title","namespace"]}
+{"query":"empire climate","limit":10,"fields":["title","namespace"]}
+{"query":"geography","limit":10,"fields":["title","namespace"]}
+{"query":"civilization folklore","limit":10,"fields":["title","namespace"]}
+{"query":"democracy language","limit":10,"fields":["title","namespace"]}
+{"query":"\"economic development\"","limit":10,"fields":["title","namespace"]}
+{"query":"tradition history","limit":10,"fields":["title","namespace"]}
+{"query":"monarchy ecosystem","limit":10,"fields":["title","namespace"]}
+{"query":"invention empire","limit":10,"fields":["title","namespace"]}
+{"query":"peninsula","limit":10,"fields":["title","namespace"]}
+{"query":"kingdom experiment","limit":10,"fields":["title","namespace"]}
+{"query":"science dynasty","limit":10,"fields":["title","namespace"]}
+{"query":"ritual","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"story mountain","limit":10,"fields":["title","namespace"]}
+{"query":"quantum conservation","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"revolution art","limit":10,"fields":["title","namespace"]}
+{"query":"medieval art","limit":10,"fields":["title","namespace"]}
+{"query":"sociology","limit":10,"fields":["title","namespace"]}
+{"query":"civilization democracy","limit":10,"fields":["title","namespace"]}
+{"query":"\"industrial revolution\"","limit":10,"fields":["title","namespace"]}
+{"query":"science experiment","limit":10,"fields":["title","namespace"]}
+{"query":"desert economics","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"river medicine","limit":10,"fields":["title","namespace"]}
+{"query":"city","limit":10,"fields":["title","namespace"]}
+{"query":"river","limit":10,"fields":["title","namespace"]}
+{"query":"history molecular","limit":10,"fields":["title","namespace"]}
+{"query":"energy medicine","limit":10,"fields":["title","namespace"]}
+{"query":"revolution heritage","limit":10,"fields":["title","namespace"]}
+{"query":"language","limit":10,"fields":["title","namespace"]}
+{"query":"religion","limit":10,"fields":["title","namespace"]}
+{"query":"evolution","limit":10,"fields":["title","namespace"]}
+{"query":"renaissance","limit":10,"fields":["title","namespace"]}
+{"query":"climate","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty","limit":10,"fields":["title","namespace"]}
+{"query":"mountain","limit":10,"fields":["title","namespace"]}
+{"query":"geography","limit":10,"fields":["title","namespace"]}
+{"query":"\"world war\"","limit":10,"fields":["title","namespace"]}
+{"query":"politics","limit":10,"fields":["title","namespace"]}
+{"query":"genetic","limit":10,"fields":["title","namespace"]}
+{"query":"chemistry","limit":10,"fields":["title","namespace"]}
+{"query":"\"artificial intelligence\"","limit":10,"fields":["title","namespace"]}
+{"query":"river","limit":10,"fields":["title","namespace"]}
+{"query":"economics","limit":10,"fields":["title","namespace"]}
+{"query":"custom","limit":10,"fields":["title","namespace"]}
+{"query":"industrial revolution","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"natural selection\"","limit":10,"fields":["title","namespace"]}
+{"query":"ancient","limit":10,"fields":["title","namespace"]}
+{"query":"\"genetic engineering\"","limit":10,"fields":["title","namespace"]}
+{"query":"empire hypothesis","limit":10,"fields":["title","namespace"]}
+{"query":"world war literature","limit":10,"fields":["title","namespace"]}
+{"query":"\"social media\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"medicine","limit":10,"fields":["title","namespace"]}
+{"query":"religion ecosystem","limit":10,"fields":["title","namespace"]}
+{"query":"nuclear","limit":10,"fields":["title","namespace"]}
+{"query":"tale","limit":10,"fields":["title","namespace"]}
+{"query":"\"social media\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"genetic engineering\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"economic development\"","limit":10,"fields":["title","namespace"]}
+{"query":"experiment","limit":10,"fields":["title","namespace"]}
+{"query":"geography","limit":10,"fields":["title","namespace"]}
+{"query":"climate","limit":10,"fields":["title","namespace"]}
+{"query":"\"climate change\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"civilization","limit":10,"fields":["title","namespace"]}
+{"query":"\"natural selection\"","limit":10,"fields":["title","namespace"]}
+{"query":"analysis kingdom","limit":10,"fields":["title","namespace"]}
+{"query":"biodiversity desert","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"population","limit":10,"fields":["title","namespace"]}
+{"query":"medieval","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"legend","limit":10,"fields":["title","namespace"]}
+{"query":"island","limit":10,"fields":["title","namespace"]}
+{"query":"anthropology","limit":10,"fields":["title","namespace"]}
+{"query":"anthropology analysis","limit":10,"fields":["title","namespace"]}
+{"query":"renaissance ritual","limit":10,"fields":["title","namespace"]}
+{"query":"tale","limit":10,"fields":["title","namespace"]}
+{"query":"\"ancient civilization\"","limit":10,"fields":["title","namespace"]}
+{"query":"molecular heritage","limit":10,"fields":["title","namespace"]}
+{"query":"politics ancient","limit":10,"fields":["title","namespace"]}
+{"query":"revolution","limit":10,"fields":["title","namespace"]}
+{"query":"\"world war\"","limit":10,"fields":["title","namespace"]}
+{"query":"archaeology","limit":10,"fields":["title","namespace"]}
+{"query":"religion","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"cold war nuclear","limit":10,"fields":["title","namespace"]}
+{"query":"legend","limit":10,"fields":["title","namespace"]}
+{"query":"city continent","limit":10,"fields":["title","namespace"]}
+{"query":"colonialism","limit":10,"fields":["title","namespace"]}
+{"query":"\"artificial intelligence\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"feudalism anthropology","limit":10,"fields":["title","namespace"]}
+{"query":"energy mythology","limit":10,"fields":["title","namespace"]}
+{"query":"civilization","limit":10,"fields":["title","namespace"]}
+{"query":"sociology","limit":10,"fields":["title","namespace"]}
+{"query":"legend","limit":10,"fields":["title","namespace"]}
+{"query":"\"world war\"","limit":10,"fields":["title","namespace"]}
+{"query":"music","limit":10,"fields":["title","namespace"]}
+{"query":"chemistry","limit":10,"fields":["title","namespace"]}
+{"query":"medieval atomic","limit":10,"fields":["title","namespace"]}
+{"query":"revolution genetic","limit":10,"fields":["title","namespace"]}
+{"query":"country","limit":10,"fields":["title","namespace"]}
+{"query":"democracy empire","limit":10,"fields":["title","namespace"]}
+{"query":"kingdom","limit":10,"fields":["title","namespace"]}
+{"query":"democracy legend","limit":10,"fields":["title","namespace"]}
+{"query":"ritual","limit":10,"fields":["title","namespace"]}
+{"query":"mythology atomic","limit":10,"fields":["title","namespace"]}
+{"query":"festival","limit":10,"fields":["title","namespace"]}
+{"query":"ancient","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"economics","limit":10,"fields":["title","namespace"]}
+{"query":"energy","limit":10,"fields":["title","namespace"]}
+{"query":"ancient city","limit":10,"fields":["title","namespace"]}
+{"query":"feudalism","limit":10,"fields":["title","namespace"]}
+{"query":"engineering","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"climate change\"","limit":10,"fields":["title","namespace"]}
+{"query":"republic valley","limit":10,"fields":["title","namespace"]}
+{"query":"theory","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"discovery history","limit":10,"fields":["title","namespace"]}
+{"query":"republic","limit":10,"fields":["title","namespace"]}
+{"query":"\"natural selection\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"artificial intelligence\"","limit":10,"fields":["title","namespace"]}
+{"query":"climate","limit":10,"fields":["title","namespace"]}
+{"query":"country renaissance","limit":10,"fields":["title","namespace"]}
+{"query":"medieval","limit":10,"fields":["title","namespace"]}
+{"query":"mathematics continent","limit":10,"fields":["title","namespace"]}
+{"query":"politics conservation","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"republic tale","limit":10,"fields":["title","namespace"]}
+{"query":"city","limit":10,"fields":["title","namespace"]}
+{"query":"mythology","limit":10,"fields":["title","namespace"]}
+{"query":"feudalism","limit":10,"fields":["title","namespace"]}
+{"query":"psychology","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"engineering","limit":10,"fields":["title","namespace"]}
+{"query":"\"quantum mechanics\"","limit":10,"fields":["title","namespace"]}
+{"query":"legend","limit":10,"fields":["title","namespace"]}
+{"query":"cold war","limit":10,"fields":["title","namespace"]}
+{"query":"psychology river","limit":10,"fields":["title","namespace"]}
+{"query":"molecular","limit":10,"fields":["title","namespace"]}
+{"query":"genetic","limit":10,"fields":["title","namespace"]}
+{"query":"astronomy","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"culture","limit":10,"fields":["title","namespace"]}
+{"query":"history","limit":10,"fields":["title","namespace"]}
+{"query":"kingdom valley","limit":10,"fields":["title","namespace"]}
+{"query":"ocean","limit":10,"fields":["title","namespace"]}
+{"query":"science","limit":10,"fields":["title","namespace"]}
+{"query":"ancient","limit":10,"fields":["title","namespace"]}
+{"query":"nuclear","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"anthropology experiment","limit":10,"fields":["title","namespace"]}
+{"query":"tale analysis","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"quantum physics","limit":10,"fields":["title","namespace"]}
+{"query":"ceremony","limit":10,"fields":["title","namespace"]}
+{"query":"medieval legend","limit":10,"fields":["title","namespace"]}
+{"query":"biology desert","limit":10,"fields":["title","namespace"]}
+{"query":"\"cultural heritage\"","limit":10,"fields":["title","namespace"]}
+{"query":"island","limit":10,"fields":["title","namespace"]}
+{"query":"politics","limit":10,"fields":["title","namespace"]}
+{"query":"mountain mythology","limit":10,"fields":["title","namespace"]}
+{"query":"\"quantum mechanics\"","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"revolution literature","limit":10,"fields":["title","namespace"]}
+{"query":"peninsula world war","limit":10,"fields":["title","namespace"]}
+{"query":"\"human rights\"","limit":10,"fields":["title","namespace"]}
+{"query":"mathematics","limit":10,"fields":["title","namespace"]}
+{"query":"invention","limit":10,"fields":["title","namespace"]}
+{"query":"biology experiment","limit":10,"fields":["title","namespace"]}
+{"query":"kingdom","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty","limit":10,"fields":["title","namespace"]}
+{"query":"molecular cold war","limit":10,"fields":["title","namespace"]}
+{"query":"industrial revolution hypothesis","limit":10,"fields":["title","namespace"]}
+{"query":"sociology","limit":10,"fields":["title","namespace"]}
+{"query":"culture","limit":10,"fields":["title","namespace"]}
+{"query":"anthropology river","limit":10,"fields":["title","namespace"]}
+{"query":"festival psychology","limit":10,"fields":["title","namespace"]}
+{"query":"\"climate change\"","limit":10,"fields":["title","namespace"]}
+{"query":"folklore science","limit":10,"fields":["title","namespace"]}
+{"query":"revolution","limit":10,"fields":["title","namespace"]}
+{"query":"technology tale","limit":10,"fields":["title","namespace"]}
+{"query":"atomic","limit":10,"fields":["title","namespace"]}
+{"query":"genetic","limit":10,"fields":["title","namespace"]}
+{"query":"physics","limit":10,"fields":["title","namespace"]}
+{"query":"mythology","limit":10,"fields":["title","namespace"]}
+{"query":"politics","limit":10,"fields":["title","namespace"]}
+{"query":"politics","limit":10,"fields":["title","namespace"]}
+{"query":"renaissance valley","limit":10,"fields":["title","namespace"]}
+{"query":"molecular","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"dynasty","limit":10,"fields":["title","namespace"]}
+{"query":"\"ancient civilization\"","limit":10,"fields":["title","namespace"]}
+{"query":"atomic","limit":10,"fields":["title","namespace"]}
+{"query":"colonialism mountain","limit":10,"fields":["title","namespace"]}
+{"query":"folklore","limit":10,"fields":["title","namespace"]}
+{"query":"\"artificial intelligence\"","limit":10,"fields":["title","namespace"]}
+{"query":"economics genetic","limit":10,"fields":["title","namespace"]}
+{"query":"ecosystem","limit":10,"fields":["title","namespace"]}
+{"query":"river","limit":10,"fields":["title","namespace"]}
+{"query":"\"quantum mechanics\"","limit":10,"fields":["title","namespace"]}
+{"query":"politics","limit":10,"fields":["title","namespace"]}
+{"query":"history island","limit":10,"fields":["title","namespace"]}
+{"query":"geography music","limit":10,"fields":["title","namespace"]}
+{"query":"population","limit":10,"fields":["title","namespace"]}
+{"query":"\"scientific method\"","limit":10,"fields":["title","namespace"]}
+{"query":"island","limit":10,"fields":["title","namespace"]}
+{"query":"religion atomic","limit":10,"fields":["title","namespace"]}
+{"query":"\"political science\"","limit":10,"fields":["title","namespace"]}
+{"query":"tradition","limit":10,"fields":["title","namespace"]}
+{"query":"engineering","limit":10,"fields":["title","namespace"]}
+{"query":"\"genetic engineering\"","limit":10,"fields":["title","namespace"]}
+{"query":"biodiversity genetic","limit":10,"fields":["title","namespace"]}
+{"query":"medieval","limit":10,"fields":["title","namespace"]}
+{"query":"\"artificial intelligence\"","limit":10,"fields":["title","namespace"]}
+{"query":"ceremony","limit":10,"fields":["title","namespace"]}
+{"query":"astronomy","limit":10,"fields":["title","namespace"]}
+{"query":"plateau","limit":10,"fields":["title","namespace"]}
+{"query":"\"space exploration\"","limit":10,"fields":["title","namespace"]}
+{"query":"energy","limit":10,"fields":["title","namespace"]}
+{"query":"kingdom","limit":10,"fields":["title","namespace"]}
+{"query":"cold war","limit":10,"fields":["title","namespace"]}
+{"query":"biology tale","limit":10,"fields":["title","namespace"]}
+{"query":"legend","limit":10,"fields":["title","namespace"]}
+{"query":"\"environmental protection\"","limit":10,"fields":["title","namespace"]}
+{"query":"astronomy biology","limit":10,"fields":["title","namespace"]}
+{"query":"music","limit":10,"fields":["title","namespace"]}
+{"query":"story discovery","limit":10,"fields":["title","namespace"]}
+{"query":"ritual desert","limit":10,"fields":["title","namespace"]}

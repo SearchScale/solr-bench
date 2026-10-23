@@ -31,7 +31,8 @@ public class MetricsCollector implements Runnable {
 	private final String prometheusMetricsPort;
 	private final SolrCloud cloud;
 	private final int collectionDurationSeconds;
-	Set<String> groups = new HashSet<String>();
+	Set<String> queries = new HashSet<String>();
+	private final Set<String> unresolved = ConcurrentHashMap.newKeySet();
 
 	public MetricsCollector(SolrCloud cloud, List<String> zkMetricsPaths, List<String> solrMetricsPaths, List<String> prometheusMetrics, String prometheusMetricsPort, int collectionIntervalSeconds) {
 		// default to empty lists, since either of these could be null
@@ -59,7 +60,7 @@ public class MetricsCollector implements Runnable {
 		this.prometheusMetricsPort = prometheusMetricsPort;
 
 		for (String path: metricsPaths) {
-			groups.add(path.split("/")[0]);
+			queries.add(SolrMetrics.queryFor(path));
 		}
 	}
 
@@ -98,40 +99,29 @@ public class MetricsCollector implements Runnable {
 		}
 	}
 
-	// Update the metrics map with new metrics scraped from the Solr metrics endpoint
+	// Update the metrics map with new metrics scraped from the Solr metrics endpoint. Each path is either a JSON path
+	// (group/registry/name) or a Prometheus selector; SolrMetrics reads both formats Solr's endpoint has used.
 	private void fetchSolrMetrics() {
 		for (SolrNode node: cloud.nodes) {
-			Map<String, JSONObject> resp = new HashMap<>();
-			for (String group: groups) {
+			Map<String, SolrMetrics> resp = new HashMap<>();
+			for (String query: queries) {
 				try {
-					URL url = new URL(node.getBaseUrl()+"admin/metrics?group="+group);
-					resp.put(group, new JSONObject(IOUtils.toString(url, Charset.forName("UTF-8"))));
+					resp.put(query, SolrMetrics.fetchQuery(node.getBaseUrl(), query));
 				} catch (JSONException | IOException e1) {
 					log.debug("Couldn't get metrics from "+node.getBaseUrl(), e1);
 				}
 			}
 			for (String path: metricsPaths) {
-				String[] elements = path.split("(?<!\\\\)/");
-				String group = elements[0];
-				JSONObject json = resp.get(group);
-
-				if (json != null) {
-					try {
-						json = json.getJSONObject("metrics");
-						int n = elements.length;
-						for (int i = 1; i < n - 1; ++i) {
-							json = json.getJSONObject(elements[i].replace("\\/", "/"));
-						}
-						Double metric = json.getDouble(elements[n - 1].replace("\\/", "/"));
-						metrics.get(node.getNodeName()).get(path).add(metric);
-					} catch (JSONException e) {
-						// some key, e.g., solr.core.fsloadtest.shard1.replica_n1 may not be available immediately
-						log.debug("Skipped metrics path {}: json: " + json, path, e);
-						metrics.get(node.getNodeName()).get(path).add(-1.0);
+				SolrMetrics response = resp.get(SolrMetrics.queryFor(path));
+				Double metric = response == null ? null : response.get(path);
+				if (metric == null) {
+					// not fetched, or not available (yet), e.g. solr.core.fsloadtest.shard1.replica_n1
+					if (response != null && response.isPrometheus() && unresolved.add(path)) {
+						log.warn("Metric {} isn't in the Prometheus metrics from {}; use a Prometheus selector instead", path, node.getBaseUrl());
 					}
-				} else { // else this response wasn't fetched
-					metrics.get(node.getNodeName()).get(path).add(-1.0);
+					metric = -1.0;
 				}
+				metrics.get(node.getNodeName()).get(path).add(metric);
 			}
 		}
 	}

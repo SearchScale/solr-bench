@@ -25,7 +25,11 @@ public class QueryGenerator {
     final QueryBenchmark queryBenchmark;
     List<String> queries = new ArrayList<>();
     AtomicLong counter = new AtomicLong();
+    AtomicLong ridCounter = new AtomicLong();
     final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+    
+    // Map to store RID to query content mapping for correlation
+    private final Map<String, String> ridToQueryMap = new HashMap<>();
 
     public QueryGenerator(QueryBenchmark queryBenchmark) throws IOException, ParseException {
         this.queryBenchmark = queryBenchmark;
@@ -49,6 +53,26 @@ public class QueryGenerator {
 
     }
 
+    /**
+     * Generate a unique request ID for correlation with logs
+     */
+    private String generateRID() {
+        return "query-" + System.currentTimeMillis() + "-" + ridCounter.incrementAndGet();
+    }
+    
+    /**
+     * Get the query content for a given RID (for correlation)
+     */
+    public String getQueryForRID(String rid) {
+        return ridToQueryMap.get(rid);
+    }
+    
+    /**
+     * Get all RID to query mappings (for debugging/correlation)
+     */
+    public Map<String, String> getRIDToQueryMap() {
+        return new HashMap<>(ridToQueryMap);
+    }
 
     public QueryRequest nextRequest() {
         if (queryBenchmark.shuffle && counter.get() % queries.size() == 0) {
@@ -61,6 +85,10 @@ public class QueryGenerator {
         
     	  String q = queries.get((int) (counter.getAndIncrement() % queries.size()));
 
+        // Generate unique RID for this query
+        String rid = generateRID();
+        ridToQueryMap.put(rid, q);
+
         QueryRequest request;
         if (queryBenchmark.templateValues != null && !queryBenchmark.templateValues.isEmpty()) {
             PropertiesUtil.substituteProperty(q, queryBenchmark.templateValues);
@@ -68,7 +96,11 @@ public class QueryGenerator {
 
         //TODO apply templates if any
         if (Boolean.TRUE.equals(queryBenchmark.isJsonQuery)) {
-            request = new QueryRequest() {
+            // Create params with RID for JSON queries
+            Map<String, String> paramsWithRID = new HashMap<>(queryBenchmark.params);
+            paramsWithRID.put("rid", rid);
+            
+            request = new QueryRequest(new MapSolrParams(paramsWithRID)) {
                 @Override
                 public METHOD getMethod() {
                     return METHOD.POST;
@@ -95,18 +127,26 @@ public class QueryGenerator {
                 }
 
                 @Override
-                public SolrParams getParams() {
-                    return new MapSolrParams(queryBenchmark.params);
-                }
-
-                @Override
                 public Map<String, String> getHeaders() {
                     return queryBenchmark.headers;
                 }
             };
 
         } else {
-            request = new QueryRequest(Util.parseQueryString(q)) {
+            // Parse the query string and add RID parameter
+            SolrParams baseParams = Util.parseQueryString(q);
+            Map<String, String> paramsWithRID = new HashMap<>();
+            
+            // Copy existing parameters
+            for (Iterator<String> it = baseParams.getParameterNamesIterator(); it.hasNext(); ) {
+                String paramName = it.next();
+                paramsWithRID.put(paramName, baseParams.get(paramName));
+            }
+            
+            // Add RID parameter
+            paramsWithRID.put("rid", rid);
+            
+            request = new QueryRequest(new MapSolrParams(paramsWithRID)) {
                 @Override
                 public String getCollection() {
                     return queryBenchmark.collection;

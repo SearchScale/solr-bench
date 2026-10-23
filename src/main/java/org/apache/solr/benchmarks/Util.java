@@ -110,6 +110,14 @@ public class Util {
    * @throws Exception 
    */
   public static int execute(String command, String workingDirectoryPath) throws Exception {
+    return execute(command, workingDirectoryPath, null);
+  }
+
+  /**
+   * Same as {@link #execute(String, String)}, with extra environment variables that add to or
+   * override the ones inherited from this process.
+   */
+  public static int execute(String command, String workingDirectoryPath, Map<String, String> extraEnv) throws Exception {
     logger.debug("Executing: " + command);
     logger.debug("Working dir: " + workingDirectoryPath);
     File workingDirectory = new File(workingDirectoryPath);
@@ -125,8 +133,10 @@ public class Util {
     ProcessStreamReader processErrorStream = null;
     ProcessStreamReader processOutputStream = null;
     
+    Map<String, String> env = new HashMap<>(System.getenv());
+    if (extraEnv != null) env.putAll(extraEnv);
     List<String> vars = new ArrayList<String>();
-    for (Map.Entry<String, String> e: System.getenv().entrySet()) {
+    for (Map.Entry<String, String> e: env.entrySet()) {
     	vars.add(e.toString());
     }
 
@@ -429,5 +439,14 @@ public class Util {
 	  } else {
 		  throw new RuntimeException("File " + input + " doesn't exist.");
 	  }
+  }
+
+  /**
+   * Prints the given message in yellow color using ANSI escape codes.
+   * 
+   * @param message the message to print in yellow
+   */
+  public static void printYellow(String message) {
+	  System.out.println("\033[33m" + message + "\033[0m");
   }
 }

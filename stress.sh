@@ -10,14 +10,19 @@ SOLR_BENCH_VERSION="0.0.1-SNAPSHOT"
 
 download() {
         file=$1
+	dir=$2
+        if [[ $dir == "" ]]
+	then
+		dir="."
+	fi
         if [[ $file == "https://"* ]] || [[ $file == "http://"* ]]
         then
-		echo_blue "Downloading $file"
-                wget -c $file
+		echo_blue "Downloading $file in location: $dir"
+                wget -c $file -P $dir
         elif [[ $file == "gs://"* ]]
         then
-		echo_blue "Downloading $file"
-                gsutil cp -n $file .
+		echo_blue "Downloading $file in location: $dir"
+                gsutil cp -n $file $dir
         fi
         # else, don't do anything
 }
@@ -28,7 +33,7 @@ CONFIGFILE=$i
 
 
 # parse other params
-while getopts "c:j:" option; do
+while getopts "c:j:d" option; do
   case $option in
     "c")
       commitoverrides+=("$OPTARG")
@@ -36,6 +41,10 @@ while getopts "c:j:" option; do
     "j")
       echo "${OPTARG} found for benchmarking jar"
       SOLR_BENCH_JAR=${OPTARG}
+      ;;
+    "d")
+      echo "Debug mode enabled - will show detailed query responses"
+      DEBUG_FLAG="true"
       ;;
     *)
       # any other arguments for future
@@ -86,7 +95,7 @@ then
          then
                cd $_LOCALREPO
                echo "Fetching from $_LOCALREPO"
-               GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git fetch
+               GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git fetch origin
          else
              echo "Cloning from $_REPOSRC to $_LOCALREPO"
              GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git clone --recurse-submodules $_REPOSRC $_LOCALREPO
@@ -159,8 +168,8 @@ terraform-gcp-provisioner() {
      cd $BASEDIR
      export ZK_NODE=`terraform output -state=terraform/terraform.tfstate -json zookeeper_details|jq '.[] | .name'`
      export ZK_NODE=${ZK_NODE//\"/}
-     export ZK_TARBALL_NAME="apache-zookeeper-3.8.3-bin.tar.gz"
-     export ZK_TARBALL_PATH="$BASEDIR/apache-zookeeper-3.8.3-bin.tar.gz"
+     export ZK_TARBALL_NAME="apache-zookeeper-3.8.4-bin.tar.gz"
+     export ZK_TARBALL_PATH="$BASEDIR/apache-zookeeper-3.8.4-bin.tar.gz"
      export JDK_TARBALL=`jq -r '."cluster"."jdk-tarball"' $CONFIGFILE`
      export BENCH_USER=`jq -r '."cluster"."terraform-gcp-config"."user"' $CONFIGFILE`
      export BENCH_KEY="terraform/id_rsa"
@@ -180,25 +189,28 @@ terraform-gcp-provisioner() {
 }
 
 buildsolr() {
-     echo_blue "Building Solr package for $COMMIT"
+     echo_blue "Building Solr package for $COMMIT from dir $LOCALREPO_VC_DIR"
      if [ ! -d $LOCALREPO_VC_DIR ]
      then
           GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git clone --recurse-submodules $REPOSRC $LOCALREPO
           cd $LOCALREPO
      else
           cd $LOCALREPO
-          GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git fetch
+          GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git fetch origin
      fi
 
      # remove local changes, if any
      GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git reset --hard
      GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git clean -fdx
 
+     # clean within submodules
+     GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git submodule foreach --recursive git clean -fdx
+     GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git submodule foreach --recursive git reset --hard
+     
      # checkout to the commit point
      GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git checkout $COMMIT
      if [[ "0" != "$?" ]]; then echo "Failed to checkout $COMMIT..."; exit 1; fi
-     GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git submodule init 
-     GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git submodule update
+     GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git submodule update --init --recursive
 
 
      if [[ "$PATCHURL" != "" ]];
@@ -213,7 +225,7 @@ buildsolr() {
      # Build Solr package
      bash -c "$BUILDCOMMAND"
      cd $LOCALREPO
-     PACKAGE_PATH=`pwd`/`find . -name "solr*tgz" | grep -v src|head -1`
+     PACKAGE_PATH=`pwd`/`find $PACKAGE_DIR -name "solr*tgz" | grep -v src|head -1`
      echo_blue "Package found here: $PACKAGE_PATH"
      cp $PACKAGE_PATH $BASEDIR/SolrNightlyBenchmarksWorkDirectory/Download/solr-$COMMIT.tgz
 }
@@ -266,11 +278,14 @@ generate_meta_no_repo() {
 
 # Download the pre-requisites
 download `jq -r '."cluster"."jdk-url"' $CONFIGFILE`
-for i in `jq -r '."pre-download" | .[]' $CONFIGFILE`; do cd $CONFIGFILE_DIR; download $i; cd $BASEDIR; done
+for i in `jq -r '."pre-download" | .[]' $CONFIGFILE`; do cd $CONFIGFILE_DIR; download $i datasets; cd $BASEDIR; done
 
-if [ "external" != `jq -r '.["cluster"]["provisioning-method"]' $CONFIGFILE` ]
+provisionmethod=`jq -r '.["cluster"]["provisioning-method"]' $CONFIGFILE`
+echo "Prov method: $provisionmethod"
+if [[ "external" != $provisionmethod ]]
 then
-  curl  https://archive.apache.org/dist/zookeeper/zookeeper-3.8.3/apache-zookeeper-3.8.3-bin.tar.gz --output apache-zookeeper-3.8.3-bin.tar.gz
+  echo "Downloading Zookeeper..."
+  download  https://archive.apache.org/dist/zookeeper/zookeeper-3.8.4/apache-zookeeper-3.8.4-bin.tar.gz
   # Clone/checkout the git repository and build Solr
   if [[ "null" == `jq -r '.["solr-package"]' $CONFIGFILE` ]] && [ ! -f $BASEDIR/SolrNightlyBenchmarksWorkDirectory/Download/solr-$COMMIT.tgz ]
   then
@@ -293,10 +308,10 @@ EXTRA_JVM_ARGS=`jq -r '.["extra-jvm-args"] // ""' $CONFIGFILE`
 if [ -z "$SOLR_BENCH_JAR" ] #then no explicit jar provided
 then
   java -Xmx12g $EXTRA_JVM_ARGS -cp $BASEDIR/target/org.apache.solr.benchmarks-${SOLR_BENCH_VERSION}-jar-with-dependencies.jar:. \
-   StressMain -f $CONFIGFILE -c $COMMIT
+   StressMain -f $CONFIGFILE -c $COMMIT ${DEBUG_FLAG:+-d}
   java_exit_code=$?
 else
-  java -Xmx12g $EXTRA_JVM_ARGS -cp ${SOLR_BENCH_JAR}:. StressMain -f $CONFIGFILE -c $COMMIT
+  java -Xmx12g $EXTRA_JVM_ARGS -cp ${SOLR_BENCH_JAR}:. StressMain -f $CONFIGFILE -c $COMMIT ${DEBUG_FLAG:+-d}
   java_exit_code=$?
 fi
 

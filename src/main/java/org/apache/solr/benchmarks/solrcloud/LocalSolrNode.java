@@ -20,6 +20,7 @@ package org.apache.solr.benchmarks.solrcloud;
 import java.io.File;
 import java.lang.invoke.MethodHandles;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
@@ -38,14 +39,16 @@ public class LocalSolrNode implements SolrNode {
   private final String solrPackagePath;
   private final String startupParams;
   private final List<String> startupParamsOverrides;
+  private final Map<String, String> environment;
   private final int nodeIndex;
-  
-  public LocalSolrNode(String solrPackagePath, int nodeIndex, String port, String startupParams, List<String> startupParamsOverrides, Zookeeper zookeeper)
+
+  public LocalSolrNode(String solrPackagePath, int nodeIndex, String port, String startupParams, List<String> startupParamsOverrides, Map<String, String> environment, Zookeeper zookeeper)
       throws Exception {
     this.zookeeper = zookeeper;
     this.solrPackagePath = solrPackagePath;
     this.startupParams = startupParams;
     this.startupParamsOverrides = startupParamsOverrides;
+    this.environment = environment;
     this.nodeIndex = nodeIndex;
     this.port = port;
   }
@@ -101,9 +104,9 @@ public class LocalSolrNode implements SolrNode {
     String startup = (startupParams != null ? startupParams : "");
     if (startupParamsOverrides != null && startupParamsOverrides.size() >= nodeIndex && startupParamsOverrides.get(nodeIndex-1).trim().length()>0) startup = startupParamsOverrides.get(nodeIndex-1);
 
-    returnValue = Util.execute(binDirectory + "solr start -force -Dhost=localhost " + "-p " + port + " "
-			+ startup + " -V " + " -z " + zookeeper.getHost() + ":"
-			+ zookeeper.getPort(), binDirectory);
+    returnValue = Util.execute(binDirectory + "solr start -Dhost=localhost " + "-p " + port + " "
+			+ startup + "  " + " -z " + zookeeper.getHost() + ":"
+			+ zookeeper.getPort(), binDirectory, environment);
 
     end = System.currentTimeMillis();
 
@@ -120,7 +123,7 @@ public class LocalSolrNode implements SolrNode {
 	  start = System.currentTimeMillis();
 	  new File(binDirectory + "solr").setExecutable(true);
 	  returnValue = Util.execute(
-			  binDirectory + "solr stop -p " + port + " -z " + zookeeper.getHost() + ":" + zookeeper.getPort() + " -force",
+			  binDirectory + "solr stop -p " + port + " -z " + zookeeper.getHost() + ":" + zookeeper.getPort(),
 			  binDirectory);
 	  end = System.currentTimeMillis();
 

@@ -6,7 +6,7 @@ git pull
 
 for commit in `git log --since="1 July 2021" --until="1 January 2029" --pretty=format:"%H"`;
 do echo; echo "Running $commit"
-  for testnamefile in "cluster-test.json" "stress-facets-local.json" "prs-vs-nonprs.json"
+  for testnamefile in "cluster-test.json" "stress-facets-local-100m.json" "prs-vs-nonprs.json"
   do
     cd $ORIGINAL_DIR
     testname=`echo $testnamefile|cut -d "." -f 1`
@@ -16,7 +16,7 @@ do echo; echo "Running $commit"
         echo "Trying commit: $commit"
         ./cleanup.sh
         ./stress.sh -c $commit -v suites/$testnamefile
-	python3 graph-scripts/generate_graph_json.py -r suites/results/cluster-test -r suites/results/prs-vs-nonprs -r suites/results/stress-facets-local -b branch_9x...branch_9_1
+	python3 graph-scripts/generate_graph_json.py -r suites/results/cluster-test -r suites/results/prs-vs-nonprs -r suites/results/stress-facets-local-100m -b branch_9x...branch_9_1
 	cp graph/* /var/www/html
     fi
 

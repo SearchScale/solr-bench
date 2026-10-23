@@ -42,6 +42,7 @@ import org.apache.solr.client.solrj.response.RequestStatusState;
 import org.apache.solr.common.cloud.*;
 import org.apache.solr.common.util.NamedList;
 import org.apache.zookeeper.KeeperException;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,6 +68,7 @@ public class StressMain {
 		Options cliOptions = new Options();
 		cliOptions.addRequiredOption("f", "file", true, "Configuration file");
 		cliOptions.addRequiredOption("c", "commit", true, "Commit ID");
+		cliOptions.addOption("d", "debug", false, "Enable debug mode for detailed query responses");
 		CommandLineParser cliParser = new DefaultParser();
 		CommandLine cli = cliParser.parse(cliOptions, args);
 		return cli;
@@ -75,6 +77,12 @@ public class StressMain {
 	public static void main(String[] args) throws Exception {
 		CommandLine cliParams = getCLIParams(args);		
 		String configFile = cliParams.getOptionValue("f");
+
+		// Set debug mode if flag is present
+		if (cliParams.hasOption("d")) {
+			BenchmarksMain.DEBUG_MODE = true;
+			log.info("Debug mode enabled - detailed query responses will be shown");
+		}
 
 		// Set the suite base directory from the configFile. All resources, like configsets, datasets,
 		// will be fetched off this path
@@ -261,7 +269,7 @@ public class StressMain {
 							//it's ok to ignore interrupt
 						} catch (ExecutionException e) { //unhandled exception, print error and stop other futures
 							exception.add(e);
-							log.warn("Found exception from submitted task [" + taskName + "] with exception. Going to interrupt all other tasks");
+							log.warn("Found exception from submitted task [" + taskName + "] with exception. Going to interrupt all other tasks", e);
 							taskFutures.values().forEach(targets -> targets.forEach(f -> f.cancel(true)));
 						}
 					});
@@ -383,6 +391,7 @@ public class StressMain {
 				Map<String, Long> shutdownTimes = Collections.synchronizedMap(new TreeMap<>());
 				Map<String, Long> startTimes = Collections.synchronizedMap(new TreeMap<>());
 				Map<String, Long> minHeaps = Collections.synchronizedMap(new TreeMap<>());
+				ConcurrentHashMap<String, Long> restartedAt = new ConcurrentHashMap<>();
 				try {
 					executor = Executors.newCachedThreadPool(new ThreadFactoryBuilder().setNameFormat(taskName + "-restart-thread-pool").build());
 
@@ -436,14 +445,12 @@ public class StressMain {
 								startTimes.put(nodeName, startTimes.getOrDefault(nodeName, 0L) + (System.currentTimeMillis() - marker));
 							}
 							log.info("Finished restarting " + restartNode.getNodeName());
+							restartedAt.put(nodeName, System.currentTimeMillis());
 
 							try {
 								long minHeap = Long.MAX_VALUE;
 								for (int i=0; i<5; i++) {
-									URL heapUrl = new URL("http://"+restartNode.getNodeName() + "/api/node/heap");
-									JSONObject obj = new JSONObject(IOUtils.toString(heapUrl, StandardCharsets.UTF_8));
-									long heap = obj.getLong("heap");
-									minHeap = Math.min(minHeap, heap);
+									minHeap = Math.min(minHeap, heapUsed(restartNode));
 									Thread.sleep(1000);
 								}
 								minHeaps.put(nodeName, minHeap);
@@ -468,6 +475,8 @@ public class StressMain {
 				}
 
 				long taskEnd = System.currentTimeMillis();
+				// the restart itself ends when the last node has recovered, before sampling its heap
+				long restartEnd = restartedAt.isEmpty() ? taskEnd : Collections.max(restartedAt.values());
 
 				long totalMinHeap = 0;
 				for (Long minHeap : minHeaps.values()) {
@@ -482,7 +491,7 @@ public class StressMain {
 					totalStart += startTime;
 				}
 
-				Map result = new HashMap(Map.of("total-time", (taskEnd-taskStart)/1000.0, //time taken to execute this task
+				Map result = new HashMap(Map.of("total-time", (restartEnd-taskStart)/1000.0, //time taken to restart the nodes, excluding the heap sampling after
 								"node-shutdown", totalShutdown/1000.0/restartNodes.size(),//average time it takes to stop a node
 								"node-startup", totalStart/1000.0/restartNodes.size(), //average time it takes to start a node
 								"heap-mb", minHeaps.size() == 0 ? -1: totalMinHeap/1024.0/1024.0/minHeaps.size(), //average min heap after restart
@@ -803,7 +812,7 @@ public class StressMain {
 			runValidations(instance.validations, workflow, cloud);
 
 			
-			return end-start;			
+			return end-start;
 		};
 		return c;
 	}
@@ -858,6 +867,22 @@ public class StressMain {
 		String resolvedCommand = resolveString(resolveString(resolveString(command, taskInstanceParams), globalConstants), solrurlMap); //nocommit resolve instance.parameters as well
 		log.info("Resolved command: " + resolvedCommand);
 		return resolvedCommand;
+	}
+
+	/**
+	 * Heap in use on a node, in bytes. Uses the /api/node/heap endpoint where a patched Solr has it, else the
+	 * metrics API (JSON on older Solr, Prometheus on Solr 10+).
+	 */
+	private static long heapUsed(SolrNode node) throws IOException {
+		try {
+			URL heapUrl = new URL("http://" + node.getNodeName() + "/api/node/heap");
+			return new JSONObject(IOUtils.toString(heapUrl, StandardCharsets.UTF_8)).getLong("heap");
+		} catch (IOException | JSONException e) {
+			String path = "jvm/solr.jvm/memory.heap.used";
+			Double heap = SolrMetrics.fetch(node.getBaseUrl(), path).get(path);
+			if (heap == null) throw new IOException("No heap metric from " + node.getBaseUrl());
+			return heap.longValue();
+		}
 	}
 
 	private static CloudSolrClient buildSolrClient(SolrCloud cloud) {
