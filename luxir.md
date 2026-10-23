@@ -239,34 +239,60 @@ How to read them:
 ## Results
 
 Results from one run of `suites/stress-facets-local-100m.json` (Solr+Lucene) and
-`suites/luxir-stress-facets-local-100m.json` (Solr+Luxir) on 2026-10-23. Each indexes the first 100M events of the
-150M dataset, restarts each node, then runs the four query tasks from 16 concurrent clients. Ratios are how much
-better Solr+Luxir is: Solr+Lucene's time ÷ Solr+Luxir's, or Solr+Luxir's throughput ÷ Solr+Lucene's, so above 1× means
-Solr+Luxir was faster.
+`suites/luxir-stress-facets-local-100m.json` (Solr+Luxir) on each of two machines, on 2026-10-23. Each run indexes
+the first 100M events of the 150M dataset, restarts each node, then runs the four query tasks from 16 concurrent
+clients. Ratios are how much better Solr+Luxir is: Solr+Lucene's time ÷ Solr+Luxir's, or Solr+Luxir's throughput ÷
+Solr+Lucene's, so above 1× means Solr+Luxir was faster. Throughput counts each task's warm-up queries (20, or 3 for
+joins) over its whole run; latencies are over the measured queries after them. Restart times include waiting for
+replicas to recover.
+
+Both machines used the same versions and settings, everything cloned from GitHub and built on the machine itself:
 
 | | |
 |---|---|
 | Solr+Lucene | apache/solr `main` @ `63f2459` (11.0.0-SNAPSHOT), security manager on |
-| Solr+Luxir | SearchScale/solr `luxir-codec` @ `c9e21f7`, with luxir `48a10abe` and luxir-lucene `ed0bedc`; native library built on this machine with `-DLUXIR_CPU_TARGET=native`; `OMP_NUM_THREADS=1`; security manager off |
+| Solr+Luxir | SearchScale/solr `luxir-codec` @ `c9e21f7`, with luxir `48a10abe` and luxir-lucene `ed0bedc`; native library built on the machine with `-DLUXIR_CPU_TARGET=native`; `OMP_NUM_THREADS=1`; security manager off |
 | JDK | Oracle JDK 22.0.2, for both Solr and the solr-bench client |
 | Solr nodes | 3 on the same machine, each with `-m 16g -Dsolr.searchThreads=4` |
 | Client | solr-bench (`java -Xmx12g`) on the same machine: 16 indexing threads with 50,000-document batches, 16 query threads with no rate cap |
+
+On both machines, both runs indexed exactly 100,000,000 documents, with identical per-shard counts (33,331,737 /
+33,333,346 / 33,334,917).
+
+### Summary
+
+| | 7950X: Solr+Luxir better by | 5950X: Solr+Luxir better by |
+|---|---|---|
+| Indexing | **1.80×** | **2.09×** |
+| Terms facet throughput | **2.11×** | **2.03×** |
+| Range facet throughput | **2.69×** | **2.83×** |
+| Product facet throughput | **0.57×** | **0.55×** |
+| Join throughput | **5.92×** | **6.01×** |
+| All four query tasks (total time) | **2.15×** | **2.09×** |
+
+- **Indexing:** Solr+Luxir indexed 1.8–2.1× faster.
+- **Terms and range facets:** Solr+Luxir handled 2.0–2.8× the queries per second, with lower latency at every
+  percentile.
+- **Product facet:** Solr+Lucene was faster on this query type, with about 1.8× the throughput on both machines. Each
+  query buckets about 12,000 distinct `product_id` values per shard and computes `avg(price)`; this is the query type
+  left to optimize in Solr+Luxir.
+- **Joins:** Solr+Luxir runs joins between string fields natively (`LuxirJoinQParserPlugin`), about 6× the throughput
+  of Solr's join.
+- **Overall:** the four query tasks took about 2.1× less time on Solr+Luxir.
+
+### AMD Ryzen 9 7950X
+
+| | |
+|---|---|
 | CPU | AMD Ryzen 9 7950X: 16 cores / 32 threads, up to 5.88 GHz, 64 MB L3, one socket |
 | Memory | 128 GB DDR5 (2 × 64 GB at 6000 MT/s, non-ECC); 124 GiB usable |
 | Disk | WD_BLACK SN8100 4 TB NVMe SSD, ext4. It holds the dataset, the Solr nodes and their indexes. |
 | OS | Ubuntu 22.04.5 LTS, Linux 6.8.0-138-generic, transparent huge pages `madvise` |
 
-### Indexing and restarts
-
 | | Solr+Lucene | Solr+Luxir | Solr+Luxir better by |
 |---|---|---|---|
 | Indexing 100M documents | 701.5 s (142,500 docs/s) | 390.5 s (256,100 docs/s) | **1.80×** |
 | Node restarts | 5.78 s, 5.86 s, 5.79 s | 5.85 s, 5.81 s, 5.78 s | same |
-
-Both runs indexed exactly 100,000,000 documents, with identical per-shard counts (33,331,737 / 33,333,346 /
-33,334,917). Restart times include waiting for replicas to recover.
-
-### Queries, 16 concurrent clients
 
 | Query task | | Solr+Lucene | Solr+Luxir | Solr+Luxir better by |
 |---|---|---|---|---|
@@ -284,22 +310,7 @@ Both runs indexed exactly 100,000,000 documents, with identical per-shard counts
 | | mean | 6,449 ms | 1,102 ms | 5.85× |
 | All four tasks | total time | 136.2 s | 63.3 s | **2.15×** |
 
-Throughput counts each task's warm-up queries (20, or 3 for joins) over its whole run; latencies are over the
-measured queries after them.
-
-- **Indexing:** Solr+Luxir indexed 1.80× faster.
-- **Terms and range facets:** Solr+Luxir handled 2.1× and 2.7× the queries per second, with lower latency at every
-  percentile.
-- **Product facet:** Solr+Lucene was faster on this query type, with 1.75× the throughput. Each query buckets about
-  12,000 distinct `product_id` values per shard and computes `avg(price)`; this is the query type left to optimize in
-  Solr+Luxir.
-- **Joins:** Solr+Luxir runs joins between string fields natively (`LuxirJoinQParserPlugin`), 5.9× the throughput of
-  Solr's join.
-- **Overall:** the four tasks took 2.15× less time on Solr+Luxir.
-
-### JVM metrics
-
-Sampled every 2 seconds (plus the time each sample takes) on each of the 3 nodes over the whole run.
+JVM metrics, sampled every 2 seconds (plus the time each sample takes) on each of the 3 nodes over the whole run:
 
 | | Solr+Lucene | Solr+Luxir |
 |---|---|---|
@@ -307,3 +318,48 @@ Sampled every 2 seconds (plus the time each sample takes) on each of the 3 nodes
 | Mean heap usage | 0.44–0.45 | 0.40–0.42 |
 | Threads per node | 47–116 | 46–121 |
 | Heap right after a restart (average) | 235 MB | 224 MB |
+
+### AMD Ryzen 9 5950X
+
+The machine's other workloads were stopped for the runs. The Luxir native library was compiled for the 5950X's Zen 3
+cores, which have no AVX-512.
+
+| | |
+|---|---|
+| CPU | AMD Ryzen 9 5950X: 16 cores / 32 threads, up to 5.08 GHz, 64 MB L3, one socket |
+| Memory | 128 GB DDR4 (4 × 32 GB at 3200 MT/s, non-ECC); 125 GiB usable |
+| Disk | Crucial P3 1 TB NVMe SSD (CT1000P3SSD8), ext4. It holds the dataset, the Solr nodes and their indexes. |
+| OS | Ubuntu 24.04.5 LTS, Linux 6.8.0-147-generic, transparent huge pages `madvise` |
+
+| | Solr+Lucene | Solr+Luxir | Solr+Luxir better by |
+|---|---|---|---|
+| Indexing 100M documents | 1,198.0 s (83,500 docs/s) | 573.3 s (174,400 docs/s) | **2.09×** |
+| Node restarts | 8.15 s, 8.14 s, 8.15 s | 17.38 s, 7.11 s, 7.11 s | |
+
+Solr+Luxir's first restart, right after indexing, took 12.5 s to shut the node down; its node startups (4.85 s) were
+faster than Solr+Lucene's (5.89 s).
+
+| Query task | | Solr+Lucene | Solr+Luxir | Solr+Luxir better by |
+|---|---|---|---|---|
+| Terms facet (6,000 queries) | throughput | 90.0 queries/s | 182.4 queries/s | **2.03×** |
+| | p50 / p95 / p99 | 208.1 / 316.7 / 383.7 ms | 101.2 / 151.1 / 175.5 ms | 2.06× / 2.10× / 2.19× |
+| | mean | 176.7 ms | 86.8 ms | 2.04× |
+| Range facet (6,000) | throughput | 106.5 queries/s | 302.0 queries/s | **2.83×** |
+| | p50 / p95 / p99 | 174.9 / 266.6 / 315.9 ms | 59.4 / 92.9 / 111.2 ms | 2.94× / 2.87× / 2.84× |
+| | mean | 148.3 ms | 52.8 ms | 2.81× |
+| Product facet (6,000) | throughput | 315.0 queries/s | 172.9 queries/s | **0.55×** |
+| | p50 / p95 / p99 | 60.6 / 87.3 / 102.2 ms | 108.1 / 151.9 / 174.2 ms | 0.56× / 0.57× / 0.59× |
+| | mean | 50.1 ms | 92.0 ms | 0.54× |
+| Join (100) | throughput | 1.7 queries/s | 10.0 queries/s | **6.01×** |
+| | p50 / p95 / p99 | 9,911 / 13,181 / 14,820 ms | 1,956 / 2,728 / 2,925 ms | 5.07× / 4.83× / 5.07× |
+| | mean | 9,289 ms | 1,578 ms | 5.89× |
+| All four tasks | total time | 204.6 s | 98.1 s | **2.09×** |
+
+JVM metrics, sampled the same way:
+
+| | Solr+Lucene | Solr+Luxir |
+|---|---|---|
+| Peak heap usage (of 16 GB) | 0.88–0.91 | 0.88–0.91 |
+| Mean heap usage | 0.45–0.47 | 0.40–0.43 |
+| Threads per node | 47–104 | 46–111 |
+| Heap right after a restart (average) | 221 MB | 206 MB |
