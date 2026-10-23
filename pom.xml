@@ -233,6 +233,8 @@
          </plugin>
          <plugin>
             <artifactId>maven-assembly-plugin</artifactId>
+            <!-- pinned: Maven 3.8's default (2.2-beta-5) packs an older jetty-util into the jar, breaking the client -->
+            <version>3.6.0</version>
             <executions>
                <execution>
                   <id>make-jar-with-dependencies</id>

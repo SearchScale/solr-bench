@@ -11,6 +11,10 @@ shared_cache=${LUXIR_CACHE_DIR:-$HOME/.cache/luxir}
 home_dir="$root/luxir/build/container-cache/$(id -u)/home"
 mkdir -p "$home_dir" "$shared_cache/container-ccache"
 
+# Sources a fresh luxir clone lacks: its git submodule and the pinned deps it fetches (FastPFOR)
+git -C "$root/luxir" submodule update --init --recursive
+"$root/luxir/deps/fetch_sources.sh"
+
 if ! docker image inspect "$image" > /dev/null 2>&1; then
   echo "Building the Luxir dev image $image (this takes a while the first time)"
   (cd "$root/luxir" && DOCKER_BUILDKIT=1 docker build -f .devcontainer/Dockerfile \

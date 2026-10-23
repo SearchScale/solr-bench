@@ -35,7 +35,7 @@ Clone the three Luxir repositories side by side in one directory. This guide cal
 ```bash
 export LUXIR_ROOT=$HOME/solr-luxir
 mkdir -p $LUXIR_ROOT && cd $LUXIR_ROOT
-git clone -b luxir-lucene https://github.com/SearchScale/luxir.git          # Luxir plus the patches luxir-lucene needs
+git clone --recurse-submodules -b luxir-lucene https://github.com/SearchScale/luxir.git  # Luxir plus the patches luxir-lucene needs
 git clone https://github.com/SearchScale/luxir-lucene.git                   # Lucene codec + native C ABI
 git clone -b luxir-codec https://github.com/SearchScale/solr.git            # Solr with the luxir-codec module
 ```
@@ -55,10 +55,12 @@ cd /path/to/solr-bench
 luxir-bench/build-native.sh $LUXIR_ROOT
 ```
 
-The first run builds Luxir's dev image (`luxir-dev:normal-deps`, about 6 GB), from the `normal-dependencies` stage of
-`luxir/.devcontainer/Dockerfile`. That step takes a while. The script then builds `libluxir_lucene.so` inside the
-container and writes it to `$LUXIR_ROOT/luxir/build/lux4j-release/bin/`, with the GCC 16 `libgomp.so.1` it needs
-beside it.
+The script first makes sure the Luxir checkout is complete: it initializes Luxir's git submodule (`deps/hpp-proto`)
+and runs `deps/fetch_sources.sh`, which clones FastPFOR at its pinned tag into `deps/FastPFOR` (not kept in git). The
+first run then builds Luxir's dev image (`luxir-dev:normal-deps`, about 6 GB), from the `normal-dependencies` stage of
+`luxir/.devcontainer/Dockerfile`; that took about 20 minutes on a 16-core machine. Finally it builds
+`libluxir_lucene.so` inside the container and writes it to `$LUXIR_ROOT/luxir/build/lux4j-release/bin/`, with the
+GCC 16 `libgomp.so.1` it needs beside it.
 
 Notes:
 
@@ -208,19 +210,33 @@ How to read them:
 
 - **Security manager.** The Solr+Luxir runs disable Solr's security manager (`SOLR_SECURITY_MANAGER_ENABLED=false`)
   so the native library can load; the Solr+Lucene runs keep it on. That gives Solr+Luxir a small advantage.
-- **JVM metrics.** JVM metrics come back as `-1` on Solr 10/11, and the log warns
-  `Gather metrics after restart failed`. The metrics API changed and solr-bench hasn't been updated yet.
+- **JVM metrics.** Solr 10+ serves its metrics only in Prometheus format. solr-bench reads both that and the older
+  JSON format, so the suites' JVM metrics (`metrics.json`) and the heap after each restart (`heap-mb` in
+  `results.json`) work on both Solr 9 and Solr 10/11. A sample taken while a node is restarting is recorded as `-1`.
 - **Dataset density.** The synthetic events fall in the same Oct–Nov 2019 window as the real ones, so the first 100M
   events of the 150M file cover a shorter span of time than the first 100M real events did.
 
 ## Results
 
-These are 100M-document results from runs on 2026-10-23, using `suites/stress-facets-local-100m.json` and
-`suites/luxir-stress-facets-local-100m.json`. Each configuration ran once. These runs indexed the first 100M events
-of the real 110M-event dataset, before the suites switched to the 150M dataset, so a rerun now indexes a different
-100M events.
+All runs used `suites/stress-facets-local-100m.json` and `suites/luxir-stress-facets-local-100m.json` on 2026-10-23,
+with the same versions on both machines:
 
-### Hardware and software
+| | |
+|---|---|
+| Solr+Lucene | apache/solr `main` @ `63f2459` (11.0.0-SNAPSHOT), security manager on |
+| Solr+Luxir | SearchScale/solr `luxir-codec` @ `d2d7cf1`, with luxir `0df0e119` and luxir-lucene `e2c5039`; native library built on the machine itself with `-DLUXIR_CPU_TARGET=native`; security manager off |
+| JDK | Oracle JDK 22.0.2, for both Solr and the solr-bench client |
+| Solr nodes | 3 on the same machine, each with `-m 16g -Dsolr.searchThreads=4` |
+| Client | solr-bench (`java -Xmx12g`, 8 indexing threads, 50,000-document batches) on the same machine as the cluster |
+
+Each configuration ran once on each machine. Ratios above 1× mean Solr+Luxir was faster. Latencies are over 4,980
+queries, after 20 warm-up queries. Restart times include waiting for replicas to recover.
+
+### AMD Ryzen 9 7950X
+
+These runs indexed the first 100M events of the real 110M-event dataset, before the suites switched to the 150M
+dataset, so a rerun now indexes a different 100M events. They predate the JVM metrics fix, so there are no heap or
+thread numbers.
 
 | | |
 |---|---|
@@ -228,15 +244,6 @@ of the real 110M-event dataset, before the suites switched to the 150M dataset, 
 | Memory | 128 GB DDR5 (2 × 64 GB at 6000 MT/s, non-ECC); 124 GiB usable |
 | Disk | WD_BLACK SN8100 4 TB NVMe SSD, ext4. It holds the datasets, the Solr nodes and their indexes. |
 | OS | Ubuntu 22.04.5 LTS, Linux 6.8.0-138-generic, transparent huge pages `madvise` |
-| JDK | Oracle JDK 22.0.2, for both Solr and the solr-bench client |
-| Solr nodes | 3 on the same machine, each with `-m 16g -Dsolr.searchThreads=4` |
-| Solr+Lucene | apache/solr `main` @ `63f2459` (11.0.0-SNAPSHOT), security manager on |
-| Solr+Luxir | SearchScale/solr `luxir-codec` @ `d2d7cf1`, with luxir `0df0e119` and luxir-lucene `e2c5039`; native library built with `-DLUXIR_CPU_TARGET=native`; security manager off |
-
-The solr-bench client (`java -Xmx12g`, 8 indexing threads, 50,000-document batches) runs on the same machine as the
-cluster.
-
-### 100M documents
 
 | | Solr+Lucene | Solr+Luxir | Solr+Lucene ÷ Solr+Luxir |
 |---|---|---|---|
@@ -248,9 +255,6 @@ cluster.
 | Query mean | 48.58 ms | 48.50 ms | 1.00× |
 | Query phase | 243.6 s | 242.8 s | 1.00× |
 
-Ratios above 1× mean Solr+Luxir was faster. Latencies are over 4,980 queries, after 20 warm-up queries. Restart
-times include waiting for replicas to recover.
-
 - **Indexing:** Solr+Luxir indexed 1.24× faster.
 - **Query latency:** Solr+Luxir was faster at p50, p90 and p95, with the gap growing toward the tail. Its mean was the
   same as Solr+Lucene's. With a lower p95, that means a few Solr+Luxir queries above p95 are very slow and cancel out
@@ -258,3 +262,44 @@ times include waiting for replicas to recover.
 - **Restarts:** the same, except one Solr+Lucene restart that took 9.9 s because the node took long to shut down.
 - **Doc counts:** both runs indexed exactly 100,000,000 documents, with identical per-shard counts (33,332,235 /
   33,335,048 / 33,332,717).
+
+### AMD Ryzen 9 5950X
+
+These runs indexed the first 100M events of the 150M dataset, which the suites use now. Everything on this machine
+was cloned from git and built there, including the Luxir native library (compiled for the 5950X's Zen 3 cores, which
+have no AVX-512). Other workloads on the machine were stopped for the runs.
+
+| | |
+|---|---|
+| CPU | AMD Ryzen 9 5950X: 16 cores / 32 threads, up to 5.08 GHz, 64 MB L3, one socket |
+| Memory | 128 GB DDR4 (4 × 32 GB at 3200 MT/s, non-ECC); 125 GiB usable |
+| Disk | Crucial P3 1 TB NVMe SSD (CT1000P3SSD8), ext4. It holds the datasets, the Solr nodes and their indexes. |
+| OS | Ubuntu 24.04.5 LTS, Linux 6.8.0-147-generic, transparent huge pages `madvise` |
+
+| | Solr+Lucene | Solr+Luxir | Solr+Lucene ÷ Solr+Luxir |
+|---|---|---|---|
+| Indexing | 1,013.0 s (98,700 docs/s) | 720.1 s (138,900 docs/s) | **1.41×** |
+| Node restarts | 7.10 s, 7.11 s, 7.67 s | 7.11 s, 7.09 s, 7.09 s | |
+| Query p50 | 36.51 ms | 44.81 ms | 0.81× |
+| Query p90 | 110.69 ms | 62.47 ms | 1.77× |
+| Query p95 | 126.49 ms | 67.33 ms | **1.88×** |
+| Query mean | 59.26 ms | 61.53 ms | 0.96× |
+| Query phase | 297.5 s | 308.1 s | 0.97× |
+
+JVM metrics, sampled every 2 seconds (plus the time each sample takes) on each of the 3 nodes over the whole run:
+
+| | Solr+Lucene | Solr+Luxir |
+|---|---|---|
+| Peak heap usage (of 16 GB) | 0.90–0.91 | 0.98–0.99 |
+| Mean heap usage | 0.41–0.42 | 0.42–0.44 |
+| Threads per node | 47–69 | 46–68 |
+| Heap right after a restart (average) | 224 MB | 219 MB |
+
+- **Indexing:** Solr+Luxir indexed 1.41× faster, a bigger lead than on the 7950X.
+- **Query latency:** Solr+Luxir was much faster at p90 and p95, but its median was 19% slower and its mean slightly
+  higher. On this dataset the first 100M events span fewer days, so each query's date range matches more documents
+  than on the 7950X runs.
+- **Heap:** Solr+Luxir came closer to filling its heap at peak.
+- **Restarts:** the same for both systems.
+- **Doc counts:** both runs indexed exactly 100,000,000 documents, with identical per-shard counts (33,331,737 /
+  33,333,346 / 33,334,917).

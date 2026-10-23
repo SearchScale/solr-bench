@@ -225,7 +225,9 @@ buildsolr() {
      # Build Solr package
      bash -c "$BUILDCOMMAND"
      cd $LOCALREPO
-     PACKAGE_PATH=`pwd`/`find $PACKAGE_DIR -name "solr*tgz" | grep -v src|head -1`
+     # prefer the full distribution: the -slim one has no modules (e.g. luxir-codec)
+     PACKAGE_PATH=`pwd`/`find $PACKAGE_DIR -name "solr*tgz" | grep -v src | sort | grep -v slim | head -1`
+     [ -f "$PACKAGE_PATH" ] || PACKAGE_PATH=`pwd`/`find $PACKAGE_DIR -name "solr*tgz" | grep -v src | head -1`
      echo_blue "Package found here: $PACKAGE_PATH"
      cp $PACKAGE_PATH $BASEDIR/SolrNightlyBenchmarksWorkDirectory/Download/solr-$COMMIT.tgz
 }
