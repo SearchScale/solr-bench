@@ -3,11 +3,9 @@
 The geonames workload from luxir-lucene (`bench/geonames`), run as solr-bench suites on a 3-node
 SolrCloud: `suites/geonames-local.json` (Solr+Lucene) and `suites/luxir-geonames-local.json`
 (Solr+Luxir). One run of each on an AMD Ryzen 9 7950X, 2026-10-24. The setup and builds are the
-same as in [luxir.md](luxir.md).
-
-**Correctness caveat:** on a multi-segment index, Solr+Luxir's native search on the catch-all
-`_text_` field misses documents, so its CatchAllText numbers are not valid. See
-[Known issue](#known-issue-catch-all-text-misses-documents).
+same as in [luxir.md](luxir.md), except luxir-lucene, which is at `39eedb6`: that commit fixes
+native search on the catch-all `_text_` field, which missed documents (see
+[Fixed: catch-all text missed documents](#fixed-catch-all-text-missed-documents)).
 
 ## The workload
 
@@ -53,81 +51,94 @@ to one segment.
 
 | | Solr+Lucene | Solr+Luxir | Solr+Luxir better by |
 |---|---|---|---|
-| Indexing 11.4M documents | 83.9 s (135,900 docs/s) | 48.5 s (235,200 docs/s) | **1.73×** |
-| Node restarts | 5.80 s, 5.83 s, 5.78 s | 12.01 s, 5.86 s, 5.82 s | |
+| Indexing 11.4M documents | 84.2 s (135,400 docs/s) | 48.4 s (235,600 docs/s) | **1.74×** |
+| Node restarts | 5.82 s, 5.79 s, 5.78 s | 11.98 s, 5.78 s, 5.89 s | |
 
 Queries, 16 threads (throughput includes warm-up queries):
 
 | Category | Throughput, Solr+Lucene | Throughput, Solr+Luxir | Ratio | p50, Solr+Lucene | p50, Solr+Luxir | p99, Solr+Lucene | p99, Solr+Luxir |
 |---|---|---|---|---|---|---|---|
-| MatchAll | 197 q/s | 268 q/s | **1.36×** | 79.1 ms | 57.1 ms | 112.0 ms | 91.9 ms |
-| StringTerm | 8,610 q/s | 8,734 q/s | **1.01×** | 1.60 ms | 1.19 ms | 7.57 ms | 6.99 ms |
-| TextTerm | 8,301 q/s | 11,004 q/s | **1.33×** | 1.83 ms | 1.28 ms | 3.46 ms | 2.06 ms |
-| TextPhrase | 8,470 q/s | 11,163 q/s | **1.32×** | 1.77 ms | 1.25 ms | 3.48 ms | 2.93 ms |
-| TextOr | 5,473 q/s | 9,128 q/s | **1.67×** | 2.76 ms | 1.58 ms | 5.26 ms | 2.78 ms |
-| TextAnd | 8,572 q/s | 11,200 q/s | **1.31×** | 1.82 ms | 1.34 ms | 2.91 ms | 2.11 ms |
-| CatchAllText* | 8,033 q/s | 11,099 q/s | *1.38×* | 1.90 ms | 1.31 ms | 3.50 ms | 1.97 ms |
-| TextFiltered | 8,192 q/s | 10,216 q/s | **1.25×** | 1.90 ms | 1.50 ms | 3.36 ms | 2.60 ms |
-| NumRange | 1,613 q/s | 10,511 q/s | **6.52×** | 5.12 ms | 1.39 ms | 57.55 ms | 2.54 ms |
-| SortPopulation | 140 q/s | 376 q/s | **2.70×** | 111.8 ms | 41.7 ms | 153.9 ms | 63.4 ms |
-| SortGeonameid | 150 q/s | 371 q/s | **2.48×** | 105.6 ms | 42.3 ms | 146.0 ms | 62.0 ms |
-| TermSortPop | 7,047 q/s | 6,194 q/s | **0.88×** | 2.16 ms | 2.14 ms | 3.56 ms | 3.41 ms |
-| CountryFacet | 180 q/s | 378 q/s | **2.10×** | 68.0 ms | 28.0 ms | 348.1 ms | 180.8 ms |
-| HiCardFacet | 10.7 q/s | 11.9 q/s | **1.11×** | 1,166 ms | 1,141 ms | 2,091 ms | 2,051 ms |
-| TermsPure | 54.6 q/s | 48.7 q/s | **0.89×** | 273.0 ms | 312.0 ms | 351.4 ms | 390.4 ms |
-| TermsFiltered | 103.9 q/s | 102.6 q/s | **0.99×** | 150.4 ms | 152.7 ms | 171.3 ms | 179.2 ms |
-| TermsProhibited | 57.8 q/s | 50.4 q/s | **0.87×** | 271.4 ms | 311.5 ms | 321.4 ms | 371.3 ms |
-| All 212, mixed (30 s) | 427 q/s | 418 q/s | **0.98×** | 6.14 ms | 6.52 ms | 409.5 ms | 556.3 ms |
+| MatchAll* | 280 q/s | 216 q/s | *0.77×* | 54.5 ms | 71.2 ms | 91.5 ms | 105.3 ms |
+| StringTerm | 8,603 q/s | 9,113 q/s | **1.06×** | 1.64 ms | 1.19 ms | 6.31 ms | 6.62 ms |
+| TextTerm | 7,968 q/s | 11,041 q/s | **1.39×** | 1.92 ms | 1.28 ms | 3.31 ms | 2.18 ms |
+| TextPhrase | 8,036 q/s | 11,100 q/s | **1.38×** | 1.87 ms | 1.25 ms | 3.62 ms | 2.94 ms |
+| TextOr | 5,155 q/s | 9,129 q/s | **1.77×** | 2.94 ms | 1.57 ms | 5.52 ms | 2.77 ms |
+| TextAnd | 8,100 q/s | 11,157 q/s | **1.38×** | 1.92 ms | 1.34 ms | 3.10 ms | 2.14 ms |
+| CatchAllText | 7,672 q/s | 10,667 q/s | **1.39×** | 1.99 ms | 1.37 ms | 3.77 ms | 2.06 ms |
+| TextFiltered | 7,898 q/s | 10,270 q/s | **1.30×** | 1.98 ms | 1.50 ms | 3.46 ms | 2.57 ms |
+| NumRange | 1,616 q/s | 10,050 q/s | **6.22×** | 5.11 ms | 1.44 ms | 57.0 ms | 2.69 ms |
+| SortPopulation | 142 q/s | 369 q/s | **2.61×** | 110.2 ms | 42.5 ms | 157.3 ms | 63.5 ms |
+| SortGeonameid | 153 q/s | 361 q/s | **2.36×** | 104.1 ms | 43.7 ms | 141.3 ms | 63.0 ms |
+| TermSortPop | 6,949 q/s | 6,140 q/s | **0.88×** | 2.18 ms | 2.18 ms | 3.61 ms | 3.43 ms |
+| CountryFacet | 181 q/s | 372 q/s | **2.05×** | 67.4 ms | 27.9 ms | 337.8 ms | 183.6 ms |
+| HiCardFacet | 10.8 q/s | 11.9 q/s | **1.11×** | 1,199 ms | 1,140 ms | 2,597 ms | 1,812 ms |
+| TermsPure | 52.6 q/s | 51.0 q/s | **0.97×** | 283.7 ms | 301.1 ms | 366.8 ms | 383.6 ms |
+| TermsFiltered | 103 q/s | 103 q/s | **1.00×** | 151.7 ms | 152.8 ms | 173.3 ms | 177.2 ms |
+| TermsProhibited | 55.8 q/s | 51.9 q/s | **0.93×** | 281.4 ms | 301.8 ms | 340.4 ms | 355.7 ms |
+| All 212, mixed (30 s) | 426 q/s | 419 q/s | **0.98×** | 6.20 ms | 6.35 ms | 423.0 ms | 562.5 ms |
 
-\* Not valid: Solr+Luxir returns too few documents for some of these requests (see below).
+\* Not settled: an earlier run on the same builds (apart from the `_text_` fix, which `*:*` does
+not reach) gave the opposite result, 197 q/s on Solr+Lucene and 268 q/s on Solr+Luxir (1.36×).
+Every other category's throughput was within 6% of that run.
 
-- **Faster on Solr+Luxir:** indexing (1.73×), numeric ranges (6.5× throughput, 23× lower p99),
-  sorting all docs (2.5–2.7×), the country facet (2.1×), and most text queries (1.25–1.67×).
-- **Slower on Solr+Luxir:** the three `{!terms}` categories with 45,700 names (0.87–0.99×) and a
-  term sorted by a field (0.88×). These are the same weak spots as in luxir-lucene's own results.
+- **Faster on Solr+Luxir:** indexing (1.74×), numeric ranges (6.2× throughput, 21× lower p99),
+  sorting all docs (2.4–2.6×), the country facet (2.05×), and the text queries (1.30–1.77×),
+  including the catch-all `_text_` field (1.39×).
+- **Slower on Solr+Luxir:** a term sorted by a field (0.88×) and the `{!terms}` sets of 45,700
+  names (0.93–1.00×). These are the same weak spots as in luxir-lucene's own results.
 - **Mixed:** the 30-second mix of all 212 requests is even (0.98×). The `{!terms}` requests, 15 of
   212 but by far the slowest, dominate its time.
-- **Heap:** peak usage was 0.86–0.92 of 16 GB on Solr+Lucene and 0.78–0.95 on Solr+Luxir.
-- **Restarts:** Solr+Luxir's first restart took 12.0 s, including an 8.3 s shutdown. The other
-  restarts on both systems took 5.8–5.9 s.
+- **Heap:** peak usage was 0.79–0.91 of 16 GB on Solr+Lucene and 0.76–0.97 on Solr+Luxir.
+- **Restarts:** Solr+Luxir's first restart took 12.0 s, against 5.8–5.9 s for every other restart
+  on both systems.
 
-## Known issue: catch-all text misses documents
+## Fixed: catch-all text missed documents
 
 Before benchmarking, both systems' indexes were loaded with the same data (in separate test
-clusters), and all 212 requests compared with `luxir-bench/geonames-verify.py`. Everything matched
-except CatchAllText: 8 of its 20 requests returned fewer documents on Solr+Luxir, for example
-`_text_:creek` 229,122 against 242,460 and `_text_:hammam` 498 against 532.
+clusters), and all 212 requests compared with `luxir-bench/geonames-verify.py`. With luxir-lucene
+`57f953d`, everything matched except CatchAllText: 8 of its 20 requests returned fewer documents on
+Solr+Luxir, for example `_text_:creek` 229,122 against 242,460 and `_text_:hammam` 498 against 532.
+On the same index, Luxir's Java path (`luxirCodec=false`) returned the full counts.
 
-- **Native search only.** On the same Solr+Luxir index, Luxir's Java path (`luxirCodec=false`)
-  returns the full counts, so the index is right and the native query path is wrong.
-- **Whole flushed segments.** Searched together, the native call finds nothing in any segment
-  written by a flush (about 20,000 documents each here) and is right in every merged segment.
-  Searched one at a time, every segment is right.
-- **Gone after a full merge.** After merging the index to one segment, native and Java agree. This
-  is the layout luxir-lucene's own geonames check used, which is why it passed there.
-- **Not new.** It shows with upstream Luxir `8cb622ba` without the four patches, with the previous
-  base (`48a10abe`), and with the luxir-lucene and Solr module builds from before the faster
-  filters and native joins (luxir-lucene `e2c5039`, Solr `d2d7cf1`).
+**Cause.** A text field whose name is not a valid Luxir schema name (it must start with a letter,
+as `_text_` does not) was stored under two names:
 
-Other text fields (`name`, `asciiname`, `alternatenames`) matched on the same index.
-
-**Root cause (luxir-lucene).** A text field whose name is not a valid Luxir schema name (it must
-start with a letter, as `_text_` does not) is stored under two different names:
-
-- **Flush:** `NativeIndexer` writes it under `LuxirTextField.schemaName`, here `lx5f746578745f`.
-- **Merge:** `lxl_writer_merge_field` writes it under its own name, `_text_`.
-- **One segment:** `findField` tries both names, so a search of one segment finds the field
+- **Flush:** `NativeIndexer` wrote it under `LuxirTextField.schemaName`, here `lx5f746578745f`.
+- **Merge:** `lxl_writer_merge_field` wrote it under its own name, `_text_`.
+- **One segment:** `findField` tries both names, so a search of one segment found the field
   either way.
 - **Many segments:** one native call over all segments (`lxl_multi_top_k`) resolves the field name
-  once for the whole index, in `QueryParser::field`. That picks `_text_` when any segment has it,
-  and Luxir then finds no such field in the flushed segments.
+  once for the whole index. That picked `_text_` when any segment had it, so the search found
+  nothing in the flushed segments.
 
-`name`, `asciiname` and the other fields are valid schema names, so both paths store them under
-the same name.
+`name`, `asciiname` and the other fields are valid schema names, so both paths stored them under
+the same name. On an index merged to one segment, which is what luxir-lucene's own geonames check
+used, there is only one name, so the bug didn't show there. It was not new: it showed with upstream
+Luxir `8cb622ba` without the four patches, and with the luxir-lucene and Solr module builds from
+before the faster filters and native joins.
+
+**Fix (luxir-lucene `39eedb6`).**
+
+- **One name:** merges, and text written through Lucene's own inverter, now store text fields under
+  the schema name, as native flush does.
+- **Indexes written before the fix:** these mix both names. A search over a field stored under
+  both names now runs through Lucene, which gets the right count, until merges rewrite the
+  segments.
+- **Test:** `TestNativeIndexing` covers `_text_` searched natively across flushed and merged
+  segments. It fails without the fix.
+
+**Checks after the fix.**
+
+- **Index written before the fix:** `_text_:creek` returns 242,460, through Lucene. Other fields
+  still run natively.
+- **New index with flushed and merged segments:** `_text_` runs natively, and all 212 requests
+  match Solr+Lucene (counts, facets and sort values) and Luxir's Java path (top rows).
+- **Indexing speed:** unchanged. The results above are with the fix.
 
 ## Reproduce
 
-Build as in [luxir.md](luxir.md), then convert the corpus and run the two suites:
+Build as in [luxir.md](luxir.md), with luxir-lucene at `39eedb6`, then convert the corpus and run
+the two suites:
 
 ```bash
 curl -O https://rally-tracks.elastic.co/geonames/documents-2.json.bz2
