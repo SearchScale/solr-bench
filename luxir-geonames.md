@@ -100,9 +100,9 @@ except CatchAllText: 8 of its 20 requests returned fewer documents on Solr+Luxir
 
 - **Native search only.** On the same Solr+Luxir index, Luxir's Java path (`luxirCodec=false`)
   returns the full counts, so the index is right and the native query path is wrong.
-- **Particular segments.** Per segment, native search misses some or all of a term's documents in
-  a few segments (merged and flushed alike) and is right in the rest. A tiny index with the missed
-  documents is right.
+- **Whole flushed segments.** Searched together, the native call finds nothing in any segment
+  written by a flush (about 20,000 documents each here) and is right in every merged segment.
+  Searched one at a time, every segment is right.
 - **Gone after a full merge.** After merging the index to one segment, native and Java agree. This
   is the layout luxir-lucene's own geonames check used, which is why it passed there.
 - **Not new.** It shows with upstream Luxir `8cb622ba` without the four patches, with the previous
@@ -110,6 +110,20 @@ except CatchAllText: 8 of its 20 requests returned fewer documents on Solr+Luxir
   filters and native joins (luxir-lucene `e2c5039`, Solr `d2d7cf1`).
 
 Other text fields (`name`, `asciiname`, `alternatenames`) matched on the same index.
+
+**Root cause (luxir-lucene).** A text field whose name is not a valid Luxir schema name (it must
+start with a letter, as `_text_` does not) is stored under two different names:
+
+- **Flush:** `NativeIndexer` writes it under `LuxirTextField.schemaName`, here `lx5f746578745f`.
+- **Merge:** `lxl_writer_merge_field` writes it under its own name, `_text_`.
+- **One segment:** `findField` tries both names, so a search of one segment finds the field
+  either way.
+- **Many segments:** one native call over all segments (`lxl_multi_top_k`) resolves the field name
+  once for the whole index, in `QueryParser::field`. That picks `_text_` when any segment has it,
+  and Luxir then finds no such field in the flushed segments.
+
+`name`, `asciiname` and the other fields are valid schema names, so both paths store them under
+the same name.
 
 ## Reproduce
 
