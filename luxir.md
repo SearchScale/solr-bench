@@ -59,7 +59,7 @@ The [results](#results) below used these versions:
 |---|---|---|
 | luxir | `luxir-lucene` | `13c80ecc` (Luxir `8cb622ba` + the 4 patches in `luxir-lucene/luxir-patches/`) |
 | luxir-lucene | `main` | `57f953d` |
-| solr | `luxir-codec` | `c9e21f7c6ae20a21d3e97795896127ed5e7b62f4` |
+| solr | `luxir-codec-c9e21f7` (`luxir-codec` has since been rebased onto a newer Solr) | `c9e21f7c6ae20a21d3e97795896127ed5e7b62f4` |
 
 ## 2. Build the native library
 
