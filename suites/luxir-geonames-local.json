@@ -486,7 +486,7 @@
     },
     "repositories": [
         {
-            "commit-id": "11ab746c92bf84dd6872d34d9beda64ad3d4d3bd",
+            "commit-id": "5bad8a159906e65ea0e29cd8104d2d79477d3c09",
             "description": "Solr luxir-codec branch (Luxir codec module)",
             "name": "solr-luxir-repository",
             "package-subdir": "solr/packaging/",
