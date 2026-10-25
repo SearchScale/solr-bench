@@ -55,6 +55,43 @@ public class IndexBatchSupplier implements Supplier<Callable<IndexResult>>, Auto
     }
   }
 
+  /**
+   * The id of a JSON document whose first key is the id field, holding a string without escapes or
+   * a long, as {@link IdParser} would give it; null for any other document, which is parsed.
+   */
+  static String leadingId(String doc, String idField) {
+    int n = doc.length(), i = skipSpace(doc, 0);
+    if (i == n || doc.charAt(i) != '{') return null;
+    i = skipSpace(doc, i + 1);
+    if (!doc.startsWith(idField, i + 1) || doc.charAt(i) != '"' || i + idField.length() + 1 >= n
+        || doc.charAt(i + idField.length() + 1) != '"') return null;
+    i = skipSpace(doc, i + idField.length() + 2);
+    if (i == n || doc.charAt(i) != ':') return null;
+    i = skipSpace(doc, i + 1);
+    if (i == n) return null;
+    if (doc.charAt(i) == '"') {
+      int end = doc.indexOf('"', i + 1);
+      if (end < 0 || doc.lastIndexOf('\\', end) > i) return null;
+      return doc.substring(i + 1, end);
+    }
+    int start = i;
+    if (doc.charAt(i) == '-') i++;
+    while (i < n && doc.charAt(i) >= '0' && doc.charAt(i) <= '9') i++;
+    int next = skipSpace(doc, i);
+    if (next == n || (doc.charAt(next) != ',' && doc.charAt(next) != '}')) return null;
+    String number = doc.substring(start, i);
+    try {
+      return Long.toString(Long.parseLong(number)).equals(number) ? number : null;
+    } catch (NumberFormatException e) {
+      return null;
+    }
+  }
+
+  private static int skipSpace(String s, int i) {
+    while (i < s.length() && Character.isWhitespace(s.charAt(i))) i++;
+    return i;
+  }
+
   private Future<?> startWorker(DocReader docReader) {
     ExecutorService executorService = Executors.newSingleThreadExecutor();
     //a continuously running job until either all input is exhausted or exit is flagged
@@ -67,8 +104,12 @@ public class IndexBatchSupplier implements Supplier<Callable<IndexResult>>, Auto
       try {
         while (!exit && (inputDocs = docReader.readDocs(benchmark.batchSize)) != null) { //can read more than batch size, just use batch size as a sensible value
           for (String inputDoc : inputDocs) {
-            rdr.streamRecords(new StringReader(inputDoc), idParser);
-            Slice targetSlice = docCollection.getRouter().getTargetSlice(idParser.idParsed, null, null, null, docCollection);
+            String id = leadingId(inputDoc, benchmark.idField);
+            if (id == null) {
+              rdr.streamRecords(new StringReader(inputDoc), idParser);
+              id = idParser.idParsed;
+            }
+            Slice targetSlice = docCollection.getRouter().getTargetSlice(id, null, null, null, docCollection);
             List<String> shardDocs = shardVsDocs.computeIfAbsent(targetSlice.getName(), key -> new ArrayList<>(benchmark.batchSize));
             shardDocs.add(inputDoc);
             if (shardDocs.size() >= benchmark.batchSize) {

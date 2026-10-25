@@ -8,6 +8,7 @@ import java.io.*;
 import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * A DocReader that reads from a File.
@@ -18,6 +19,7 @@ public class FileDocReader implements DocReader {
   private long docsRead; //docs read so far from all the readDocs invocations
   private Long maxDocs; //max number of totals to be read, if docsRead >= maxDocs, it should stop reading any new docs
   private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+  private static final Pattern VERSION = Pattern.compile("\"_version_\":\\d*,*");
   public FileDocReader(File datasetFile, Long maxDocs, long offset) throws IOException {
     this.maxDocs = maxDocs;
     this.reader = JsonlFileType.getBufferedReader(datasetFile);
@@ -48,7 +50,7 @@ public class FileDocReader implements DocReader {
         if (docsRead < offset) continue;
 
         // _version_ must be removed or adding doc will fail
-        line = line.replaceAll("\"_version_\":\\d*,*", "");
+        if (line.contains("\"_version_\":")) line = VERSION.matcher(line).replaceAll("");
         docs.add(line);
         docsRead++;
 
