@@ -183,7 +183,7 @@ The benchmarks used these versions:
 
 | Repository | Branch | Commit |
 |---|---|---|
-| luxir | `luxir-lucene` | `173ec324` (Luxir `8cb622ba` + the 4 patches in `luxir-lucene/luxir-patches/` + a faster postings encoder) |
+| luxir | `luxir-lucene` | `173ec324` (Luxir `8cb622ba` + the 5 patches in `luxir-lucene/luxir-patches/`) |
 | luxir-lucene | `main` | `ecd09a1` |
 | solr | `luxir-codec` (Apache Solr `79b23df` plus the module) | `31ae830a4e8cef8968769d4a9e3281562668b6c1` |
 
