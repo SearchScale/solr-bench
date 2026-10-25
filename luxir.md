@@ -1,6 +1,6 @@
 # Solr+Lucene vs Solr+Luxir benchmarks
 
-This guide runs the same SolrCloud workload twice on one machine:
+This guide runs the same SolrCloud workloads on one machine with:
 
 - **Solr+Lucene**: stock Apache Solr built from an Apache Solr commit, storing and searching its index with Lucene's
   own codecs.
@@ -8,7 +8,7 @@ This guide runs the same SolrCloud workload twice on one machine:
   `luxir-codec` module. Luxir field types store their data in Luxir's native segment format, and queries and facets
   run natively through `libluxir_lucene.so`.
 
-The workload is the `stress-facets` suite:
+There are two workloads. The main one, used in most of this guide, is the e-commerce `stress-facets` suite:
 
 1. Index 100M documents of the e-commerce events dataset into a 3-node, 3-shard collection (one replica per shard),
    from 16 client threads.
@@ -25,10 +25,13 @@ The workload is the `stress-facets` suite:
 
    The four files are `facets2.json` split by query type, each keeping the queries' order.
 
-It reports indexing time, restart times, query throughput and query latency percentiles.
+It reports indexing time, restart times, query throughput and query latency percentiles. The second workload,
+[geonames](#geonames), indexes 11.4M places and runs 17 kinds of search request, from term and phrase queries to
+sorts, facets and large `{!terms}` sets.
 
-[Results](#results) from two machines are at the end of this file, followed by [the changes](#how-solrluxir-got-here)
-that made Solr+Luxir fast and what each one changed.
+[Results](#results) for both workloads are at the end of this file, comparing stock Solr+Lucene, Solr+Lucene with the
+security manager off and Solr+Luxir, followed by [the changes](#how-solrluxir-got-here) that made Solr+Luxir fast and
+what each one changed.
 
 ## What you need
 
@@ -53,7 +56,7 @@ git clone https://github.com/SearchScale/luxir-lucene.git                   # Lu
 git clone -b luxir-codec https://github.com/SearchScale/solr.git            # Solr with the luxir-codec module
 ```
 
-The 7950X [results](#results) below used these versions:
+The [results](#results) below used these versions:
 
 | Repository | Branch | Commit |
 |---|---|---|
@@ -61,8 +64,8 @@ The 7950X [results](#results) below used these versions:
 | luxir-lucene | `main` | `ecd09a1` |
 | solr | `luxir-codec` (Apache Solr `79b23df` plus the module) | `31ae830a4e8cef8968769d4a9e3281562668b6c1` |
 
-The 5950X results used earlier builds: Solr `luxir-codec` at `c9e21f7`, kept on the `luxir-codec-c9e21f7` branch
-since `luxir-codec` was rebased onto a newer Solr.
+The geonames results used `luxir-codec` at `35d1e2b3871017184e90db8349c67801f898c519`, the same build without the
+date parsing change, which the geonames schema does not use.
 
 ## 2. Build the native library
 
@@ -115,7 +118,7 @@ luxir-bench/configure-suites.sh $LUXIR_ROOT
 
 ## 5. Get the dataset
 
-Both suites use the 150M-event dataset (`ecommerce-events-150m.json.gz`, 8.7 GB) and index its first 100M events.
+The e-commerce suites use the 150M-event dataset (`ecommerce-events-150m.json.gz`, 8.7 GB) and index its first 100M events.
 They download it into `suites/datasets/` on their first run, from the `pre-download` URL
 `https://huggingface.co/buckets/searchscale/solr-bench/resolve/ecommerce-events-150m.json.gz`.
 
@@ -133,23 +136,38 @@ first 100M events are a mix of real and synthetic ones. The synthetic events fol
 Their IDs are 19-digit numbers above the real ID range, so they never collide with real docs. The generator is
 seeded (`SEED=42` by default), so a rerun produces the same file.
 
+The geonames suites read `suites/datasets/geonames.json.gz`, converted from the `documents-2.json.bz2` corpus of the
+Rally and OpenSearch Benchmark geonames track:
+
+```bash
+curl -O https://rally-tracks.elastic.co/geonames/documents-2.json.bz2
+python3 luxir-bench/geonames-jsonl.py documents-2.json.bz2 suites/datasets/geonames.json.gz
+```
+
 ## 6. Run the benchmark
 
-Run Solr+Lucene first, then Solr+Luxir. Both suites index 100M documents in 50,000-document batches from 16 threads,
-then run the four query tasks from 16 threads each.
+Run Solr+Lucene first, then Solr+Luxir. The e-commerce suites index 100M documents in 50,000-document batches from
+16 threads, then run the four query tasks from 16 threads each; the [geonames](#geonames) suites are described below.
 
 ```bash
 cd /path/to/solr-bench
 ./cleanup.sh && ./stress.sh -c 79b23df58daac14b92cc35f23b8b81f72098b4ba suites/stress-facets-local-100m.json        # Solr+Lucene
 ./cleanup.sh && ./stress.sh -c 31ae830a4e8cef8968769d4a9e3281562668b6c1 suites/luxir-stress-facets-local-100m.json  # Solr+Luxir
+
+# geonames
+./cleanup.sh && ./stress.sh -c 79b23df58daac14b92cc35f23b8b81f72098b4ba suites/geonames-local.json        # Solr+Lucene
+./cleanup.sh && ./stress.sh -c 35d1e2b3871017184e90db8349c67801f898c519 suites/luxir-geonames-local.json  # Solr+Luxir
 ```
+
+The Solr+Lucene suites run with Solr's security manager off. For stock Solr+Lucene, with it on as Solr starts by
+default, remove the `environment` entry from their `cluster` section.
 
 Things to know:
 
 - **Choice of Solr+Lucene commit.** `-c` picks the Solr commit to build. `luxir-codec` is Apache Solr `main` at
   `79b23df` plus the module, so building `79b23df` for Solr+Lucene compares the same Solr.
 - **Run time.** Each run builds its Solr commit with Gradle the first time and reuses the tarball afterwards. Each run
-  then takes about 20 minutes.
+  then takes about 10 minutes (e-commerce) or 8 minutes (geonames).
 - **Broken IPv6.** If downloads hang (the Gradle wrapper, JDK toolchains), your machine's IPv6 route is probably broken.
   Run with `export JAVA_TOOL_OPTIONS="-Djava.net.preferIPv4Stack=true"`.
 - **Harmless errors.** `stress.sh` tries to apply two old custom patches; `patch` failures in the log are harmless.
@@ -162,7 +180,8 @@ Only the Solr build, the configset and the node environment differ. The workload
 Solr's security manager (`SOLR_SECURITY_MANAGER_ENABLED=false` in `cluster.environment`); see
 [Known caveats](#known-caveats).
 
-- **Configset** `conf_ecommerce_events_luxir`, a copy of `conf_ecommerce_events` with these changes:
+- **Configset** `conf_ecommerce_events_luxir`, a copy of `conf_ecommerce_events` with these changes (geonames:
+  `conf_geonames_luxir`, see [Geonames](#geonames)):
   - `string`, `pfloat`, `plong` and `pdate` fields switched to `LuxirStrField`, `LuxirFloatPointField`,
     `LuxirLongPointField` and `LuxirDatePointField`
   - `LuxirCodecFactory` as the codec
@@ -212,6 +231,9 @@ timings, and `config.json`, the suite as run. Compare a Solr+Lucene and a Solr+L
 python3 luxir-bench/compare.py \
   suites/results/stress-facets-local-100m/79b23df58daac14b92cc35f23b8b81f72098b4ba \
   suites/results/luxir-stress-facets-local-100m/31ae830a4e8cef8968769d4a9e3281562668b6c1 Solr+Lucene Solr+Luxir
+python3 luxir-bench/compare.py \
+  suites/results/geonames-local/79b23df58daac14b92cc35f23b8b81f72098b4ba \
+  suites/results/luxir-geonames-local/35d1e2b3871017184e90db8349c67801f898c519 Solr+Lucene Solr+Luxir
 ```
 
 What the fields mean:
@@ -219,10 +241,10 @@ What the fields mean:
 - **Indexing:** `task1[0].total-time`, in seconds.
 - **Restarts:** `task2[*].total-time`, in seconds. Each covers stopping the node, starting it, and waiting for its
   replicas to recover.
-- **Queries:** `task3` to `task6` (one per query type), each with `timings`: one entry per thread count in the task's
-  `threads` (here just 16). Each has `qps` (queries per second over the whole run, warm-up included), and the latency
-  percentiles `50th`, `90th`, `95th`, `99th` and `mean` in milliseconds, measured over the queries after the
-  warm-up. `compare.py` labels them by the task's description from `config.json`.
+- **Queries:** `task3` to `task6` (one per query type; geonames: `task3` to `task20`), each with `timings`: one entry
+  per thread count in the task's `threads` (here just 16). Each has `qps` (queries per second over the whole run,
+  warm-up included), and the latency percentiles `50th`, `90th`, `95th`, `99th` and `mean` in milliseconds, measured
+  over the queries after the warm-up. An entry with `total-errors` counts failed queries. `compare.py` labels them by the task's description from `config.json`.
 
 How to read them:
 
@@ -232,14 +254,68 @@ How to read them:
   move the mean a lot while the percentiles barely change, so compare the mean and the percentiles together.
 - **Noise.** p95 can vary by several percent between identical runs. Repeat runs before trusting small differences.
 
+## Geonames
+
+The geonames workload from luxir-lucene (`bench/geonames`), as solr-bench suites: `suites/geonames-local.json`
+(Solr+Lucene) and `suites/luxir-geonames-local.json` (Solr+Luxir). Build, dataset and run steps are above.
+
+- **Data:** 11,396,503 places from GeoNames (the `documents-2.json.bz2` corpus of the Rally and
+  OpenSearch Benchmark geonames track), with text, string, numeric and location fields. Every text
+  field is copied to a `_raw` string field and to the catch-all `_text_`.
+- **Collection:** 3 shards on 3 nodes, one replica each.
+- **Indexing:** 16 client threads, batches of 10,000 documents.
+- **Restarts:** each node once, after indexing.
+- **Queries:** luxir-lucene's 212 requests in 17 categories, one task per category, then all 212
+  mixed. Each task runs for 15 seconds (the mixed one for 30) from 16 concurrent clients, sent to
+  one node as POSTs (the terms-set requests are about 740 KB each). Rows are 10 and counts exact.
+
+| Category | Requests | What it does |
+|---|---|---|
+| MatchAll | 1 | `*:*` |
+| StringTerm | 20 | a term on a string field (`country_code_raw`) |
+| TextTerm | 30 | a term on a text field (`name`) |
+| TextPhrase | 30 | a two-word phrase on `name` |
+| TextOr | 20 | two terms on `name`, either |
+| TextAnd | 20 | two terms on `name`, both |
+| CatchAllText | 20 | a term on the catch-all `_text_` |
+| TextFiltered | 20 | a term on `name`, filtered on `feature_class_raw` |
+| NumRange | 10 | a `population` range |
+| SortPopulation | 2 | all docs sorted by `population` |
+| SortGeonameid | 2 | all docs sorted by `geonameid` |
+| TermSortPop | 10 | a `country_code_raw` term sorted by `population` |
+| CountryFacet | 9 | terms facet on `country_code_raw` with `sum(population)` |
+| HiCardFacet | 3 | terms facet on `geonameid`, limit 50,000 |
+| TermsPure | 5 | a `{!terms}` set of about 45,700 names |
+| TermsFiltered | 5 | a term query filtered by the `{!terms}` set |
+| TermsProhibited | 5 | a term query excluding the `{!terms}` set |
+
+**Configsets:** `conf_geonames` and `conf_geonames_luxir` share luxir-lucene's geonames schema.
+The Luxir one uses Luxir field types, codec and components, keeping `alternatenames_raw` (values
+over 255 bytes) on a stock string field. Both have the same `solrconfig.xml` apart from the codec
+and components. They add the update log and commit settings of the e-commerce configsets (hard
+commit every 30 s, soft commit every 15 s), and a 128 MB RAM buffer. Unlike luxir-lucene's own
+benchmark, the Luxir side gets no 4 GB RAM buffer or parallel flush, and the indexes are not merged
+to one segment.
+
+**solr-bench changes for these suites:**
+
+- **`http-method` for query tasks:** `POST` sends URL-parameter queries in the request body, for
+  requests too long for a URL.
+- **URL-parameter queries work again:** their responses are now read as a stream, as JSON queries'
+  are. Before, every such query failed with `NullPointerException: inputStream`.
+- **No throughput cap for fast queries:** with 10 requests pending per client thread, the
+  submitter waited 100 ms before sending more, which capped any task at about 1,600 queries/s.
+  It now waits 1 ms. The e-commerce suites stayed under the cap (at most about 500 queries/s), so
+  their results are unaffected.
+
 ## Known caveats
 
 - **Security manager.** Solr+Luxir needs Solr's security manager off (`SOLR_SECURITY_MANAGER_ENABLED=false`) so the
   native library can load, and since 2026-10-25 the Solr+Lucene suites turn it off too. Earlier results had it on
   for Solr+Lucene only, which was not a small advantage: every update-log write checks a permission with a stack walk
   under the log's lock, which kept Solr+Lucene's indexing to about 10 busy cores. With it off, Solr+Lucene indexed
-  100M documents in 331.9 s instead of 684.3 s on the 7950X, and answered geonames' fast queries 20–35% faster. The
-  5950X results below still have it on for Solr+Lucene, so their indexing ratio overstates Solr+Luxir's lead.
+  100M documents in 331.9 s instead of 684.3 s, and answered geonames' fast queries 23–36% faster. The
+  [results](#results) show Solr+Lucene both ways.
 - **Date parsing.** The e-commerce configsets parse `event_time` (`2019-10-01 00:00:00 UTC`) with Solr's
   `ParseDateFieldUpdateProcessorFactory`, which tries its 9 formats in order and throws an exception for each format
   that does not match: this value matches the 8th. That was about 45% of the indexing CPU on both systems. Solr+Luxir's
@@ -259,148 +335,126 @@ How to read them:
 
 ## Results
 
-Results from one run of `suites/stress-facets-local-100m.json` (Solr+Lucene) and
-`suites/luxir-stress-facets-local-100m.json` (Solr+Luxir) on each of two machines: the 7950X on 2026-10-25 with the
-current builds and the security manager off on both systems, the 5950X on 2026-10-23 with earlier builds (before the
-product facet fix) and the security manager on for Solr+Lucene (see [Known caveats](#known-caveats)). Each run indexes
-the first 100M events of the 150M dataset, restarts each node, then runs the four query tasks from 16 concurrent
-clients. Ratios are how much better Solr+Luxir is: Solr+Lucene's time ÷ Solr+Luxir's, or Solr+Luxir's throughput ÷
-Solr+Lucene's, so above 1× means Solr+Luxir was faster. Throughput counts each task's warm-up queries (20, or 3 for
-joins) over its whole run; latencies are over the measured queries after them. Restart times include waiting for
-replicas to recover.
+One run of each suite on the machine below, comparing three setups:
 
-Both machines used the same settings, with everything built on the machine itself:
+- **Stock Solr+Lucene:** Apache Solr `79b23df` as it starts by default, with Solr's security manager on. Run on
+  2026-10-24 with solr-bench before `3ae58b3`, whose client capped indexing at about 260,000 docs/s; stock
+  Solr+Lucene indexed well below that.
+- **Solr+Lucene, SM=off:** the same build with the security manager off (`SOLR_SECURITY_MANAGER_ENABLED=false`), as
+  Solr+Luxir must run. Run on 2026-10-25.
+- **Solr+Luxir:** the versions in [Get the code](#1-get-the-code), security manager off. Run on 2026-10-25.
 
-| | |
-|---|---|
-| Solr+Lucene | apache/solr `main` (11.0.0-SNAPSHOT) @ `79b23df` on the 7950X, `63f2459` on the 5950X; security manager off on the 7950X, on on the 5950X |
-| Solr+Luxir | SearchScale/solr `luxir-codec` @ `31ae830` on the 7950X, `c9e21f7` on the 5950X, with the Luxir and luxir-lucene versions given for each machine below; native library built on the machine with `-DLUXIR_CPU_TARGET=native`; `OMP_NUM_THREADS=1`; security manager off |
-| JDK | Oracle JDK 22.0.2, for both Solr and the solr-bench client |
-| Solr nodes | 3 on the same machine, each with `-m 16g -Dsolr.searchThreads=4` |
-| Client | solr-bench (`java -Xmx12g`) on the same machine: 16 indexing threads with 50,000-document batches, 16 query threads with no rate cap; on the 7950X, solr-bench `3ae58b3`, whose document routing no longer limits indexing |
-
-On both machines, both runs indexed exactly 100,000,000 documents. The earlier 7950X runs and the 5950X runs had
-identical per-shard counts (33,331,737 / 33,333,346 / 33,334,917); for the current builds, 20M-document indexes of
-both systems gave identical results for 120 terms, range and product facet requests and for the hourly counts of
-`event_time`.
-
-### Summary
-
-| | 7950X: Solr+Luxir better by | 5950X (earlier builds): Solr+Luxir better by |
-|---|---|---|
-| Indexing | **1.85×** | *2.09×, security manager on for Solr+Lucene* |
-| Terms facet throughput | **2.14×** | **2.03×** |
-| Range facet throughput | **4.16×** | **2.83×** |
-| Product facet throughput | **1.24×** | **0.55×** |
-| Join throughput | **6.34×** | **6.01×** |
-| All four query tasks (total time) | **2.94×** | **2.09×** |
-
-- **Indexing:** Solr+Luxir indexed 1.85× faster on the 7950X, mostly because its JSON loader parses the dates
-  without the exceptions of Solr's date processor (see [Known caveats](#known-caveats)): without that, the two were
-  even (320.5 s against 331.9 s, 1.04×). The earlier 1.75× came mostly from Solr+Lucene's security manager.
-- **Terms and range facets:** Solr+Luxir handled 2.1× the terms facet queries per second and 4.2× the range facet
-  ones on the 7950X, with lower latency at every percentile.
-- **Product facet:** 1.24× on the 7950X. It was the one query type where Solr+Lucene was faster (0.55–0.58×)
-  until the matches of each query, about 67,000 per shard, went to Luxir's facet code as a list of docs instead of
-  a bitset of all 33M (see [the changes](#how-solrluxir-got-here)). The 5950X results predate this change.
-- **Joins:** Solr+Luxir runs joins between string fields natively (`LuxirJoinQParserPlugin`), 6.0–6.3× the throughput
-  of Solr's join.
-- **Overall:** the four query tasks took 2.94× less time on Solr+Luxir on the 7950X.
-
-### AMD Ryzen 9 7950X
-
-Solr+Luxir used Luxir `8cb622ba` with the 4 patches and the postings encoder change (`173ec324`) and luxir-lucene
-`ecd09a1`.
+Ratios are how much better Solr+Luxir is than each Solr+Lucene setup: its time ÷ Solr+Luxir's for indexing and total
+time, Solr+Luxir's throughput ÷ its own for queries, so above 1× means Solr+Luxir was faster. Throughput counts each
+task's warm-up queries over its whole run; latencies are over the measured queries after them. Restart times include
+waiting for replicas to recover.
 
 | | |
 |---|---|
 | CPU | AMD Ryzen 9 7950X: 16 cores / 32 threads, up to 5.88 GHz, 64 MB L3, one socket |
 | Memory | 128 GB DDR5 (2 × 64 GB at 6000 MT/s, non-ECC); 124 GiB usable |
-| Disk | WD_BLACK SN8100 4 TB NVMe SSD, ext4. It holds the dataset, the Solr nodes and their indexes. |
+| Disk | WD_BLACK SN8100 4 TB NVMe SSD, ext4. It holds the datasets, the Solr nodes and their indexes. |
 | OS | Ubuntu 22.04.5 LTS, Linux 6.8.0-138-generic, transparent huge pages `madvise` |
+| Solr+Luxir | native library built on the machine with `-DLUXIR_CPU_TARGET=native`; `OMP_NUM_THREADS=1` |
+| JDK | Oracle JDK 22.0.2, for both Solr and the solr-bench client |
+| Solr nodes | 3 on the same machine, each with `-m 16g -Dsolr.searchThreads=4` |
+| Client | solr-bench (`java -Xmx12g`) on the same machine: 16 indexing threads, 16 query threads with no rate cap |
 
-| | Solr+Lucene | Solr+Luxir | Solr+Luxir better by |
+### E-commerce, 100M documents
+
+All three runs indexed exactly 100,000,000 documents. The stock runs of both systems had identical per-shard counts
+(33,331,737 / 33,333,346 / 33,334,917); for the current builds, 20M-document indexes of both systems gave identical
+results for 120 terms, range and product facet requests and for the hourly counts of `event_time`.
+
+| | Stock Solr+Lucene | Solr+Lucene, SM=off | Solr+Luxir | Luxir vs stock | Luxir vs SM=off |
+|---|---|---|---|---|---|
+| Indexing 100M documents | 684.3 s | 331.9 s | 179.0 s | **3.82×** | **1.85×** |
+| Terms facet (6,000 queries) | 129.2 q/s | 130.1 q/s | 278.9 q/s | **2.16×** | **2.14×** |
+| Range facet (6,000) | 170.0 q/s | 162.6 q/s | 677.2 q/s | **3.98×** | **4.16×** |
+| Product facet (6,000) | 499.0 q/s | 434.8 q/s | 537.5 q/s | **1.08×** | **1.24×** |
+| Join (100) | 2.4 q/s | 2.2 q/s | 13.7 q/s | **5.75×** | **6.34×** |
+| All four query tasks, total time | 137.2 s | 144.8 s | 49.2 s | **2.79×** | **2.94×** |
+| Node restarts | 5.87, 5.81, 5.77 s | 5.84, 5.87, 5.78 s | 5.85, 5.86, 5.79 s | same | same |
+
+Latencies, p50 / p95 / p99 (ms):
+
+| Query task | Stock Solr+Lucene | Solr+Lucene, SM=off | Solr+Luxir |
 |---|---|---|---|
-| Indexing 100M documents | 331.9 s (301,300 docs/s) | 179.0 s (558,700 docs/s) | **1.85×** |
-| Node restarts | 5.84 s, 5.87 s, 5.78 s | 5.85 s, 5.86 s, 5.79 s | same |
+| Terms facet | 145.7 / 217.7 / 254.1 | 144.0 / 215.2 / 259.2 | 65.1 / 98.1 / 113.9 |
+| Range facet | 107.7 / 162.2 / 187.5 | 114.4 / 170.3 / 198.7 | 25.8 / 43.7 / 55.0 |
+| Product facet | 37.2 / 53.1 / 64.0 | 43.8 / 61.9 / 70.2 | 34.3 / 49.9 / 58.1 |
+| Join | 6,937 / 8,507 / 9,598 | 6,350 / 21,289 / 21,968 | 1,416 / 1,976 / 2,030 |
 
-| Query task | | Solr+Lucene | Solr+Luxir | Solr+Luxir better by |
-|---|---|---|---|---|
-| Terms facet (6,000 queries) | throughput | 130.1 queries/s | 278.9 queries/s | **2.14×** |
-| | p50 / p95 / p99 | 144.0 / 215.2 / 259.2 ms | 65.1 / 98.1 / 113.9 ms | 2.21× / 2.19× / 2.28× |
-| | mean | 122.0 ms | 56.5 ms | 2.16× |
-| Range facet (6,000) | throughput | 162.6 queries/s | 677.2 queries/s | **4.16×** |
-| | p50 / p95 / p99 | 114.4 / 170.3 / 198.7 ms | 25.8 / 43.7 / 55.0 ms | 4.43× / 3.90× / 3.61× |
-| | mean | 97.2 ms | 23.5 ms | 4.14× |
-| Product facet (6,000) | throughput | 434.8 queries/s | 537.5 queries/s | **1.24×** |
-| | p50 / p95 / p99 | 43.8 / 61.9 / 70.2 ms | 34.3 / 49.9 / 58.1 ms | 1.28× / 1.24× / 1.21× |
-| | mean | 36.2 ms | 29.4 ms | 1.23× |
-| Join (100) | throughput | 2.2 queries/s | 13.7 queries/s | **6.34×** |
-| | p50 / p95 / p99 | 6,350 / 21,289 / 21,968 ms | 1,416 / 1,976 / 2,030 ms | 4.48× / 10.77× / 10.82× |
-| | mean | 7,272 ms | 1,143 ms | 6.36× |
-| All four tasks | total time | 144.8 s | 49.2 s | **2.94×** |
-
-Single runs: compared with the runs of 2026-10-24 (Solr+Lucene with the security manager on), Solr+Lucene's product
-facet throughput was 13% lower (499.0 queries/s then) and its join tail much longer (p99 9.6 s then), while its terms
-and range facets were within 5%. A run of Solr+Luxir at `35d1e2b` (the same build without the date change) made the same
-day gave 280.6, 730.0, 552.2 and 14.5 queries/s for the four tasks, 1–8% above this run.
+- **Indexing:** the security manager halved Solr+Lucene's indexing speed (684.3 s against 331.9 s). Of Solr+Luxir's
+  remaining 1.85×, most comes from parsing dates in its JSON loader (see [Known caveats](#known-caveats)): without
+  that, Solr+Luxir indexed in 320.5 s (1.04×), and the same change in Solr's date processor would give Solr+Lucene the
+  same saving.
+- **Queries:** the security manager hardly affects these heavy queries. Solr+Luxir handled 2.1× the terms facet
+  queries, 4.0–4.2× the range facet ones and 5.8–6.3× the joins (`LuxirJoinQParserPlugin` runs joins between string
+  fields natively), with lower latency at every percentile. The product facet, once Solr+Luxir's weak spot (0.55–0.58×
+  before the [change](#the-product-facet) that hands each query's matches to the facets as a doc list), is 1.08–1.24×.
+- **Run to run:** Solr+Lucene with SM=off had a 13% lower product facet throughput and a much longer join tail than
+  stock, which the security manager cannot explain; these are single runs. A run of Solr+Luxir at `35d1e2b` (without
+  the date change) the same day gave 280.6, 730.0, 552.2 and 14.5 queries/s for the four tasks, 1–8% above this one.
 
 JVM metrics, sampled every 2 seconds (plus the time each sample takes) on each of the 3 nodes over the whole run:
 
-| | Solr+Lucene | Solr+Luxir |
-|---|---|---|
-| Peak heap usage (of 16 GB) | 0.89–0.91 | 0.89–0.91 |
-| Mean heap usage | 0.43–0.47 | 0.40–0.46 |
-| Threads per node | 46–135 | 46–148 |
-| Heap right after a restart (average) | 200 MB | 211 MB |
-
-### AMD Ryzen 9 5950X
-
-These runs predate the product facet change and the rebase onto Solr `79b23df`: Solr+Lucene was Apache Solr
-`63f2459`, Solr+Luxir was `luxir-codec` at `c9e21f7`, and it used Luxir `e42cd268` with the 4 patches
-(`48a10abe`) and luxir-lucene `ed0bedc`, all cloned from GitHub on the machine. The machine's other workloads
-were stopped for the runs. The Luxir native library was compiled for the 5950X's Zen 3 cores, which have no
-AVX-512.
-
-| | |
-|---|---|
-| CPU | AMD Ryzen 9 5950X: 16 cores / 32 threads, up to 5.08 GHz, 64 MB L3, one socket |
-| Memory | 128 GB DDR4 (4 × 32 GB at 3200 MT/s, non-ECC); 125 GiB usable |
-| Disk | Crucial P3 1 TB NVMe SSD (CT1000P3SSD8), ext4. It holds the dataset, the Solr nodes and their indexes. |
-| OS | Ubuntu 24.04.5 LTS, Linux 6.8.0-147-generic, transparent huge pages `madvise` |
-
-| | Solr+Lucene | Solr+Luxir | Solr+Luxir better by |
+| | Stock Solr+Lucene | Solr+Lucene, SM=off | Solr+Luxir |
 |---|---|---|---|
-| Indexing 100M documents | 1,198.0 s (83,500 docs/s), security manager on | 573.3 s (174,400 docs/s) | *2.09×* |
-| Node restarts | 8.15 s, 8.14 s, 8.15 s | 17.38 s, 7.11 s, 7.11 s | |
+| Peak heap usage (of 16 GB) | 0.89–0.91 | 0.89–0.91 | 0.89–0.91 |
+| Mean heap usage | 0.44–0.46 | 0.43–0.47 | 0.40–0.46 |
+| Threads per node | 47–143 | 46–135 | 46–148 |
+| Heap right after a restart (average) | 220 MB | 200 MB | 211 MB |
 
-Solr+Luxir's first restart, right after indexing, took 12.5 s to shut the node down; its node startups (4.85 s) were
-faster than Solr+Lucene's (5.89 s).
+### Geonames, 11.4M documents
 
-| Query task | | Solr+Lucene | Solr+Luxir | Solr+Luxir better by |
-|---|---|---|---|---|
-| Terms facet (6,000 queries) | throughput | 90.0 queries/s | 182.4 queries/s | **2.03×** |
-| | p50 / p95 / p99 | 208.1 / 316.7 / 383.7 ms | 101.2 / 151.1 / 175.5 ms | 2.06× / 2.10× / 2.19× |
-| | mean | 176.7 ms | 86.8 ms | 2.04× |
-| Range facet (6,000) | throughput | 106.5 queries/s | 302.0 queries/s | **2.83×** |
-| | p50 / p95 / p99 | 174.9 / 266.6 / 315.9 ms | 59.4 / 92.9 / 111.2 ms | 2.94× / 2.87× / 2.84× |
-| | mean | 148.3 ms | 52.8 ms | 2.81× |
-| Product facet (6,000) | throughput | 315.0 queries/s | 172.9 queries/s | **0.55×** |
-| | p50 / p95 / p99 | 60.6 / 87.3 / 102.2 ms | 108.1 / 151.9 / 174.2 ms | 0.56× / 0.57× / 0.59× |
-| | mean | 50.1 ms | 92.0 ms | 0.54× |
-| Join (100) | throughput | 1.7 queries/s | 10.0 queries/s | **6.01×** |
-| | p50 / p95 / p99 | 9,911 / 13,181 / 14,820 ms | 1,956 / 2,728 / 2,925 ms | 5.07× / 4.83× / 5.07× |
-| | mean | 9,289 ms | 1,578 ms | 5.89× |
-| All four tasks | total time | 204.6 s | 98.1 s | **2.09×** |
+The [geonames](#geonames) suites, with Solr+Luxir at `35d1e2b`.
 
-JVM metrics, sampled the same way:
+| | Stock Solr+Lucene | Solr+Lucene, SM=off | Solr+Luxir | Luxir vs stock | Luxir vs SM=off |
+|---|---|---|---|---|---|
+| Indexing 11.4M documents | 83.5 s | 49.2 s | 38.6 s | **2.16×** | **1.27×** |
+| Node restarts | 5.83, 5.82, 5.83 s | 5.85, 5.86, 5.82 s | 9.93, 5.79, 5.94 s | | |
 
-| | Solr+Lucene | Solr+Luxir |
-|---|---|---|
-| Peak heap usage (of 16 GB) | 0.88–0.91 | 0.88–0.91 |
-| Mean heap usage | 0.45–0.47 | 0.40–0.43 |
-| Threads per node | 47–104 | 46–111 |
-| Heap right after a restart (average) | 221 MB | 206 MB |
+Queries, 16 threads, throughput and p99:
+
+| Category | Stock Solr+Lucene | Solr+Lucene, SM=off | Solr+Luxir | Luxir vs stock | Luxir vs SM=off |
+|---|---|---|---|---|---|
+| MatchAll* | 245 q/s, 99.0 ms | 244 q/s, 98.0 ms | 247 q/s, 96.6 ms | *1.01×* | *1.01×* |
+| StringTerm | 8,548 q/s, 7.06 ms | 10,501 q/s, 6.33 ms | 10,454 q/s, 6.76 ms | **1.22×** | **1.00×** |
+| TextTerm | 7,959 q/s, 3.48 ms | 10,756 q/s, 3.08 ms | 11,412 q/s, 2.35 ms | **1.43×** | **1.06×** |
+| TextPhrase | 8,092 q/s, 3.64 ms | 10,394 q/s, 3.10 ms | 11,305 q/s, 3.05 ms | **1.40×** | **1.09×** |
+| TextOr | 5,191 q/s, 5.61 ms | 5,642 q/s, 5.32 ms | 9,308 q/s, 2.76 ms | **1.79×** | **1.65×** |
+| TextAnd | 8,137 q/s, 3.13 ms | 10,949 q/s, 2.32 ms | 11,190 q/s, 2.22 ms | **1.38×** | **1.02×** |
+| CatchAllText | 7,694 q/s, 3.76 ms | 10,450 q/s, 3.13 ms | 11,006 q/s, 2.10 ms | **1.43×** | **1.05×** |
+| TextFiltered | 7,889 q/s, 3.51 ms | 10,489 q/s, 2.94 ms | 10,341 q/s, 2.73 ms | **1.31×** | **0.99×** |
+| NumRange | 1,575 q/s, 58.7 ms | 1,592 q/s, 60.3 ms | 9,987 q/s, 2.75 ms | **6.34×** | **6.27×** |
+| SortPopulation | 144 q/s, 151.7 ms | 143 q/s, 155.4 ms | 349 q/s, 65.8 ms | **2.43×** | **2.44×** |
+| SortGeonameid | 144 q/s, 155.5 ms | 167 q/s, 134.1 ms | 349 q/s, 64.5 ms | **2.41×** | **2.08×** |
+| TermSortPop | 6,954 q/s, 3.64 ms | 9,354 q/s, 2.80 ms | 8,287 q/s, 2.92 ms | **1.19×** | **0.89×** |
+| CountryFacet | 179 q/s, 350.7 ms | 180 q/s, 343.9 ms | 409 q/s, 182.2 ms | **2.29×** | **2.27×** |
+| HiCardFacet | 10.9 q/s, 2,551 ms | 10.9 q/s, 2,552 ms | 11.2 q/s, 1,804 ms | **1.03×** | **1.03×** |
+| TermsPure | 53.2 q/s, 349.0 ms | 51.5 q/s, 372.6 ms | 49.7 q/s, 383.5 ms | **0.93×** | **0.96×** |
+| TermsFiltered | 102 q/s, 188.3 ms | 103 q/s, 174.1 ms | 103 q/s, 179.9 ms | **1.01×** | **1.01×** |
+| TermsProhibited | 56.5 q/s, 331.5 ms | 54.3 q/s, 355.1 ms | 50.6 q/s, 370.7 ms | **0.90×** | **0.93×** |
+| All 212, mixed (30 s) | 421 q/s, 432.3 ms | 427 q/s, 413.3 ms | 419 q/s, 554.4 ms | **0.99×** | **0.98×** |
+
+\* Not settled: across six runs on these and earlier builds, MatchAll has given 0.76× to 1.36×, with Solr+Lucene
+between 197 and 280 q/s and Solr+Luxir between 213 and 268 q/s.
+
+- **Indexing:** 2.16× faster than stock Solr+Lucene, 1.27× with its security manager off. Geonames has no dates, so
+  this is Luxir's own indexing.
+- **What the security manager hid:** with it off, Solr+Lucene answers 23–36% more StringTerm, TermSortPop and text
+  requests per second (two-term OR: 9%). Against stock, Solr+Luxir is 1.2–1.4× faster on these; against SM=off, they
+  are about even, and TermSortPop is 0.89× (see [the changes](#a-term-sorted-by-a-field-termsortpop)).
+- **Faster on Solr+Luxir either way:** numeric ranges (6.3× throughput, 22× lower p99), sorting all docs
+  (2.1–2.4×), the country facet (2.3×) and two-term OR (1.65–1.79×).
+- **Even or slower either way:** the `{!terms}` sets of 45,700 names (0.90–1.01×), the same weak spot as in
+  luxir-lucene's own results, and the 30-second mix of all 212 requests (0.98–0.99×), whose time the `{!terms}`
+  requests, 15 of 212 but by far the slowest, dominate.
+- **Errors:** one TextTerm request of 161,389 failed on Solr+Lucene with SM=off: the node it was sent to got an
+  `EOFException` reading shard2's response. None failed in the other runs.
+- **Heap:** peak usage was 0.80–0.93 of 16 GB on stock Solr+Lucene, 0.79–0.92 with SM=off and 0.77–0.86 on
+  Solr+Luxir. Solr+Luxir's first restart is the slow one in every run (9.9 s here).
 
 ## How Solr+Luxir got here
 
@@ -442,7 +496,7 @@ the query to each facet as a bitset of all 33M docs (4 MB per shard), built, cop
 
 How each effect was measured, on the 7950X: the benchmark's product facet queries from 16 clients on a 3-node cluster
 with the 100M index (Solr+Lucene: 514 queries/s), and for the GC change, geonames TermSortPop requests (see
-[luxir-geonames.md](luxir-geonames.md)).
+[below](#a-term-sorted-by-a-field-termsortpop)).
 
 | Change | Where | Without → with |
 |---|---|---|
@@ -451,6 +505,83 @@ with the 100M index (Solr+Lucene: 514 queries/s), and for the GC change, geoname
 
 The results match Solr+Lucene's: the counts and facets of 120 product, range and terms facet queries were
 identical, and the luxir-lucene tests compare facets over doc lists and over bitsets.
+
+### A term sorted by a field (TermSortPop)
+
+Before luxir-lucene `d78c3df`, TermSortPop (a `country_code_raw` term sorted by `population`) was the
+one category clearly slower on Solr+Luxir: 6,184 q/s against stock Solr+Lucene's 7,200 (0.86×). On a test cluster under
+the same 16-client load, Solr+Luxir used 3.87 CPU-ms per request against 3.03.
+
+**Causes.**
+
+- **Match bits per segment:** a field sort ran the query into a bitset of every segment's docs,
+  allocated and zeroed per request, then scanned each bitset for the segment's best docs by the
+  column.
+- **GC pauses:** native objects (terms and postings enums, doc values iterators, stored fields
+  readers) were freed by `java.lang.ref.Cleaner`. Before JDK 24, its registrations form one linked
+  list, which young GCs walk serially: Solr+Luxir's pauses took about 96 ms against 3 ms on
+  Solr+Lucene, with the other GC threads spinning.
+- **Doc values per returned doc:** every doc values iterator opened a native object, with a cleaner
+  registration, even to read one doc's value.
+
+**Fix (luxir-lucene `d78c3df`).**
+
+- **Sorted without bits:** without facets, each segment's best k by the sort column are kept as the
+  query finds its matches (`lxl_multi_top_k_sorted`), with the column's block zones pruning docs that
+  cannot make it.
+- **Cleaner:** native objects are freed by `NativeCleaner`, which holds its registrations in a
+  concurrent set that GC threads scan in parallel. Young GC pauses fell from about 96 ms to 18 ms.
+- **Doc values:** an iterator reads its first block with a one-shot native call and opens a native
+  iterator only for a second block.
+
+On the test cluster, CPU per request fell to 2.7 ms (Solr+Lucene: 3.0). The other categories are the
+same or faster than before the fix. That comparison had Solr+Lucene's security manager on; with it off, as in the
+results above, Solr+Lucene answers TermSortPop at 9,354 q/s and Solr+Luxir at 8,287 (0.89×), so it is again the
+category where Solr+Luxir trails. Sorted requests match Solr+Lucene's order, and luxir-lucene's
+tests compare both sort paths with Lucene's.
+
+### Fixed: catch-all text missed documents
+
+Before benchmarking, both systems' indexes were loaded with the same data (in separate test
+clusters), and all 212 requests compared with `luxir-bench/geonames-verify.py`. With luxir-lucene
+`57f953d`, everything matched except CatchAllText: 8 of its 20 requests returned fewer documents on
+Solr+Luxir, for example `_text_:creek` 229,122 against 242,460 and `_text_:hammam` 498 against 532.
+On the same index, Luxir's Java path (`luxirCodec=false`) returned the full counts.
+
+**Cause.** A text field whose name is not a valid Luxir schema name (it must start with a letter,
+as `_text_` does not) was stored under two names:
+
+- **Flush:** `NativeIndexer` wrote it under `LuxirTextField.schemaName`, here `lx5f746578745f`.
+- **Merge:** `lxl_writer_merge_field` wrote it under its own name, `_text_`.
+- **One segment:** `findField` tries both names, so a search of one segment found the field
+  either way.
+- **Many segments:** one native call over all segments (`lxl_multi_top_k`) resolves the field name
+  once for the whole index. That picked `_text_` when any segment had it, so the search found
+  nothing in the flushed segments.
+
+`name`, `asciiname` and the other fields are valid schema names, so both paths stored them under
+the same name. On an index merged to one segment, which is what luxir-lucene's own geonames check
+used, there is only one name, so the bug didn't show there. It was not new: it showed with upstream
+Luxir `8cb622ba` without the four patches, and with the luxir-lucene and Solr module builds from
+before the faster filters and native joins.
+
+**Fix (luxir-lucene `39eedb6`).**
+
+- **One name:** merges, and text written through Lucene's own inverter, now store text fields under
+  the schema name, as native flush does.
+- **Indexes written before the fix:** these mix both names. A search over a field stored under
+  both names now runs through Lucene, which gets the right count, until merges rewrite the
+  segments.
+- **Test:** `TestNativeIndexing` covers `_text_` searched natively across flushed and merged
+  segments. It fails without the fix.
+
+**Checks after the fix.**
+
+- **Index written before the fix:** `_text_:creek` returns 242,460, through Lucene. Other fields
+  still run natively.
+- **New index with flushed and merged segments:** `_text_` runs natively, and all 212 requests
+  match Solr+Lucene (counts, facets and sort values) and Luxir's Java path (top rows).
+- **Indexing speed:** unchanged. The results above are with the fix.
 
 ### Indexing
 
