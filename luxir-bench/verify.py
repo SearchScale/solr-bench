@@ -78,5 +78,5 @@ for line in open(path):
         info += 1
 print(f"{n} requests: {len(fails)} failures; score-ranked top rows differing across systems (info): {info}; "
       f"Luxir native vs Java rows reordered among scores equal to float rounding: {rounding}")
-for f in fails[:30]: print("  FAIL", f)
+for f in fails: print("  FAIL", f)
 sys.exit(1 if fails else 0)
