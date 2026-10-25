@@ -549,7 +549,7 @@ The [enwiki](#enwiki) suites, run on 2026-10-25, with Solr+Luxir at `31ae830` an
 | | Stock Solr+Lucene | Solr+Lucene, SM=off | Solr+Luxir | Luxir vs stock | Luxir vs SM=off |
 |---|---|---|---|---|---|
 | Indexing 25M documents | 210.6 s | 133.1 s | 88.4 s | **2.38×** | **1.51×** |
-| Node restarts | 5.84, 5.83, 5.84 s | 5.75, 5.90, 5.89 s | 5.76, 5.79, 5.80 s | same | same |
+| Index size after indexing | not measured (the same Lucene index as SM=off) | 10.60 GB, 62 segments | 13.54 GB, 61 segments | | **0.78×** (1.28× larger) |
 
 Queries, 16 threads, throughput and p99. Each category ran its queries 100 times over (3,000 measured queries for
 the categories with 30), the mix 10 times over:
@@ -603,6 +603,11 @@ the categories with 30), the mix 10 times over:
 
 - **Indexing:** 1.51× faster than Solr+Lucene with SM=off and 2.38× faster than stock. Solr+Luxir analyzes and
   inverts the text natively; its analysis is not quite Solr's (see [Known caveats](#known-caveats)).
+- **Index size:** solr-bench reads each replica's index size (CoreAdmin `STATUS`) right after indexing's final commit
+  and records it in the indexing task's results (`index-size-bytes`, `index-num-docs`, `index-segments`, and each
+  replica's in `index-replicas`); the sizes above are from indexing-only runs of the same suites with that report.
+  Solr+Luxir's index is 1.28× the size of Solr+Lucene's. After the node restarts, with merges settled, the index
+  directories on disk were 9.31 GB and 11.61 GB (1.25×).
 - **Much faster on Solr+Luxir:** disjunctions (OrHigh*: 4.4–9.9×, with 5–12× lower p99), the numeric range (8.9×)
   and set (2.2×), the facets after an OR (3.6×) or a term or AND (1.6–2.4×), the most frequent term (2.6×),
   negations (1.2–2.6×) and the sorts (1.3–1.9×). The mix of all 1,153 is 1.49× (1.48× against stock).

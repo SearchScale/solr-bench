@@ -526,10 +526,16 @@ public class StressMain {
 				long taskEnd = System.currentTimeMillis();
 				log.info("Results: "+results.get("indexing-benchmarks"));
 				try {
-					String totalTime = ((List<Map>)((Map.Entry)((Map)((Map.Entry)results.get("indexing-benchmarks").entrySet().iterator().next()).getValue()).entrySet().iterator().next()).getValue()).get(0).get("total-time").toString();
-					finalResults.get(taskName).add(Map.of(
+					Map metrics = ((List<Map>)((Map.Entry)((Map)((Map.Entry)results.get("indexing-benchmarks").entrySet().iterator().next()).getValue()).entrySet().iterator().next()).getValue()).get(0);
+					String totalTime = metrics.get("total-time").toString();
+					Map result = new LinkedHashMap(Map.of(
 							"total-time", totalTime, "start-time", (taskStart- executionStart)/1000.0, "end-time", (taskEnd- executionStart)/1000.0,
 							"init-timestamp", executionStart, "start-timestamp", taskStart, "end-timestamp", taskEnd));
+					// the index size after indexing (BenchmarksMain.indexSizes)
+					for (Object key: metrics.keySet()) {
+						if (key.toString().startsWith("index-")) result.put(key, metrics.get(key));
+					}
+					finalResults.get(taskName).add(result);
 				} catch (Exception ex) {
 					log.warn("Failed task [" + taskName + "] with exception " + ex.getMessage(), ex);
 				}

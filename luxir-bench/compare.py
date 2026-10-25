@@ -11,6 +11,9 @@ def load(d):
         "Indexing (s)": float(r["task1"][0]["total-time"]),
         "Restarts (s)": [float(t["total-time"]) for t in r.get("task2", [])],
     }
+    if "index-size-bytes" in r["task1"][0]:  # the index after indexing, from solr-bench's index size report
+        out["Index size (GB)"] = r["task1"][0]["index-size-bytes"] / 1e9
+        out["Indexed docs"] = r["task1"][0]["index-num-docs"]
     # every query task: one entry per thread count in its "threads"
     for task in sorted((t for t in r if t.startswith("task")), key=lambda t: int(t[4:])):
         runs = r[task][0].get("timings") if r[task] else None
@@ -39,8 +42,8 @@ for k in a:
         continue
     if isinstance(x, list):
         print(f"| {k} | {', '.join(f'{v:.2f}' for v in x)} | {', '.join(f'{v:.2f}' for v in y)} | |")
-    elif k.endswith(": queries") or k.endswith(": errors"):
+    elif k.endswith(": queries") or k.endswith(": errors") or k == "Indexed docs":
         print(f"| {k} | {x} | {y} | |")
     else:
-        ratio = y / x if "throughput" in k else x / y
+        ratio = y / x if "throughput" in k else x / y  # a smaller index, like a shorter time, is better
         print(f"| {k} | {x:.2f} | {y:.2f} | {ratio:.2f}x |")

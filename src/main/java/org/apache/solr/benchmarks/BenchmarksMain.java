@@ -21,6 +21,8 @@ import org.apache.solr.client.solrj.impl.ConcurrentUpdateSolrClient;
 import org.apache.solr.client.solrj.impl.HttpClientUtil;
 import org.apache.solr.client.solrj.impl.HttpClusterStateProvider;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
+import org.apache.solr.client.solrj.request.CoreAdminRequest;
+import org.apache.solr.common.params.CoreAdminParams;
 import org.apache.solr.client.solrj.request.QueryRequest;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.SolrException.ErrorCode;
@@ -238,10 +240,59 @@ public class BenchmarksMain {
 						}
 					}
 
-					setupMetrics.add(Util.map("threads", i, "total-time", String.valueOf((end - start) / 1_000_000_000.0)));
+					Map<String, Object> metrics = Util.map("threads", i, "total-time", String.valueOf((end - start) / 1_000_000_000.0));
+					metrics.putAll(indexSizes(solrCloud.nodes.get(0).getBaseUrl(), collectionName));
+					setupMetrics.add(metrics);
 				}
 			}
 		}
+	}
+
+	/**
+	 * The size of the collection's index after indexing (which ends with a commit), from each replica's core
+	 * status: "index-size-bytes", "index-num-docs" and "index-segments" summed over the replicas, and
+	 * "index-replicas" with each replica's shard, core, node and those three. Empty if the sizes cannot be read.
+	 */
+	static Map<String, Object> indexSizes(String baseUrl, String collection) {
+		Map<String, Object> out = new LinkedHashMap<>();
+		try (CloseableHttpClient httpClient = HttpClientUtil.createClient(null);
+				 HttpClusterStateProvider stateProvider = new HttpClusterStateProvider(Collections.singletonList(baseUrl), httpClient)) {
+			DocCollection coll = stateProvider.getCollection(collection);
+			List<Map<String, Object>> replicas = new ArrayList<>();
+			long bytes = 0, docs = 0, segments = 0;
+			for (Slice slice : coll.getSlices()) {
+				for (Replica replica : slice.getReplicas()) {
+					try (HttpSolrClient client = new HttpSolrClient.Builder(replica.getBaseUrl()).withHttpClient(httpClient).build()) {
+						CoreAdminRequest status = new CoreAdminRequest();
+						status.setAction(CoreAdminParams.CoreAdminAction.STATUS);
+						status.setCoreName(replica.getCoreName());
+						// read raw: CoreAdminResponse.getCoreStatus fails when the server's status holds maps
+						Object index = field(field(client.request(status).get("status"), replica.getCoreName()), "index");
+						long b = ((Number) field(index, "sizeInBytes")).longValue();
+						long d = ((Number) field(index, "numDocs")).longValue();
+						long sg = ((Number) field(index, "segmentCount")).longValue();
+						bytes += b;
+						docs += d;
+						segments += sg;
+						replicas.add(Util.map("shard", slice.getName(), "core", replica.getCoreName(), "node", replica.getNodeName(),
+								"size-bytes", b, "num-docs", d, "segments", sg));
+					}
+				}
+			}
+			out.put("index-size-bytes", bytes);
+			out.put("index-num-docs", docs);
+			out.put("index-segments", segments);
+			out.put("index-replicas", replicas);
+			log.info("Index of {}: {} bytes, {} docs, {} segments over {} replicas", collection, bytes, docs, segments, replicas.size());
+		} catch (Exception e) {
+			log.warn("Could not read the index size of " + collection, e);
+		}
+		return out;
+	}
+
+	// A field of a response object, which can be a NamedList or a Map
+	private static Object field(Object object, String key) {
+		return object instanceof NamedList ? ((NamedList<?>) object).get(key) : ((Map<?, ?>) object).get(key);
 	}
 
   private static Supplier<ControlledExecutor.CallableWithType<QueryResponseContents>> getQuerySupplier(QueryGenerator queryGenerator, HttpSolrClient client, String collection, boolean interruptOnFailure) {
