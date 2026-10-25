@@ -1,14 +1,14 @@
 {
     "pre-download": [
-        "https://huggingface.co/buckets/searchscale/solr-bench/resolve/enwiki-10m.json.gz"
+        "https://huggingface.co/buckets/searchscale/solr-bench/resolve/enwiki-25m.json.gz"
     ],
     "task-types": {
         "indexing": {
             "index-benchmark": {
                 "name": "ENWIKI",
-                "description": "Wikipedia: the first 10M 1 KB chunks of enwiki-20120502-lines-1k (lucene-bench's wikimedium10m); Luxir analysis",
+                "description": "Wikipedia: the first 25M 1 KB chunks of enwiki-20120502-lines-1k (lucene-bench's wikimedium10m has the first 10M)",
                 "replication-type": "cloud",
-                "dataset-file": "datasets/enwiki-10m.json.gz",
+                "dataset-file": "datasets/enwiki-25m.json.gz",
                 "file-format": "json",
                 "batch-size": 5000,
                 "id-field": "id",

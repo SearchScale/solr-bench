@@ -17,15 +17,16 @@ enwiki-jsonl.py, returning the top 10 ids by score (or by the task's sort):
                          (luceneutil's Date facet's top level is the year; taxonomy and sorted-set
                          variants of a facet become one category)
   ... +minShouldMatch=2  {!edismax} on body with mm=2
-PKLookup, which luceneutil generates, looks up random ids of the first 10M documents.
+PKLookup, which luceneutil generates, looks up random ids of the indexed documents.
 Left out: RandomLabel facets (the dataset has no labels), the title sort on binary doc values
 (the same sort as titledvsort in Solr), and categories with no Solr query parser equivalent
 (intervals, respell, doc-values range exclusion, constant-score minShouldMatch, range facets).
-Usage: enwiki-queries.py <tasks-file> <out-dir> [per-category, default 30]"""
+Usage: enwiki-queries.py <tasks-file> <out-dir> [per-category, default 30] [documents, default 25000000]"""
 import json, os, random, re, sys
 
 tasks_path, out = sys.argv[1], sys.argv[2]
 per_cat = int(sys.argv[3]) if len(sys.argv) > 3 else 30
+num_docs = int(sys.argv[4]) if len(sys.argv) > 4 else 25_000_000
 SORTS = {"monthdvsort": "month asc", "dayofyeardvsort": "dayOfYear asc", "titledvsort": "title asc",
          "lastmodndvsort": "lastMod asc"}
 FACETS = {"Month": "month", "DayOfYear": "dayOfYear", "Date": "year"}
@@ -84,7 +85,8 @@ for line in open(tasks_path, encoding="utf-8"):
     by_cat.setdefault(cat, []).append(params)
 
 rng = random.Random(42)
-by_cat["PKLookup"] = [{"query": "id:" + to_id(rng.randrange(10_000_000)), "limit": 10, "fields": "id"}
+ids = random.Random(43)  # its own, so the number of documents changes only the ids
+by_cat["PKLookup"] = [{"query": "id:" + to_id(ids.randrange(num_docs)), "limit": 10, "fields": "id"}
                       for _ in range(per_cat)]
 os.makedirs(out, exist_ok=True)
 everything = []
