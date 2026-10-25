@@ -1,0 +1,1153 @@
+{"query": "url", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "utc tyndale", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:02bnvu", "limit": 10, "fields": "id"}
+{"query": "side", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "br -list", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"dead link\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "music -shtml", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-links arts", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"2011 ref\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"http www\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-since buzzard", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "national -milner", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "am*g", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-date location", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "2004 party", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"race were\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-from longm", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "shame~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"3 1\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "2002 cost", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "general -shankbone.jpg", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "from", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "\"have been\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"2008 03\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "n went", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "america", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "+its +interview", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "{!complexphrase inOrder=true}body:\"united kingdom\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!terms f=timesecnum}85966,68268,59222,30832,57218,79797,33844,8622,56608,13322,83591,1618,63401,64688,55907,74508,41337,73690,9706,85315,996,33636,81244,44838,68244,73422,2008,50806,44616,36171,78952,8177,61760,61216,12805,79827,11403,71561,57246,46783,36380,42870,4896,41055,66600,41786,26497,13714,32920,3330", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"links imdb\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"world war\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "hi*l", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "202010~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+work +national", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "day", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "its", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "\"news url\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "shree~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "two", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "office", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "id:008zru", "limit": 10, "fields": "id"}
+{"query": "{!terms f=timesecnum}35639,83713,74483,38015,71659,39821,49398,85907,44238,69504,79437,80755,33970,44422,3536,36354,41129,84284,78606,85007,58690,4749,583,40665,70323,9531,14381,8167,81100,71775,52060,11416,67312,1546,56632,63627,83574,21048,39617,42694,82787,31201,13961,64663,83406,6394,48294,79727,49569,62143", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "br list", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+url +underlies", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"web url\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "which give", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "timesecnum:[2999 TO 79469]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "family", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "\"subdivision_name united\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-web 2011", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"24 ref\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "and author", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "+any +country", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"cite book\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "mains~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "sorel~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "binge~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"from other\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"federal information\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"its own\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"div class\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "some originally", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "ban*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "accessdate", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "robes~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+2004 +do", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-de ben", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"persondata metadata\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"every 100\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+see +95", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "left taxed", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "forum", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"united kingdom\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "so", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "lou*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "ref also url", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true", "defType": "edismax", "qf": "body", "mm": "2"}}
+{"query": "+7 +originally", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "n", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "were", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "{!complexphrase inOrder=true}body:\"ref cite\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "who", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "\"flagicon usa\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"oxford university\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "party", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "\"more than\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "timesecnum:[30172 TO 68086]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "2001", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "27", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "name 94", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "since -1930", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "australia", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "2010 billy", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-use authorities", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"oi book_result\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+2005 +thomas", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "non*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"which were\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "references", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "{!complexphrase inOrder=true}body:\"accessdate 2009\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "world -something", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "position", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "book -copy", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"cite news\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-you ufc", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+time +when", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "\"democratic party\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "references -25", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "11", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "times -negotiator", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "southern", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "long 27", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+this +see", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "\"dmy dates\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "should", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "\"june 2010\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "br*h", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"had been\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-11 2002", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"december 2005\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "either", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-early 1987", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "crore~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "wa*n", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "hawes~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"class wikitable\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"r b\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "mea*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+music +old", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "now", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"reflist external\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "pittsburgh", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "gam*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "form", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "timesecnum:[4000 TO 42291]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+2007 +during", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "thr*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "several -observant", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "timesecnum:[892 TO 54028]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "january -daffy", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"people who\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"dmy dates\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+other +christian", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "+see +historic", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "us*r", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "august capua", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "timesecnum:[5832 TO 68572]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"ref name\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "margaret", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+2001 +what", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "had west", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:05ltj5", "limit": 10, "fields": "id"}
+{"query": "sixes~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "bests~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "york", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "{!terms f=timesecnum}11910,58586,53730,20525,44133,5357,15642,61122,60731,24319,65308,68469,77343,69553,55421,13297,53878,58308,60838,13837,19107,63048,43701,13281,64762,21101,81214,60068,65769,25736,81667,25061,56959,75470,62263,31420,33093,26589,8454,33426,22376,26456,20816,65619,46277,63543,81525,86017,80418,79630", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "timesecnum:[26712 TO 72859]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-ref 20", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"ref harvnb\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!terms f=timesecnum}70921,80024,48443,1943,50880,22990,75040,61541,37455,60867,71315,53383,75359,15015,55271,81519,77420,85788,78455,60914,72740,70703,21114,5668,77453,59617,69262,83018,45481,82086,59144,51621,32746,42704,70218,53618,59963,73822,5969,6162,5985,55639,62320,31317,32220,39506,50269,54241,17418,79303", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+on +their", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "own", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "+2008 +short", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "series", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "+page +article", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "became", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "timesecnum:[3943 TO 80372]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"external links\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "between controversy", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "constant", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+family +pashtun", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"thumb right\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"country united\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "si*x", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+30 +colend", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "timesecnum:[53 TO 85622]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "year streetaddress", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "2009", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+been +2010", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "title -2006", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "stain~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "countries", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "built", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "\"2006 utc\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"parliament constituency\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "including 08", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "center", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "-same oliva", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "up use", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"subdivision_type1 political\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!terms f=timesecnum}24391,47034,70638,77724,75334,26593,71236,50786,73364,42503,77037,63814,44025,81978,9378,68356,63070,53471,76806,85349,33323,39974,46603,14679,77248,63093,22433,54246,33524,56945,63290,67394,32822,67571,76864,77682,81350,84302,73873,82305,28821,62997,54391,85573,59761,78115,32146,49810,85819,74184", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "2000 yachting", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "where -fan", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!terms f=timesecnum}58817,64986,54654,26459,38587,53347,25792,63775,62130,68008,54987,52474,85082,80302,25317,58302,428,65902,43830,58675,74016,70110,68646,52357,59438,50238,54862,66060,73735,61,82282,65034,43682,78094,43996,64322,64880,236,69528,71065,61259,38701,59312,17958,64554,68812,46345,74990,15162,53672", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "18 pragmatism", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "war", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "19", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "death austen", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+image +preliminaries", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "los*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-february overlaps", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "see -replays", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "major", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "august", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+only +ten", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "paler~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-links now", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+first +christian", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "\"longew w\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "ev*y", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-all 1960s", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+had +john", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "war -territory", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+cite +2011", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "hi*y", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "14", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "\"reflist external\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"2006 utc\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"2 sub\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+most +memory", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "new thumb", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:02g27v", "limit": 10, "fields": "id"}
+{"query": "two 2011", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "loại~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-his category", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-22 e", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "place -horde", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"new york\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"july 2011\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"small br\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+both +next", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+a +5", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "{!complexphrase inOrder=true}body:\"census bureau\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "while", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "also appears", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "{!complexphrase inOrder=true}body:\"2 1\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "timesecnum:[4591 TO 84612]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "have", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "-july several", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+the +flagicon", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "-23 proper", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+english +guitar", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"have been\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "sears~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:0279or", "limit": 10, "fields": "id"}
+{"query": "{!complexphrase inOrder=true}body:\"date 2004\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"colspan 4\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "overview", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+21 +drugged", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-27 nymag.com", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "st", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "lastMod asc"}
+{"query": "\"system gnis\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-he lady", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+names +party", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "who -composites", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"09 ref\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+25 +carrera", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"align center\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+last +kiowa", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:014181", "limit": 10, "fields": "id"}
+{"query": "under -1633", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "names", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "lastMod asc"}
+{"query": "basie~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "later", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "{!terms f=timesecnum}83365,43316,1372,3209,54063,79965,82020,18687,85100,44880,56505,51902,70051,79014,74867,53495,1865,1772,35952,21939,51504,78972,52706,55611,26577,30661,44786,16597,40879,33947,64743,24327,55303,1657,39475,62349,4268,69120,81335,81577,59571,38903,61207,69287,45204,50876,72584,82757,50732,77991", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "may -ohm", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"year 2002\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "between 17", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+any +dravidian", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!terms f=timesecnum}23486,45271,65500,35948,13567,17666,71327,3929,48587,40731,32785,9777,59378,68112,46636,7042,41526,25926,67204,41037,25160,65051,68473,63442,55589,76584,73510,63806,2511,916,15670,31602,30494,66727,49550,11059,22531,78965,297,51196,67922,49910,39431,22857,70575,73042,2221,65173,44848,55598", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+international +97", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-first than", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "pages achieved", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "10 1970", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "website heavy", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "km", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "{!complexphrase inOrder=true}body:\"cite news\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"ref name\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "timesecnum:[1265 TO 79183]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "international", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "from running", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "altos~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "news -well", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:05fyh4", "limit": 10, "fields": "id"}
+{"query": "\"image caption\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"colspan 4\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "fille~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "consisted", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "dai*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "part", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-main appearance", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "rowed~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "maintain", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "its -needed", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+19 +finlay", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"leader_name1 established_title\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"hl en\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "wh*n", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"roman catholic\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"issue 2\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "stahl~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"radio station\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+an +were", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "won*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"july 2011\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "carne~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"box candidate\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "links", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "peres~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "manna~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "case", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "-now meaning", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:046uue", "limit": 10, "fields": "id"}
+{"query": "siz*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "last", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"2010 ref\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "war", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "made", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "may ohm", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-can birth", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+april +life", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-author w", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"have been\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+and +2011", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "arian~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "ar*e", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"people's republic\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"date 2007\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"states census\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"page note\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "language -ligands", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "peter", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "giv*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+use +administration", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "she", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"birth date\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"short description\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "timesecnum:[36026 TO 69454]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"please provide\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"2005 utc\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "north", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "leaks~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "ja*s", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"world war\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "2005", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "green", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "spo*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "given", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "\"30 ref\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "seán~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"3 0\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+time +being", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "part", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "lastMod asc"}
+{"query": "\"united kingdom\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "n -retainers", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "26 -crew", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"2011 ref\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:010uu7", "limit": 10, "fields": "id"}
+{"query": "{!terms f=timesecnum}27458,41899,56747,4817,29601,8148,30212,82761,14616,4832,58553,84265,11524,51131,39232,76252,70083,42537,73801,31603,1889,62971,56073,71555,2720,31007,36296,6785,76731,79971,72825,80381,9230,71751,77299,17926,84129,33504,56899,53333,71306,16693,1057,56804,1720,68405,59307,40081,73379,78380", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "birth because", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "2005 jorgensen", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "p -rail", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "small", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "2008 -11", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "1994", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "early family", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"cite news\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "works", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "\"gr 1\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "j", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "1850s~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:01leum", "limit": 10, "fields": "id"}
+{"query": "called -provincial", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "hop", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-2008 october", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-county typ", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"which have\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"2010 ref\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"links http\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "4 51", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "\"external links\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "fr*h", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+location +agent", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:01zi12", "limit": 10, "fields": "id"}
+{"query": "process", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+name +roofed", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"style font\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+government +bless", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:047pxt", "limit": 10, "fields": "id"}
+{"query": "+new +products", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "+world +rev6score", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-references place", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+web +place", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "string", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "became", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "about", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "part high", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "well", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "f", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "children", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "may", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "\"any other\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "water", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "22 -windham", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "students", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "timesecnum:[816 TO 79745]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "against -emperor", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "from", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "national -center", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+new +visual", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "faure~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "had few", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "league", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "6 15", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "author gunshot", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "19 delinquency", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "during june", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "1896", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "north includes", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+and +program", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "+cite +more", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "news -list", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+also +united", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "\"3 1\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "old -claim", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"november 2009\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "were know", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "\"debate span\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"accessdate april\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "as*n", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+series +n", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"his first\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"white u.s\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "boo*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "matte~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "series", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "w", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "carew~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-24 964", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"ref cite\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"19 ref\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "shuts~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+title +all", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "following reversible", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "his influence", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "\"see also\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"commons cat\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "well -cat", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-title well", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "times includes", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "2008 -while", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "mardi~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "december", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "were", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "long", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "40", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "\"when you\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "rationale", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-p 2.57", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"citation needed\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "century whether", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "ou*t", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+two +patriotism", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "bu*t", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "class", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "cod*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "accessdate dog", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"display inline\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "rosas~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "march -face", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+have +r", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "work information", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "\"population were\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-18 class", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+author +discussion", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "title date which", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true", "defType": "edismax", "qf": "body", "mm": "2"}}
+{"query": "+external +water", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+place +style", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-7 kg", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "e johnny", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "capes~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "life sensibility", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+have +references", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "*:*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "month", "limit": 10}}}
+{"query": "action", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"persondata metadata\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "historical", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"more than\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"republican party\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"inline title\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"wikitable sortable\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+which +into", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "\"government_footnotes government_type\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "manon~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+he +5", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "\"names short\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"colspan 4\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "references -kendra", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"book_result ct\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"2008 ref\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-2005 article", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-state 1959", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-century math", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "cite", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "\"latns n\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-isbn 智", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+as +2008", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "class", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "\"races hispanic\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-up well", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"republican party\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "fades~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "10 -2000", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+style +caine", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "no president", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "-south licensing", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "would", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "ev*s", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "would", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "requires", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "2006 1988", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "york", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "composition", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:02s1a9", "limit": 10, "fields": "id"}
+{"query": "-10 hydroxy", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "we*b", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-main www.comics.org", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "8", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "-id 19", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "stabs~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+cite +like", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "nbsp", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "there's", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "up based", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "made names", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "and st", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "chi*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-4 fascinating", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "15 21", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "timesecnum:[9689 TO 83604]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "common", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "{!complexphrase inOrder=true}body:\"new york\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-between austria", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"page please\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:03eco8", "limit": 10, "fields": "id"}
+{"query": "eu*e", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"alternative names\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "for f", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "-26 penske", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"st louis\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-than compact5", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+names +field", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "us phra", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "br", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-24 village", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "loc*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "timesecnum:[2173 TO 43039]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "names", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "id -rugby", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"would have\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "family", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+states +annihilated", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"color red\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "january", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "+0 +efforts", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "timesecnum:[1510 TO 47899]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+up +deleted", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+9 +bnsf", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"date february\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+july +687", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!terms f=timesecnum}46501,25912,61097,12056,58213,80800,5114,16539,36225,70064,78184,54339,37332,32416,81618,5251,39112,24524,62933,48387,35060,15840,79021,69629,82042,23761,77043,16018,69538,5384,20862,81224,76671,6811,76792,15227,69339,351,58002,39381,5074,74785,26686,4802,81876,9503,70384,47605,31166,36335", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "*:*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "of upper", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "1 yet", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "{!complexphrase inOrder=true}body:\"were built\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "timesecnum:[13589 TO 48872]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "be*t", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+who +industrial", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "utc gulfstream", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "used", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "-being government", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "during", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "following", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "\"metadata see\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "series thong", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "dat*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"cite web\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-has couple's", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "10 12", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-times attendants", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "timesecnum:[3474 TO 39862]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"so far\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "david", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"citation needed\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "http article", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "alternative", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "url -through", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"ref harvnb\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "times inseparable", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"u.s state\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+century +svetlana", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"year 2007\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-between 2001", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "called -draftround", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "20 chairman", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "game", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"although he\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "stub", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "timesecnum:[14581 TO 57184]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "20", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "-well few", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"made up\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+they +4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "{!terms f=timesecnum}66057,65729,52093,70616,925,80894,4419,27757,53122,16771,8887,7926,66254,81107,79607,30185,81069,36187,59972,67319,61146,59363,59299,14901,55269,72674,67427,14851,35385,49602,36233,6390,53359,61510,3906,35281,68832,70511,67984,2073,63693,72734,48056,2738,56247,58278,56801,86179,3080,86112", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "ref", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"year 2010\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "between -gray", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "middle", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"london ref\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!terms f=timesecnum}38563,69514,58209,23982,39079,65293,53429,52412,19030,81535,67464,61593,65267,81432,15115,12856,7080,57050,39597,67733,24251,25784,28836,75812,10478,42654,78083,78509,47065,75374,82278,51856,24477,73779,48430,58215,42478,9735,2218,58459,4458,13615,82986,54772,49235,72943,78771,12581,27167,50098", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-all rock", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "pa", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"code postal_code\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "year", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "{!terms f=timesecnum}36471,51393,57357,79061,47644,63500,60733,21207,64354,45236,63866,81216,29874,85875,55205,35028,54660,64501,76024,79653,70389,47520,77454,15,54996,43243,81738,73575,60287,83069,58040,30545,60352,1724,54542,47361,51787,86044,22761,64488,81628,63392,28667,65265,54471,38562,17357,25591,7724,26061", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!terms f=timesecnum}81137,3794,81437,12049,80198,37252,77277,71202,70843,79167,52678,35651,26698,33299,63901,43387,52579,70994,39100,74869,52293,82088,81012,74524,71041,26906,60708,83350,39811,86021,55416,6473,44999,7779,23839,57339,61379,72047,22121,54324,53377,35835,2901,42666,15440,46276,58579,5305,65653,20983", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+world +sclerosis", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+27 +albert", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "number -audience", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "timesecnum:[39579 TO 75724]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "right -letters", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+but +their", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "23 -1310", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:01e6dd", "limit": 10, "fields": "id"}
+{"query": "+accessdate +times", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "23", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "capable", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"isbn 0\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "based", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "time -bremerton", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:04hj6l", "limit": 10, "fields": "id"}
+{"query": "+states +john", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+short +level", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "maida~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "pages ani", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "net*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+also +centre", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "-2007 summary", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"web url\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-company forerunner", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"book title\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "http first were", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true", "defType": "edismax", "qf": "body", "mm": "2"}}
+{"query": "work -apparitions", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"persondata metadata\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"external links\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "industries", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "morin~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"middle east\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "you -because", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "casus~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "rivers", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+it +real", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "\"cite web\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "+5 +2006", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "+years +state", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"date july\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "15 getting", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:051q0m", "limit": 10, "fields": "id"}
+{"query": "país~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+u.s +minutes", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "along", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "+to +ended", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "2001 lexis", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-other credo", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "yo*k", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+because +school.jpg", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "dep*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "red*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "aus*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "city", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "13 cellar", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:05vw9p", "limit": 10, "fields": "id"}
+{"query": "\"citation needed\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "timesecnum:[21493 TO 81775]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "some -w", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"ref ref\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "infobox industry's", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+accessdate +2005", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "{!complexphrase inOrder=true}body:\"has been\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "17", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "\"font subsequent\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-year 22", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+2003 +purpose", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:05g3z8", "limit": 10, "fields": "id"}
+{"query": "-before ofcom", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "br -schweitzer", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "all someone", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "timesecnum:[20747 TO 70538]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"3 4\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"per square\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "known", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "{!terms f=timesecnum}9893,26516,53576,67409,71444,47888,16785,65571,40130,53908,62488,27615,16284,29526,14271,56460,45433,73371,32870,63778,42464,62649,58052,20582,31983,20574,71515,65485,40556,72732,37120,47367,12827,39499,20555,19862,67603,24402,28112,51703,32070,74193,54679,19035,57424,54381,54599,51438,71782,46943", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "century", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "+2006 +eight", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "{!complexphrase inOrder=true}body:\"government_type leader_title\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "class -group", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "do bush's", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+c +00", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"2005 06\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "when", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+http +publisher", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "+ref +when", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "+its +words", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "+de +donald", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "since", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "\"he played\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "other marked", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "sports", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!terms f=timesecnum}78050,37768,13314,72331,82909,45387,35726,84536,78772,16298,48598,58600,37859,14154,85576,81671,40363,69651,46279,9331,80598,49671,36278,80959,53881,61951,1861,84582,30619,52001,20334,14745,9845,54468,66501,86077,50757,19263,68838,17526,74400,7753,22287,9383,75544,73661,50566,63374,32979,52938", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"may 2006\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+his +gamal", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"were non\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"links http\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "other entire", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "what", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"2 6\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "their win", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "+some +through", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!terms f=timesecnum}62297,68188,78167,24183,84055,56776,71976,39559,50202,42277,78756,62830,76354,82442,76298,26435,62972,10562,76844,52668,47317,68576,54819,61790,81833,66286,40563,65017,70402,58491,63059,13691,63367,74380,66962,10904,54936,65382,42583,68972,66678,26887,65530,20450,11161,55038,66127,85081,66921,15627", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-than 19", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"press isbn\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+area +previously", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "john", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "which 978", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "well dan", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "ga", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-north product", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-2008 idea", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"february 2012\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "used", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "{!terms f=timesecnum}51283,85988,68967,68868,386,40329,3936,39139,4778,70754,84589,67708,63655,78040,31226,79621,56648,64860,50478,1686,43746,58705,59892,55802,68150,72948,30042,24478,5333,79093,82656,9657,2163,5862,4575,78,81690,43085,58346,64610,72345,56595,19543,64567,18335,20375,59024,84057,9443,22283", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+date +talk", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "{!complexphrase inOrder=true}body:\"september 2005\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"class wikitable\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+2011 +25", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "style -auld", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "2009 british", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"june 2008\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "city", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "17 -palladium", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "within", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "{!complexphrase inOrder=true}body:\"were 65\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"birth date\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+an +daily", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "+other +iceman", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!terms f=timesecnum}4361,81114,53919,52038,6354,4703,80372,50337,56226,13144,78583,9584,55987,58754,55775,20077,74521,2484,36807,80256,46403,871,69003,30098,83828,53547,31629,58088,64376,3006,74983,53809,21374,24161,76936,62823,19173,68559,68232,1041,25631,6094,46804,51735,44945,1875,81805,35223,30436,68889", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+times +michael", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "2005 -adv", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "1 being", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"3 4\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"metadata see\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "swore~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"url http\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"march 2008\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "be independent", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "people", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "{!complexphrase inOrder=true}body:\"h3llbot ref\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+2008 +wikitable", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "fares~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "publisher association", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "gi*n", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "10 11", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "against", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:05wc5g", "limit": 10, "fields": "id"}
+{"query": "-2007 symbolized", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+new +century", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "western", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "2005", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "-infobox must", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+the +be", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "timesecnum:[12731 TO 79139]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "city", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+he +url", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "\"from 25\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"links commons\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+class +free", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"f3f9ff margin\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+4 +upon", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "{!complexphrase inOrder=true}body:\"track listing\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-url 2008", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "nbsp isbn", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "type", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "several website", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"ice hockey\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "york stories", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"11 ref\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "102.3~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"year 2005\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"has been\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "21", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "\"september 2010\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "0", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "lastMod asc"}
+{"query": "sou*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"names short\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"ref although\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "last left", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"wikimedia commons\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+new +web", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "id:047ywl", "limit": 10, "fields": "id"}
+{"query": "p 2.57", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "1998", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "2010 media", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "+2009 +between", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"cite web\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "nbsp", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "lastMod asc"}
+{"query": "{!complexphrase inOrder=true}body:\"0 10px\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+british +what", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "date widely", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "men", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"align center\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "expressed", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "ba*e", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-world south", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "m -musicians", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"cite journal\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+image +cases", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"http www.guardian.co.uk\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "w", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "wo*n", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "s", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "only -nizhny", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"links http\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "league", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "timesecnum:[34356 TO 72513]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"2005 ref\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "second -center", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-book well", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-called four", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "timesecnum:[10024 TO 85446]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:00v9gf", "limit": 10, "fields": "id"}
+{"query": "haile~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-7 59th", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"november 2005\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "author -w", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!terms f=timesecnum}82054,68647,80557,65690,36499,69540,50521,49852,74485,61199,28700,38268,77006,32964,18233,9836,73572,84019,5536,34016,21676,43862,10103,51649,6602,35395,42078,11053,30925,62759,33231,24507,10983,9425,53795,76723,69183,80916,22755,45744,77914,76188,75639,66502,25190,79704,63478,78317,55865,43814", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "work enough", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+news +should", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:009jin", "limit": 10, "fields": "id"}
+{"query": "\"birth date\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!terms f=timesecnum}83948,60536,52142,29803,78043,2732,12595,78950,49729,34995,54300,73382,83826,46641,77191,41514,85543,44872,39063,255,64344,39451,73207,60910,69213,4897,55948,4853,78985,70432,51316,355,3117,64407,41852,3369,75535,50196,42228,11891,32598,54521,11953,51838,21838,61640,26688,69276,35201,80201", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"alternative names\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"deletion pagename\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!terms f=timesecnum}3375,74484,85288,7528,75656,54196,81752,3208,59633,1992,64155,4467,66849,53939,74661,81368,45103,82698,8181,48960,84128,84634,32708,80852,43037,85442,82625,59997,64515,57608,68286,28929,18264,49427,79872,79071,50546,16490,57930,42017,79247,20963,5150,74420,67501,29736,11358,85212,35776,33463", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:02qwcy", "limit": 10, "fields": "id"}
+{"query": "bgc*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-12 reform", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"hockey league\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"thumb right\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "non", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"science fiction\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "c", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "\"june 2011\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+last +whitewater", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "pears~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "studs~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "wares~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-used 2002", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "population", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "20*6", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "main", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "\"result resnum\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"united states\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+title +set", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "timesecnum:[7232 TO 70805]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "16", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "century", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "{!complexphrase inOrder=true}body:\"needed date\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+on +2010", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "birth sedgwick", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "2003", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+other +2006", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "+9 +reflist", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"thumb right\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "1990", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "taper~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "timesecnum:[7591 TO 80383]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "september -1993", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "less", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"n longd\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "news list", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+were +1985", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "timesecnum:[19135 TO 72844]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+old +turned", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:00bffs", "limit": 10, "fields": "id"}
+{"query": "-s richard", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"reflist external\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "02", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"i don't\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-both 250px", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+many +plundered", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"2 2\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+on +only", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "{!complexphrase inOrder=true}body:\"22 ref\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "center -because", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-12 choreographers", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "her him", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "history -noone", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "official", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "\"dates date\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-including 08", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "early", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "-place home", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "over -than", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"publisher bbc\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "have -successor4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "party", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "2006 02", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "eas*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"census gr\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "0", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "region", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"talk page\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "2006", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "\"needed date\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "9 kerouac", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!terms f=timesecnum}37732,16238,8529,51327,36019,40527,42914,70812,65763,7290,52404,23063,79395,16772,47838,66030,66978,47220,6616,33187,63997,76493,86212,55799,58217,15901,26378,44855,82744,8313,81984,64674,5321,50257,42409,43985,52658,30504,35292,83144,2472,4093,74093,72420,326,84230,62658,60137,72480,37677", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+december +condiment", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "chien~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"thumb left\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "date -page", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "now", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "+were +hold", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "often", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "+2010 +2006", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-category 團", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "him -pollen", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"nbsp mm\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "his -distinguished", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "timesecnum:[3335 TO 81405]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "title imagesize", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "news -28", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+15 +books", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-style 23", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "att*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "transit", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"historic places\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+2 +recent", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "+3 +into", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "\"second world\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "*:*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "year", "limit": 10}}}
+{"query": "\"zip code\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-9 codenamed", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "since buzzard", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"above discussion\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "four", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "became", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "however charge", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "times -inseparable", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "subsequent", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!terms f=timesecnum}62636,41102,36995,57267,37491,76532,73460,38950,40331,38030,49866,66899,22398,31681,67897,82522,67947,32408,72760,68,50099,81489,82105,79045,61471,53973,40223,85279,62977,81528,45893,30323,77742,20876,73652,22300,12105,55870,70885,57742,60846,71637,65054,3708,12111,82244,31885,14036,85826,61717", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "than 19", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "both", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+be +accessdate", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "any", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "against interscholastic", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "title era", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "\"class wikitable\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-can www.onlineworldofwrestling.com", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "ryan", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"align center\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "1989", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "scorn~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "http -article", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:026mco", "limit": 10, "fields": "id"}
+{"query": "class -buried", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!terms f=timesecnum}13858,48617,45553,79185,755,63126,19141,76330,49164,33344,41838,43299,86083,4376,63013,3849,76527,80094,44582,42355,9828,47907,74865,33497,10146,44720,42120,71809,65117,10384,39144,23736,26423,68136,75053,31559,72902,32451,51249,50476,53622,20264,52128,66711,43504,37571,3027,43079,67134,42397", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "second", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "{!complexphrase inOrder=true}body:\"bio stub\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "right p", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"january 2009\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "s", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "reflist", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "\"much more\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "tal*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "timesecnum:[348 TO 85399]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "from his new", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true", "defType": "edismax", "qf": "body", "mm": "2"}}
+{"query": "than -19", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"may 2005\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:00xox5", "limit": 10, "fields": "id"}
+{"query": "headed", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "massive", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "as married", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "ico*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "began", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "{!complexphrase inOrder=true}body:\"cite book\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-18 onto", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "language agriculture", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"cite journal\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"september 2005\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "reflist cinco", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "several -agency", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "12", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "2001", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "has 200px", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "center crank", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "like undivided", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"ref http\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+names +cremation", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "nea*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+also +success", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "press -28", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "m birth", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"press location\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"ref see\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "now -meaning", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "marin~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "times", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "+states +people", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "{!complexphrase inOrder=true}body:\"human rights\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!terms f=timesecnum}67545,58430,81634,3718,6964,38472,38976,84362,85809,1750,59578,51606,82611,19237,71485,69618,47008,84828,47210,39136,73775,39122,3016,49898,8265,80607,80322,70088,40068,37826,6480,34644,15631,6718,62443,34126,5833,36143,53769,64724,147,35324,72233,49002,60796,29030,64399,64556,46242,9690", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"school district\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "about -bridge", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-death 28", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "1 1973", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "{!complexphrase inOrder=true}body:\"2009 infobox\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "degrees", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-north publication", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "2008", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"needed date\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "after -create", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"names short\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "pen*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "pikes~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "united beautiful", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+out +any", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"information system\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "death", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"county subdivision_name2\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+other +all", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "\"ref cite\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-known short", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "i -made", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "journey", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"2005 utc\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"he later\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "july", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "+since +territory", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:002c4n", "limit": 10, "fields": "id"}
+{"query": "-him ejected", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "08", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "end", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "+id +photos", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "ref founded", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "2006 -couples", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+both +life", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-were damage", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "than 1994", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"2005 utc\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"had someone\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"premier league\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"utc keep\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "marcy~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "may -refrigerated", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+march +stewardship", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "left fellow", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "so*e", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-united 1229", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "west heavily", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"geo stub\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "number", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "marín~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"death_date death\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"april 2006\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "si*e", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "artist", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "19*7", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "stalk~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-2007 1488", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "center -old", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "two", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "month asc"}
+{"query": "{!complexphrase inOrder=true}body:\"her husband\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "number -school", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:0289jq", "limit": 10, "fields": "id"}
+{"query": "2000 -literary", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "them", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "+m +gianni", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"press location\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+ref +been", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "{!terms f=timesecnum}15167,5414,5177,75575,83616,31421,82279,80394,67454,67932,66421,85232,4306,58054,77098,6842,80308,18727,68909,73271,65281,69433,39298,76025,80552,6215,51360,76737,2517,74860,81661,53533,65503,70692,33931,57105,562,76980,81979,4764,84586,83065,78008,70034,67894,5716,67147,62994,21794,80336", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "20.00~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+publisher +last", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "\"he joined\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"he died\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "been -author", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+small +bowloutcome", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "soups~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "which -over", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-5 vaz", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "-october 1025", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"census african\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "more address", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"s end\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "he -lady", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"see also\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "series -early", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "shop", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"january 2011\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "new", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "+two +lake", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "+title +parliament", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "{!complexphrase inOrder=true}body:\"2011 ref\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"publisher national\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!complexphrase inOrder=true}body:\"web title\"~10", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!terms f=timesecnum}6753,37516,56023,13999,32852,27558,8819,5352,52359,45970,73411,21274,76499,61341,86067,7725,37014,57367,74480,76266,65405,14313,45980,74879,16921,76571,55229,77232,60893,78726,50700,33928,8574,82061,9451,47785,70039,26784,6345,1886,61781,86100,62879,42215,31380,24197,80748,80468,65947,82855", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "unr*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"had been\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "which pre", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "years", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "pl*r", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!terms f=timesecnum}46227,73110,62229,23548,45824,76545,79654,66603,73036,31054,57226,72265,776,56012,71896,77394,74460,80348,62218,30221,73421,874,73162,59601,70697,23543,35016,57389,28940,56052,76807,1026,65184,50879,48505,46352,65916,41673,32654,76568,54520,67502,37132,42329,25521,58352,9932,26392,38905,77797", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+have +speed", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "united -code.google.com", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "chemistry", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "declined", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "{!terms f=timesecnum}10052,5554,45136,46999,50019,66539,50034,70405,41010,5745,59844,48671,67309,11361,4170,12433,65422,14855,66151,28226,14352,43819,33553,81938,43918,20430,70459,78210,54771,66006,3292,37786,82366,64506,60855,28049,22333,74736,66307,76256,41814,47948,7916,20543,31338,77411,14603,59886,31023,11321", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+year +bookstores", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "trail", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "should -cellpadding", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "av*e", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "number fourth", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+he +some", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "p", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "name cite he", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true", "defType": "edismax", "qf": "body", "mm": "2"}}
+{"query": "kn*n", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "february", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "dayOfYear asc"}
+{"query": "\"state subdivision_name1\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "style", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "deane~1", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"hockey league\"~4", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "timesecnum:[29576 TO 69633]", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "what", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "sort": "title asc"}
+{"query": "alles~2", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "+10 +corporation", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "dayOfYear", "limit": 10}}}
+{"query": "\"afd nomination\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "2 -became", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "\"date september\"", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "date -music", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "following -reversible", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "when 2011", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+{"query": "id:00apqi", "limit": 10, "fields": "id"}

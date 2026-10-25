@@ -1,0 +1,5 @@
+{"query": "ref also url", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true", "defType": "edismax", "qf": "body", "mm": "2"}}
+{"query": "http first were", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true", "defType": "edismax", "qf": "body", "mm": "2"}}
+{"query": "from his new", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true", "defType": "edismax", "qf": "body", "mm": "2"}}
+{"query": "name cite he", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true", "defType": "edismax", "qf": "body", "mm": "2"}}
+{"query": "title date which", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true", "defType": "edismax", "qf": "body", "mm": "2"}}

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.zip.GZIPInputStream;
@@ -40,6 +41,19 @@ public class JsonlFileType implements DocsFileStreamer {
         SolrInputDocument doc = new SolrInputDocument();
         m.forEach((k, v) -> doc.addField(String.valueOf(k), v));
         return doc;
+    }
+
+    /** The dataset's bytes, decompressed; null for an unsupported file type. */
+    public static InputStream getInputStream(File datasetFile) throws IOException {
+        String fName = datasetFile.getName();
+        if (fName.endsWith(".json")) {
+            return new FileInputStream(datasetFile);
+        } else if (fName.endsWith(".gz")) {
+            return new GZIPInputStream(new FileInputStream(datasetFile), 1 << 16);
+        } else if (fName.endsWith(".xz")) {
+            return new XZInputStream(new FileInputStream(datasetFile));
+        }
+        return null;
     }
 
     public static BufferedReader getBufferedReader(File datasetFile) throws IOException {

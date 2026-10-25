@@ -1,0 +1,1 @@
+{"query": "*:*", "limit": 10, "fields": "id", "params": {"df": "body", "q.op": "OR", "sow": "true"}, "facet": {"f": {"type": "terms", "field": "year", "limit": 10}}}
