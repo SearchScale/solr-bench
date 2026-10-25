@@ -183,8 +183,8 @@ The benchmarks used these versions:
 
 | Repository | Branch | Commit |
 |---|---|---|
-| luxir | `luxir-lucene` | `173ec324` (Luxir `8cb622ba` + the 5 patches in `luxir-lucene/luxir-patches/`) |
-| luxir-lucene | `main` | `ecd09a1` |
+| luxir | `luxir-lucene` | `93a50f1f` (Luxir `609367c5` + the 5 patches in `luxir-lucene/luxir-patches/`; the results were measured on the same patches over Luxir `8cb622ba`, and the rebase measured the same) |
+| luxir-lucene | `main` | `d3ba0c1` |
 | solr | `luxir-codec` (Apache Solr `79b23df` plus the module) | `31ae830a4e8cef8968769d4a9e3281562668b6c1` |
 
 ### 2. Build the native library
