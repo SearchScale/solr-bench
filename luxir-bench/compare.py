@@ -19,6 +19,9 @@ def load(d):
         label = plan.get(task, {}).get("description", task)
         for t in runs:
             p = f"{label}, {t['threads']} threads"
+            if "total-errors" in t:  # an error count, beside the timings
+                out[f"{p}: errors"] = t["total-errors"]
+                continue
             if "qps" in t:
                 out[f"{p}: throughput (queries/s)"] = t["qps"]
             out.update({f"{p}: p50 (ms)": t["50th"], f"{p}: p90 (ms)": t["90th"], f"{p}: p95 (ms)": t["95th"]})
@@ -31,12 +34,12 @@ a, b = load(sys.argv[1]), load(sys.argv[2])
 la, lb = (sys.argv[3:5] + ["A", "B"])[:2]
 print(f"| Metric | {la} | {lb} | {lb} better by |\n|---|---|---|---|")
 for k in a:
-    x, y = a[k], b.get(k)
+    x, y = a[k], b.get(k, 0 if k.endswith(": errors") else None)
     if y is None:
         continue
     if isinstance(x, list):
         print(f"| {k} | {', '.join(f'{v:.2f}' for v in x)} | {', '.join(f'{v:.2f}' for v in y)} | |")
-    elif k.endswith(": queries"):
+    elif k.endswith(": queries") or k.endswith(": errors"):
         print(f"| {k} | {x} | {y} | |")
     else:
         ratio = y / x if "throughput" in k else x / y

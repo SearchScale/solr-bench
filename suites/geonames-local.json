@@ -476,6 +476,9 @@
     "cluster": {
         "num-solr-nodes": 3,
         "startup-params": "-m 16g -Dsolr.searchThreads=4",
+        "environment": {
+            "SOLR_SECURITY_MANAGER_ENABLED": "false"
+        },
         "provisioning-method": "local"
     },
     "repositories": [

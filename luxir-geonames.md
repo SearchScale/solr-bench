@@ -2,13 +2,14 @@
 
 The geonames workload from luxir-lucene (`bench/geonames`), run as solr-bench suites on a 3-node
 SolrCloud: `suites/geonames-local.json` (Solr+Lucene) and `suites/luxir-geonames-local.json`
-(Solr+Luxir). One run of each on an AMD Ryzen 9 7950X, 2026-10-24. The setup is the same as in
+(Solr+Luxir). One run of each on an AMD Ryzen 9 7950X, 2026-10-25. The setup is the same as in
 [luxir.md](luxir.md), with these builds:
 
-- **Solr+Lucene:** Apache Solr `79b23df`.
-- **Solr+Luxir:** the SearchScale/solr `luxir-codec` branch at `5bad8a1`, which is Apache Solr
-  `79b23df` plus the Luxir module, with Luxir `13c80ecc` (as in luxir.md) and luxir-lucene
-  `d78c3df`. luxir-lucene `39eedb6` fixed native search on the catch-all `_text_` field, which
+- **Solr+Lucene:** Apache Solr `79b23df`, with Solr's security manager off, as on Solr+Luxir.
+- **Solr+Luxir:** the SearchScale/solr `luxir-codec` branch at `35d1e2b`, which is Apache Solr
+  `79b23df` plus the Luxir module, with Luxir `173ec324` (as in luxir.md) and luxir-lucene
+  `ecd09a1`. (luxir.md's `31ae830` only adds date parsing, which this schema doesn't use.)
+  luxir-lucene `39eedb6` fixed native search on the catch-all `_text_` field, which
   missed documents (see
   [Fixed: catch-all text missed documents](#fixed-catch-all-text-missed-documents)), and
   `d78c3df` made sorted queries faster (see
@@ -58,47 +59,53 @@ to one segment.
 
 | | Solr+Lucene | Solr+Luxir | Solr+Luxir better by |
 |---|---|---|---|
-| Indexing 11.4M documents | 83.5 s (136,400 docs/s) | 48.9 s (233,200 docs/s) | **1.71×** |
-| Node restarts | 5.83 s, 5.82 s, 5.83 s | 7.88 s, 5.79 s, 5.81 s | |
+| Indexing 11.4M documents | 49.2 s (231,700 docs/s) | 38.6 s (295,200 docs/s) | **1.27×** |
+| Node restarts | 5.85 s, 5.86 s, 5.82 s | 9.93 s, 5.79 s, 5.94 s | |
+
+Until 2026-10-24 Solr+Lucene ran with Solr's security manager on, which slowed its indexing (83.5 s) and its fast
+queries: with it off, Solr+Lucene answers 23–36% more StringTerm, TermSortPop and text requests per second (two-term
+OR: 9%). With it on, Solr+Luxir looked 1.26–1.49× faster on these; now they are about even. See [luxir.md](luxir.md#known-caveats).
 
 Queries, 16 threads (throughput includes warm-up queries):
 
 | Category | Throughput, Solr+Lucene | Throughput, Solr+Luxir | Ratio | p50, Solr+Lucene | p50, Solr+Luxir | p99, Solr+Lucene | p99, Solr+Luxir |
 |---|---|---|---|---|---|---|---|
-| MatchAll* | 245 q/s | 239 q/s | *0.97×* | 62.5 ms | 63.7 ms | 99.0 ms | 96.0 ms |
-| StringTerm | 8,548 q/s | 11,614 q/s | **1.36×** | 1.63 ms | 1.16 ms | 7.06 ms | 6.03 ms |
-| TextTerm | 7,959 q/s | 11,852 q/s | **1.49×** | 1.91 ms | 1.28 ms | 3.48 ms | 2.14 ms |
-| TextPhrase | 8,092 q/s | 11,583 q/s | **1.43×** | 1.86 ms | 1.25 ms | 3.64 ms | 2.95 ms |
-| TextOr | 5,191 q/s | 9,716 q/s | **1.87×** | 2.91 ms | 1.57 ms | 5.61 ms | 2.58 ms |
-| TextAnd | 8,137 q/s | 11,694 q/s | **1.44×** | 1.91 ms | 1.32 ms | 3.13 ms | 2.06 ms |
-| CatchAllText | 7,694 q/s | 11,412 q/s | **1.48×** | 1.99 ms | 1.35 ms | 3.76 ms | 2.03 ms |
-| TextFiltered | 7,889 q/s | 10,900 q/s | **1.38×** | 1.98 ms | 1.47 ms | 3.51 ms | 2.49 ms |
-| NumRange | 1,575 q/s | 10,716 q/s | **6.80×** | 5.24 ms | 1.41 ms | 58.7 ms | 2.45 ms |
-| SortPopulation | 144 q/s | 349 q/s | **2.43×** | 108.7 ms | 45.1 ms | 151.7 ms | 65.6 ms |
-| SortGeonameid | 144 q/s | 347 q/s | **2.40×** | 108.5 ms | 45.3 ms | 155.5 ms | 66.1 ms |
-| TermSortPop | 6,954 q/s | 8,760 q/s | **1.26×** | 2.19 ms | 1.68 ms | 3.64 ms | 2.75 ms |
-| CountryFacet | 179 q/s | 413 q/s | **2.31×** | 67.9 ms | 24.6 ms | 350.7 ms | 179.7 ms |
-| HiCardFacet | 10.9 q/s | 11.4 q/s | **1.05×** | 1,228 ms | 1,195 ms | 2,551 ms | 1,887 ms |
-| TermsPure | 53.2 q/s | 52.0 q/s | **0.98×** | 281.2 ms | 294.6 ms | 349.0 ms | 367.0 ms |
-| TermsFiltered | 102 q/s | 103 q/s | **1.01×** | 152.6 ms | 152.4 ms | 188.3 ms | 177.8 ms |
-| TermsProhibited | 56.5 q/s | 53.1 q/s | **0.94×** | 277.6 ms | 296.1 ms | 331.5 ms | 362.9 ms |
-| All 212, mixed (30 s) | 421 q/s | 423 q/s | **1.01×** | 6.28 ms | 6.28 ms | 432.3 ms | 555.0 ms |
+| MatchAll* | 244 q/s | 247 q/s | *1.01×* | 62.4 ms | 61.7 ms | 98.0 ms | 96.6 ms |
+| StringTerm | 10,501 q/s | 10,454 q/s | **1.00×** | 1.29 ms | 1.26 ms | 6.33 ms | 6.76 ms |
+| TextTerm | 10,756 q/s | 11,412 q/s | **1.06×** | 1.38 ms | 1.32 ms | 3.08 ms | 2.35 ms |
+| TextPhrase | 10,394 q/s | 11,305 q/s | **1.09×** | 1.41 ms | 1.29 ms | 3.10 ms | 3.05 ms |
+| TextOr | 5,642 q/s | 9,308 q/s | **1.65×** | 2.64 ms | 1.63 ms | 5.32 ms | 2.76 ms |
+| TextAnd | 10,949 q/s | 11,190 q/s | **1.02×** | 1.42 ms | 1.38 ms | 2.32 ms | 2.22 ms |
+| CatchAllText | 10,450 q/s | 11,006 q/s | **1.05×** | 1.43 ms | 1.41 ms | 3.13 ms | 2.10 ms |
+| TextFiltered | 10,489 q/s | 10,341 q/s | **0.99×** | 1.46 ms | 1.54 ms | 2.94 ms | 2.73 ms |
+| NumRange | 1,592 q/s | 9,987 q/s | **6.27×** | 5.02 ms | 1.50 ms | 60.3 ms | 2.75 ms |
+| SortPopulation | 143 q/s | 349 q/s | **2.44×** | 108.6 ms | 45.0 ms | 155.4 ms | 65.8 ms |
+| SortGeonameid | 167 q/s | 349 q/s | **2.08×** | 93.3 ms | 44.9 ms | 134.1 ms | 64.5 ms |
+| TermSortPop | 9,354 q/s | 8,287 q/s | **0.89×** | 1.58 ms | 1.79 ms | 2.80 ms | 2.92 ms |
+| CountryFacet | 180 q/s | 409 q/s | **2.27×** | 67.1 ms | 24.6 ms | 343.9 ms | 182.2 ms |
+| HiCardFacet | 10.9 q/s | 11.2 q/s | **1.03×** | 1,161 ms | 1,216 ms | 2,552 ms | 1,804 ms |
+| TermsPure | 51.5 q/s | 49.7 q/s | **0.96×** | 290.7 ms | 308.3 ms | 372.6 ms | 383.5 ms |
+| TermsFiltered | 103 q/s | 103 q/s | **1.01×** | 152.0 ms | 152.4 ms | 174.1 ms | 179.9 ms |
+| TermsProhibited | 54.3 q/s | 50.6 q/s | **0.93×** | 288.4 ms | 309.4 ms | 355.1 ms | 370.7 ms |
+| All 212, mixed (30 s) | 427 q/s | 419 q/s | **0.98×** | 5.68 ms | 6.44 ms | 413.3 ms | 554.4 ms |
 
-\* Not settled: across five runs on these and earlier builds, MatchAll has given 1.36×, 0.77×,
-0.90×, 0.76× and now 0.97×, with Solr+Lucene between 197 and 280 q/s and Solr+Luxir between 213 and
-268 q/s. On one test cluster, alternating the builds before and after `d78c3df` swung it by ±10% in
+\* Not settled: across six runs on these and earlier builds, MatchAll has given 1.36×, 0.77×,
+0.90×, 0.76×, 0.97× and now 1.01×, with Solr+Lucene between 197 and 280 q/s and Solr+Luxir between
+213 and 268 q/s. On one test cluster, alternating the builds before and after `d78c3df` swung it by ±10% in
 both directions; the changes do not touch its path (`*:*`, ranked, no facets or sort).
 
-- **Faster on Solr+Luxir:** indexing (1.71×), numeric ranges (6.8× throughput, 24× lower p99),
-  sorting all docs (2.4×), the country facet (2.31×), the text queries (1.38–1.87×), including the
-  catch-all `_text_` field (1.48×), and a term sorted by a field (1.26×).
-- **Even:** the `{!terms}` sets of 45,700 names (0.94–1.01×), the same weak spot as in luxir-lucene's
-  own results.
-- **Mixed:** the 30-second mix of all 212 requests is even (1.01×). The `{!terms}` requests, 15 of
+- **Faster on Solr+Luxir:** indexing (1.27×), numeric ranges (6.3× throughput, 22× lower p99),
+  sorting all docs (2.1–2.4×), the country facet (2.27×) and two-term OR (1.65×).
+- **Even:** the other text queries (0.99–1.09×), string terms (1.00×), and the `{!terms}` sets of
+  45,700 names (0.93–1.01×), the same weak spot as in luxir-lucene's own results.
+- **Slower on Solr+Luxir:** a term sorted by a field (TermSortPop, 0.89×); see below.
+- **Mixed:** the 30-second mix of all 212 requests is even (0.98×). The `{!terms}` requests, 15 of
   212 but by far the slowest, dominate its time.
-- **Heap:** peak usage was 0.80–0.93 of 16 GB on Solr+Lucene and 0.74–0.94 on Solr+Luxir.
-- **Restarts:** Solr+Luxir's first restart took 7.9 s, against 5.8 s for every other restart on both
-  systems, as in every run.
+- **Errors:** one TextTerm request of 161,389 failed on Solr+Lucene: the node it was sent to got an
+  `EOFException` reading shard2's response. None failed on Solr+Luxir.
+- **Heap:** peak usage was 0.79–0.92 of 16 GB on Solr+Lucene and 0.77–0.86 on Solr+Luxir.
+- **Restarts:** Solr+Luxir's first restart took 9.9 s, against 5.8–5.9 s for every other restart on
+  both systems; its first restart has been the slow one in every run.
 
 ## Fixed: a term sorted by a field was slower
 
@@ -129,7 +136,9 @@ the same 16-client load, Solr+Luxir used 3.87 CPU-ms per request against 3.03.
   iterator only for a second block.
 
 On the test cluster, CPU per request fell to 2.7 ms (Solr+Lucene: 3.0). The other categories are the
-same or faster than before the fix. Sorted requests match Solr+Lucene's order, and luxir-lucene's
+same or faster than before the fix. That comparison had Solr+Lucene's security manager on; with it off, as in the
+results above, Solr+Lucene answers TermSortPop at 9,354 q/s and Solr+Luxir at 8,287 (0.89×), so it is again the
+category where Solr+Luxir trails. Sorted requests match Solr+Lucene's order, and luxir-lucene's
 tests compare both sort paths with Lucene's.
 
 ## Fixed: catch-all text missed documents
@@ -177,7 +186,7 @@ before the faster filters and native joins.
 
 ## Reproduce
 
-Build Luxir and luxir-lucene as in [luxir.md](luxir.md), with luxir-lucene at `d78c3df`, then
+Build Luxir and luxir-lucene as in [luxir.md](luxir.md), with luxir-lucene at `ecd09a1`, then
 convert the corpus and run the two suites:
 
 ```bash
@@ -185,10 +194,10 @@ curl -O https://rally-tracks.elastic.co/geonames/documents-2.json.bz2
 python3 luxir-bench/geonames-jsonl.py documents-2.json.bz2 suites/datasets/geonames.json.gz
 
 ./cleanup.sh && ./stress.sh -c 79b23df58daac14b92cc35f23b8b81f72098b4ba suites/geonames-local.json
-./cleanup.sh && ./stress.sh -c 5bad8a159906e65ea0e29cd8104d2d79477d3c09 suites/luxir-geonames-local.json
+./cleanup.sh && ./stress.sh -c 35d1e2b3871017184e90db8349c67801f898c519 suites/luxir-geonames-local.json
 python3 luxir-bench/compare.py \
   suites/results/geonames-local/79b23df58daac14b92cc35f23b8b81f72098b4ba \
-  suites/results/luxir-geonames-local/5bad8a159906e65ea0e29cd8104d2d79477d3c09 Solr+Lucene Solr+Luxir
+  suites/results/luxir-geonames-local/35d1e2b3871017184e90db8349c67801f898c519 Solr+Lucene Solr+Luxir
 ```
 
 ## solr-bench changes for this suite
