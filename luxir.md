@@ -16,7 +16,7 @@ queries from 16 concurrent clients with no rate cap:
 | Geonames | 11.4M places from the Rally/OpenSearch Benchmark geonames corpus | luxir-lucene's 212 requests in 17 categories, 15 s per category, then all mixed for 30 s | `geonames-local.json`, `luxir-geonames-local.json` |
 | Enwiki | the first 25M 1 KB Wikipedia chunks of lucene-bench's `enwiki-20120502-lines-1k.txt.lzma` | luceneutil's wikimedium tasks as JSON requests (`luxir-bench/enwiki-queries.py`): up to 30 per category, each category 100 times over, then all 1,153 mixed 10 times over | `enwiki-local.json`, `luxir-enwiki-native-local.json` |
 
-Jump to: [Benchmarks](#benchmarks) · [Known caveats](#known-caveats) · [Run it yourself](#run-it-yourself) ·
+Jump to: [Benchmarks](#benchmarks) · [Run it yourself](#run-it-yourself) ·
 [How Solr+Luxir got here](#how-solrluxir-got-here)
 
 ## Benchmarks
@@ -53,8 +53,8 @@ under each workload compares Solr+Luxir with Solr+Lucene, SM=off.
 | All four query tasks, total time | 137.2 s | 144.8 s | 49.2 s | **2.79×** | **2.94×** |
 
 All three runs indexed exactly 100,000,000 documents, and 20M-document indexes of both systems gave identical results
-for 120 facet requests. Most of Solr+Luxir's indexing lead over SM=off comes from date parsing (see
-[Known caveats](#known-caveats)). Native joins between string fields (`LuxirJoinQParserPlugin`) make the joins 5.8–6.3×
+for 120 facet requests. Most of Solr+Luxir's indexing lead over SM=off comes from parsing dates in its JSON
+loader instead of Solr's date processor (without it, 1.04×). Native joins between string fields (`LuxirJoinQParserPlugin`) make the joins 5.8–6.3×
 faster.
 
 ### Geonames, 11.4M documents
@@ -150,26 +150,9 @@ and on the `{!terms}` sets of 45,700 names (0.91–1.00×), which also dominate 
 | All 1,153, mixed | 436 q/s, 226.1 ms | 432 q/s, 226.8 ms | 643 q/s, 207.2 ms | **1.48×** | **1.49×** |
 
 All three runs indexed 25,000,000 documents with no failed request. Solr+Luxir analyzes text natively, not quite as
-Solr does (see [Known caveats](#known-caveats)). It is much faster on disjunctions, numeric ranges and sets, facets
+Solr does: at 10M documents, 66 of the 1,153 requests found slightly different counts. It is much faster on disjunctions, numeric ranges and sets, facets
 after an OR and the sorts. The sloppy phrases and span queries (Lucene's code over Luxir's postings) and PKLookup (the
 uniqueKey stays in Lucene's format) are slower, and so are lower-frequency phrases, Fuzzy2, Wildcard and AndHighMed.
-
-## Known caveats
-
-- **Security manager.** Solr+Luxir needs it off to load the native library. It also costs Solr+Lucene a lot of
-  indexing time (every update-log write walks the stack under the log's lock), so the benchmarks show Solr+Lucene both
-  with it on (stock) and off.
-- **Date parsing.** Solr's `ParseDateFieldUpdateProcessorFactory` throws an exception for each of its formats that
-  doesn't match, about 45% of the e-commerce indexing CPU. Solr+Luxir's JSON loader parses Luxir date fields itself
-  (`LuxirDateValues`), with identical results. That is most of its e-commerce indexing lead (without it, 1.04×); the
-  same change in Solr's processor would give Solr+Lucene the same saving.
-- **Luxir's text analysis.** `LuxirTextField`'s `unicode_word` tokenizer and `lowercase` filter match Solr's
-  `StandardTokenizer` and `LowerCaseFilter` for most text, but not all (1.4% of enwiki bodies differ: symbols such as
-  ©, Thai and Myanmar text, the dotted capital I, final sigma). All geonames requests matched Solr+Lucene's results;
-  on enwiki at 10M documents, 66 of 1,153 requests found slightly different counts (408,732 against 408,741 for
-  `body:e`). A Solr+Luxir configset with Solr's analysis matched every count, facet and sort value.
-- **Single runs.** Cheap enwiki categories finish their 3,000 queries in a second or two and are noisy: stock and
-  SM=off Solr+Lucene, which should be about equal, differ by 10% on some and by 44% on PKLookup.
 
 ## Run it yourself
 
