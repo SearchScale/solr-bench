@@ -59,35 +59,39 @@ faster.
 
 ### Geonames, 11.4M documents
 
-**Solr+Luxir indexes 1.27× faster; ranges, sorts and facets are 2–6× faster, text queries about even.**
+**Solr+Luxir indexes 1.25× faster, but into a 1.72× larger index. Ranges, sorts and facets are 2–6× faster; text
+queries are 1.03–1.11× faster, apart from two-term OR at 1.64×.**
 
-Indexing: stock Solr+Lucene 83.5 s, SM=off 49.2 s, Solr+Luxir 38.6 s (**2.16×** and **1.27×**; geonames has no dates).
+| | Stock Solr+Lucene | Solr+Lucene, SM=off | Solr+Luxir | Luxir vs stock | Luxir vs SM=off |
+|---|---|---|---|---|---|
+| Indexing | 80.4 s | 48.9 s | 39.1 s | **2.06×** | **1.25×** |
+| Index size after indexing | 4.61 GB, 57 segments | 4.40 GB, 50 segments | 7.56 GB, 86 segments | 1.64× larger | 1.72× larger |
 
 | Category | Stock Solr+Lucene | Solr+Lucene, SM=off | Solr+Luxir | Luxir vs stock | Luxir vs SM=off |
 |---|---|---|---|---|---|
-| MatchAll* | 245 q/s, 99.0 ms | 244 q/s, 98.0 ms | 247 q/s, 96.6 ms | *1.01×* | *1.01×* |
-| StringTerm | 8,548 q/s, 7.06 ms | 10,501 q/s, 6.33 ms | 10,454 q/s, 6.76 ms | **1.22×** | **1.00×** |
-| TextTerm | 7,959 q/s, 3.48 ms | 10,756 q/s, 3.08 ms | 11,412 q/s, 2.35 ms | **1.43×** | **1.06×** |
-| TextPhrase | 8,092 q/s, 3.64 ms | 10,394 q/s, 3.10 ms | 11,305 q/s, 3.05 ms | **1.40×** | **1.09×** |
-| TextOr | 5,191 q/s, 5.61 ms | 5,642 q/s, 5.32 ms | 9,308 q/s, 2.76 ms | **1.79×** | **1.65×** |
-| TextAnd | 8,137 q/s, 3.13 ms | 10,949 q/s, 2.32 ms | 11,190 q/s, 2.22 ms | **1.38×** | **1.02×** |
-| CatchAllText | 7,694 q/s, 3.76 ms | 10,450 q/s, 3.13 ms | 11,006 q/s, 2.10 ms | **1.43×** | **1.05×** |
-| TextFiltered | 7,889 q/s, 3.51 ms | 10,489 q/s, 2.94 ms | 10,341 q/s, 2.73 ms | **1.31×** | **0.99×** |
-| NumRange | 1,575 q/s, 58.7 ms | 1,592 q/s, 60.3 ms | 9,987 q/s, 2.75 ms | **6.34×** | **6.27×** |
-| SortPopulation | 144 q/s, 151.7 ms | 143 q/s, 155.4 ms | 349 q/s, 65.8 ms | **2.43×** | **2.44×** |
-| SortGeonameid | 144 q/s, 155.5 ms | 167 q/s, 134.1 ms | 349 q/s, 64.5 ms | **2.41×** | **2.08×** |
-| TermSortPop | 6,954 q/s, 3.64 ms | 9,354 q/s, 2.80 ms | 8,287 q/s, 2.92 ms | **1.19×** | **0.89×** |
-| CountryFacet | 179 q/s, 350.7 ms | 180 q/s, 343.9 ms | 409 q/s, 182.2 ms | **2.29×** | **2.27×** |
-| HiCardFacet | 10.9 q/s, 2,551 ms | 10.9 q/s, 2,552 ms | 11.2 q/s, 1,804 ms | **1.03×** | **1.03×** |
-| TermsPure | 53.2 q/s, 349.0 ms | 51.5 q/s, 372.6 ms | 49.7 q/s, 383.5 ms | **0.93×** | **0.96×** |
-| TermsFiltered | 102 q/s, 188.3 ms | 103 q/s, 174.1 ms | 103 q/s, 179.9 ms | **1.01×** | **1.01×** |
-| TermsProhibited | 56.5 q/s, 331.5 ms | 54.3 q/s, 355.1 ms | 50.6 q/s, 370.7 ms | **0.90×** | **0.93×** |
-| All 212, mixed (30 s) | 421 q/s, 432.3 ms | 427 q/s, 413.3 ms | 419 q/s, 554.4 ms | **0.99×** | **0.98×** |
+| MatchAll* | 244 q/s, 97.3 ms | 269 q/s, 94.0 ms | 280 q/s, 90.4 ms | **1.15×** | **1.04×** |
+| StringTerm | 8,557 q/s, 6.39 ms | 10,511 q/s, 6.64 ms | 11,421 q/s, 5.61 ms | **1.33×** | **1.09×** |
+| TextTerm | 8,004 q/s, 3.51 ms | 10,920 q/s, 2.80 ms | 11,639 q/s, 2.39 ms | **1.45×** | **1.07×** |
+| TextPhrase | 8,150 q/s, 3.58 ms | 10,529 q/s, 3.03 ms | 11,676 q/s, 3.00 ms | **1.43×** | **1.11×** |
+| TextOr | 5,301 q/s, 5.47 ms | 5,879 q/s, 5.05 ms | 9,662 q/s, 2.69 ms | **1.82×** | **1.64×** |
+| TextAnd | 8,212 q/s, 3.11 ms | 11,096 q/s, 2.32 ms | 11,621 q/s, 2.12 ms | **1.42×** | **1.05×** |
+| CatchAllText | 7,757 q/s, 3.64 ms | 10,649 q/s, 3.01 ms | 11,463 q/s, 2.04 ms | **1.48×** | **1.08×** |
+| TextFiltered | 7,925 q/s, 3.52 ms | 10,615 q/s, 2.88 ms | 10,883 q/s, 2.56 ms | **1.37×** | **1.03×** |
+| NumRange | 1,635 q/s, 56.1 ms | 1,624 q/s, 59.4 ms | 10,305 q/s, 2.67 ms | **6.30×** | **6.35×** |
+| SortPopulation | 144 q/s, 151.2 ms | 143 q/s, 155.1 ms | 352 q/s, 65.4 ms | **2.44×** | **2.47×** |
+| SortGeonameid | 157 q/s, 137.2 ms | 156 q/s, 140.6 ms | 352 q/s, 64.4 ms | **2.24×** | **2.26×** |
+| TermSortPop | 7,189 q/s, 3.59 ms | 9,378 q/s, 2.81 ms | 8,541 q/s, 2.88 ms | **1.19×** | **0.91×** |
+| CountryFacet | 182 q/s, 337.3 ms | 181 q/s, 333.3 ms | 429 q/s, 164.3 ms | **2.36×** | **2.37×** |
+| HiCardFacet | 11.1 q/s, 2,347 ms | 10.9 q/s, 2,611 ms | 12.3 q/s, 1,655 ms | **1.11×** | **1.13×** |
+| TermsPure | 54.4 q/s, 353.3 ms | 54.6 q/s, 353.7 ms | 51.0 q/s, 379.6 ms | **0.94×** | **0.93×** |
+| TermsFiltered | 102 q/s, 182.7 ms | 103 q/s, 172.6 ms | 103 q/s, 174.0 ms | **1.01×** | **1.00×** |
+| TermsProhibited | 57.5 q/s, 331.9 ms | 57.5 q/s, 329.6 ms | 52.4 q/s, 356.6 ms | **0.91×** | **0.91×** |
+| All 212, mixed (30 s) | 427 q/s, 429.4 ms | 434 q/s, 400.4 ms | 437 q/s, 521.0 ms | **1.03×** | **1.01×** |
 
-\* Not settled: across six runs, MatchAll has given 0.76× to 1.36×.
+\* Not settled: across seven runs, MatchAll has given 0.76× to 1.36×.
 
-Solr+Luxir is much faster on numeric ranges, sorting all docs, the country facet and two-term OR. It is even or slower
-on the `{!terms}` sets of 45,700 names, which also dominate the time of the mixed task.
+All three runs indexed 11,396,503 documents with no failed request. Solr+Luxir is slower only on TermSortPop (0.91×)
+and on the `{!terms}` sets of 45,700 names (0.91–1.00×), which also dominate the time of the mixed task and its p99.
 
 ### Enwiki, 25M documents
 
@@ -192,8 +196,7 @@ git clone https://github.com/SearchScale/luxir-lucene.git                   # Lu
 git clone -b luxir-codec https://github.com/SearchScale/solr.git            # Solr with the luxir-codec module
 ```
 
-The benchmarks used these versions (geonames: solr `35d1e2b`, the same build without the date parsing
-change, which geonames does not use):
+The benchmarks used these versions:
 
 | Repository | Branch | Commit |
 |---|---|---|
@@ -244,17 +247,16 @@ export JAVA_TOOL_OPTIONS="-Djava.net.preferIPv4Stack=true"   # if downloads hang
 ./cleanup.sh && ./stress.sh -c 79b23df58daac14b92cc35f23b8b81f72098b4ba suites/stress-facets-local-100m.json        # Solr+Lucene
 ./cleanup.sh && ./stress.sh -c 31ae830a4e8cef8968769d4a9e3281562668b6c1 suites/luxir-stress-facets-local-100m.json  # Solr+Luxir
 
-# geonames (first: curl -O https://rally-tracks.elastic.co/geonames/documents-2.json.bz2
-#           python3 luxir-bench/geonames-jsonl.py documents-2.json.bz2 suites/datasets/geonames.json.gz)
+# geonames
 ./cleanup.sh && ./stress.sh -c 79b23df58daac14b92cc35f23b8b81f72098b4ba suites/geonames-local.json        # Solr+Lucene
-./cleanup.sh && ./stress.sh -c 35d1e2b3871017184e90db8349c67801f898c519 suites/luxir-geonames-local.json  # Solr+Luxir
+./cleanup.sh && ./stress.sh -c 31ae830a4e8cef8968769d4a9e3281562668b6c1 suites/luxir-geonames-local.json  # Solr+Luxir
 
 # enwiki
 ./cleanup.sh && ./stress.sh -c 79b23df58daac14b92cc35f23b8b81f72098b4ba suites/enwiki-local.json                # Solr+Lucene
 ./cleanup.sh && ./stress.sh -c 31ae830a4e8cef8968769d4a9e3281562668b6c1 suites/luxir-enwiki-native-local.json   # Solr+Luxir
 ```
 
-- The e-commerce and enwiki suites download their datasets on the first run.
+- The suites download their datasets on the first run.
 - Each run takes about 10 minutes after the first Gradle build of its commit. `luxir-codec` is Apache Solr `79b23df`
   plus the module, so `-c 79b23df` builds the same Solr for Solr+Lucene.
 - The Solr+Lucene suites turn Solr's security manager off, as Solr+Luxir must. For stock Solr+Lucene, remove the

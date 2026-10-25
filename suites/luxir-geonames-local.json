@@ -1,4 +1,7 @@
 {
+    "pre-download": [
+        "https://huggingface.co/buckets/searchscale/solr-bench/resolve/geonames.json.gz"
+    ],
     "task-types": {
         "indexing": {
             "index-benchmark": {
