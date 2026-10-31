@@ -1,0 +1,494 @@
+{
+  "pre-download": [
+    "https://huggingface.co/buckets/searchscale/solr-bench/resolve/enwiki-25m.json.gz"
+  ],
+  "task-types": {
+    "indexing": {
+      "index-benchmark": {
+        "name": "ENWIKI",
+        "description": "Wikipedia: the first 25M 1 KB chunks of enwiki-20120502-lines-1k (lucene-bench's wikimedium10m has the first 10M)",
+        "replication-type": "cloud",
+        "dataset-file": "datasets/enwiki-25m.json.gz",
+        "file-format": "json",
+        "batch-size": 5000,
+        "id-field": "id",
+        "threads": [
+          16
+        ],
+        "setups": [
+          {
+            "setup-name": "cloud_3x1",
+            "collection": "enwiki",
+            "configset": "conf_enwiki",
+            "replication-factor": 1,
+            "shards": 3
+          }
+        ]
+      }
+    },
+    "restart-solr-node": {
+      "restart-solr-node": "${NODE_INDEX}",
+      "await-recoveries": true
+    },
+    "querying-BoostedOr": {
+      "query-benchmark": {
+        "name": "BoostedOr queries",
+        "description": "coverage: BoostedOr",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/BoostedOr.json",
+        "threads": [
+          16
+        ],
+        "json-query": true,
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30
+      }
+    },
+    "querying-NestedBoolean": {
+      "query-benchmark": {
+        "name": "NestedBoolean queries",
+        "description": "coverage: NestedBoolean",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/NestedBoolean.json",
+        "threads": [
+          16
+        ],
+        "json-query": true,
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30
+      }
+    },
+    "querying-DisMaxTwoFields": {
+      "query-benchmark": {
+        "name": "DisMaxTwoFields queries",
+        "description": "coverage: DisMaxTwoFields",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/DisMaxTwoFields.json",
+        "threads": [
+          16
+        ],
+        "json-query": true,
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30
+      }
+    },
+    "querying-Regexp": {
+      "query-benchmark": {
+        "name": "Regexp queries",
+        "description": "coverage: Regexp",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/Regexp.json",
+        "threads": [
+          16
+        ],
+        "json-query": true,
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30
+      }
+    },
+    "querying-UnorderedSpanNear": {
+      "query-benchmark": {
+        "name": "UnorderedSpanNear queries",
+        "description": "coverage: UnorderedSpanNear",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/UnorderedSpanNear.json",
+        "threads": [
+          16
+        ],
+        "json-query": true,
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30
+      }
+    },
+    "querying-LongRange": {
+      "query-benchmark": {
+        "name": "LongRange queries",
+        "description": "coverage: LongRange",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/LongRange.json",
+        "threads": [
+          16
+        ],
+        "json-query": true,
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30
+      }
+    },
+    "querying-FieldExistsFilter": {
+      "query-benchmark": {
+        "name": "FieldExistsFilter queries",
+        "description": "coverage: FieldExistsFilter",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/FieldExistsFilter.json",
+        "threads": [
+          16
+        ],
+        "json-query": true,
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30
+      }
+    },
+    "querying-Frange": {
+      "query-benchmark": {
+        "name": "Frange queries",
+        "description": "coverage: Frange",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/Frange.json",
+        "threads": [
+          16
+        ],
+        "json-query": true,
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30
+      }
+    },
+    "querying-NegativeFilter": {
+      "query-benchmark": {
+        "name": "NegativeFilter queries",
+        "description": "coverage: NegativeFilter",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/NegativeFilter.json",
+        "threads": [
+          16
+        ],
+        "json-query": true,
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30
+      }
+    },
+    "querying-SortLongFiltered": {
+      "query-benchmark": {
+        "name": "SortLongFiltered queries",
+        "description": "coverage: SortLongFiltered",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/SortLongFiltered.json",
+        "threads": [
+          16
+        ],
+        "json-query": true,
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30
+      }
+    },
+    "querying-MultiKeySort": {
+      "query-benchmark": {
+        "name": "MultiKeySort queries",
+        "description": "coverage: MultiKeySort",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/MultiKeySort.json",
+        "threads": [
+          16
+        ],
+        "json-query": true,
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30
+      }
+    },
+    "querying-DeepPaging": {
+      "query-benchmark": {
+        "name": "DeepPaging queries",
+        "description": "coverage: DeepPaging",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/DeepPaging.json",
+        "threads": [
+          16
+        ],
+        "json-query": true,
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30
+      }
+    },
+    "querying-LegacyFacetField": {
+      "query-benchmark": {
+        "name": "LegacyFacetField queries",
+        "description": "coverage: LegacyFacetField",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/LegacyFacetField.json",
+        "threads": [
+          16
+        ],
+        "json-query": true,
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30
+      }
+    },
+    "querying-LegacyFacetRange": {
+      "query-benchmark": {
+        "name": "LegacyFacetRange queries",
+        "description": "coverage: LegacyFacetRange",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/LegacyFacetRange.json",
+        "threads": [
+          16
+        ],
+        "json-query": true,
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30
+      }
+    },
+    "querying-JsonQueryNestedFacets": {
+      "query-benchmark": {
+        "name": "JsonQueryNestedFacets queries",
+        "description": "coverage: JsonQueryNestedFacets",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/JsonQueryNestedFacets.json",
+        "threads": [
+          16
+        ],
+        "json-query": true,
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30
+      }
+    },
+    "querying-FacetAggregations": {
+      "query-benchmark": {
+        "name": "FacetAggregations queries",
+        "description": "coverage: FacetAggregations",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/FacetAggregations.json",
+        "threads": [
+          16
+        ],
+        "json-query": true,
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30
+      }
+    },
+    "querying-Grouping": {
+      "query-benchmark": {
+        "name": "Grouping queries",
+        "description": "coverage: Grouping",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/Grouping.json",
+        "threads": [
+          16
+        ],
+        "json-query": true,
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30
+      }
+    }
+  },
+  "global-variables": {
+    "collection-counter": 0,
+    "restart-counter": 0
+  },
+  "global-constants": {
+    "HOST": "localhost",
+    "PORT": "8983"
+  },
+  "execution-plan": {
+    "task1": {
+      "type": "indexing",
+      "description": "Indexing enwiki",
+      "instances": 1,
+      "concurrency": 1,
+      "mode": "sync"
+    },
+    "task2": {
+      "description": "Restart Solr node",
+      "instances": 3,
+      "concurrency": 1,
+      "type": "restart-solr-node",
+      "parameters": {
+        "NODE_INDEX": "${restart-counter}"
+      },
+      "wait-for": "task1",
+      "mode": "sync",
+      "pre-task-evals": [
+        "inc(restart-counter,1)"
+      ]
+    },
+    "task3": {
+      "description": "BoostedOr queries",
+      "type": "querying-BoostedOr",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task2",
+      "mode": "sync"
+    },
+    "task4": {
+      "description": "NestedBoolean queries",
+      "type": "querying-NestedBoolean",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task3",
+      "mode": "sync"
+    },
+    "task5": {
+      "description": "DisMaxTwoFields queries",
+      "type": "querying-DisMaxTwoFields",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task4",
+      "mode": "sync"
+    },
+    "task6": {
+      "description": "Regexp queries",
+      "type": "querying-Regexp",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task5",
+      "mode": "sync"
+    },
+    "task7": {
+      "description": "UnorderedSpanNear queries",
+      "type": "querying-UnorderedSpanNear",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task6",
+      "mode": "sync"
+    },
+    "task8": {
+      "description": "LongRange queries",
+      "type": "querying-LongRange",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task7",
+      "mode": "sync"
+    },
+    "task9": {
+      "description": "FieldExistsFilter queries",
+      "type": "querying-FieldExistsFilter",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task8",
+      "mode": "sync"
+    },
+    "task10": {
+      "description": "Frange queries",
+      "type": "querying-Frange",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task9",
+      "mode": "sync"
+    },
+    "task11": {
+      "description": "NegativeFilter queries",
+      "type": "querying-NegativeFilter",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task10",
+      "mode": "sync"
+    },
+    "task12": {
+      "description": "SortLongFiltered queries",
+      "type": "querying-SortLongFiltered",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task11",
+      "mode": "sync"
+    },
+    "task13": {
+      "description": "MultiKeySort queries",
+      "type": "querying-MultiKeySort",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task12",
+      "mode": "sync"
+    },
+    "task14": {
+      "description": "DeepPaging queries",
+      "type": "querying-DeepPaging",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task13",
+      "mode": "sync"
+    },
+    "task15": {
+      "description": "LegacyFacetField queries",
+      "type": "querying-LegacyFacetField",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task14",
+      "mode": "sync"
+    },
+    "task16": {
+      "description": "LegacyFacetRange queries",
+      "type": "querying-LegacyFacetRange",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task15",
+      "mode": "sync"
+    },
+    "task17": {
+      "description": "JsonQueryNestedFacets queries",
+      "type": "querying-JsonQueryNestedFacets",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task16",
+      "mode": "sync"
+    },
+    "task18": {
+      "description": "FacetAggregations queries",
+      "type": "querying-FacetAggregations",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task17",
+      "mode": "sync"
+    },
+    "task19": {
+      "description": "Grouping queries",
+      "type": "querying-Grouping",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task18",
+      "mode": "sync"
+    }
+  },
+  "cluster": {
+    "num-solr-nodes": 3,
+    "startup-params": "-m 16g -Dsolr.searchThreads=4",
+    "environment": {
+      "SOLR_SECURITY_MANAGER_ENABLED": "false"
+    },
+    "provisioning-method": "local"
+  },
+  "repositories": [
+    {
+      "commit-id": "d007470bda2f70ba4e1c407ac624e21288947128",
+      "description": "Solr 8.4",
+      "name": "git-repository",
+      "package-subdir": "solr/package/",
+      "build-command": "ant ivy-bootstrap && cd solr && ant compile package",
+      "submodules": false,
+      "url": "https://github.com/apache/lucene-solr",
+      "user": "ishan"
+    },
+    {
+      "commit-id": "dfde16a004206cc92e21cc5a6cad9030fbe13c20",
+      "description": "Solr 10x",
+      "name": "solr-repository",
+      "package-subdir": "solr/packaging/",
+      "build-command": "git clean -fdx && cd solr && ../gradlew distTar",
+      "submodules": false,
+      "url": "https://github.com/apache/solr",
+      "user": "ishan"
+    }
+  ],
+  "metrics": [
+    "jvm/solr.jvm/memory.heap.usage",
+    "jvm/solr.jvm/threads.count"
+  ],
+  "zk-metrics": [
+    "sum_configs_read_per_namespace",
+    "sum_configs_write_per_namespace"
+  ]
+}

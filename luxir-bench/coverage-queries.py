@@ -1,0 +1,206 @@
+#!/usr/bin/env python3
+"""Coverage workloads: request features the main suites leave out, on the same three datasets.
+
+Writes suites/queries/coverage/<dataset>/<Category>.(json|txt) from the main suites' own terms, and
+coverage suites for both systems from the main suites (same cluster, indexing and restarts; only
+the query tasks change):
+
+    suites/coverage-enwiki-local.json        suites/luxir-coverage-enwiki-native-local.json
+    suites/coverage-geonames-local.json      suites/luxir-coverage-geonames-local.json
+    suites/coverage-facets-local-100m.json   suites/luxir-coverage-facets-local-100m.json
+
+Usage: luxir-bench/coverage-queries.py   (from the solr-bench directory)
+"""
+import ast
+import json
+import os
+import random
+import urllib.parse
+
+Q = "suites/queries"
+OUT = f"{Q}/coverage"
+rnd = random.Random(42)
+
+
+def lines(path):
+    with open(path) as f:
+        return [l.strip() for l in f if l.strip()]
+
+
+def enwiki_terms(name):
+    return [json.loads(l)["query"] for l in lines(f"{Q}/enwiki/{name}.json")]
+
+
+def write(path, rows):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w") as f:
+        for r in rows:
+            f.write(r + "\n")
+
+
+# ---- enwiki: JSON requests, as the main enwiki suite sends them
+def ej(query, **extra):
+    req = {"query": query, "limit": 10, "fields": "id",
+           "params": {"df": "body", "q.op": "OR", "sow": "true"}}
+    params = extra.pop("params", {})
+    req["params"].update(params)
+    req.update(extra)
+    return json.dumps(req)
+
+
+high, med, low = enwiki_terms("HighTerm"), enwiki_terms("MedTerm"), enwiki_terms("LowTerm")
+prefixes = [p.rstrip("*") for p in enwiki_terms("Prefix3")]
+spans = enwiki_terms("MedSpanNear")
+LASTMOD_LO, LASTMOD_HI = 978307200000, 1335756317000  # 2001 to the dump's last edit, ms
+
+
+def lastmod_range():
+    lo = rnd.randrange(LASTMOD_LO, LASTMOD_HI - 31536000000)
+    return f"lastMod:[{lo} TO {lo + 31536000000}]"
+
+
+def day_range():
+    lo = rnd.randrange(1, 300)
+    return f"dayOfYear:[{lo} TO {lo + rnd.randrange(10, 66)}]"
+
+
+enwiki = {
+    # scoring shapes
+    "BoostedOr": [ej(f"{h}^3 {m}") for h, m in zip(high, med)],
+    "NestedBoolean": [ej(f"+({h} {m}) -({l} {low[(i + 7) % 30]})")
+                      for i, (h, m, l) in enumerate(zip(high, med, low))],
+    "DisMaxTwoFields": [ej(f"{h} {m}", params={"defType": "edismax", "qf": "body titleTokenized^2"})
+                        for h, m in zip(high, med)],
+    # multi-term and positional shapes
+    "Regexp": [ej(f"body:/{p}[a-z]{{2,4}}/") for p in prefixes],
+    "UnorderedSpanNear": [ej(s.replace("inOrder=true", "inOrder=false")) for s in spans],
+    # numeric clauses
+    "LongRange": [ej(f"+{h} +{lastmod_range()}") for h in high],
+    "FieldExistsFilter": [ej(m, filter="year:*") for m in med],
+    "Frange": [ej(h, filter="{!frange l=100 u=200}dayOfYear") for h in high],
+    "NegativeFilter": [ej(h, filter="-month:January") for h in high],
+    # sorts and pages
+    "SortLongFiltered": [ej(h, filter=day_range(), sort="lastMod desc") for h in high],
+    "MultiKeySort": [ej(h, sort="month asc,dayOfYear desc") for h in high],
+    "DeepPaging": [ej(h, offset=500) for h in high],
+    # facets and grouping
+    "LegacyFacetField": [ej(m, params={"facet": "true", "facet.field": "month", "facet.limit": "12"})
+                         for m in med],
+    "LegacyFacetRange": [ej(m, params={"facet": "true", "facet.range": "dayOfYear",
+                                       "facet.range.start": "1", "facet.range.end": "367",
+                                       "facet.range.gap": "30", "facet.range.other": "all"})
+                         for m in med],
+    "JsonQueryNestedFacets": [ej(m, limit=0, facet={
+        "recent": {"type": "query", "q": "year:[2010 TO *]"},
+        "m": {"type": "terms", "field": "month", "limit": 12,
+              "facet": {"d": {"type": "range", "field": "dayOfYear", "start": 1, "end": 367, "gap": 61}}}})
+        for m in med],
+    "FacetAggregations": [ej(h, limit=0, facet={
+        "mn": "min(lastMod)", "mx": "max(dayOfYear)", "v": "variance(dayOfYear)", "sd": "stddev(year)",
+        "u": "unique(month)"}) for h in high],
+    "Grouping": [ej(m, params={"group": "true", "group.field": "month", "group.limit": "1"}) for m in med],
+}
+for name, rows in enwiki.items():
+    write(f"{OUT}/enwiki/{name}.json", rows)
+
+# ---- geonames: form-encoded GET/POST parameters, as the main geonames suite sends them
+names = [urllib.parse.parse_qs(l)["q"][0] for l in lines(f"{Q}/geonames/TextTerm.txt")]
+countries = [urllib.parse.parse_qs(l)["q"][0] for l in lines(f"{Q}/geonames/StringTerm.txt")]
+
+
+def gq(**p):
+    return urllib.parse.urlencode(p)
+
+
+geonames = {
+    "LegacyFacetPivot": [gq(q=c, rows=0, facet="true", **{"facet.pivot": "feature_class_raw,admin1_code_raw",
+                                                          "facet.limit": 20}) for c in countries],
+    "LegacyFacetFields": [gq(q=c, rows=0, facet="true", **{"facet.field": "timezone_raw",
+                                                          "facet.mincount": 1, "facet.limit": 20})
+                          for c in countries],
+    "NumBucketsPrefix": [gq(q=c, rows=0, **{"json.facet": json.dumps(
+        {"a": {"type": "terms", "field": "admin1_code_raw", "numBuckets": True, "missing": True, "limit": 5},
+         "f": {"type": "terms", "field": "feature_code_raw", "prefix": "PP", "limit": 10}})})
+        for c in countries],
+    "PopulationRangeFacet": [gq(q=n, rows=0, **{"json.facet": json.dumps(
+        {"p": {"type": "range", "field": "population", "start": 0, "end": 10000000, "gap": 100000,
+               "facet": {"e": "avg(elevation)"}}})}) for n in names],
+    "SortElevation": [gq(q=c, sort="elevation desc", fl="id") for c in countries],
+    "MultiKeySort": [gq(q=c, sort="admin1_code_raw asc,population desc", fl="id") for c in countries],
+    "CursorMarkFirstPage": [gq(q=c, sort="population desc,id asc", cursorMark="*", rows=50, fl="id")
+                            for c in countries],
+    "DeepPaging": [gq(q=c, sort="population desc", start=1000, rows=10, fl="id") for c in countries],
+    "Grouping": [gq(q=n, group="true", **{"group.field": "country_code_raw", "group.limit": 1}, fl="id")
+                 for n in names],
+    "Collapse": [gq(q=n, fq="{!collapse field=country_code_raw}", fl="id") for n in names],
+}
+for name, rows in geonames.items():
+    write(f"{OUT}/geonames/{name}.txt", rows)
+
+# ---- ecommerce: JSON requests on the facet suite's 7-day windows; float price clauses and stats
+windows = [ast.literal_eval(l)["query"] for l in lines(f"{Q}/facets-range.json")]
+ecom = {
+    "FloatRangeSort": [repr({"query": w, "filter": f"price:[{lo} TO {lo + 50}]", "limit": 10,
+                             "sort": "price desc"}) for w, lo in ((w, rnd.randrange(0, 500)) for w in windows[:600])],
+    "FloatStats": [repr({"query": w, "filter": "event_type:purchase", "limit": 0,
+                         "facet": {"mn": "min(price)", "mx": "max(price)", "sd": "stddev(price)",
+                                   "b": {"type": "terms", "field": "brand", "limit": 10,
+                                         "facet": {"p": "max(price)"}}}}) for w in windows[:600]],
+    "QueryFacets": [repr({"query": w, "limit": 0,
+                          "facet": {"cheap": {"type": "query", "q": "price:[0 TO 50]"},
+                                    "cart": {"type": "query", "q": "event_type:cart",
+                                             "facet": {"a": "avg(price)"}}}}) for w in windows[:600]],
+}
+for name, rows in ecom.items():
+    write(f"{OUT}/ecommerce/{name}.json", rows)
+
+
+# ---- suites: the main suites with their query tasks replaced
+def suite(base, out, tasks, task_spec):
+    s = json.load(open(f"suites/{base}"))
+    plan = s["execution-plan"]
+    keep = {k: v for k, v in plan.items() if not v["type"].startswith("querying")}
+    tt = {k: v for k, v in s["task-types"].items() if not k.startswith("querying")}
+    last = max(keep, key=lambda k: int(k[4:]))
+    n = int(last[4:])
+    new_plan = dict(keep)
+    for name, spec in tasks:
+        n += 1
+        tt[f"querying-{name}"] = task_spec(name, spec)
+        new_plan[f"task{n}"] = {"description": f"{name} queries", "type": f"querying-{name}",
+                                "instances": 1, "concurrency": 1, "wait-for": f"task{n - 1}", "mode": "sync"}
+    s["task-types"], s["execution-plan"] = tt, new_plan
+    with open(f"suites/{out}", "w") as f:
+        json.dump(s, f, indent=2)
+
+
+def enwiki_task(name, _):
+    return {"query-benchmark": {"name": f"{name} queries", "description": f"coverage: {name}",
+                                "collection": "enwiki", "query-file": f"queries/coverage/enwiki/{name}.json",
+                                "threads": [16], "json-query": True, "shuffle": False,
+                                "total-count": 1530, "warm-count": 30}}
+
+
+def geonames_task(name, _):
+    return {"query-benchmark": {"name": f"{name} queries", "description": f"coverage: {name}",
+                                "collection": "geonames", "query-file": f"queries/coverage/geonames/{name}.txt",
+                                "http-method": "POST", "threads": [16], "shuffle": False,
+                                "duration-secs": 10, "warm-count": 16}}
+
+
+def ecom_task(name, _):
+    return {"query-benchmark": {"name": f"{name} queries", "description": f"coverage: {name}",
+                                "collection": "ecommerce-events", "query-file": f"queries/coverage/ecommerce/{name}.json",
+                                "threads": [16], "json-query": True, "shuffle": False,
+                                "total-count": 1220, "warm-count": 20}}
+
+
+for base, out, data, spec in [
+        ("enwiki-local.json", "coverage-enwiki-local.json", enwiki, enwiki_task),
+        ("luxir-enwiki-native-local.json", "luxir-coverage-enwiki-native-local.json", enwiki, enwiki_task),
+        ("geonames-local.json", "coverage-geonames-local.json", geonames, geonames_task),
+        ("luxir-geonames-local.json", "luxir-coverage-geonames-local.json", geonames, geonames_task),
+        ("stress-facets-local-100m.json", "coverage-facets-local-100m.json", ecom, ecom_task),
+        ("luxir-stress-facets-local-100m.json", "luxir-coverage-facets-local-100m.json", ecom, ecom_task)]:
+    suite(base, out, list(data.items()), spec)
+print("wrote", sum(map(len, (enwiki, geonames, ecom))), "query files and 6 suites")

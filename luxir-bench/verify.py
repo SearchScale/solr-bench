@@ -3,7 +3,9 @@
 its Java path (luxirCodec=false) over the same index:
   - numFound equal on both systems;
   - facet buckets (and their stats) equal on both systems;
-  - for sorted requests, the top rows' sort values equal on both systems;
+  - for sorted requests, the top rows' values of every sort key equal on both systems;
+  - legacy facet_counts, grouped results (match counts; for field-sorted groups, each group's numFound) and
+    nextCursorMark equal on both systems, and all of them native vs Java on Solr+Luxir;
   - on Solr+Luxir, the native top rows (ids and order) equal to the Java path's.
 Top rows of score-ranked requests are compared across systems for information only.
 Requests are lines of URL-encoded parameters, or JSON request bodies (lines starting with "{").
@@ -58,6 +60,26 @@ for line in open(path):
              + (" json.facet" if "json.facet" in q else ""))
     a, b = run(lport, params, extra), run(xport, params, extra)
     j = run(xport, params, {**extra, "luxirCodec": "false"})
+    for key, what in (("facet_counts", "legacy facets"), ("nextCursorMark", "nextCursorMark")):
+        if key in a and not close(a[key], b.get(key)):
+            fails.append(f"{what} differ: {label}")
+        if key in b and not close(b[key], j.get(key)):
+            fails.append(f"Luxir {what} native vs Java differ: {label}")
+    if "grouped" in a:
+        def groups(r):
+            return {f: (g["matches"], g.get("ngroups"),
+                        sorted((str(x["groupValue"]), x["doclist"]["numFound"]) for x in g["groups"]))
+                    for f, g in r["grouped"].items()}
+        if "sort" in q or "group.sort" in q:
+            if groups(a) != groups(b):
+                fails.append(f"groups differ: {label}")
+        elif {f: g[0] for f, g in groups(a).items()} != {f: g[0] for f, g in groups(b).items()}:
+            fails.append(f"group matches differ: {label}")
+        elif groups(a) != groups(b):
+            info += 1  # score-ranked groups: which tied groups make the page depends on doc order
+        if not close(b["grouped"], j["grouped"]):
+            fails.append(f"Luxir groups native vs Java differ: {label}")
+        continue
     ra, rb, rj = a["response"], b["response"], j["response"]
     if ra["numFound"] != rb["numFound"]:
         fails.append(f"numFound {ra['numFound']} vs {rb['numFound']}: {label}")
@@ -66,9 +88,10 @@ for line in open(path):
     if "facets" in b and not close(b["facets"], j["facets"]):
         fails.append(f"Luxir facets native vs Java differ: {label}")
     if "sort" in q:
-        f = q["sort"].split()[0]
-        va, vb = [d.get(f) for d in ra["docs"]], [d.get(f) for d in rb["docs"]]
-        if va != vb: fails.append(f"sort values {va} vs {vb}: {label}")
+        keys = [k.split()[0] for k in q["sort"].split(",")]
+        va = [[d.get(f) for f in keys] for d in ra["docs"]]
+        vb = [[d.get(f) for f in keys] for d in rb["docs"]]
+        if va != vb: fails.append(f"sort values {va[:5]} vs {vb[:5]}: {label}")
     if [d["id"] for d in rb["docs"]] != [d["id"] for d in rj["docs"]] or rb["numFound"] != rj["numFound"]:
         if rb["numFound"] == rj["numFound"] and same_but_rounding(rb["docs"], rj["docs"]):
             rounding += 1
