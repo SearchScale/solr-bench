@@ -14,6 +14,7 @@ import org.apache.solr.client.solrj.request.QueryRequest;
 import org.apache.solr.client.solrj.request.RequestWriter;
 import org.apache.solr.common.params.CommonParams;
 import org.apache.solr.common.params.MapSolrParams;
+import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.params.SolrParams;
 
 import java.io.ByteArrayOutputStream;
@@ -118,6 +119,11 @@ public class QueryGenerator {
                 }
 
                 @Override
+                public String getPath() {
+                    return queryBenchmark.uri;
+                }
+
+                @Override
                 public ResponseParser getResponseParser() {
                     return new InputStreamResponseParser("json");
                 }
@@ -134,23 +140,19 @@ public class QueryGenerator {
             };
 
         } else {
-            // Parse the query string and add RID parameter
-            SolrParams baseParams = Util.parseQueryString(q);
-            Map<String, String> paramsWithRID = new HashMap<>();
-            
-            // Copy existing parameters
-            for (Iterator<String> it = baseParams.getParameterNamesIterator(); it.hasNext(); ) {
-                String paramName = it.next();
-                paramsWithRID.put(paramName, baseParams.get(paramName));
-            }
-            
-            // Add RID parameter
-            paramsWithRID.put("rid", rid);
-            
-            request = new QueryRequest(new MapSolrParams(paramsWithRID), SolrRequest.METHOD.valueOf(queryBenchmark.httpMethod.toUpperCase(Locale.ROOT))) {
+            // Parse the query string (every value of a repeated parameter) and add the RID parameter
+            ModifiableSolrParams paramsWithRID = new ModifiableSolrParams(Util.parseQueryString(q));
+            paramsWithRID.set("rid", rid);
+
+            request = new QueryRequest(paramsWithRID, SolrRequest.METHOD.valueOf(queryBenchmark.httpMethod.toUpperCase(Locale.ROOT))) {
                 @Override
                 public String getCollection() {
                     return queryBenchmark.collection;
+                }
+
+                @Override
+                public String getPath() {
+                    return queryBenchmark.uri;
                 }
 
                 // the response is read as a stream (QueryResponseContents), as for JSON queries
