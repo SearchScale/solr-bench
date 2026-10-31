@@ -39,10 +39,10 @@
         "threads": [
           16
         ],
-        "json-query": true,
         "shuffle": false,
         "total-count": 1530,
-        "warm-count": 30
+        "warm-count": 30,
+        "json-query": true
       }
     },
     "querying-NestedBoolean": {
@@ -54,10 +54,10 @@
         "threads": [
           16
         ],
-        "json-query": true,
         "shuffle": false,
         "total-count": 1530,
-        "warm-count": 30
+        "warm-count": 30,
+        "json-query": true
       }
     },
     "querying-DisMaxTwoFields": {
@@ -69,10 +69,10 @@
         "threads": [
           16
         ],
-        "json-query": true,
         "shuffle": false,
         "total-count": 1530,
-        "warm-count": 30
+        "warm-count": 30,
+        "json-query": true
       }
     },
     "querying-Regexp": {
@@ -84,10 +84,10 @@
         "threads": [
           16
         ],
-        "json-query": true,
         "shuffle": false,
         "total-count": 1530,
-        "warm-count": 30
+        "warm-count": 30,
+        "json-query": true
       }
     },
     "querying-UnorderedSpanNear": {
@@ -99,10 +99,10 @@
         "threads": [
           16
         ],
-        "json-query": true,
         "shuffle": false,
         "total-count": 1530,
-        "warm-count": 30
+        "warm-count": 30,
+        "json-query": true
       }
     },
     "querying-LongRange": {
@@ -114,10 +114,10 @@
         "threads": [
           16
         ],
-        "json-query": true,
         "shuffle": false,
         "total-count": 1530,
-        "warm-count": 30
+        "warm-count": 30,
+        "json-query": true
       }
     },
     "querying-FieldExistsFilter": {
@@ -129,10 +129,10 @@
         "threads": [
           16
         ],
-        "json-query": true,
         "shuffle": false,
         "total-count": 1530,
-        "warm-count": 30
+        "warm-count": 30,
+        "json-query": true
       }
     },
     "querying-Frange": {
@@ -144,10 +144,10 @@
         "threads": [
           16
         ],
-        "json-query": true,
         "shuffle": false,
         "total-count": 1530,
-        "warm-count": 30
+        "warm-count": 30,
+        "json-query": true
       }
     },
     "querying-NegativeFilter": {
@@ -159,10 +159,10 @@
         "threads": [
           16
         ],
-        "json-query": true,
         "shuffle": false,
         "total-count": 1530,
-        "warm-count": 30
+        "warm-count": 30,
+        "json-query": true
       }
     },
     "querying-SortLongFiltered": {
@@ -174,10 +174,10 @@
         "threads": [
           16
         ],
-        "json-query": true,
         "shuffle": false,
         "total-count": 1530,
-        "warm-count": 30
+        "warm-count": 30,
+        "json-query": true
       }
     },
     "querying-MultiKeySort": {
@@ -189,10 +189,10 @@
         "threads": [
           16
         ],
-        "json-query": true,
         "shuffle": false,
         "total-count": 1530,
-        "warm-count": 30
+        "warm-count": 30,
+        "json-query": true
       }
     },
     "querying-DeepPaging": {
@@ -204,10 +204,10 @@
         "threads": [
           16
         ],
-        "json-query": true,
         "shuffle": false,
         "total-count": 1530,
-        "warm-count": 30
+        "warm-count": 30,
+        "json-query": true
       }
     },
     "querying-LegacyFacetField": {
@@ -219,10 +219,10 @@
         "threads": [
           16
         ],
-        "json-query": true,
         "shuffle": false,
         "total-count": 1530,
-        "warm-count": 30
+        "warm-count": 30,
+        "json-query": true
       }
     },
     "querying-LegacyFacetRange": {
@@ -234,10 +234,10 @@
         "threads": [
           16
         ],
-        "json-query": true,
         "shuffle": false,
         "total-count": 1530,
-        "warm-count": 30
+        "warm-count": 30,
+        "json-query": true
       }
     },
     "querying-JsonQueryNestedFacets": {
@@ -249,10 +249,10 @@
         "threads": [
           16
         ],
-        "json-query": true,
         "shuffle": false,
         "total-count": 1530,
-        "warm-count": 30
+        "warm-count": 30,
+        "json-query": true
       }
     },
     "querying-FacetAggregations": {
@@ -264,10 +264,10 @@
         "threads": [
           16
         ],
-        "json-query": true,
         "shuffle": false,
         "total-count": 1530,
-        "warm-count": 30
+        "warm-count": 30,
+        "json-query": true
       }
     },
     "querying-Grouping": {
@@ -279,10 +279,297 @@
         "threads": [
           16
         ],
-        "json-query": true,
         "shuffle": false,
         "total-count": 1530,
-        "warm-count": 30
+        "warm-count": 30,
+        "json-query": true
+      }
+    },
+    "querying-EdismaxComplex": {
+      "query-benchmark": {
+        "name": "EdismaxComplex queries",
+        "description": "coverage: EdismaxComplex",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/EdismaxComplex.json",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30,
+        "json-query": true
+      }
+    },
+    "querying-EdismaxMinMatch": {
+      "query-benchmark": {
+        "name": "EdismaxMinMatch queries",
+        "description": "coverage: EdismaxMinMatch",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/EdismaxMinMatch.json",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30,
+        "json-query": true
+      }
+    },
+    "querying-EdismaxPhraseBoost": {
+      "query-benchmark": {
+        "name": "EdismaxPhraseBoost queries",
+        "description": "coverage: EdismaxPhraseBoost",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/EdismaxPhraseBoost.json",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30,
+        "json-query": true
+      }
+    },
+    "querying-SpellCheck": {
+      "query-benchmark": {
+        "name": "SpellCheck queries",
+        "description": "coverage: SpellCheck",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/SpellCheck.json",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30,
+        "json-query": true,
+        "uri": "/spell"
+      }
+    },
+    "querying-FacetTermsByAgg": {
+      "query-benchmark": {
+        "name": "FacetTermsByAgg queries",
+        "description": "coverage: FacetTermsByAgg",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/FacetTermsByAgg.json",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30,
+        "json-query": true
+      }
+    },
+    "querying-FacetExcludeTags": {
+      "query-benchmark": {
+        "name": "FacetExcludeTags queries",
+        "description": "coverage: FacetExcludeTags",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/FacetExcludeTags.json",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30,
+        "json-query": true
+      }
+    },
+    "querying-FacetRangeNested": {
+      "query-benchmark": {
+        "name": "FacetRangeNested queries",
+        "description": "coverage: FacetRangeNested",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/FacetRangeNested.json",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30,
+        "json-query": true
+      }
+    },
+    "querying-FacetRelatedness": {
+      "query-benchmark": {
+        "name": "FacetRelatedness queries",
+        "description": "coverage: FacetRelatedness",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/FacetRelatedness.json",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30,
+        "json-query": true
+      }
+    },
+    "querying-LegacyMultiSelectFacets": {
+      "query-benchmark": {
+        "name": "LegacyMultiSelectFacets queries",
+        "description": "coverage: LegacyMultiSelectFacets",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/LegacyMultiSelectFacets.json",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30,
+        "json-query": true
+      }
+    },
+    "querying-StatsComponent": {
+      "query-benchmark": {
+        "name": "StatsComponent queries",
+        "description": "coverage: StatsComponent",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/StatsComponent.json",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30,
+        "json-query": true
+      }
+    },
+    "querying-SurroundParser": {
+      "query-benchmark": {
+        "name": "SurroundParser queries",
+        "description": "coverage: SurroundParser",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/SurroundParser.json",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30,
+        "json-query": true
+      }
+    },
+    "querying-BoolParser": {
+      "query-benchmark": {
+        "name": "BoolParser queries",
+        "description": "coverage: BoolParser",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/BoolParser.json",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30,
+        "json-query": true
+      }
+    },
+    "querying-ReRank": {
+      "query-benchmark": {
+        "name": "ReRank queries",
+        "description": "coverage: ReRank",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/ReRank.json",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30,
+        "json-query": true
+      }
+    },
+    "querying-FunctionSort": {
+      "query-benchmark": {
+        "name": "FunctionSort queries",
+        "description": "coverage: FunctionSort",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/FunctionSort.json",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30,
+        "json-query": true
+      }
+    },
+    "querying-PrefixTermFieldParsers": {
+      "query-benchmark": {
+        "name": "PrefixTermFieldParsers queries",
+        "description": "coverage: PrefixTermFieldParsers",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/PrefixTermFieldParsers.json",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30,
+        "json-query": true
+      }
+    },
+    "querying-ExistsOnText": {
+      "query-benchmark": {
+        "name": "ExistsOnText queries",
+        "description": "coverage: ExistsOnText",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/ExistsOnText.json",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30,
+        "json-query": true
+      }
+    },
+    "querying-TimeAllowed": {
+      "query-benchmark": {
+        "name": "TimeAllowed queries",
+        "description": "coverage: TimeAllowed",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/TimeAllowed.json",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30,
+        "json-query": true
+      }
+    },
+    "querying-DebugExplain": {
+      "query-benchmark": {
+        "name": "DebugExplain queries",
+        "description": "coverage: DebugExplain",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/DebugExplain.json",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30,
+        "json-query": true
+      }
+    },
+    "querying-TermsComponent": {
+      "query-benchmark": {
+        "name": "TermsComponent queries",
+        "description": "coverage: TermsComponent",
+        "collection": "enwiki",
+        "query-file": "queries/coverage/enwiki/TermsComponent.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "total-count": 1530,
+        "warm-count": 30,
+        "http-method": "POST",
+        "uri": "/terms"
       }
     }
   },
@@ -450,6 +737,158 @@
       "instances": 1,
       "concurrency": 1,
       "wait-for": "task18",
+      "mode": "sync"
+    },
+    "task20": {
+      "description": "EdismaxComplex queries",
+      "type": "querying-EdismaxComplex",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task19",
+      "mode": "sync"
+    },
+    "task21": {
+      "description": "EdismaxMinMatch queries",
+      "type": "querying-EdismaxMinMatch",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task20",
+      "mode": "sync"
+    },
+    "task22": {
+      "description": "EdismaxPhraseBoost queries",
+      "type": "querying-EdismaxPhraseBoost",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task21",
+      "mode": "sync"
+    },
+    "task23": {
+      "description": "SpellCheck queries",
+      "type": "querying-SpellCheck",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task22",
+      "mode": "sync"
+    },
+    "task24": {
+      "description": "FacetTermsByAgg queries",
+      "type": "querying-FacetTermsByAgg",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task23",
+      "mode": "sync"
+    },
+    "task25": {
+      "description": "FacetExcludeTags queries",
+      "type": "querying-FacetExcludeTags",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task24",
+      "mode": "sync"
+    },
+    "task26": {
+      "description": "FacetRangeNested queries",
+      "type": "querying-FacetRangeNested",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task25",
+      "mode": "sync"
+    },
+    "task27": {
+      "description": "FacetRelatedness queries",
+      "type": "querying-FacetRelatedness",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task26",
+      "mode": "sync"
+    },
+    "task28": {
+      "description": "LegacyMultiSelectFacets queries",
+      "type": "querying-LegacyMultiSelectFacets",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task27",
+      "mode": "sync"
+    },
+    "task29": {
+      "description": "StatsComponent queries",
+      "type": "querying-StatsComponent",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task28",
+      "mode": "sync"
+    },
+    "task30": {
+      "description": "SurroundParser queries",
+      "type": "querying-SurroundParser",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task29",
+      "mode": "sync"
+    },
+    "task31": {
+      "description": "BoolParser queries",
+      "type": "querying-BoolParser",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task30",
+      "mode": "sync"
+    },
+    "task32": {
+      "description": "ReRank queries",
+      "type": "querying-ReRank",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task31",
+      "mode": "sync"
+    },
+    "task33": {
+      "description": "FunctionSort queries",
+      "type": "querying-FunctionSort",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task32",
+      "mode": "sync"
+    },
+    "task34": {
+      "description": "PrefixTermFieldParsers queries",
+      "type": "querying-PrefixTermFieldParsers",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task33",
+      "mode": "sync"
+    },
+    "task35": {
+      "description": "ExistsOnText queries",
+      "type": "querying-ExistsOnText",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task34",
+      "mode": "sync"
+    },
+    "task36": {
+      "description": "TimeAllowed queries",
+      "type": "querying-TimeAllowed",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task35",
+      "mode": "sync"
+    },
+    "task37": {
+      "description": "DebugExplain queries",
+      "type": "querying-DebugExplain",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task36",
+      "mode": "sync"
+    },
+    "task38": {
+      "description": "TermsComponent queries",
+      "type": "querying-TermsComponent",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task37",
       "mode": "sync"
     }
   },

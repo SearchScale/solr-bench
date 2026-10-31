@@ -9,17 +9,20 @@ its Java path (luxirCodec=false) over the same index:
   - on Solr+Luxir, the native top rows (ids and order) equal to the Java path's.
 Top rows of score-ranked requests are compared across systems for information only.
 Requests are lines of URL-encoded parameters, or JSON request bodies (lines starting with "{").
-Usage: verify.py <lucene-port> <luxir-port> <requests-file> [collection] [fl], with the collection
+Spell checking, the terms component, stats and highlighting (of docs both systems return) are compared
+the same ways, and responses without results (/terms) as a whole.
+Usage: verify.py <lucene-port> <luxir-port> <requests-file> [collection] [fl] [handler], with the collection
 (default geonames) holding the same documents on each system; fl lists the fields to return, which
-must include the sort fields (default id,score,population,geonameid). For example:
+must include the sort fields (default id,score,population,geonameid); handler defaults to /select. For example:
   verify.py 51000 52000 suites/queries/geonames/All.txt
   verify.py 51000 52000 suites/queries/enwiki/All.json enwiki id,score,month,dayOfYear,title,lastMod"""
 import json, sys, urllib.parse, urllib.request
 lport, xport, path = sys.argv[1:4]
 coll = sys.argv[4] if len(sys.argv) > 4 else "geonames"
 fl = sys.argv[5] if len(sys.argv) > 5 else "id,score,population,geonameid"
+handler = sys.argv[6] if len(sys.argv) > 6 else "/select"
 def run(port, params, extra):
-    url = f"http://localhost:{port}/solr/{coll}/select"
+    url = f"http://localhost:{port}/solr/{coll}{handler}"
     if params.startswith("{"):  # a JSON body, with the extra parameters in the URL
         body = {**json.loads(params), "fields": extra["fl"], "limit": int(extra["rows"])}
         req = urllib.request.Request(url + "?" + urllib.parse.urlencode(extra), data=json.dumps(body).encode(),
@@ -60,7 +63,8 @@ for line in open(path):
              + (" json.facet" if "json.facet" in q else ""))
     a, b = run(lport, params, extra), run(xport, params, extra)
     j = run(xport, params, {**extra, "luxirCodec": "false"})
-    for key, what in (("facet_counts", "legacy facets"), ("nextCursorMark", "nextCursorMark")):
+    for key, what in (("facet_counts", "legacy facets"), ("nextCursorMark", "nextCursorMark"),
+                      ("spellcheck", "spellcheck"), ("terms", "terms"), ("stats", "stats")):
         if key in a and not close(a[key], b.get(key)):
             fails.append(f"{what} differ: {label}")
         if key in b and not close(b[key], j.get(key)):
@@ -79,6 +83,14 @@ for line in open(path):
             info += 1  # score-ranked groups: which tied groups make the page depends on doc order
         if not close(b["grouped"], j["grouped"]):
             fails.append(f"Luxir groups native vs Java differ: {label}")
+        continue
+    if "highlighting" in a:
+        both = a["highlighting"].keys() & b["highlighting"].keys()
+        if any(a["highlighting"][d] != b["highlighting"][d] for d in both):
+            fails.append(f"highlighting differs: {label}")
+        if b["highlighting"] != j.get("highlighting"):
+            fails.append(f"Luxir highlighting native vs Java differs: {label}")
+    if "response" not in a:
         continue
     ra, rb, rj = a["response"], b["response"], j["response"]
     if ra["numFound"] != rb["numFound"]:

@@ -179,6 +179,158 @@
         "duration-secs": 10,
         "warm-count": 16
       }
+    },
+    "querying-Highlight": {
+      "query-benchmark": {
+        "name": "Highlight queries",
+        "description": "coverage: Highlight",
+        "collection": "geonames",
+        "query-file": "queries/coverage/geonames/Highlight.txt",
+        "http-method": "POST",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16
+      }
+    },
+    "querying-EdismaxNames": {
+      "query-benchmark": {
+        "name": "EdismaxNames queries",
+        "description": "coverage: EdismaxNames",
+        "collection": "geonames",
+        "query-file": "queries/coverage/geonames/EdismaxNames.txt",
+        "http-method": "POST",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16
+      }
+    },
+    "querying-Geofilt": {
+      "query-benchmark": {
+        "name": "Geofilt queries",
+        "description": "coverage: Geofilt",
+        "collection": "geonames",
+        "query-file": "queries/coverage/geonames/Geofilt.txt",
+        "http-method": "POST",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16
+      }
+    },
+    "querying-MoreLikeThis": {
+      "query-benchmark": {
+        "name": "MoreLikeThis queries",
+        "description": "coverage: MoreLikeThis",
+        "collection": "geonames",
+        "query-file": "queries/coverage/geonames/MoreLikeThis.txt",
+        "http-method": "POST",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16
+      }
+    },
+    "querying-FacetHeatmap": {
+      "query-benchmark": {
+        "name": "FacetHeatmap queries",
+        "description": "coverage: FacetHeatmap",
+        "collection": "geonames",
+        "query-file": "queries/coverage/geonames/FacetHeatmap.txt",
+        "http-method": "POST",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16
+      }
+    },
+    "querying-FacetQueryNested": {
+      "query-benchmark": {
+        "name": "FacetQueryNested queries",
+        "description": "coverage: FacetQueryNested",
+        "collection": "geonames",
+        "query-file": "queries/coverage/geonames/FacetQueryNested.txt",
+        "http-method": "POST",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16
+      }
+    },
+    "querying-PivotWithStats": {
+      "query-benchmark": {
+        "name": "PivotWithStats queries",
+        "description": "coverage: PivotWithStats",
+        "collection": "geonames",
+        "query-file": "queries/coverage/geonames/PivotWithStats.txt",
+        "http-method": "POST",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16
+      }
+    },
+    "querying-IntervalFacets": {
+      "query-benchmark": {
+        "name": "IntervalFacets queries",
+        "description": "coverage: IntervalFacets",
+        "collection": "geonames",
+        "query-file": "queries/coverage/geonames/IntervalFacets.txt",
+        "http-method": "POST",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16
+      }
+    },
+    "querying-SpellCheck": {
+      "query-benchmark": {
+        "name": "SpellCheck queries",
+        "description": "coverage: SpellCheck",
+        "collection": "geonames",
+        "query-file": "queries/coverage/geonames/SpellCheck.txt",
+        "http-method": "POST",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "uri": "/spell"
+      }
+    },
+    "querying-TermsComponent": {
+      "query-benchmark": {
+        "name": "TermsComponent queries",
+        "description": "coverage: TermsComponent",
+        "collection": "geonames",
+        "query-file": "queries/coverage/geonames/TermsComponent.txt",
+        "http-method": "POST",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "uri": "/terms"
+      }
     }
   },
   "global-variables": {
@@ -289,6 +441,86 @@
       "instances": 1,
       "concurrency": 1,
       "wait-for": "task11",
+      "mode": "sync"
+    },
+    "task13": {
+      "description": "Highlight queries",
+      "type": "querying-Highlight",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task12",
+      "mode": "sync"
+    },
+    "task14": {
+      "description": "EdismaxNames queries",
+      "type": "querying-EdismaxNames",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task13",
+      "mode": "sync"
+    },
+    "task15": {
+      "description": "Geofilt queries",
+      "type": "querying-Geofilt",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task14",
+      "mode": "sync"
+    },
+    "task16": {
+      "description": "MoreLikeThis queries",
+      "type": "querying-MoreLikeThis",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task15",
+      "mode": "sync"
+    },
+    "task17": {
+      "description": "FacetHeatmap queries",
+      "type": "querying-FacetHeatmap",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task16",
+      "mode": "sync"
+    },
+    "task18": {
+      "description": "FacetQueryNested queries",
+      "type": "querying-FacetQueryNested",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task17",
+      "mode": "sync"
+    },
+    "task19": {
+      "description": "PivotWithStats queries",
+      "type": "querying-PivotWithStats",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task18",
+      "mode": "sync"
+    },
+    "task20": {
+      "description": "IntervalFacets queries",
+      "type": "querying-IntervalFacets",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task19",
+      "mode": "sync"
+    },
+    "task21": {
+      "description": "SpellCheck queries",
+      "type": "querying-SpellCheck",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task20",
+      "mode": "sync"
+    },
+    "task22": {
+      "description": "TermsComponent queries",
+      "type": "querying-TermsComponent",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task21",
       "mode": "sync"
     }
   },

@@ -137,6 +137,109 @@ geonames = {
 for name, rows in geonames.items():
     write(f"{OUT}/geonames/{name}.txt", rows)
 
+# ---- more request features: edismax, spell checking, the terms component, complex JSON and
+# legacy facets, other query parsers, re-ranking, function sorts, highlighting, spatial, MLT.
+# Categories not on /select, or form-encoded in the JSON enwiki suite, are listed in HANDLERS.
+HANDLERS = {}  # (dataset, category) -> (uri, form-encoded)
+rnd2 = random.Random(7)  # its own, so the categories above stay as they were
+
+
+def misspell(word):
+    """A likely misspelling: two letters swapped, or one doubled."""
+    if len(word) < 5:
+        return word + word[-1]
+    i = rnd2.randrange(1, len(word) - 2)
+    return word[:i] + word[i + 1] + word[i] + word[i + 2:] if rnd2.random() < 0.6 else word[:i] + word[i] + word[i:]
+
+
+three = [f"{h} {m} {l}" for h, m, l in zip(high, med, low)]
+enwiki_more = {
+    "EdismaxComplex": [ej(f"{h} {m}", params={
+        "defType": "edismax", "qf": "body titleTokenized^3", "pf": "body^2", "pf2": "titleTokenized",
+        "ps": "2", "mm": "2<75%", "tie": "0.1", "bq": "month:January^2", "boost": "log(sum(dayOfYear,1))"})
+        for h, m in zip(high, med)],
+    "EdismaxMinMatch": [ej(t, params={"defType": "edismax", "qf": "body", "mm": "2"}) for t in three],
+    "EdismaxPhraseBoost": [ej(f"{m} {l}", params={"defType": "edismax", "qf": "body", "pf": "body^3", "ps": "1"})
+                           for m, l in zip(med, low)],
+    "SpellCheck": [ej(f"{misspell(m)} {misspell(l)}", limit=0) for m, l in zip(med, low)],
+    "FacetTermsByAgg": [ej(m, limit=0, facet={"m": {"type": "terms", "field": "month", "sort": "x desc", "limit": 6,
+                                                    "facet": {"x": "max(lastMod)", "a": "avg(dayOfYear)"}}})
+                        for m in med],
+    "FacetExcludeTags": [ej(m, limit=0, filter="{!tag=M}month:January", facet={
+        "m": {"type": "terms", "field": "month", "domain": {"excludeTags": "M"}},
+        "y": {"type": "terms", "field": "year", "limit": 5}}) for m in med],
+    "FacetRangeNested": [ej(m, limit=0, facet={"y": {"type": "range", "field": "year", "start": 2001, "end": 2013,
+                                                     "gap": 1, "facet": {"m": {"type": "terms", "field": "month",
+                                                                               "limit": 3},
+                                                                         "d": "avg(dayOfYear)"}}})
+                         for m in med],
+    "FacetRelatedness": [ej("*:*", limit=0, params={"fore": f"body:{m}", "back": "*:*"}, facet={
+        "m": {"type": "terms", "field": "month", "limit": 12,
+              "facet": {"r": "relatedness($fore,$back)"}}}) for m in med],
+    "LegacyMultiSelectFacets": [ej(m, filter="{!tag=t}month:March", params={
+        "facet": "true", "facet.field": ["{!ex=t}month", "year"], "facet.limit": "12"}) for m in med],
+    "StatsComponent": [ej(h, limit=0, params={"stats": "true", "stats.field": [
+        "dayOfYear", "{!countDistinct=true}month", "lastMod"]}) for h in high],
+    "SurroundParser": [ej(f"{{!surround df=body}}3w({h}, {m})") for h, m in zip(high, med)],
+    "BoolParser": [ej("{!bool must=$a should=$b filter=$c}", params={"a": f"body:{h}", "b": f"body:{m}",
+                                                                      "c": "dayOfYear:[1 TO 200]"})
+                   for h, m in zip(high, med)],
+    "ReRank": [ej(h, params={"rq": "{!rerank reRankQuery=$rqq reRankDocs=200 reRankWeight=3}", "rqq": f"body:{m}"})
+               for h, m in zip(high, med)],
+    "FunctionSort": [ej(h, sort="div(dayOfYear,7) desc,lastMod asc") for h in high],
+    "PrefixTermFieldParsers": [ej(f"{{!prefix f=titleTokenized}}{p}", filter="{!term f=month}May") for p in prefixes],
+    "ExistsOnText": [ej(m, filter="titleTokenized:*") for m in med],
+    "TimeAllowed": [ej(h, params={"timeAllowed": "5000"}) for h in high],
+    "DebugExplain": [ej(f"{h} {m}", params={"debugQuery": "true"}) for h, m in zip(high, med)],
+}
+HANDLERS[("enwiki", "SpellCheck")] = ("/spell", False)
+for name, rows in enwiki_more.items():
+    write(f"{OUT}/enwiki/{name}.json", rows)
+enwiki_terms = {"TermsComponent": [urllib.parse.urlencode({"terms.fl": "body", "terms.prefix": p, "terms.limit": 10})
+                                   for p in prefixes]}
+HANDLERS[("enwiki", "TermsComponent")] = ("/terms", True)
+for name, rows in enwiki_terms.items():
+    write(f"{OUT}/enwiki/{name}.txt", rows)
+enwiki.update(enwiki_more)
+enwiki.update(enwiki_terms)
+
+with __import__("gzip").open("suites/datasets/geonames.json.gz", "rt") as f:
+    places = [json.loads(next(f)) for _ in range(20000)][::700]
+places = [p for p in places if p.get("location")][:20]
+geonames_more = {
+    "Highlight": [gq(q=n, hl="true", **{"hl.fl": "name,asciiname", "hl.method": "unified"}, fl="id,name")
+                  for n in names],
+    "EdismaxNames": [gq(q=n.split(":", 1)[1] + " " + c.split(":", 1)[1].lower(), defType="edismax",
+                        qf="name^3 asciiname alternatenames", pf="name", mm="1", fl="id")
+                     for n, c in zip(names, countries * 2)],
+    "Geofilt": [gq(q="*:*", fq="{!geofilt}", sfield="location", pt=p["location"], d=50, sort="geodist() asc",
+                   fl="id") for p in places],
+    "MoreLikeThis": [gq(q=f"{{!mlt qf=name,admin1_code_raw mintf=1 mindf=1}}{p['id']}", fl="id") for p in places],
+    "FacetHeatmap": [gq(q=c, rows=0, **{"json.facet": json.dumps(
+        {"h": {"type": "heatmap", "field": "location", "geom": '["-180 -90" TO "180 90"]', "gridLevel": 2}})})
+        for c in countries],
+    "FacetQueryNested": [gq(q=c, rows=0, **{"json.facet": json.dumps(
+        {"pop": {"type": "query", "q": "population:[1000 TO *]",
+                 "facet": {"f": {"type": "terms", "field": "feature_code_raw", "limit": 5,
+                                 "facet": {"e": "max(elevation)", "p": "sum(population)"}}}}})})
+        for c in countries],
+    "PivotWithStats": [gq(q=c, rows=0, facet="true", stats="true", **{
+        "facet.pivot": "{!stats=s}feature_class_raw,admin1_code_raw", "facet.limit": 5,
+        "stats.field": "{!tag=s}population"}) for c in countries],
+    "IntervalFacets": [urllib.parse.urlencode([
+        ("q", c), ("rows", 0), ("facet", "true"), ("facet.interval", "population"),
+        ("f.population.facet.interval.set", "[0,1000)"), ("f.population.facet.interval.set", "[1000,100000)"),
+        ("f.population.facet.interval.set", "[100000,*]")]) for c in countries],
+    "SpellCheck": [gq(q=misspell(n.split(":", 1)[1]), rows=0) for n in names],
+    "TermsComponent": [gq(**{"terms.fl": "name", "terms.prefix": n.split(":", 1)[1][:3], "terms.limit": 10})
+                       for n in names],
+}
+HANDLERS[("geonames", "SpellCheck")] = ("/spell", True)
+HANDLERS[("geonames", "TermsComponent")] = ("/terms", True)
+for name, rows in geonames_more.items():
+    write(f"{OUT}/geonames/{name}.txt", rows)
+geonames.update(geonames_more)
+
 # ---- ecommerce: JSON requests on the facet suite's 7-day windows; float price clauses and stats
 windows = [ast.literal_eval(l)["query"] for l in lines(f"{Q}/facets-range.json")]
 ecom = {
@@ -175,17 +278,24 @@ def suite(base, out, tasks, task_spec):
 
 
 def enwiki_task(name, _):
-    return {"query-benchmark": {"name": f"{name} queries", "description": f"coverage: {name}",
-                                "collection": "enwiki", "query-file": f"queries/coverage/enwiki/{name}.json",
-                                "threads": [16], "json-query": True, "shuffle": False,
-                                "total-count": 1530, "warm-count": 30}}
+    uri, form = HANDLERS.get(("enwiki", name), ("/select", False))
+    t = {"name": f"{name} queries", "description": f"coverage: {name}", "collection": "enwiki",
+         "query-file": f"queries/coverage/enwiki/{name}.{'txt' if form else 'json'}", "threads": [16],
+         "shuffle": False, "total-count": 1530, "warm-count": 30}
+    t.update({"http-method": "POST"} if form else {"json-query": True})
+    if uri != "/select":
+        t["uri"] = uri
+    return {"query-benchmark": t}
 
 
 def geonames_task(name, _):
-    return {"query-benchmark": {"name": f"{name} queries", "description": f"coverage: {name}",
-                                "collection": "geonames", "query-file": f"queries/coverage/geonames/{name}.txt",
-                                "http-method": "POST", "threads": [16], "shuffle": False,
-                                "duration-secs": 10, "warm-count": 16}}
+    uri, _form = HANDLERS.get(("geonames", name), ("/select", True))
+    t = {"name": f"{name} queries", "description": f"coverage: {name}", "collection": "geonames",
+         "query-file": f"queries/coverage/geonames/{name}.txt", "http-method": "POST", "threads": [16],
+         "shuffle": False, "duration-secs": 10, "warm-count": 16}
+    if uri != "/select":
+        t["uri"] = uri
+    return {"query-benchmark": t}
 
 
 def ecom_task(name, _):
