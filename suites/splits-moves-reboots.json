@@ -117,6 +117,7 @@
   "cluster": {
     "num-solr-nodes": 8,
     "startup-params": "-m 4g -V",
+    "environment": {"OMP_NUM_THREADS": "1"},
     "provisioning-method": "local"
   },
   "repositories": [
