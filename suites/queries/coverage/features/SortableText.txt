@@ -1,0 +1,5 @@
+q=%2A%3A%2A&sort=name_sort+asc%2Cid+asc&fl=id%2Cname_sort
+q=cc%3AUS&sort=name_sort+desc%2Cid+asc&fl=id%2Cname_sort
+q=name_sort%3Awell&sort=name_sort+asc%2Cid+asc&fl=id%2Cname_sort
+q=cc%3AFR&rows=0&json.facet=%7B%22n%22%3A+%7B%22type%22%3A+%22terms%22%2C+%22field%22%3A+%22name_sort%22%2C+%22limit%22%3A+10%7D%7D
+q=cc%3ADE&rows=0&facet=true&facet.field=name_sort&facet.limit=10&facet.sort=index

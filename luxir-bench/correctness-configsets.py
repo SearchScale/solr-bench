@@ -5,6 +5,8 @@ geonames fields replaced by the dataset's, spell checking on its text, and a que
   types   (types-dataset.py):  one field of each type and shape
   nested  (nested-dataset.py): country, state and place blocks (_root_, _nest_path_)
   vectors (vectors-dataset.py): places with dense vectors of every kind
+  features (features-dataset.py): Solr's own types (payloads, term vectors, enum, rank, currency,
+          sortable text) and components (term vectors, suggesters) in a Luxir collection
 Usage: luxir-bench/correctness-configsets.py   (from the solr-bench directory)"""
 import io
 import re
@@ -76,8 +78,105 @@ VECTORS = """  <!-- Workload fields: places with dense vectors from their names 
   <field name="elev" type="pint" indexed="true" stored="true" />
 
 """
-DATASETS = {"types": (TYPES, TYPES_COPY, "t_s"), "nested": (NESTED, NESTED_COPY, "name"),
-            "vectors": (VECTORS, ["name"], "name")}
+FEATURES = """  <!-- Workload fields: Solr's own types in a Luxir collection (features-dataset.py) -->
+  <fieldType name="text_en" class="solr.TextField" positionIncrementGap="100">
+    <analyzer>
+      <tokenizer class="solr.StandardTokenizerFactory" />
+      <filter class="solr.LowerCaseFilterFactory" />
+      <filter class="solr.EnglishPossessiveFilterFactory" />
+      <filter class="solr.PorterStemFilterFactory" />
+    </analyzer>
+  </fieldType>
+  <fieldType name="text_sort" class="solr.SortableTextField">
+    <analyzer>
+      <tokenizer class="solr.StandardTokenizerFactory" />
+      <filter class="solr.LowerCaseFilterFactory" />
+    </analyzer>
+  </fieldType>
+  <fieldType name="delimited_payloads_float" class="solr.TextField" indexed="true" stored="false">
+    <analyzer>
+      <tokenizer class="solr.WhitespaceTokenizerFactory" />
+      <filter class="solr.DelimitedPayloadTokenFilterFactory" encoder="float" />
+    </analyzer>
+  </fieldType>
+  <fieldType name="fclass_enum" class="solr.EnumFieldType" docValues="true" enumsConfig="enumsConfig.xml" enumName="fclass" />
+  <fieldType name="rank" class="solr.RankField" />
+  <fieldType name="currency" class="solr.CurrencyFieldType" amountLongSuffix="_l_ns" codeStrSuffix="_s_ns"
+             defaultCurrency="USD" currencyConfig="currency.xml" />
+  <dynamicField name="*_txt_en" type="text_en" indexed="true" stored="true" />
+  <dynamicField name="*_l_ns" type="plong" indexed="true" stored="false" />
+  <dynamicField name="*_s_ns" type="string" indexed="true" stored="false" />
+  <field name="name" type="text_general" indexed="true" stored="true" multiValued="false" />
+  <field name="name_nf" type="text_en" indexed="true" stored="false" omitTermFreqAndPositions="true" />
+  <field name="name_nn" type="text_en" indexed="true" stored="false" omitNorms="true" />
+  <field name="name_sort" type="text_sort" indexed="true" stored="true" />
+  <field name="name_s" type="string" indexed="true" stored="true" />
+  <field name="desc_tv" type="text_en" indexed="true" stored="true" termVectors="true" termPositions="true"
+         termOffsets="true" termPayloads="false" />
+  <field name="tags_dpf" type="delimited_payloads_float" indexed="true" stored="false" />
+  <field name="fclass_enum" type="fclass_enum" indexed="true" stored="true" />
+  <field name="pop_rank" type="rank" />
+  <field name="price_c" type="currency" indexed="true" stored="true" />
+  <field name="cc" type="string" indexed="true" stored="true" />
+  <field name="pop" type="plong" indexed="true" stored="true" />
+  <field name="sw" type="plong" indexed="true" stored="true" />
+  <field name="elev" type="pint" indexed="true" stored="true" />
+
+"""
+FEATURES_CONFIG = """  <searchComponent name="tvComponent" class="solr.TermVectorComponent" />
+  <requestHandler name="/tvrh" class="solr.SearchHandler">
+    <lst name="defaults">
+      <bool name="tv">true</bool>
+    </lst>
+    <arr name="last-components">
+      <str>tvComponent</str>
+    </arr>
+  </requestHandler>
+  <searchComponent name="suggest" class="solr.SuggestComponent">
+    <lst name="suggester">
+      <str name="name">fuzzy</str>
+      <str name="lookupImpl">FuzzyLookupFactory</str>
+      <str name="dictionaryImpl">DocumentDictionaryFactory</str>
+      <str name="field">name_s</str>
+      <str name="weightField">sw</str>
+      <str name="suggestAnalyzerFieldType">string</str>
+      <str name="buildOnStartup">false</str>
+    </lst>
+    <lst name="suggester">
+      <str name="name">infix</str>
+      <str name="lookupImpl">AnalyzingInfixLookupFactory</str>
+      <str name="dictionaryImpl">DocumentDictionaryFactory</str>
+      <str name="field">name_txt_en</str>
+      <str name="weightField">sw</str>
+      <str name="suggestAnalyzerFieldType">text_en</str>
+      <str name="buildOnStartup">false</str>
+    </lst>
+  </searchComponent>
+  <requestHandler name="/suggest" class="solr.SearchHandler">
+    <lst name="defaults">
+      <str name="suggest">true</str>
+      <str name="suggest.count">10</str>
+    </lst>
+    <arr name="components">
+      <str>suggest</str>
+    </arr>
+  </requestHandler>
+"""
+USD_RATE = {"USD": 1.0, "EUR": 0.9, "GBP": 0.8, "JPY": 150.0}
+FEATURES_FILES = {
+    "enumsConfig.xml": '<?xml version="1.0" ?>\n<enumsConfig>\n  <enum name="fclass">\n'
+                       + "".join(f"    <value>{v}</value>\n" for v in ["A", "H", "L", "P", "R", "S", "T", "U", "V"])
+                       + "  </enum>\n</enumsConfig>\n",
+    # every pair: Solr converts only along a rate it is given
+    "currency.xml": '<?xml version="1.0" ?>\n<currencyConfig version="1.0">\n  <rates>\n'
+                    + "".join(f'    <rate from="{a}" to="{b}" rate="{USD_RATE[b] / USD_RATE[a]:.6f}" />\n'
+                              for a in USD_RATE for b in USD_RATE if a != b)
+                    + '  </rates>\n</currencyConfig>\n',
+}
+# per dataset: schema fields, copyField sources, the spell checker's field, solrconfig additions, files
+DATASETS = {"types": (TYPES, TYPES_COPY, "t_s", "", {}), "nested": (NESTED, NESTED_COPY, "name", "", {}),
+            "vectors": (VECTORS, ["name"], "name", "", {}),
+            "features": (FEATURES, ["name"], "name", FEATURES_CONFIG, FEATURES_FILES)}
 
 
 def copies(fields):
@@ -102,7 +201,7 @@ ELEVATE = """  <searchComponent name="elevator" class="solr.QueryElevationCompon
 
 
 def convert(src, dst, dataset):
-    fields, copy, spell = DATASETS[dataset]
+    fields, copy, spell, config, files = DATASETS[dataset]
     zin = zipfile.ZipFile(src)
     buf = io.BytesIO()
     with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zout:
@@ -116,10 +215,12 @@ def convert(src, dst, dataset):
             elif item.filename.endswith("solrconfig.xml"):
                 data = data.replace('<str name="field">name</str>', f'<str name="field">{spell}</str>')
                 data = data.replace('<str name="df">name</str>', f'<str name="df">{spell}</str>')
-                data = data.replace('  <searchComponent name="terms"', ELEVATE + '  <searchComponent name="terms"')
+                data = data.replace('  <searchComponent name="terms"', ELEVATE + config + '  <searchComponent name="terms"')
                 assert "/elevate" in data and f'<str name="field">{spell}</str>' in data, src
             zout.writestr(item.filename, data)
         zout.writestr("elevate.xml", '<?xml version="1.0" encoding="UTF-8" ?>\n<elevate>\n</elevate>\n')
+        for name, text in files.items():
+            zout.writestr(name, text)
     open(dst, "wb").write(buf.getvalue())
     print("wrote", dst)
 

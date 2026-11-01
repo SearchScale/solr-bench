@@ -1,0 +1,11 @@
+q=name_txt_en%3Achurchs&fl=id%2Cscore&sort=score+desc%2Cid+asc
+q=name_txt_en%3A%22creek+school%22~2&fl=id%2Cscore&sort=score+desc%2Cid+asc
+q=name_txt_en%3Alake%2A&fl=id%2Cscore&sort=id+asc
+q=name_txt_en%3Acemetery~1&fl=id%2Cscore&sort=score+desc%2Cid+asc
+q=name_nn%3Ahotel+name_nn%3Apark&fl=id%2Cscore&sort=score+desc%2Cid+asc
+q=name_nf%3Acerro&fl=id%2Cscore&sort=score+desc%2Cid+asc
+q=%2Bname_nf%3Aquebrada+%2Bname_txt_en%3Aquebrada&fl=id%2Cscore&sort=id+asc
+q=name_txt_en%3A%28center+OR+well%29+-name_nn%3Aspring&fl=id%2Cscore&sort=score+desc%2Cid+asc
+q=%7B%21edismax+qf%3D%27name_txt_en%5E2+name_nn+name%27+pf%3Dname_txt_en+mm%3D1%7Dhill+island&fl=id%2Cscore&sort=score+desc%2Cid+asc
+q=%2A%3A%2A&rows=0&facet=true&facet.field=name_txt_en&facet.limit=15&facet.mincount=10
+q=name_txt_en%3Astation&rows=0&json.facet=%7B%22t%22%3A+%7B%22type%22%3A+%22terms%22%2C+%22field%22%3A+%22name_nf%22%2C+%22limit%22%3A+10%7D%7D

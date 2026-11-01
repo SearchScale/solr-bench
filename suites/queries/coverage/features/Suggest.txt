@@ -1,0 +1,7 @@
+suggest.q=chu&suggest.dictionary=infix&suggest.count=8
+suggest.q=cree&suggest.dictionary=infix&suggest.count=8
+suggest.q=school&suggest.dictionary=infix&suggest.count=8
+suggest.q=Shel&suggest.dictionary=fuzzy&suggest.count=8
+suggest.q=Koh&suggest.dictionary=fuzzy&suggest.count=8
+suggest.q=qash-&suggest.dictionary=fuzzy&suggest.count=8
+suggest.q=lake+ce&suggest.dictionary=infix&suggest.count=8

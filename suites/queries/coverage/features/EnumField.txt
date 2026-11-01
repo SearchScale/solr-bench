@@ -1,0 +1,7 @@
+q=fclass_enum%3AP&sort=id+asc&fl=id%2Cfclass_enum
+q=fclass_enum%3A%5BH+TO+S%5D&sort=id+asc&fl=id%2Cfclass_enum
+q=fclass_enum%3A%7BL+TO+%2A%5D&sort=id+asc&fl=id%2Cfclass_enum
+q=cc%3AUS&sort=fclass_enum+desc%2Cid+asc&fl=id%2Cfclass_enum
+q=cc%3AIN&sort=fclass_enum+asc%2Cpop+desc%2Cid+asc&fl=id%2Cfclass_enum
+q=%2A%3A%2A&rows=0&facet=true&facet.field=fclass_enum&facet.sort=index
+q=cc%3ACN&rows=0&json.facet=%7B%22f%22%3A+%7B%22type%22%3A+%22terms%22%2C+%22field%22%3A+%22fclass_enum%22%2C+%22facet%22%3A+%7B%22p%22%3A+%22sum%28pop%29%22%7D%7D%7D

@@ -1,0 +1,7 @@
+q=price_c%3A%5B10%2CUSD+TO+20%2CUSD%5D&fl=id%2Cprice_c&sort=id+asc
+q=price_c%3A%5B100%2CEUR+TO+%2A%5D&fl=id%2Cprice_c&sort=price_c+asc%2Cid+asc
+q=cc%3AUS+AND+price_c%3A%5B%2A+TO+5%2CGBP%5D&fl=id%2Cprice_c&sort=price_c+desc%2Cid+asc
+q=cc%3AJP&fl=id%2Cprice_c&sort=currency%28price_c%2CJPY%29+desc%2Cid+asc
+q=cc%3AFR&fl=id%2Cu%3Acurrency%28price_c%29%2Ce%3Acurrency%28price_c%2CEUR%29&sort=id+asc
+q=%2A%3A%2A&fq=%7B%21frange+l%3D900+u%3D950%7Dcurrency%28price_c%2CUSD%29&sort=id+asc&fl=id
+q=cc%3AIT&rows=0&facet=true&facet.range=price_c&facet.range.start=0%2CUSD&facet.range.end=1000%2CUSD&facet.range.gap=100%2CUSD

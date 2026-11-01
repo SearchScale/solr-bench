@@ -1,0 +1,11 @@
+{
+ "LuceneAnalyzedText": "/select",
+ "Payloads": "/select",
+ "TermVectors": "/tvrh",
+ "TermVectorHighlighting": "/select",
+ "SortableText": "/select",
+ "EnumField": "/select",
+ "RankField": "/select",
+ "Currency": "/select",
+ "Suggest": "/suggest"
+}

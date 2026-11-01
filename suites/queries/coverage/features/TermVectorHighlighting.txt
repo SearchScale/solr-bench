@@ -1,0 +1,4 @@
+q=desc_tv%3Acemetery&sort=id+asc&fl=id&hl=true&hl.method=fastVector&hl.fl=desc_tv
+q=desc_tv%3A%22hotel+park%22~3&sort=id+asc&fl=id&hl=true&hl.method=fastVector&hl.fl=desc_tv&hl.fragsize=30
+q=desc_tv%3Acerro&sort=id+asc&fl=id&hl=true&hl.method=unified&hl.fl=desc_tv&hl.offsetSource=TERM_VECTORS
+q=desc_tv%3Aquebrada+desc_tv%3Acenter&sort=id+asc&fl=id&hl=true&hl.method=fastVector&hl.fl=desc_tv&hl.tag.pre=%5B&hl.tag.post=%5D

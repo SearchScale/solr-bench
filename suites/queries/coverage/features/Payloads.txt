@@ -1,0 +1,9 @@
+q=%7B%21payload_score+f%3Dtags_dpf+v%3Dchurch+func%3Dmax%7D&fl=id%2Cscore&sort=score+desc%2Cid+asc
+q=%7B%21payload_score+f%3Dtags_dpf+v%3Dcreek+func%3Dsum%7D&fl=id%2Cscore&sort=score+desc%2Cid+asc
+q=%7B%21payload_score+f%3Dtags_dpf+v%3Dschool+func%3Daverage+includeSpanScore%3Dtrue%7D&fl=id%2Cscore&sort=score+desc%2Cid+asc
+q=%7B%21payload_score+f%3Dtags_dpf+v%3Dlake+func%3Dmin%7D&fl=id%2Cscore&sort=score+desc%2Cid+asc
+q=%7B%21payload_score+f%3Dtags_dpf+v%3D%27cemetery+hotel%27+func%3Dmax+operator%3Dor%7D&fl=id%2Cscore&sort=score+desc%2Cid+asc
+q=%7B%21payload_check+f%3Dtags_dpf+payloads%3D%273.0%27+v%3Dpark%7D&fl=id&sort=id+asc
+q=%7B%21payload_check+f%3Dtags_dpf+payloads%3D%271.5+3.0%27+op%3Dgte+v%3D%27cerro+quebrada%27%7D&fl=id&sort=id+asc
+q=tags_dpf%3Acenter&fl=id%2Cp%3Apayload%28tags_dpf%2Ccenter%29&sort=id+asc
+q=tags_dpf%3Awell&fl=id&sort=payload%28tags_dpf%2Cwell%2C0%2Cmax%29+desc%2Cid+asc

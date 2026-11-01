@@ -1,0 +1,4 @@
+q=desc_tv%3Achurch&sort=id+asc&rows=3&fl=id&tv.fl=desc_tv&tv.tf=true&tv.df=true
+q=desc_tv%3Acreek&sort=id+asc&rows=3&fl=id&tv.fl=desc_tv&tv.positions=true&tv.offsets=true
+q=desc_tv%3Aschool&sort=id+asc&rows=3&fl=id&tv.fl=desc_tv&tv.all=true
+q=desc_tv%3Alake+AND+cc%3AUS&sort=id+asc&rows=3&fl=id&tv.fl=desc_tv&tv.tf_idf=true&tv.df=true

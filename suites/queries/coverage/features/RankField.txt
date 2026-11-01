@@ -1,0 +1,4 @@
+q=name%3Achurch+%7B%21rank+f%3Dpop_rank+function%3Dlog+weight%3D2%7D&fl=id%2Cscore&sort=score+desc%2Cid+asc
+q=name%3Acreek+%7B%21rank+f%3Dpop_rank+function%3Dsatu+pivot%3D1000%7D&fl=id%2Cscore&sort=score+desc%2Cid+asc
+q=name%3Aschool+%7B%21rank+f%3Dpop_rank+function%3Dsigm+pivot%3D1000+exponent%3D0.6%7D&fl=id%2Cscore&sort=score+desc%2Cid+asc
+q=name%3Alake+%7B%21rank+f%3Dpop_rank+function%3Dlog+scalingFactor%3D2%7D&fl=id%2Cscore&sort=score+desc%2Cid+asc
