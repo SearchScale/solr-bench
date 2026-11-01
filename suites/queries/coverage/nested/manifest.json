@@ -1,0 +1,9 @@
+{
+ "ParentBlockJoin": "/select",
+ "ChildBlockJoin": "/select",
+ "NestPaths": "/select",
+ "ChildTransformer": "/select",
+ "BlockJoinFacets": "/select",
+ "ParentsByChildren": "/select",
+ "FeaturesOverNested": "/select"
+}

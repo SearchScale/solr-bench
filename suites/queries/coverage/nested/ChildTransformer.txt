@@ -1,0 +1,8 @@
+q=code%3AAD+AND+doc_type%3Acountry&sort=id+asc&fl=%2A%2C%5Bchild+limit%3D5%5D&rows=1
+q=code%3A%28LI+MC+SM%29+AND+doc_type%3Acountry&sort=id+asc&fl=id%2Ccode%2C%5Bchild+limit%3D3+fl%3Did%2Cname%2Cpopulation%5D&rows=3
+q=doc_type%3Acountry+AND+num_places%3A%5B1+TO+20%5D&sort=id+asc&fl=%2A%2C%5Bchild+childFilter%3Ddoc_type%3Aplace+limit%3D10%5D&rows=5
+q=doc_type%3Acountry+AND+num_places%3A%5B1+TO+50%5D&sort=id+asc&fl=%2A%2C%5Bchild+childFilter%3D%27name%3Aquebrada%27+limit%3D5%5D&rows=10
+q=id%3As-AF-33&sort=id+asc&fl=%2A%2C%5Bchild+limit%3D4+fl%3Did%2Celevation%5D&rows=1
+q=doc_type%3Astate+AND+num_places%3A%5B1+TO+5%5D&sort=id+asc&fl=id%2Cname_s%2C%5Bchild%5D&rows=10
+q=doc_type%3Acountry+AND+code%3ABV&sort=id+asc&fl=%2A%2C%5Bchild%5D&rows=1
+q=doc_type%3Acountry+AND+num_places%3A%5B1+TO+30%5D&sort=id+asc&fl=id%2C%5Bchild+childFilter%3D%27feature_class%3A%28H+OR+T%29%27+limit%3D-1+fl%3Did%5D&rows=8

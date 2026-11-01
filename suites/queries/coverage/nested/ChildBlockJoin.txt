@@ -1,0 +1,10 @@
+q=%7B%21child+of%3Ddoc_type%3Acountry%7D%2Bdoc_type%3Acountry+%2Bcode%3AUS&fq=doc_type%3Astate&sort=id+asc&fl=id&rows=20
+q=%7B%21child+of%3Ddoc_type%3Acountry%7D%2Bdoc_type%3Acountry+%2Bcode%3AIN&fq=name%3Afire&sort=id+asc&fl=id&rows=20
+q=%7B%21child+of%3Ddoc_type%3Acountry%7D%2Bdoc_type%3Acountry+%2Bpopulation%3A%5B100000000+TO+%2A%5D&fq=doc_type%3Aplace&sort=id+asc&fl=id&rows=20
+q=%7B%21child+of%3Ddoc_type%3Acountry%7D%2Bdoc_type%3Acountry+%2Bnum_places%3A%5B0+TO+100%5D&fq=%2A%3A%2A&sort=id+asc&fl=id&rows=20
+q=%7B%21child+of%3Ddoc_type%3Acountry%7D%2Bdoc_type%3Acountry+%2Bcode%3A%28US+CN+NO+IN+MX%29&fq=feature_class%3AP&sort=id+asc&fl=id&rows=20
+q=%7B%21child+of%3D%22doc_type%3A%28country+OR+state%29%22%7D%2Bdoc_type%3Astate+%2Bid%3As-AE-03&sort=population+desc%2Cid+asc&fl=id%2Cpopulation&rows=15
+q=%7B%21child+of%3D%22doc_type%3A%28country+OR+state%29%22%7D%2Bdoc_type%3Astate+%2Bnum_places%3A%5B2000+TO+%2A%5D&sort=population+desc%2Cid+asc&fl=id%2Cpopulation&rows=15
+q=%7B%21child+of%3D%22doc_type%3A%28country+OR+state%29%22%7D%2Bdoc_type%3Astate+%2Bpopulation%3A0&sort=population+desc%2Cid+asc&fl=id%2Cpopulation&rows=15
+q=%7B%21child+of%3D%22%2A%3A%2A+-_nest_path_%3A%2A%22%7D%2Bdoc_type%3Acountry+%2Bcode%3ACN&fq=_nest_path_%3A%22%2Fstates%22&sort=id+asc&fl=id
+q=%7B%21child+of%3D%22%2A%3A%2A+-_nest_path_%3A%2A%22%7D%2Bdoc_type%3Acountry+%2Bcode%3ANO&fq=_nest_path_%3A%22%2Fplaces%22&rows=0

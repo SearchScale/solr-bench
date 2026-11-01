@@ -25,6 +25,12 @@ coll = sys.argv[4] if len(sys.argv) > 4 else "geonames"
 fl = sys.argv[5] if len(sys.argv) > 5 else "id,score,population,geonameid"
 handler = sys.argv[6] if len(sys.argv) > 6 else "/select"
 strict = os.environ.get("VERIFY_STRICT") == "1"
+# approximate results (HNSW vector search: each system's graphs differ with its segments): rows need only
+# overlap; docs both return must still agree, scores included
+# VERIFY_APPROX=2: approximate scores as well (quantized vectors): only counts and that both answer
+approx = os.environ.get("VERIFY_APPROX") in ("1", "2")
+approx_scores = os.environ.get("VERIFY_APPROX") == "2"
+APPROX_OVERLAP = 0.7
 ROWS_FREE = handler in ("/export", "/get", "/stream")  # handlers that take no rows/fl defaults of ours
 def run(port, params, extra):
     url = f"http://localhost:{port}/solr/{coll}{handler}"
@@ -218,8 +224,23 @@ for line in open(path):
     if ra is None:
         continue
     if na != nb:
-        fails.append(f"numFound {na} vs {nb}: {label}")
-    if ROWS_FREE:
+        if approx: info += 1
+        else: fails.append(f"numFound {na} vs {nb}: {label}")
+    if approx_scores and not ROWS_FREE:
+        if [x.get("id") for x in ra] != [x.get("id") for x in rb]: info += 1
+    elif approx and not ROWS_FREE:
+        ida, idb = [x.get("id") for x in ra], [x.get("id") for x in rb]
+        shared = set(ida) & set(idb)
+        if ida and len(shared) < APPROX_OVERLAP * max(len(ida), len(idb)):
+            fails.append(f"rows overlap {len(shared)} of {max(len(ida), len(idb))}: {label}")
+        by_id = {x.get("id"): x for x in rb}
+        for x in ra:
+            if x.get("id") in shared:
+                dd = diff({k: v for k, v in x.items() if not k.startswith("_k")},
+                          {k: v for k, v in by_id[x.get("id")].items() if not k.startswith("_k")}, f"doc {x.get('id')}")
+                if dd: fails.append(f"rows differ: {dd}: {label}"); break
+        if ida != idb: info += 1
+    elif ROWS_FREE:
         if handler == "/get":  # distributed real-time get lists docs as the shards answer
             ra, rb, rj = (sorted(r, key=lambda x: str(x.get("id"))) for r in (ra, rb, rj))
         d = diff(ra, rb, "docs")

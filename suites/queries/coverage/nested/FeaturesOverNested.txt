@@ -1,0 +1,7 @@
+q=doc_type%3Aplace&fl=id%2Cpopulation&fq=%7B%21collapse+field%3Dcode+sort%3D%27population+desc%2Cid+asc%27%7D&sort=id+asc
+q=name%3Awell&fl=id&facet=true&facet.field=feature_class&facet.field=code&facet.limit=8&rows=0
+q=doc_type%3Astate&fl=id&stats=true&stats.field=population&stats.field=num_places&rows=0
+q=doc_type%3Aplace+AND+population%3A%5B100000+TO+%2A%5D&fl=id&group=true&group.field=timezone&group.sort=population+desc%2Cid+asc&sort=id+asc
+q=doc_type%3Aplace&fl=id%2Clocation&fq=%7B%21geofilt+sfield%3Dlocation+pt%3D48.85%2C2.35+d%3D30%7D&sort=id+asc
+q=doc_type%3Acountry&fl=id%2Cnum_places&sort=num_places+desc%2Cid+asc&rows=20
+q=%2A%3A%2A&fl=id&rows=0&json.facet=%7B%22t%22%3A+%7B%22type%22%3A+%22terms%22%2C+%22field%22%3A+%22doc_type%22%7D%7D

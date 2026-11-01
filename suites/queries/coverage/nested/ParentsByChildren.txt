@@ -1,0 +1,3 @@
+q=%7B%21parent+which%3Ddoc_type%3Acountry+score%3Dmax+v%3D%24cq%7D&sort=score+desc%2Cid+asc&fl=id%2Cscore&cq=%7B%21bool+filter%3Ddoc_type%3Aplace+must%3D%24f%7D&f=%7B%21func%7Dpopulation
+q=%7B%21parent+which%3D%22doc_type%3A%28country+OR+state%29%22+score%3Dtotal+v%3D%24cq%7D&sort=score+desc%2Cid+asc&fl=id%2Cscore&cq=%7B%21bool+filter%3Ddoc_type%3Aplace+must%3D%24f%7D&f=%7B%21func%7Delevation
+q=%7B%21parent+which%3Ddoc_type%3Acountry+score%3Davg+v%3D%24cq%7D&sort=score+desc%2Cid+asc&fl=id%2Cscore&cq=%7B%21bool+filter%3Ddoc_type%3Aplace+must%3D%24f%7D&f=%7B%21func%7Dlog%28sum%28population%2C1%29%29

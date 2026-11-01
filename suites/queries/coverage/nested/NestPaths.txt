@@ -1,0 +1,7 @@
+q=_nest_path_%3A%22%2Fstates%22&rows=0
+q=_nest_path_%3A%22%2Fstates%2Fplaces%22&rows=0
+q=_nest_path_%3A%22%2Fplaces%22&rows=0
+q=-_nest_path_%3A%2A&rows=0
+q=_nest_path_%3A%2A&rows=0
+q=%2B_nest_path_%3A%22%2Fstates%2Fplaces%22+%2Bname%3Ahill&rows=0
+q=doc_type%3Aplace&fq=_nest_path_%3A%22%2Fplaces%22&fq=name%3Ariver&sort=id+asc&fl=id%2Cname

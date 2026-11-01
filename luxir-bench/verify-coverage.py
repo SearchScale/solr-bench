@@ -17,9 +17,13 @@ coll = sys.argv[4] if len(sys.argv) > 4 else dataset
 only = set(sys.argv[5:])
 base = f"suites/queries/coverage/{dataset}"
 handlers = {"SpellCheck": "/spell", "TermsComponent": "/terms"}
+approximate = approximate_scores = set()
 if os.path.exists(f"{base}/manifest.json"):
-    handlers.update(json.load(open(f"{base}/manifest.json")))
-fl = {"types": "-", "enwiki": "id,score", "geonames": "id,score"}.get(dataset, "id,score")
+    manifest = json.load(open(f"{base}/manifest.json"))
+    approximate = set(manifest.pop("_approximate", []))  # categories verify.py checks with VERIFY_APPROX=1
+    approximate_scores = set(manifest.pop("_approximate_scores", []))  # ... with VERIFY_APPROX=2
+    handlers.update(manifest)
+fl = {"enwiki": "id,score", "geonames": "id,score"}.get(dataset, "-")
 files = sorted(f for f in os.listdir(base) if f.endswith((".txt", ".json")) and f != "manifest.json"
                and (not only or f.rsplit(".", 1)[0] in only))
 
@@ -28,7 +32,8 @@ def check(f):
     name = f.rsplit(".", 1)[0]
     cmd = [sys.executable, os.path.join(os.path.dirname(__file__), "verify.py"), lport, xport, f"{base}/{f}", coll, fl,
            handlers.get(name, "/select")]
-    r = subprocess.run(cmd, capture_output=True, text=True)
+    env = dict(os.environ, VERIFY_APPROX="2" if name in approximate_scores else "1" if name in approximate else "0")
+    r = subprocess.run(cmd, capture_output=True, text=True, env=env)
     return name, r.returncode, (r.stdout + r.stderr).strip().splitlines()
 
 

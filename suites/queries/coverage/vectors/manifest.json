@@ -1,0 +1,18 @@
+{
+ "KnnBasic": "/select",
+ "KnnQuantized": "/select",
+ "KnnFiltered": "/select",
+ "KnnParams": "/select",
+ "VectorThreshold": "/select",
+ "KnnHybrid": "/select",
+ "KnnExactSmallFilters": "/select",
+ "VectorFunctions": "/select",
+ "VectorFields": "/select",
+ "_approximate": [
+  "KnnParams",
+  "VectorThreshold"
+ ],
+ "_approximate_scores": [
+  "KnnQuantized"
+ ]
+}
