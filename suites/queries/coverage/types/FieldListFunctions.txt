@@ -1,0 +1,11 @@
+q=s_s%3AUS&sort=id+asc&fl=id%2Cs%3Asum%28i_s%2C1%29%2Cl%3Alog%28sum%28l_s%2C1%29%29%2Ce%3Aexists%28i_sp%29%2Cd%3Adef%28d_sp%2C-1%29%2Cm%3Amax%28f_s%2Cd_s%29&NOW=1700000000000
+q=s_s%3ACN&sort=id+asc&fl=id%2Cmi%3Afield%28i_m%2Cmin%29%2Cma%3Afield%28dt_m%2Cmax%29%2Cg%3Ageodist%28ll%2C40%2C-74%29%2Cms%3Ams%28dt_s%29%2Cb%3Aif%28b_s%2C%27y%27%2C%27n%27%29&NOW=1700000000000
+q=t_s%3Achurch&sort=id+asc&fl=id%2Ctf%3Atermfreq%28t_s%2C%27church%27%29%2Cdf%3Adocfreq%28t_s%2C%27church%27%29%2Cttf%3Atotaltermfreq%28t_s%2C%27church%27%29%2Cstf%3Asumtotaltermfreq%28t_s%29%2Cnd%3Anumdocs%28%29%2Cmd%3Amaxdoc%28%29&NOW=1700000000000
+q=s_s%3AIN&sort=id+asc&fl=id%2Cstr%3Astrdist%28s_s%2C%27IN%27%2Cjw%29%2Cmp%3Amap%28i_s%2C0%2C100%2C1%2C0%29%2Crc%3Arecip%28i_s%2C1%2C1000%2C1000%29%2Cq%3Aquery%28%24qq%29&qq=t_s%3Acreek&NOW=1700000000000
+q=s_s%3AMX&sort=id+asc&fl=id%2Ca%3Aabs%28d_sp%29%2Cp%3Apow%28i_dv%2C2%29%2Csq%3Asqrt%28i_dv%29%2Cc%3Aceil%28f_s%29%2Cfl%3Afloor%28d_s%29%2Cr%3Arint%28f_s%29%2Csb%3Asub%28l_s%2Ci_s%29%2Cmu%3Amul%28i_s%2Cf_s%29&NOW=1700000000000
+q=s_s%3AAU&sort=id+asc&fl=%2A&NOW=1700000000000
+q=s_s%3ABR&sort=id+asc&fl=%2A%2Cscore&NOW=1700000000000
+q=s_s%3ANO&sort=id+asc&fl=id%2Cs_%2A%2Ci_%2A&NOW=1700000000000
+q=s_s%3AID&sort=id+asc&fl=id%2Ci_dv%2Cb_s%2Cll%2Crpt&NOW=1700000000000
+q=s_s%3ACA&sort=id+asc&fl=id%2Cdt_m%2Cf_m%2Cl_m%2Ct_m&NOW=1700000000000
+q=s_s%3ATH&sort=id+asc&fl=id%2Csc%3Ascale%28i_s%2C0%2C1%29&NOW=1700000000000

@@ -1,0 +1,8 @@
+q=oued+pond&defType=dismax&qf=t_s%5E2+t_m&mm=1&fl=id%2Cscore&NOW=1700000000000
+q=number+santa&defType=dismax&qf=t_s%5E2+t_m&mm=2&fl=id%2Cscore&pf=t_s%5E3&ps=1&NOW=1700000000000
+q=methodist+suites&defType=dismax&qf=t_s%5E2+t_m&mm=1&fl=id%2Cscore&tie=0.3&NOW=1700000000000
+q=fire+wadi&defType=dismax&qf=t_s%5E2+t_m&mm=100%25&fl=id%2Cscore&bq=b_s%3Atrue%5E2&NOW=1700000000000
+q=mountain+little&defType=dismax&qf=t_s%5E2+t_m&mm=1&fl=id%2Cscore&bf=log%28sum%28l_s%2C1%29%29&NOW=1700000000000
+q=well+fire&defType=dismax&qf=t_s%5E2+t_m&mm=2&fl=id%2Cscore&qs=1&NOW=1700000000000
+q=well+cove&defType=dismax&qf=t_s%5E2+t_m&mm=1&fl=id%2Cscore&pf=t_m&bq=s_s%3AUS&NOW=1700000000000
+q=district+north&defType=dismax&qf=t_s%5E2+t_m&mm=100%25&fl=id%2Cscore&NOW=1700000000000

@@ -1,0 +1,10 @@
+q=%2A%3A%2A&rows=0&facet=true&facet.pivot=s_s%2Cb_s&facet.pivot.mincount=2&facet.limit=5&NOW=1700000000000
+q=b_s%3Atrue&rows=0&facet=true&facet.pivot=s_m%2Cs_s&facet.limit=4&NOW=1700000000000
+q=s_m%3APPL&rows=0&facet=true&facet.pivot=%7B%21range%3Dr1%7Ds_s&facet.range=%7B%21tag%3Dr1%7Di_s&facet.range.start=0&facet.range.end=3000&facet.range.gap=1000&facet.limit=3&NOW=1700000000000
+q=%2A%3A%2A&rows=0&facet=true&facet.pivot=%7B%21query%3Dq1%7Ds_s%2Cb_s&facet.query=%7B%21tag%3Dq1%7Di_s%3A%5B0+TO+100%5D&facet.limit=3&NOW=1700000000000
+q=b_s%3Atrue&rows=0&facet=true&facet.interval=f_s&f.f_s.facet.interval.set=%5B-90%2C0%29&f.f_s.facet.interval.set=%5B0%2C30%29&f.f_s.facet.interval.set=%5B30%2C90%5D&f.f_s.facet.interval.set=%2845%2C%2A%5D&NOW=1700000000000
+q=b_s%3Atrue&rows=0&facet=true&facet.interval=dt_s&f.dt_s.facet.interval.set=%5B%2A%2C1990-01-01T00%3A00%3A00Z%29&f.dt_s.facet.interval.set=%5B1990-01-01T00%3A00%3A00Z%2CNOW%5D&f.dt_s.facet.interval.set=%28NOW%2C%2A%5D&NOW=1700000000000
+q=s_m%3APPL&rows=0&facet=true&facet.interval=l_m&f.l_m.facet.interval.set=%5B%2A%2C0%29&f.l_m.facet.interval.set=%5B0%2C1000000000%5D&f.l_m.facet.interval.set=%281000000000%2C%2A%5D&NOW=1700000000000
+q=b_s%3Atrue&rows=0&facet=true&facet.interval=%7B%21key%3Dpop%7Dl_s&f.l_s.facet.interval.set=%7B%21key%3Dnone%7D%5B0%2C0%5D&f.l_s.facet.interval.set=%7B%21key%3Dsome%7D%280%2C%2A%5D&NOW=1700000000000
+q=%2A%3A%2A&rows=0&facet=true&facet.heatmap=rpt&facet.heatmap.geom=%5B%22-180+-90%22+TO+%22180+90%22%5D&facet.heatmap.gridLevel=2&NOW=1700000000000
+q=s_m%3APPL&rows=0&facet=true&facet.heatmap=rpt&facet.heatmap.geom=%5B%220+40%22+TO+%2220+55%22%5D&facet.heatmap.distErrPct=0.15&NOW=1700000000000

@@ -1,0 +1,8 @@
+q=%2Bt_s%3Achurch+%2B%28s_s%3AUS+s_s%3ACA%29+-b_s%3Afalse&fl=id%2Cscore&NOW=1700000000000
+q=t_s%3A%28creek+lake%29%5E2+s_s%3AUS%5E%3D5&fl=id%2Cscore&NOW=1700000000000
+q=%28t_s%3Aschool+OR+t_m%3Aschool%29+AND+NOT+s_s%3AUS&fl=id%2Cscore&NOW=1700000000000
+q=t_s%3Achurch+%26%26+s_m%3APPL+%7C%7C+t_m%3Apark&fl=id%2Cscore&NOW=1700000000000
+q=%28%28t_s%3Acemetery+t_s%3Aisland%29+%2B%28b_s%3Atrue%5E3+i_s%3A%5B0+TO+100%5D%5E0.5%29%29+-s_s%3ACN&fl=id%2Cscore&NOW=1700000000000
+q=t_s%3Abaptist%5E0.1+t_m%3Abaptist%5E10&fl=id%2Cscore&NOW=1700000000000
+q=%2B%28t_s%3Ahill+t_m%3Astation%29+%2Bs_s%3A%28US+CN+NO+IN+MX%29&fl=id%2Cscore&NOW=1700000000000
+q=t_s%3Apoint+s_m%3AP%5E%3D0.5+s_m%3APPL%5E%3D0.25&fl=id%2Cscore&NOW=1700000000000

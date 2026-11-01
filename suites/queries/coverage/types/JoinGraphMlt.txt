@@ -1,0 +1,12 @@
+q=%7B%21join+from%3Ds_s+to%3Ds_s%7Dt_s%3Achurch&sort=id+asc&fl=id&NOW=1700000000000
+q=%7B%21join+from%3Di_s+to%3Di_sp%7Dt_s%3Acreek&sort=id+asc&fl=id&NOW=1700000000000
+q=%7B%21join+from%3Ds_sp+to%3Ds_sp%7Dt_s%3Alake+AND+s_s%3AUS&sort=id+asc&fl=id&NOW=1700000000000
+q=%7B%21graph+from%3Ds_sp+to%3Ds_sp+maxDepth%3D1%7Dt_s%3Aschool&sort=id+asc&fl=id&NOW=1700000000000
+q=%7B%21graph+from%3Ds_s+to%3Ds_sp+returnRoot%3Dfalse+maxDepth%3D1%7Did%3A1146398&sort=id+asc&fl=id&NOW=1700000000000
+q=%7B%21join+from%3Ds_sp+to%3Ds_sp+score%3Dmax%7Dt_s%3Apark&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21mlt+qf%3Dt_s%2Ct_m+mintf%3D1+mindf%3D1%7D10671636&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21mlt+qf%3Dt_s%2Ct_m+mintf%3D1+mindf%3D1%7D7615049&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21mlt+qf%3Dt_s%2Ct_m+mintf%3D1+mindf%3D1%7D10014021&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21mlt+qf%3Dt_s%2Ct_m+mintf%3D1+mindf%3D1%7D6636120&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21mlt+qf%3Dt_s%2Ct_m+mintf%3D1+mindf%3D1%7D3815565&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21mlt+qf%3Dt_s%2Ct_m+mintf%3D1+mindf%3D1%7D11043722&fl=id%2Cscore&NOW=1700000000000

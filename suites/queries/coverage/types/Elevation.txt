@@ -1,0 +1,5 @@
+q=s_s%3AUS&sort=l_s+desc%2Cid+asc&fl=id%2C%5Belevated%5D%2C%5Bexcluded%5D&elevateIds=6454232%2C11043722%2C5851874&forceElevation=true&NOW=1700000000000
+q=s_s%3ACN&sort=id+asc&fl=id%2C%5Belevated%5D%2C%5Bexcluded%5D&elevateIds=3123416%2C1304054&excludeIds=5846852%2C9681729&NOW=1700000000000
+q=t_s%3Achurch&sort=score+desc%2Cid+asc&fl=id%2C%5Belevated%5D%2C%5Bexcluded%5D&elevateIds=6093932%2C2295580&NOW=1700000000000
+q=s_m%3APPL&sort=id+asc&fl=id%2C%5Belevated%5D%2C%5Bexcluded%5D&excludeIds=8615138%2C1136329%2C10879663%2C7294340%2C358731&markExcludes=true&NOW=1700000000000
+q=s_s%3AUS&sort=id+asc&fl=id%2C%5Belevated%5D%2C%5Bexcluded%5D&elevateIds=8201007%2C1729930%2C3519354&enableElevation=false&NOW=1700000000000

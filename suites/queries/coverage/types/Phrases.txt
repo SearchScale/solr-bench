@@ -1,0 +1,14 @@
+q=t_s%3A%22morrison+lake%22&fl=id%2Cscore&NOW=1700000000000
+q=t_s%3A%22war+nurse%22&fl=id%2Cscore&NOW=1700000000000
+q=t_s%3A%22du+lion%22&fl=id%2Cscore&NOW=1700000000000
+q=t_s%3A%22long+brake%22&fl=id%2Cscore&NOW=1700000000000
+q=t_s%3A%22twin+lakes%22&fl=id%2Cscore&NOW=1700000000000
+q=t_m%3A%22kartalgolu+tepesi%22~2&fl=id%2Cscore&NOW=1700000000000
+q=t_m%3A%22david+morgan%22~2&fl=id%2Cscore&NOW=1700000000000
+q=t_m%3A%22wadi+khalla%22~2&fl=id%2Cscore&NOW=1700000000000
+q=t_m%3A%22town+of%22~2&fl=id%2Cscore&NOW=1700000000000
+q=t_s%3A%22mexican+fork%22~3&fl=id%2Cscore&NOW=1700000000000
+q=t_s%3A%22church+lutheran%22~3&fl=id%2Cscore&NOW=1700000000000
+q=t_s%3A%22colorada+lagunita%22~3&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21field+f%3Dt_s%7Dfirst+baptist+church&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21lucene+df%3Dt_m%7D%22mount+hope%22~1&fl=id%2Cscore&NOW=1700000000000

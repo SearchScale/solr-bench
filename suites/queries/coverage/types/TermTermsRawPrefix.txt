@@ -1,0 +1,17 @@
+q=%7B%21term+f%3Ds_m%7DPPL&sort=id+asc&fl=id&NOW=1700000000000
+q=%7B%21term+f%3Di_s%7D0&sort=id+asc&fl=id&NOW=1700000000000
+q=%7B%21term+f%3Db_s%7Dtrue&sort=id+asc&fl=id&NOW=1700000000000
+q=%7B%21term+f%3Ddt_s%7D1992-11-20T20%3A18%3A07Z&sort=id+asc&fl=id&NOW=1700000000000
+q=%7B%21terms+f%3Ds_s%7DUS%2CCN%2CNO%2CIN&sort=id+asc&fl=id&NOW=1700000000000
+q=%7B%21terms+f%3Di_m%7D1%2C2%2C3&sort=id+asc&fl=id&NOW=1700000000000
+q=%7B%21terms+f%3Dl_s+separator%3D%22+%22%7D0+100+1000&sort=id+asc&fl=id&NOW=1700000000000
+q=%7B%21terms+f%3Ds_m+method%3DbooleanQuery%7DP%2CPPL%2CH%2CS%2CT&sort=id+asc&fl=id&NOW=1700000000000
+q=%7B%21terms+f%3Ds_m+method%3Dautomaton%7DP%2CPPL%2CH%2CS%2CT&sort=id+asc&fl=id&NOW=1700000000000
+q=%7B%21terms+f%3Ds_s+method%3DdocValuesTermsFilter%7DID%2CRU%2CCA%2CTH&sort=id+asc&fl=id&NOW=1700000000000
+q=%7B%21terms+f%3Ds_s+method%3DdocValuesTermsFilterTopLevel%7DID%2CRU%2CCA%2CTH&sort=id+asc&fl=id&NOW=1700000000000
+q=%7B%21terms+f%3Ds_s+method%3DdocValuesTermsFilterPerSegment%7DID%2CRU%2CCA%2CTH&sort=id+asc&fl=id&NOW=1700000000000
+q=%7B%21terms+f%3Ds_s+method%3DtermsFilter%7DIR%2CAU%2CPK&sort=id+asc&fl=id&NOW=1700000000000
+q=%7B%21terms+f%3Df_m%7D0.0%2C1.5&sort=id+asc&fl=id&NOW=1700000000000
+q=%7B%21raw+f%3Ds_s%7DUS&sort=id+asc&fl=id&NOW=1700000000000
+q=%7B%21prefix+f%3Dt_s%7Dchu&sort=id+asc&fl=id&NOW=1700000000000
+q=%7B%21prefix+f%3Ds_m%7DPP&sort=id+asc&fl=id&NOW=1700000000000

@@ -1,0 +1,9 @@
+q=church+creek&fl=id%2Cscore&df=t_s&q.op=AND&NOW=1700000000000
+q=lake+school&fl=id%2Cscore&df=t_m&sow=false&NOW=1700000000000
+q=t_s%3Apark&fl=id%2Cscore&rows=0&NOW=1700000000000
+q=t_s%3Acemetery&fl=id%2Cscore&debugQuery=true&sort=id+asc&NOW=1700000000000
+q=t_s%3Aisland&fl=id%2Cscore&fq=s_m%3APPL&fq=b_s%3Atrue&fq=%7B%21cache%3Dfalse%7Di_s%3A%5B0+TO+1000%5D&sort=id+asc&NOW=1700000000000
+q=t_s%3Abaptist&fl=id%2Cscore&timeAllowed=10000&sort=l_s+desc%2Cid+asc&NOW=1700000000000
+q=t_s%3Ahill&fl=id%2Cscore&rq=%7B%21rerank+reRankQuery%3D%24rqq+reRankDocs%3D100+reRankWeight%3D2%7D&rqq=%7B%21func%7Ddiv%28ms%28dt_s%29%2C1e12%29&sort=score+desc%2Cid+asc&NOW=1700000000000
+q=t_s%3Astation&fl=id%2Cscore&rq=%7B%21rerank+reRankQuery%3D%24rqq+reRankDocs%3D50+reRankOperator%3Dmultiply%7D&rqq=%7B%21func%7Ddiv%28ms%28dt_s%29%2C1e12%29&sort=score+desc%2Cid+asc&NOW=1700000000000
+q=t_s%3Apoint&fl=id%2Cscore&rq=%7B%21rerank+reRankQuery%3D%24rqq+reRankDocs%3D50+reRankOperator%3Dreplace%7D&rqq=%7B%21func%7Dms%28dt_s%29&sort=score+desc%2Cid+asc&NOW=1700000000000

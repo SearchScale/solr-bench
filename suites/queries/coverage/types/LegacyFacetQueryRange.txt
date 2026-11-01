@@ -1,0 +1,11 @@
+q=s_s%3AUS&rows=0&facet=true&facet.query=b_s%3Atrue&facet.query=i_s%3A%5B0+TO+100%5D&facet.query=dt_s%3A%5BNOW-30YEARS+TO+%2A%5D&facet.query=%7B%21key%3Dpop%7Dl_s%3A%5B1000+TO+%2A%5D&NOW=1700000000000
+q=s_s%3AUS&rows=0&facet=true&facet.range=i_s&facet.range.start=-500&facet.range.end=5000&facet.range.gap=500&facet.range.other=all&NOW=1700000000000
+q=%2A%3A%2A&rows=0&facet=true&facet.range=l_s&facet.range.start=0&facet.range.end=1000000&facet.range.gap=100000&facet.range.include=edge&facet.range.hardend=true&NOW=1700000000000
+q=%2A%3A%2A&rows=0&facet=true&facet.range=f_s&facet.range.start=-90&facet.range.end=90&facet.range.gap=15.5&facet.range.include=lower&facet.range.include=upper&facet.range.other=before&NOW=1700000000000
+q=s_m%3APPL&rows=0&facet=true&facet.range=d_s&facet.range.start=-180&facet.range.end=180&facet.range.gap=45&facet.range.include=outer&facet.range.other=after&facet.range.other=between&NOW=1700000000000
+q=%2A%3A%2A&rows=0&facet=true&facet.range=dt_s&facet.range.start=NOW%2FYEAR-60YEARS&facet.range.end=NOW%2FYEAR%2B10YEARS&facet.range.gap=%2B5YEARS&facet.range.other=all&NOW=1700000000000
+q=s_m%3APPL&rows=0&facet=true&facet.range=dt_m&facet.range.start=1970-01-01T00%3A00%3A00Z&facet.range.end=2030-01-01T00%3A00%3A00Z&facet.range.gap=%2B10YEARS&facet.range.include=all&NOW=1700000000000
+q=%2A%3A%2A&rows=0&facet=true&facet.range=i_m&facet.range.start=0&facet.range.end=50&facet.range.gap=7&facet.range.method=dv&NOW=1700000000000
+q=s_m%3APPL&rows=0&facet=true&facet.range=i_s&facet.range.start=0&facet.range.end=3000&facet.range.gap=250&facet.range.method=filter&NOW=1700000000000
+q=s_s%3AUS&rows=0&facet=true&facet.range=d_sp&facet.range.start=-1000000.0&facet.range.end=1000000.0&facet.range.gap=200000.0&facet.range.other=all&facet.mincount=1&NOW=1700000000000
+q=s_s%3AUS&fq=%7B%21tag%3Db%7Db_s%3Atrue&rows=0&facet=true&facet.query=%7B%21ex%3Db%7Db_s%3Atrue&facet.query=%7B%21ex%3Db+key%3Dall%7D%2A%3A%2A&facet.field=%7B%21ex%3Db%7Db_s&NOW=1700000000000

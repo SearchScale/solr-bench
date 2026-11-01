@@ -1,0 +1,10 @@
+q=t_s%3Achurch&fq=%7B%21collapse+field%3Ds_s+sort%3D%27score+desc%2Cid+asc%27%7D&sort=score+desc%2Cid+asc&fl=id%2Cscore&NOW=1700000000000
+q=s_m%3APPL&fq=%7B%21collapse+field%3Ds_s+min%3Dms%28dt_s%29%7D&sort=id+asc&fl=id%2Cscore&NOW=1700000000000
+q=s_m%3APPL&fq=%7B%21collapse+field%3Ds_s+max%3Dms%28dt_s%29%7D&sort=l_s+desc%2Cid+asc&fl=id%2Cscore&NOW=1700000000000
+q=%2A%3A%2A&fq=%7B%21collapse+field%3Ds_s+sort%3D%27l_s+desc%2Cid+asc%27%7D&sort=id+asc&fl=id%2Cscore&NOW=1700000000000
+q=s_s%3AUS&fq=%7B%21collapse+field%3Ds_sp+nullPolicy%3Dexpand+sort%3D%27dt_s+asc%2Cid+asc%27%7D&sort=id+asc&fl=id%2Cscore&NOW=1700000000000
+q=s_s%3AUS&fq=%7B%21collapse+field%3Ds_sp+nullPolicy%3Dcollapse+sort%3D%27dt_s+asc%2Cid+asc%27%7D&sort=id+asc&fl=id%2Cscore&NOW=1700000000000
+q=s_s%3AUS&fq=%7B%21collapse+field%3Ds_sp+nullPolicy%3Dignore+sort%3D%27dt_s+asc%2Cid+asc%27%7D&sort=id+asc&fl=id%2Cscore&NOW=1700000000000
+q=b_s%3Atrue&fq=%7B%21collapse+field%3Di_dv+sort%3D%27l_s+desc%2Cid+asc%27%7D&sort=id+asc&fl=id%2Cscore&NOW=1700000000000
+q=s_m%3APPL&fq=%7B%21collapse+field%3Ds_s+sort%3D%27l_s+desc%2Cid+asc%27%7D&sort=l_s+desc%2Cid+asc&fl=id%2Cscore&expand=true&expand.rows=3&expand.sort=l_s+desc%2Cid+asc&shards=shard1&NOW=1700000000000
+q=%2A%3A%2A&fq=%7B%21collapse+field%3Ds_s+sort%3D%27dt_s+desc%2Cid+asc%27%7D&sort=id+asc&fl=id%2Cscore&expand=true&expand.rows=2&expand.sort=dt_s+desc%2Cid+asc&expand.q=b_s%3Atrue&shards=shard1&NOW=1700000000000

@@ -1,0 +1,12 @@
+q=t_s%3Achurch+s_s%3AUS&defType=edismax&fl=id%2Cscore&qf=t_m&uf=t_s+s_s&NOW=1700000000000
+q=creek+lake+school&defType=edismax&fl=id%2Cscore&qf=t_s+t_m&pf2=t_s%5E2&pf3=t_m%5E3&ps2=1&ps3=2&NOW=1700000000000
+q=park+cemetery+island+baptist&defType=edismax&fl=id%2Cscore&qf=t_s&mm=2%3C-1+5%3C80%25&NOW=1700000000000
+q=hill+station&defType=edismax&fl=id%2Cscore&qf=t_s+t_m&bf=sqrt%28i_dv%29&NOW=1700000000000
+q=point+and+rongrian&defType=edismax&fl=id%2Cscore&qf=t_s&lowercaseOperators=true&NOW=1700000000000
+q=fire+arroyo&defType=edismax&fl=id%2Cscore&qf=t_s&sow=false&NOW=1700000000000
+q=mount+well&defType=edismax&fl=id%2Cscore&qf=t_s+t_m%5E0.5+s_s%5E10&NOW=1700000000000
+q=bran%2A+-mountain&defType=edismax&fl=id%2Cscore&qf=t_s&NOW=1700000000000
+q=%22spring+quebrada%22+hotel&defType=edismax&fl=id%2Cscore&qf=t_s+t_m&pf=t_s&NOW=1700000000000
+q=saint+valley&defType=edismax&fl=id%2Cscore&qf=t_s&boost=if%28b_s%2C2%2C1%29&NOW=1700000000000
+q=river+cerro&defType=edismax&fl=id%2Cscore&qf=t_m&mm=1&bq=%7B%21func%7Dlog%28sum%28l_s%2C1%29%29&NOW=1700000000000
+q=sidi~1+hall&defType=edismax&fl=id%2Cscore&qf=t_s&mm.autoRelax=true&NOW=1700000000000

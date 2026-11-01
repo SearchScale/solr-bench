@@ -1,0 +1,15 @@
+q=s_s%3AUS&sort=sum%28i_s%2Cl_s%29+desc%2Cid+asc&fl=id&NOW=1700000000000
+q=%2A%3A%2A&sort=def%28i_sp%2C-1%29+asc%2Cid+asc&fl=id&NOW=1700000000000
+q=s_m%3APPL&sort=if%28b_s%2C1%2C0%29+desc%2Cl_s+desc%2Cid+asc&fl=id&NOW=1700000000000
+q=s_s%3AIN&sort=ms%28dt_s%29+asc%2Cid+asc&fl=id&NOW=1700000000000
+q=%2A%3A%2A&sort=geodist%28ll%2C40.7%2C-74.0%29+asc%2Cid+asc&fl=id&NOW=1700000000000
+q=s_s%3AFR&sort=div%28l_s%2Csum%28i_s%2C1%29%29+desc%2Cid+asc&fl=id&NOW=1700000000000
+q=%2A%3A%2A&sort=abs%28d_sp%29+desc%2Cid+asc&fl=id&NOW=1700000000000
+q=t_s%3Achurch&sort=score+desc%2Cid+asc&fl=id&NOW=1700000000000
+q=t_s%3Acreek&sort=score+asc%2Cid+asc&fl=id&NOW=1700000000000
+q=s_s%3AUS&sort=query%28%24qq%29+desc%2Cid+asc&fl=id&qq=t_s%3Alake&NOW=1700000000000
+q=s_s%3AMX&sort=strdist%28s_sp%2C%2201%22%2Cedit%29+desc%2Cid+asc&fl=id&NOW=1700000000000
+q=%2A%3A%2A&sort=termfreq%28t_m%2C%27school%27%29+desc%2Cid+asc&fl=id&NOW=1700000000000
+q=s_s%3ARU&sort=geodist%28%29+asc%2Cid+asc&fl=id&sfield=ll&pt=55.75%2C37.6&NOW=1700000000000
+q=%2A%3A%2A&sort=sub%28f_s%2Cd_s%29+asc%2Cid+asc&fl=id&NOW=1700000000000
+q=s_s%3ADE&sort=i_dv+desc%2Cdt_s+asc%2Cid+asc&fl=id&NOW=1700000000000

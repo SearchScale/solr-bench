@@ -1,0 +1,11 @@
+q=%7B%21boost+b%3Dlog%28sum%28l_s%2C2%29%29%7Dt_s%3Achurch&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21boost+b%3Dif%28b_s%2C2%2C1%29%7Dt_m%3Acreek&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21boost+b%3Drecip%28ms%28NOW%2Cdt_s%29%2C3.16e-11%2C1%2C1%29%7Dt_s%3Alake&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21func%7Dsum%28i_s%2C1%29&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21func%7Dlog%28sum%28l_s%2C1%29%29&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21func%7Dgeodist%28ll%2C40.7%2C-74.0%29&fl=id%2Cscore&sort=score+asc&NOW=1700000000000
+q=%7B%21func%7Dif%28exists%28i_sp%29%2Ci_sp%2C0%29&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21func%7Dfield%28i_m%2Cmax%29&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21func%7Dtermfreq%28t_m%2C%27school%27%29&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21func%7Dms%28dt_s%2C1970-01-01T00%3A00%3A00Z%29&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21func%7Dquery%28%24qq%29&fl=id%2Cscore&qq=t_s%3Apark&NOW=1700000000000

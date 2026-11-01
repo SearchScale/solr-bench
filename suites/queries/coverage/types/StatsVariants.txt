@@ -1,0 +1,16 @@
+q=s_m%3APPL&rows=0&stats=true&stats.field=%7B%21min%3Dtrue+max%3Dtrue+count%3Dtrue+missing%3Dtrue+sum%3Dtrue+mean%3Dtrue+stddev%3Dtrue+sumOfSquares%3Dtrue%7Di_s&NOW=1700000000000
+q=%2A%3A%2A&rows=0&stats=true&stats.field=%7B%21sum%3Dtrue+mean%3Dtrue%7Dl_s&NOW=1700000000000
+q=%2A%3A%2A&rows=0&stats=true&stats.field=%7B%21cardinality%3Dtrue%7Ds_s&NOW=1700000000000
+q=%2A%3A%2A&rows=0&stats=true&stats.field=%7B%21countDistinct%3Dtrue+calcdistinct%3Dtrue%7Ds_sp&NOW=1700000000000
+q=s_m%3APPL&rows=0&stats=true&stats.field=%7B%21cardinality%3D0.1%7Di_m&NOW=1700000000000
+q=s_s%3AUS&rows=0&stats=true&stats.field=%7B%21func+key%3Df%7Dsum%28i_s%2C1%29&NOW=1700000000000
+q=s_s%3AUS&rows=0&stats=true&stats.field=dt_s&NOW=1700000000000
+q=s_m%3APPL&rows=0&stats=true&stats.field=dt_m&NOW=1700000000000
+q=%2A%3A%2A&rows=0&stats=true&stats.field=s_s&NOW=1700000000000
+q=s_s%3AUS&rows=0&stats=true&stats.field=s_m&NOW=1700000000000
+q=%2A%3A%2A&rows=0&stats=true&stats.field=i_dv&NOW=1700000000000
+q=%2A%3A%2A&rows=0&stats=true&stats.field=f_m&NOW=1700000000000
+q=s_m%3APPL&rows=0&stats=true&stats.field=d_sp&NOW=1700000000000
+q=s_m%3APPL&rows=0&stats=true&stats.field=i_sp&NOW=1700000000000
+q=s_m%3APPL&rows=0&stats=true&stats.field=%7B%21tag%3Dt+min%3Dtrue+max%3Dtrue%7Dl_m&NOW=1700000000000
+q=s_m%3APPL&rows=0&stats=true&facet=true&stats.field=%7B%21tag%3Dp%7Dl_s&facet.pivot=%7B%21stats%3Dp%7Ds_s%2Cb_s&facet.limit=4&NOW=1700000000000

@@ -1,0 +1,16 @@
+q=-s_s%3AUS&sort=id+asc&fl=id&NOW=1700000000000
+q=-%28s_s%3AUS+OR+s_s%3ACA%29&sort=id+asc&fl=id&NOW=1700000000000
+q=%28-s_s%3AUS%29+AND+%28-s_s%3ACN%29&sort=id+asc&fl=id&NOW=1700000000000
+q=NOT+s_m%3APPL&sort=id+asc&fl=id&NOW=1700000000000
+q=%2A%3A%2A+-b_s%3Atrue&sort=id+asc&fl=id&NOW=1700000000000
+q=%2Bi_s%3A%5B0+TO+10%5D+-s_m%3APPL&sort=id+asc&fl=id&NOW=1700000000000
+q=-i_sp%3A%2A+-s_sp%3A%2A&sort=id+asc&fl=id&NOW=1700000000000
+q=-t_s%3Achurch+-t_s%3Acreek&sort=id+asc&fl=id&NOW=1700000000000
+q=-%28-s_s%3AUS%29&sort=id+asc&fl=id&NOW=1700000000000
+q=t_s%3Achurch+-%28s_s%3AUS+-b_s%3Atrue%29&sort=id+asc&fl=id&NOW=1700000000000
+q=t_s%3Achurch&fq=-b_s%3Atrue&sort=id+asc&fl=id&NOW=1700000000000
+q=t_s%3Acreek&fq=-b_s%3Atrue&sort=id+asc&fl=id&NOW=1700000000000
+q=t_s%3Alake&fq=-b_s%3Atrue&sort=id+asc&fl=id&NOW=1700000000000
+q=t_s%3Aschool&fq=-b_s%3Atrue&sort=id+asc&fl=id&NOW=1700000000000
+q=t_s%3Apark&fq=-b_s%3Atrue&sort=id+asc&fl=id&NOW=1700000000000
+q=t_s%3Acemetery&fq=-b_s%3Atrue&sort=id+asc&fl=id&NOW=1700000000000

@@ -1,0 +1,12 @@
+q=%2A%3A%2A&fq=%7B%21frange+l%3D100+u%3D200%7Di_s&sort=id+asc&fl=id&NOW=1700000000000
+q=s_s%3AUS&fq=%7B%21frange+l%3D0+u%3D1+incl%3Dfalse+incu%3Dtrue%7Df_s&sort=id+asc&fl=id&NOW=1700000000000
+q=%2A%3A%2A&fq=%7B%21frange+l%3D100000%7Dl_s&sort=id+asc&fl=id&NOW=1700000000000
+q=t_s%3Achurch&fq=%7B%21frange+l%3D10+cache%3Dfalse+cost%3D200%7Di_dv&sort=id+asc&fl=id&NOW=1700000000000
+q=%2A%3A%2A&fq=%7B%21frange+l%3D1+u%3D1%7Dexists%28i_sp%29&sort=id+asc&fl=id&NOW=1700000000000
+q=s_s%3ACN&fq=%7B%21frange+l%3D0%7Dsub%28i_s%2Ci_sp%29&sort=id+asc&fl=id&NOW=1700000000000
+q=%2A%3A%2A&fq=%7B%21frange+l%3D0.5%7Ddiv%28l_s%2Csum%28l_s%2C1%29%29&sort=id+asc&fl=id&NOW=1700000000000
+q=s_s%3AIN&fq=%7B%21frange+l%3D1000+cost%3D150+cache%3Dfalse%7Dms%28NOW%2Cdt_s%29&sort=id+asc&fl=id&NOW=1700000000000
+q=%2A%3A%2A&fq=%7B%21frange+l%3D40+u%3D45%7Dfield%28i_m%2Cmax%29&sort=id+asc&fl=id&NOW=1700000000000
+q=%2A%3A%2A&fq=%7B%21frange+l%3D-0.001+u%3D0.001%7Dd_sp&sort=id+asc&fl=id&NOW=1700000000000
+q=s_m%3APPL&fq=%7B%21frange+l%3D50+u%3D60%7Df_s&sort=id+asc&fl=id&NOW=1700000000000
+q=%2A%3A%2A&fq=%7B%21frange+u%3D-170%7Dfield%28f_m%2Cmin%29&sort=id+asc&fl=id&NOW=1700000000000

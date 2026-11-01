@@ -1,0 +1,8 @@
+{"query": {"bool": {"must": ["t_s:church"], "filter": ["s_s:US"], "must_not": ["b_s:false"], "should": [{"lucene": {"df": "t_m", "query": "creek"}}]}}, "fields": "id,score", "params": {"NOW": "1700000000000"}}
+{"query": {"boost": {"query": "t_s:lake", "b": "log(sum(l_s,2))"}}, "fields": "id,score", "params": {"NOW": "1700000000000"}}
+{"query": {"field": {"f": "t_s", "query": "school park"}}, "fields": "id,score", "params": {"NOW": "1700000000000"}}
+{"query": {"terms": {"f": "s_s", "terms": "US,CA"}}, "sort": "id asc", "fields": "id", "params": {"NOW": "1700000000000"}}
+{"query": "*:*", "filter": [{"frange": {"query": "i_s", "l": 100, "u": 200}}, "b_s:true"], "sort": "id asc", "fields": "id", "params": {"NOW": "1700000000000"}}
+{"queries": {"cities": "s_m:PPL"}, "query": {"bool": {"must": [{"param": "cities"}], "filter": ["s_s:FR"]}}, "sort": "id asc", "fields": "id", "params": {"NOW": "1700000000000"}}
+{"query": {"dismax": {"qf": "t_s t_m", "query": "cemetery island", "mm": 1}}, "fields": "id,score", "params": {"NOW": "1700000000000"}}
+{"query": {"bool": {"should": ["t_s:baptist", "t_s:hill", "t_m:station"], "mm": 2}}, "fields": "id,score", "params": {"NOW": "1700000000000"}}

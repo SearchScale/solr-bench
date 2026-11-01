@@ -1,0 +1,8 @@
+q=_query_%3A%22%7B%21term+f%3Ds_s%7DUS%22+AND+t_s%3Achurch&fl=id%2Cscore&NOW=1700000000000
+q=%2Bfilter%28s_s%3AUS%29+%2Bfilter%28b_s%3Atrue%29+t_s%3Acreek&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21lucene+q.op%3DAND+df%3Dt_m%7Dlake+school&fl=id%2Cscore&NOW=1700000000000
+q=filter%28t_s%3Apark%29+t_m%3Apark&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21cache%3Dfalse%7Dt_s%3Acemetery&fl=id%2Cscore&NOW=1700000000000
+q=t_s%3Aisland+filter%28i_s%3A%5B0+TO+500%5D%29&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21lucene+df%3Dt_s+v%3D%24qq%7D&qq=baptist+hill&fl=id%2Cscore&NOW=1700000000000
+q=t_s%3Astation&fq=%7B%21cache%3Dfalse+cost%3D10%7Ds_m%3APPL&fq=%7B%21cost%3D200+cache%3Dfalse%7Di_s%3A%5B0+TO+1000%5D&fq=b_s%3Atrue&fl=id%2Cscore&NOW=1700000000000

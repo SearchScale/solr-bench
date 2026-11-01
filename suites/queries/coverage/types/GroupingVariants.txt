@@ -1,0 +1,10 @@
+q=s_m%3APPL&group=true&fl=id&group.field=s_s&sort=l_s+desc%2Cid+asc&group.sort=l_s+desc%2Cid+asc&group.ngroups=true&NOW=1700000000000
+q=%2A%3A%2A&group=true&fl=id&group.field=b_s&sort=id+asc&group.sort=id+asc&group.limit=2&NOW=1700000000000
+q=%2A%3A%2A&group=true&fl=id&group.query=b_s%3Atrue&group.query=s_s%3AUS&group.query=i_s%3A%5B0+TO+10%5D&sort=id+asc&group.sort=id+asc&group.limit=3&NOW=1700000000000
+q=s_s%3AUS&group=true&fl=id&group.func=floor%28div%28i_dv%2C100%29%29&sort=id+asc&group.sort=id+asc&NOW=1700000000000
+q=s_s%3ACN&group=true&fl=id&group.field=s_sp&group.limit=3&group.offset=1&sort=id+asc&group.sort=dt_s+desc%2Cid+asc&NOW=1700000000000
+q=s_s%3AIN&group=true&fl=id&group.field=s_s&group.format=simple&group.sort=id+asc&sort=id+asc&NOW=1700000000000
+q=s_s%3AMX&group=true&fl=id&group.field=s_sp&group.main=true&group.sort=id+asc&sort=id+asc&NOW=1700000000000
+q=s_m%3APPL&group=true&fl=id&group.field=s_s&group.facet=true&facet=true&facet.field=b_s&sort=id+asc&group.sort=id+asc&NOW=1700000000000
+q=s_m%3ASTM&group=true&fl=id&group.field=s_s&group.truncate=true&facet=true&facet.field=s_m&sort=id+asc&group.sort=id+asc&group.ngroups=true&NOW=1700000000000
+q=b_s%3Atrue&group=true&fl=id&group.field=dt_s&sort=dt_s+desc%2Cid+asc&group.sort=id+asc&NOW=1700000000000

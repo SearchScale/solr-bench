@@ -1,0 +1,8 @@
+q=chruch&rows=0&NOW=1700000000000
+q=creek&rows=0&spellcheck.onlyMorePopular=true&NOW=1700000000000
+q=laek&rows=0&spellcheck.count=10&NOW=1700000000000
+q=scohol&rows=0&spellcheck.collateExtendedResults=true&NOW=1700000000000
+q=pakr&rows=0&spellcheck.alternativeTermCount=3&NOW=1700000000000
+q=ceemtery&rows=0&NOW=1700000000000
+q=isalnd&rows=0&spellcheck.maxResultsForSuggest=5&NOW=1700000000000
+q=batpist&rows=0&NOW=1700000000000

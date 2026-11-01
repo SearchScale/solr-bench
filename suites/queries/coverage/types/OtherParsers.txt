@@ -1,0 +1,10 @@
+q=%7B%21complexphrase+inOrder%3Dtrue%7Dt_m%3A%22churc%2A+creek%2A%22&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21complexphrase+inOrder%3Dfalse+df%3Dt_s%7D%22lake%2A+school%22&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21simple+qf%3D%27t_s+t_m%27%7Dpark+%2Bcemetery+-island&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21simple+qf%3Dt_s+q.operators%3DAND%2COR%2CPREFIX%2CPHRASE%7D%22baptist+hill%22+%7C+sta%2A&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21xmlparser%7D%3CBooleanQuery+fieldName%3D%22t_s%22%3E%3CClause+occurs%3D%22must%22%3E%3CTermQuery%3Epoint%3C%2FTermQuery%3E%3C%2FClause%3E%3CClause+occurs%3D%22filter%22%3E%3CTermQuery+fieldName%3D%22s_s%22%3EUS%3C%2FTermQuery%3E%3C%2FClause%3E%3C%2FBooleanQuery%3E&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21xmlparser%7D%3CSpanNear+slop%3D%222%22+inOrder%3D%22true%22%3E%3CSpanTerm+fieldName%3D%22t_m%22%3Erongrian%3C%2FSpanTerm%3E%3CSpanTerm+fieldName%3D%22t_m%22%3Efire%3C%2FSpanTerm%3E%3C%2FSpanNear%3E&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21xmlparser%7D%3CUserQuery%3Et_s%3Aarroyo+-s_s%3AUS%3C%2FUserQuery%3E&fl=id%2Cscore&NOW=1700000000000
+q=%7B%21switch+case.us%3Ds_s%3AUS+case.ca%3Ds_s%3ACA+default%3D%2A%3A%2A+v%3D%24c%7D&c=us&sort=id+asc&fl=id&NOW=1700000000000
+q=%7B%21switch+case.us%3Ds_s%3AUS+case.ca%3Ds_s%3ACA+default%3D%2A%3A%2A+v%3D%24c%7D&c=ca&sort=id+asc&fl=id&NOW=1700000000000
+q=%7B%21switch+case.us%3Ds_s%3AUS+case.ca%3Ds_s%3ACA+default%3D%2A%3A%2A+v%3D%24c%7D&c=zz&sort=id+asc&fl=id&NOW=1700000000000
