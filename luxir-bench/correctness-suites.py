@@ -5,6 +5,9 @@ repositories, restarts), indexing the dataset with its configset, then one query
 suites/queries/coverage/<dataset> (16 threads, 10 s each) on its handler.
 
     suites/correctness-<dataset>-local.json   suites/luxir-correctness-<dataset>-local.json
+    suites/correctness-<dataset>-local-sm-on.json   (stock Solr+Lucene: the security manager left on)
+
+The datasets download from the searchscale/solr-bench Hugging Face bucket (made by luxir-bench/<dataset>-dataset.py).
 
 Nested blocks go to /update as JSON arrays, one block per batch (/update/json/docs would flatten them).
 Suggest is left out: its suggesters are built per core after indexing, which the suites cannot do.
@@ -19,12 +22,13 @@ DATASETS = {  # dataset: (description, batch size, update path)
     "features": ("380K places with Solr's own types (payloads, term vectors, enum, rank, currency)", 5000, None),
 }
 SKIP = {("features", "Suggest")}
+BUCKET = "https://huggingface.co/buckets/searchscale/solr-bench/resolve"
 
 
 def suite(base, out, dataset, luxir):
     s = json.load(open(f"suites/{base}"))
     desc, batch, path = DATASETS[dataset]
-    s.pop("pre-download", None)  # the datasets are generated locally
+    s["pre-download"] = [f"{BUCKET}/{dataset}.json.gz"]
     ib = s["task-types"]["indexing"]["index-benchmark"]
     ib.update({"name": dataset.upper(), "description": f"{dataset}: {desc}", "dataset-file": f"datasets/{dataset}.json.gz",
                "batch-size": batch})
@@ -54,10 +58,17 @@ def suite(base, out, dataset, luxir):
         plan[f"task{n}"] = {"description": f"{name} queries", "type": f"querying-{name}", "instances": 1,
                             "concurrency": 1, "wait-for": f"task{n - 1}", "mode": "sync"}
     s["task-types"], s["execution-plan"] = tt, plan
-    with open(f"suites/{out}", "w") as fh:
+    write(out, s)
+    if not luxir:  # and as stock Solr starts
+        del s["cluster"]["environment"]["SOLR_SECURITY_MANAGER_ENABLED"]
+        write(out.replace(".json", "-sm-on.json"), s)
+    return n - 2
+
+
+def write(name, s):
+    with open(f"suites/{name}", "w") as fh:
         json.dump(s, fh, indent=2)
         fh.write("\n")
-    return n - 2
 
 
 for dataset in DATASETS:

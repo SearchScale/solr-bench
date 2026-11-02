@@ -448,7 +448,7 @@ done
 - Each run takes about 10 minutes after the first Gradle build of its commit. `luxir-codec` is Apache Solr `79b23df`
   plus the module, so `-c 79b23df` builds the same Solr for Solr+Lucene.
 - The Solr+Lucene suites turn Solr's security manager off, as Solr+Luxir must; their `-sm-on` copies leave it on, as
-  stock Solr starts. The correctness datasets are generated locally first: `luxir-bench/<dataset>-dataset.py`.
+  stock Solr starts. The correctness datasets were made from geonames by `luxir-bench/<dataset>-dataset.py`.
 - `patch` failures in the log are harmless. `cleanup.sh` kills anything on ports 50000–50050 and 2181.
 
 **What the Solr+Luxir suites change.** Only the Solr build, the configset and the node environment; the workload is
