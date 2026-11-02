@@ -1,0 +1,1018 @@
+{
+  "task-types": {
+    "indexing": {
+      "index-benchmark": {
+        "name": "TYPES",
+        "description": "types: 2.3M places with a field of every type and shape",
+        "replication-type": "cloud",
+        "dataset-file": "datasets/types.json.gz",
+        "file-format": "json",
+        "batch-size": 10000,
+        "id-field": "id",
+        "threads": [
+          16
+        ],
+        "setups": [
+          {
+            "setup-name": "cloud_3x1",
+            "collection": "types",
+            "configset": "conf_types_luxir",
+            "replication-factor": 1,
+            "shards": 3
+          }
+        ]
+      }
+    },
+    "restart-solr-node": {
+      "restart-solr-node": "${NODE_INDEX}",
+      "await-recoveries": true
+    },
+    "querying-BooleanShapes": {
+      "query-benchmark": {
+        "name": "BooleanShapes queries",
+        "description": "correctness types: BooleanShapes",
+        "collection": "types",
+        "query-file": "queries/coverage/types/BooleanShapes.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-BoostAndFunctionQueries": {
+      "query-benchmark": {
+        "name": "BoostAndFunctionQueries queries",
+        "description": "correctness types: BoostAndFunctionQueries",
+        "collection": "types",
+        "query-file": "queries/coverage/types/BoostAndFunctionQueries.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-CollapseExpand": {
+      "query-benchmark": {
+        "name": "CollapseExpand queries",
+        "description": "correctness types: CollapseExpand",
+        "collection": "types",
+        "query-file": "queries/coverage/types/CollapseExpand.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-DateMath": {
+      "query-benchmark": {
+        "name": "DateMath queries",
+        "description": "correctness types: DateMath",
+        "collection": "types",
+        "query-file": "queries/coverage/types/DateMath.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-Dismax": {
+      "query-benchmark": {
+        "name": "Dismax queries",
+        "description": "correctness types: Dismax",
+        "collection": "types",
+        "query-file": "queries/coverage/types/Dismax.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-EdismaxVariants": {
+      "query-benchmark": {
+        "name": "EdismaxVariants queries",
+        "description": "correctness types: EdismaxVariants",
+        "collection": "types",
+        "query-file": "queries/coverage/types/EdismaxVariants.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-Elevation": {
+      "query-benchmark": {
+        "name": "Elevation queries",
+        "description": "correctness types: Elevation",
+        "collection": "types",
+        "query-file": "queries/coverage/types/Elevation.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST",
+        "uri": "/elevate"
+      }
+    },
+    "querying-Exists": {
+      "query-benchmark": {
+        "name": "Exists queries",
+        "description": "correctness types: Exists",
+        "collection": "types",
+        "query-file": "queries/coverage/types/Exists.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-FieldListFunctions": {
+      "query-benchmark": {
+        "name": "FieldListFunctions queries",
+        "description": "correctness types: FieldListFunctions",
+        "collection": "types",
+        "query-file": "queries/coverage/types/FieldListFunctions.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-Frange": {
+      "query-benchmark": {
+        "name": "Frange queries",
+        "description": "correctness types: Frange",
+        "collection": "types",
+        "query-file": "queries/coverage/types/Frange.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-GroupingVariants": {
+      "query-benchmark": {
+        "name": "GroupingVariants queries",
+        "description": "correctness types: GroupingVariants",
+        "collection": "types",
+        "query-file": "queries/coverage/types/GroupingVariants.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-HighlightVariants": {
+      "query-benchmark": {
+        "name": "HighlightVariants queries",
+        "description": "correctness types: HighlightVariants",
+        "collection": "types",
+        "query-file": "queries/coverage/types/HighlightVariants.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-JoinGraphMlt": {
+      "query-benchmark": {
+        "name": "JoinGraphMlt queries",
+        "description": "correctness types: JoinGraphMlt",
+        "collection": "types",
+        "query-file": "queries/coverage/types/JoinGraphMlt.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-JsonAggregations": {
+      "query-benchmark": {
+        "name": "JsonAggregations queries",
+        "description": "correctness types: JsonAggregations",
+        "collection": "types",
+        "query-file": "queries/coverage/types/JsonAggregations.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-JsonQueryDsl": {
+      "query-benchmark": {
+        "name": "JsonQueryDsl queries",
+        "description": "correctness types: JsonQueryDsl",
+        "collection": "types",
+        "query-file": "queries/coverage/types/JsonQueryDsl.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "json-query": true
+      }
+    },
+    "querying-JsonRangeFacets": {
+      "query-benchmark": {
+        "name": "JsonRangeFacets queries",
+        "description": "correctness types: JsonRangeFacets",
+        "collection": "types",
+        "query-file": "queries/coverage/types/JsonRangeFacets.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-JsonTermsFacets": {
+      "query-benchmark": {
+        "name": "JsonTermsFacets queries",
+        "description": "correctness types: JsonTermsFacets",
+        "collection": "types",
+        "query-file": "queries/coverage/types/JsonTermsFacets.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-LegacyFacetFieldVariants": {
+      "query-benchmark": {
+        "name": "LegacyFacetFieldVariants queries",
+        "description": "correctness types: LegacyFacetFieldVariants",
+        "collection": "types",
+        "query-file": "queries/coverage/types/LegacyFacetFieldVariants.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-LegacyFacetQueryRange": {
+      "query-benchmark": {
+        "name": "LegacyFacetQueryRange queries",
+        "description": "correctness types: LegacyFacetQueryRange",
+        "collection": "types",
+        "query-file": "queries/coverage/types/LegacyFacetQueryRange.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-LegacyPivotIntervalHeatmap": {
+      "query-benchmark": {
+        "name": "LegacyPivotIntervalHeatmap queries",
+        "description": "correctness types: LegacyPivotIntervalHeatmap",
+        "collection": "types",
+        "query-file": "queries/coverage/types/LegacyPivotIntervalHeatmap.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-MultiTerm": {
+      "query-benchmark": {
+        "name": "MultiTerm queries",
+        "description": "correctness types: MultiTerm",
+        "collection": "types",
+        "query-file": "queries/coverage/types/MultiTerm.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-NestedAndFilters": {
+      "query-benchmark": {
+        "name": "NestedAndFilters queries",
+        "description": "correctness types: NestedAndFilters",
+        "collection": "types",
+        "query-file": "queries/coverage/types/NestedAndFilters.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-OtherParsers": {
+      "query-benchmark": {
+        "name": "OtherParsers queries",
+        "description": "correctness types: OtherParsers",
+        "collection": "types",
+        "query-file": "queries/coverage/types/OtherParsers.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-Paging": {
+      "query-benchmark": {
+        "name": "Paging queries",
+        "description": "correctness types: Paging",
+        "collection": "types",
+        "query-file": "queries/coverage/types/Paging.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-Phrases": {
+      "query-benchmark": {
+        "name": "Phrases queries",
+        "description": "correctness types: Phrases",
+        "collection": "types",
+        "query-file": "queries/coverage/types/Phrases.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-PureNegative": {
+      "query-benchmark": {
+        "name": "PureNegative queries",
+        "description": "correctness types: PureNegative",
+        "collection": "types",
+        "query-file": "queries/coverage/types/PureNegative.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-RangeCounts": {
+      "query-benchmark": {
+        "name": "RangeCounts queries",
+        "description": "correctness types: RangeCounts",
+        "collection": "types",
+        "query-file": "queries/coverage/types/RangeCounts.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-RangePerType": {
+      "query-benchmark": {
+        "name": "RangePerType queries",
+        "description": "correctness types: RangePerType",
+        "collection": "types",
+        "query-file": "queries/coverage/types/RangePerType.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-RealTimeGet": {
+      "query-benchmark": {
+        "name": "RealTimeGet queries",
+        "description": "correctness types: RealTimeGet",
+        "collection": "types",
+        "query-file": "queries/coverage/types/RealTimeGet.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST",
+        "uri": "/get"
+      }
+    },
+    "querying-RequestParams": {
+      "query-benchmark": {
+        "name": "RequestParams queries",
+        "description": "correctness types: RequestParams",
+        "collection": "types",
+        "query-file": "queries/coverage/types/RequestParams.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-SortFunctions": {
+      "query-benchmark": {
+        "name": "SortFunctions queries",
+        "description": "correctness types: SortFunctions",
+        "collection": "types",
+        "query-file": "queries/coverage/types/SortFunctions.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-SortMultiValued": {
+      "query-benchmark": {
+        "name": "SortMultiValued queries",
+        "description": "correctness types: SortMultiValued",
+        "collection": "types",
+        "query-file": "queries/coverage/types/SortMultiValued.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-SortSingleValued": {
+      "query-benchmark": {
+        "name": "SortSingleValued queries",
+        "description": "correctness types: SortSingleValued",
+        "collection": "types",
+        "query-file": "queries/coverage/types/SortSingleValued.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-Spatial": {
+      "query-benchmark": {
+        "name": "Spatial queries",
+        "description": "correctness types: Spatial",
+        "collection": "types",
+        "query-file": "queries/coverage/types/Spatial.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-SpellCheckVariants": {
+      "query-benchmark": {
+        "name": "SpellCheckVariants queries",
+        "description": "correctness types: SpellCheckVariants",
+        "collection": "types",
+        "query-file": "queries/coverage/types/SpellCheckVariants.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST",
+        "uri": "/spell"
+      }
+    },
+    "querying-StatsVariants": {
+      "query-benchmark": {
+        "name": "StatsVariants queries",
+        "description": "correctness types: StatsVariants",
+        "collection": "types",
+        "query-file": "queries/coverage/types/StatsVariants.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-StreamingExpressions": {
+      "query-benchmark": {
+        "name": "StreamingExpressions queries",
+        "description": "correctness types: StreamingExpressions",
+        "collection": "types",
+        "query-file": "queries/coverage/types/StreamingExpressions.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST",
+        "uri": "/stream"
+      }
+    },
+    "querying-TermPerType": {
+      "query-benchmark": {
+        "name": "TermPerType queries",
+        "description": "correctness types: TermPerType",
+        "collection": "types",
+        "query-file": "queries/coverage/types/TermPerType.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-TermTermsRawPrefix": {
+      "query-benchmark": {
+        "name": "TermTermsRawPrefix queries",
+        "description": "correctness types: TermTermsRawPrefix",
+        "collection": "types",
+        "query-file": "queries/coverage/types/TermTermsRawPrefix.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-TermsComponentVariants": {
+      "query-benchmark": {
+        "name": "TermsComponentVariants queries",
+        "description": "correctness types: TermsComponentVariants",
+        "collection": "types",
+        "query-file": "queries/coverage/types/TermsComponentVariants.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST",
+        "uri": "/terms"
+      }
+    }
+  },
+  "global-variables": {
+    "collection-counter": 0,
+    "restart-counter": 0
+  },
+  "global-constants": {
+    "HOST": "localhost",
+    "PORT": "8983"
+  },
+  "execution-plan": {
+    "task1": {
+      "type": "indexing",
+      "description": "Indexing types",
+      "instances": 1,
+      "concurrency": 1,
+      "mode": "sync"
+    },
+    "task2": {
+      "description": "Restart Solr node",
+      "instances": 3,
+      "concurrency": 1,
+      "type": "restart-solr-node",
+      "parameters": {
+        "NODE_INDEX": "${restart-counter}"
+      },
+      "wait-for": "task1",
+      "mode": "sync",
+      "pre-task-evals": [
+        "inc(restart-counter,1)"
+      ]
+    },
+    "task3": {
+      "description": "BooleanShapes queries",
+      "type": "querying-BooleanShapes",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task2",
+      "mode": "sync"
+    },
+    "task4": {
+      "description": "BoostAndFunctionQueries queries",
+      "type": "querying-BoostAndFunctionQueries",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task3",
+      "mode": "sync"
+    },
+    "task5": {
+      "description": "CollapseExpand queries",
+      "type": "querying-CollapseExpand",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task4",
+      "mode": "sync"
+    },
+    "task6": {
+      "description": "DateMath queries",
+      "type": "querying-DateMath",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task5",
+      "mode": "sync"
+    },
+    "task7": {
+      "description": "Dismax queries",
+      "type": "querying-Dismax",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task6",
+      "mode": "sync"
+    },
+    "task8": {
+      "description": "EdismaxVariants queries",
+      "type": "querying-EdismaxVariants",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task7",
+      "mode": "sync"
+    },
+    "task9": {
+      "description": "Elevation queries",
+      "type": "querying-Elevation",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task8",
+      "mode": "sync"
+    },
+    "task10": {
+      "description": "Exists queries",
+      "type": "querying-Exists",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task9",
+      "mode": "sync"
+    },
+    "task11": {
+      "description": "FieldListFunctions queries",
+      "type": "querying-FieldListFunctions",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task10",
+      "mode": "sync"
+    },
+    "task12": {
+      "description": "Frange queries",
+      "type": "querying-Frange",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task11",
+      "mode": "sync"
+    },
+    "task13": {
+      "description": "GroupingVariants queries",
+      "type": "querying-GroupingVariants",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task12",
+      "mode": "sync"
+    },
+    "task14": {
+      "description": "HighlightVariants queries",
+      "type": "querying-HighlightVariants",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task13",
+      "mode": "sync"
+    },
+    "task15": {
+      "description": "JoinGraphMlt queries",
+      "type": "querying-JoinGraphMlt",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task14",
+      "mode": "sync"
+    },
+    "task16": {
+      "description": "JsonAggregations queries",
+      "type": "querying-JsonAggregations",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task15",
+      "mode": "sync"
+    },
+    "task17": {
+      "description": "JsonQueryDsl queries",
+      "type": "querying-JsonQueryDsl",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task16",
+      "mode": "sync"
+    },
+    "task18": {
+      "description": "JsonRangeFacets queries",
+      "type": "querying-JsonRangeFacets",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task17",
+      "mode": "sync"
+    },
+    "task19": {
+      "description": "JsonTermsFacets queries",
+      "type": "querying-JsonTermsFacets",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task18",
+      "mode": "sync"
+    },
+    "task20": {
+      "description": "LegacyFacetFieldVariants queries",
+      "type": "querying-LegacyFacetFieldVariants",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task19",
+      "mode": "sync"
+    },
+    "task21": {
+      "description": "LegacyFacetQueryRange queries",
+      "type": "querying-LegacyFacetQueryRange",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task20",
+      "mode": "sync"
+    },
+    "task22": {
+      "description": "LegacyPivotIntervalHeatmap queries",
+      "type": "querying-LegacyPivotIntervalHeatmap",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task21",
+      "mode": "sync"
+    },
+    "task23": {
+      "description": "MultiTerm queries",
+      "type": "querying-MultiTerm",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task22",
+      "mode": "sync"
+    },
+    "task24": {
+      "description": "NestedAndFilters queries",
+      "type": "querying-NestedAndFilters",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task23",
+      "mode": "sync"
+    },
+    "task25": {
+      "description": "OtherParsers queries",
+      "type": "querying-OtherParsers",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task24",
+      "mode": "sync"
+    },
+    "task26": {
+      "description": "Paging queries",
+      "type": "querying-Paging",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task25",
+      "mode": "sync"
+    },
+    "task27": {
+      "description": "Phrases queries",
+      "type": "querying-Phrases",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task26",
+      "mode": "sync"
+    },
+    "task28": {
+      "description": "PureNegative queries",
+      "type": "querying-PureNegative",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task27",
+      "mode": "sync"
+    },
+    "task29": {
+      "description": "RangeCounts queries",
+      "type": "querying-RangeCounts",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task28",
+      "mode": "sync"
+    },
+    "task30": {
+      "description": "RangePerType queries",
+      "type": "querying-RangePerType",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task29",
+      "mode": "sync"
+    },
+    "task31": {
+      "description": "RealTimeGet queries",
+      "type": "querying-RealTimeGet",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task30",
+      "mode": "sync"
+    },
+    "task32": {
+      "description": "RequestParams queries",
+      "type": "querying-RequestParams",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task31",
+      "mode": "sync"
+    },
+    "task33": {
+      "description": "SortFunctions queries",
+      "type": "querying-SortFunctions",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task32",
+      "mode": "sync"
+    },
+    "task34": {
+      "description": "SortMultiValued queries",
+      "type": "querying-SortMultiValued",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task33",
+      "mode": "sync"
+    },
+    "task35": {
+      "description": "SortSingleValued queries",
+      "type": "querying-SortSingleValued",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task34",
+      "mode": "sync"
+    },
+    "task36": {
+      "description": "Spatial queries",
+      "type": "querying-Spatial",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task35",
+      "mode": "sync"
+    },
+    "task37": {
+      "description": "SpellCheckVariants queries",
+      "type": "querying-SpellCheckVariants",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task36",
+      "mode": "sync"
+    },
+    "task38": {
+      "description": "StatsVariants queries",
+      "type": "querying-StatsVariants",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task37",
+      "mode": "sync"
+    },
+    "task39": {
+      "description": "StreamingExpressions queries",
+      "type": "querying-StreamingExpressions",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task38",
+      "mode": "sync"
+    },
+    "task40": {
+      "description": "TermPerType queries",
+      "type": "querying-TermPerType",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task39",
+      "mode": "sync"
+    },
+    "task41": {
+      "description": "TermTermsRawPrefix queries",
+      "type": "querying-TermTermsRawPrefix",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task40",
+      "mode": "sync"
+    },
+    "task42": {
+      "description": "TermsComponentVariants queries",
+      "type": "querying-TermsComponentVariants",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task41",
+      "mode": "sync"
+    }
+  },
+  "cluster": {
+    "num-solr-nodes": 3,
+    "startup-params": "-m 16g -Dsolr.searchThreads=4",
+    "environment": {
+      "SOLR_MODULES": "luxir-codec",
+      "OMP_NUM_THREADS": "1",
+      "SOLR_SECURITY_MANAGER_ENABLED": "false",
+      "SOLR_OPTS": "--enable-native-access=ALL-UNNAMED -Dluxir.lucene.library=/data2/mitali-backup/solr-luxir/luxir/build/lux4j-release/bin/libluxir_lucene.so"
+    },
+    "provisioning-method": "local"
+  },
+  "repositories": [
+    {
+      "commit-id": "35d1e2b3871017184e90db8349c67801f898c519",
+      "description": "Solr luxir-codec branch (Luxir codec module)",
+      "name": "solr-luxir-repository",
+      "package-subdir": "solr/packaging/",
+      "build-command": "git clean -fdx && cd solr && ../gradlew -Pluxir.lucene.jar=/data2/mitali-backup/solr-luxir/luxir-lucene/build/libs/luxir-lucene-0.1.0-SNAPSHOT.jar distTar",
+      "submodules": false,
+      "url": "https://github.com/SearchScale/solr",
+      "user": "ishan"
+    }
+  ],
+  "metrics": [
+    "jvm/solr.jvm/memory.heap.usage",
+    "jvm/solr.jvm/threads.count"
+  ],
+  "zk-metrics": [
+    "sum_configs_read_per_namespace",
+    "sum_configs_write_per_namespace"
+  ]
+}

@@ -111,7 +111,20 @@ class UploadDocs implements Callable<IndexResult> {
 
           @Override
           public void writeTo(OutputStream outstream) throws IOException {
-            if (payload == null) {
+            if (payload == null && "/update".equals(updatePath)) {
+              // Solr's /update takes a JSON array of documents (each may carry child documents, kept
+              // as a block); /update/json/docs would flatten them
+              OutputStreamWriter writer = new OutputStreamWriter(outstream, StandardCharsets.UTF_8);
+              writer.append('[');
+              boolean first = true;
+              for (String doc : docs) {
+                if (!first) writer.append(',');
+                writer.append(doc).append('\n');
+                first = false;
+              }
+              writer.append(']');
+              writer.flush();
+            } else if (payload == null) {
               OutputStreamWriter writer = new OutputStreamWriter(outstream);
               for (String doc : docs) {
                 writer.append(doc).append('\n');

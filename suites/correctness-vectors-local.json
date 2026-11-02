@@ -1,0 +1,308 @@
+{
+  "task-types": {
+    "indexing": {
+      "index-benchmark": {
+        "name": "VECTORS",
+        "description": "vectors: 285K places with dense vectors (float, byte, quantized)",
+        "replication-type": "cloud",
+        "dataset-file": "datasets/vectors.json.gz",
+        "file-format": "json",
+        "batch-size": 2000,
+        "id-field": "id",
+        "threads": [
+          16
+        ],
+        "setups": [
+          {
+            "setup-name": "cloud_3x1",
+            "collection": "vectors",
+            "configset": "conf_vectors",
+            "replication-factor": 1,
+            "shards": 3
+          }
+        ]
+      }
+    },
+    "restart-solr-node": {
+      "restart-solr-node": "${NODE_INDEX}",
+      "await-recoveries": true
+    },
+    "querying-KnnBasic": {
+      "query-benchmark": {
+        "name": "KnnBasic queries",
+        "description": "correctness vectors: KnnBasic",
+        "collection": "vectors",
+        "query-file": "queries/coverage/vectors/KnnBasic.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-KnnExactSmallFilters": {
+      "query-benchmark": {
+        "name": "KnnExactSmallFilters queries",
+        "description": "correctness vectors: KnnExactSmallFilters",
+        "collection": "vectors",
+        "query-file": "queries/coverage/vectors/KnnExactSmallFilters.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-KnnFiltered": {
+      "query-benchmark": {
+        "name": "KnnFiltered queries",
+        "description": "correctness vectors: KnnFiltered",
+        "collection": "vectors",
+        "query-file": "queries/coverage/vectors/KnnFiltered.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-KnnHybrid": {
+      "query-benchmark": {
+        "name": "KnnHybrid queries",
+        "description": "correctness vectors: KnnHybrid",
+        "collection": "vectors",
+        "query-file": "queries/coverage/vectors/KnnHybrid.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-KnnParams": {
+      "query-benchmark": {
+        "name": "KnnParams queries",
+        "description": "correctness vectors: KnnParams",
+        "collection": "vectors",
+        "query-file": "queries/coverage/vectors/KnnParams.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-KnnQuantized": {
+      "query-benchmark": {
+        "name": "KnnQuantized queries",
+        "description": "correctness vectors: KnnQuantized",
+        "collection": "vectors",
+        "query-file": "queries/coverage/vectors/KnnQuantized.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-VectorFields": {
+      "query-benchmark": {
+        "name": "VectorFields queries",
+        "description": "correctness vectors: VectorFields",
+        "collection": "vectors",
+        "query-file": "queries/coverage/vectors/VectorFields.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-VectorFunctions": {
+      "query-benchmark": {
+        "name": "VectorFunctions queries",
+        "description": "correctness vectors: VectorFunctions",
+        "collection": "vectors",
+        "query-file": "queries/coverage/vectors/VectorFunctions.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-VectorThreshold": {
+      "query-benchmark": {
+        "name": "VectorThreshold queries",
+        "description": "correctness vectors: VectorThreshold",
+        "collection": "vectors",
+        "query-file": "queries/coverage/vectors/VectorThreshold.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    }
+  },
+  "global-variables": {
+    "collection-counter": 0,
+    "restart-counter": 0
+  },
+  "global-constants": {
+    "HOST": "localhost",
+    "PORT": "8983"
+  },
+  "execution-plan": {
+    "task1": {
+      "type": "indexing",
+      "description": "Indexing vectors",
+      "instances": 1,
+      "concurrency": 1,
+      "mode": "sync"
+    },
+    "task2": {
+      "description": "Restart Solr node",
+      "instances": 3,
+      "concurrency": 1,
+      "type": "restart-solr-node",
+      "parameters": {
+        "NODE_INDEX": "${restart-counter}"
+      },
+      "wait-for": "task1",
+      "mode": "sync",
+      "pre-task-evals": [
+        "inc(restart-counter,1)"
+      ]
+    },
+    "task3": {
+      "description": "KnnBasic queries",
+      "type": "querying-KnnBasic",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task2",
+      "mode": "sync"
+    },
+    "task4": {
+      "description": "KnnExactSmallFilters queries",
+      "type": "querying-KnnExactSmallFilters",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task3",
+      "mode": "sync"
+    },
+    "task5": {
+      "description": "KnnFiltered queries",
+      "type": "querying-KnnFiltered",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task4",
+      "mode": "sync"
+    },
+    "task6": {
+      "description": "KnnHybrid queries",
+      "type": "querying-KnnHybrid",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task5",
+      "mode": "sync"
+    },
+    "task7": {
+      "description": "KnnParams queries",
+      "type": "querying-KnnParams",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task6",
+      "mode": "sync"
+    },
+    "task8": {
+      "description": "KnnQuantized queries",
+      "type": "querying-KnnQuantized",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task7",
+      "mode": "sync"
+    },
+    "task9": {
+      "description": "VectorFields queries",
+      "type": "querying-VectorFields",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task8",
+      "mode": "sync"
+    },
+    "task10": {
+      "description": "VectorFunctions queries",
+      "type": "querying-VectorFunctions",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task9",
+      "mode": "sync"
+    },
+    "task11": {
+      "description": "VectorThreshold queries",
+      "type": "querying-VectorThreshold",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task10",
+      "mode": "sync"
+    }
+  },
+  "cluster": {
+    "num-solr-nodes": 3,
+    "startup-params": "-m 16g -Dsolr.searchThreads=4",
+    "environment": {
+      "SOLR_SECURITY_MANAGER_ENABLED": "false",
+      "OMP_NUM_THREADS": "1"
+    },
+    "provisioning-method": "local"
+  },
+  "repositories": [
+    {
+      "commit-id": "d007470bda2f70ba4e1c407ac624e21288947128",
+      "description": "Solr 8.4",
+      "name": "git-repository",
+      "package-subdir": "solr/package/",
+      "build-command": "ant ivy-bootstrap && cd solr && ant compile package",
+      "submodules": false,
+      "url": "https://github.com/apache/lucene-solr",
+      "user": "ishan"
+    },
+    {
+      "commit-id": "dfde16a004206cc92e21cc5a6cad9030fbe13c20",
+      "description": "Solr 10x",
+      "name": "solr-repository",
+      "package-subdir": "solr/packaging/",
+      "build-command": "git clean -fdx && cd solr && ../gradlew distTar",
+      "submodules": false,
+      "url": "https://github.com/apache/solr",
+      "user": "ishan"
+    }
+  ],
+  "metrics": [
+    "jvm/solr.jvm/memory.heap.usage",
+    "jvm/solr.jvm/threads.count"
+  ],
+  "zk-metrics": [
+    "sum_configs_read_per_namespace",
+    "sum_configs_write_per_namespace"
+  ]
+}
