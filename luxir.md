@@ -29,9 +29,10 @@ One run of each suite on 2026-11-02, comparing:
 - **Solr+Lucene, SM=off:** the same build with the security manager off.
 - **Solr+Luxir:** the versions in [Get the code](#1-get-the-code), security manager off.
 
-Ratios are how much faster Solr+Luxir is: above 1× means faster. For queries they compare throughput (queries/s, warm-up
-included); for indexing, time. 🟢 is 1.05× or faster, 🟡 0.95–1.05× (about level), 🔴 below 0.95× (slower). Each
-workload's headline compares Solr+Luxir with Solr+Lucene, SM=off. All runs of a workload indexed the same number of
+Each query cell gives throughput (queries/s, warm-up included) and p99 latency (after the warm-up). Ratios are how much
+faster Solr+Luxir is: above 1× means faster. For queries they compare throughput; for indexing, time. 🟢 marks
+1.05× or faster, 🟡 0.95–1.05× (about level), 🔴 below 0.95× (slower). Each workload's headline
+compares Solr+Luxir with Solr+Lucene, SM=off. All runs of a workload indexed the same number of
 documents, and no Solr+Luxir run had a failed request.
 
 | | |
@@ -62,11 +63,11 @@ documents, and no Solr+Luxir run had a failed request.
 
 | Category | Stock Solr+Lucene | Solr+Lucene, SM=off | Solr+Luxir | Luxir vs stock | Luxir vs SM=off |
 |---|--:|--:|--:|--:|--:|
-| Indexing (s) | 640 | 336 | 180 | 🟢 3.55× | 🟢 1.86× |
-| Terms facet | 127 | 133 | 247 | 🟢 1.96× | 🟢 1.86× |
-| Range facet | 177 | 164 | 1,029 | 🟢 5.80× | 🟢 6.28× |
-| Product facet | 523 | 440 | 709 | 🟢 1.35× | 🟢 1.61× |
-| Join | 2.1 | 2.4 | 14.8 | 🟢 7.01× | 🟢 6.16× |
+| Indexing | 640 s | 336 s | 180 s | 🟢 3.55× | 🟢 1.86× |
+| Terms facet | 127 q/s<br>p99 262 ms | 133 q/s<br>p99 243 ms | 247 q/s<br>p99 128 ms | 🟢 1.96× | 🟢 1.86× |
+| Range facet | 177 q/s<br>p99 188 ms | 164 q/s<br>p99 197 ms | 1,029 q/s<br>p99 36.4 ms | 🟢 5.80× | 🟢 6.28× |
+| Product facet | 523 q/s<br>p99 59.2 ms | 440 q/s<br>p99 71.2 ms | 709 q/s<br>p99 43.3 ms | 🟢 1.35× | 🟢 1.61× |
+| Join | 2.1 q/s<br>p99 18,664 ms | 2.4 q/s<br>p99 8,928 ms | 14.8 q/s<br>p99 1,847 ms | 🟢 7.01× | 🟢 6.16× |
 | **Geometric mean, queries** | | | | **🟢 3.22×** | **🟢 3.28×** |
 | Index size after indexing | 9.33 GB, 47 segments | 10.16 GB, 69 segments | 16.19 GB, 66 segments | | 1.59× larger |
 
@@ -78,25 +79,25 @@ Joins on `user_session` run through `LuxirJoinQParserPlugin`, natively between s
 
 | Category | Stock Solr+Lucene | Solr+Lucene, SM=off | Solr+Luxir | Luxir vs stock | Luxir vs SM=off |
 |---|--:|--:|--:|--:|--:|
-| Indexing (s) | 81.9 | 49.0 | 38.7 | 🟢 2.11× | 🟢 1.27× |
-| MatchAll | 278 | 277 | 246 | 🔴 0.89× | 🔴 0.89× |
-| StringTerm | 8,594 | 10,803 | 12,800 | 🟢 1.49× | 🟢 1.18× |
-| TextTerm | 7,950 | 11,038 | 12,311 | 🟢 1.55× | 🟢 1.12× |
-| TextPhrase | 8,081 | 10,807 | 11,792 | 🟢 1.46× | 🟢 1.09× |
-| TextOr | 5,244 | 6,017 | 9,979 | 🟢 1.90× | 🟢 1.66× |
-| TextAnd | 8,122 | 11,398 | 11,987 | 🟢 1.48× | 🟢 1.05× |
-| CatchAllText | 7,601 | 10,963 | 11,998 | 🟢 1.58× | 🟢 1.09× |
-| TextFiltered | 7,797 | 10,794 | 11,046 | 🟢 1.42× | 🟡 1.02× |
-| NumRange | 1,534 | 1,640 | 10,575 | 🟢 6.89× | 🟢 6.45× |
-| SortPopulation | 138 | 141 | 360 | 🟢 2.60× | 🟢 2.56× |
-| SortGeonameid | 160 | 167 | 357 | 🟢 2.23× | 🟢 2.14× |
-| TermSortPop | 6,953 | 9,482 | 9,708 | 🟢 1.40× | 🟡 1.02× |
-| CountryFacet | 182 | 179 | 412 | 🟢 2.26× | 🟢 2.30× |
-| HiCardFacet | 10.7 | 11.0 | 12.6 | 🟢 1.18× | 🟢 1.14× |
-| TermsPure | 54.0 | 54.9 | 52.4 | 🟡 0.97× | 🟡 0.95× |
-| TermsFiltered | 102 | 103 | 103 | 🟡 1.00× | 🟡 1.00× |
-| TermsProhibited | 57.3 | 58.0 | 53.8 | 🔴 0.94× | 🔴 0.93× |
-| All | 423 | 435 | 438 | 🟡 1.04× | 🟡 1.01× |
+| Indexing | 81.9 s | 49.0 s | 38.7 s | 🟢 2.11× | 🟢 1.27× |
+| MatchAll | 278 q/s<br>p99 94.5 ms | 277 q/s<br>p99 93.9 ms | 246 q/s<br>p99 98.4 ms | 🔴 0.89× | 🔴 0.89× |
+| StringTerm | 8,594 q/s<br>p99 6.97 ms | 10,803 q/s<br>p99 6.60 ms | 12,800 q/s<br>p99 5.67 ms | 🟢 1.49× | 🟢 1.18× |
+| TextTerm | 7,950 q/s<br>p99 3.48 ms | 11,038 q/s<br>p99 2.77 ms | 12,311 q/s<br>p99 2.19 ms | 🟢 1.55× | 🟢 1.12× |
+| TextPhrase | 8,081 q/s<br>p99 3.63 ms | 10,807 q/s<br>p99 2.99 ms | 11,792 q/s<br>p99 2.90 ms | 🟢 1.46× | 🟢 1.09× |
+| TextOr | 5,244 q/s<br>p99 5.55 ms | 6,017 q/s<br>p99 4.96 ms | 9,979 q/s<br>p99 2.81 ms | 🟢 1.90× | 🟢 1.66× |
+| TextAnd | 8,122 q/s<br>p99 3.16 ms | 11,398 q/s<br>p99 2.29 ms | 11,987 q/s<br>p99 2.00 ms | 🟢 1.48× | 🟢 1.05× |
+| CatchAllText | 7,601 q/s<br>p99 3.76 ms | 10,963 q/s<br>p99 2.91 ms | 11,998 q/s<br>p99 1.90 ms | 🟢 1.58× | 🟢 1.09× |
+| TextFiltered | 7,797 q/s<br>p99 3.55 ms | 10,794 q/s<br>p99 2.83 ms | 11,046 q/s<br>p99 2.57 ms | 🟢 1.42× | 🟡 1.02× |
+| NumRange | 1,534 q/s<br>p99 62.6 ms | 1,640 q/s<br>p99 58.5 ms | 10,575 q/s<br>p99 2.62 ms | 🟢 6.89× | 🟢 6.45× |
+| SortPopulation | 138 q/s<br>p99 159 ms | 141 q/s<br>p99 155 ms | 360 q/s<br>p99 63.0 ms | 🟢 2.60× | 🟢 2.56× |
+| SortGeonameid | 160 q/s<br>p99 139 ms | 167 q/s<br>p99 137 ms | 357 q/s<br>p99 63.8 ms | 🟢 2.23× | 🟢 2.14× |
+| TermSortPop | 6,953 q/s<br>p99 3.66 ms | 9,482 q/s<br>p99 2.75 ms | 9,708 q/s<br>p99 2.51 ms | 🟢 1.40× | 🟡 1.02× |
+| CountryFacet | 182 q/s<br>p99 341 ms | 179 q/s<br>p99 347 ms | 412 q/s<br>p99 182 ms | 🟢 2.26× | 🟢 2.30× |
+| HiCardFacet | 10.7 q/s<br>p99 2,546 ms | 11.0 q/s<br>p99 2,549 ms | 12.6 q/s<br>p99 1,794 ms | 🟢 1.18× | 🟢 1.14× |
+| TermsPure | 54.0 q/s<br>p99 359 ms | 54.9 q/s<br>p99 346 ms | 52.4 q/s<br>p99 383 ms | 🟡 0.97× | 🟡 0.95× |
+| TermsFiltered | 102 q/s<br>p99 174 ms | 103 q/s<br>p99 181 ms | 103 q/s<br>p99 180 ms | 🟡 1.00× | 🟡 1.00× |
+| TermsProhibited | 57.3 q/s<br>p99 326 ms | 58.0 q/s<br>p99 322 ms | 53.8 q/s<br>p99 348 ms | 🔴 0.94× | 🔴 0.93× |
+| All | 423 q/s<br>p99 402 ms | 435 q/s<br>p99 426 ms | 438 q/s<br>p99 498 ms | 🟡 1.04× | 🟡 1.01× |
 | **Geometric mean, queries** | | | | **🟢 1.55×** | **🟢 1.35×** |
 | Index size after indexing | 5.10 GB, 55 segments | 4.37 GB, 57 segments | 7.40 GB, 90 segments | | 1.69× larger |
 
@@ -108,55 +109,55 @@ TermsPure and TermsProhibited are `{!terms}` sets of 45,700 names; MatchAll has 
 
 | Category | Stock Solr+Lucene | Solr+Lucene, SM=off | Solr+Luxir | Luxir vs stock | Luxir vs SM=off |
 |---|--:|--:|--:|--:|--:|
-| Indexing (s) | 212 | 133 | 83.0 | 🟢 2.56× | 🟢 1.60× |
-| HighTerm | 611 | 605 | 1,626 | 🟢 2.66× | 🟢 2.69× |
-| MedTerm | 1,893 | 1,878 | 2,770 | 🟢 1.46× | 🟢 1.47× |
-| LowTerm | 3,463 | 3,745 | 2,974 | 🔴 0.86× | 🔴 0.79× |
-| AndHighHigh | 1,040 | 994 | 1,361 | 🟢 1.31× | 🟢 1.37× |
-| AndHighMed | 3,341 | 3,603 | 2,698 | 🔴 0.81× | 🔴 0.75× |
-| AndHighLow | 5,489 | 6,109 | 5,941 | 🟢 1.08× | 🟡 0.97× |
-| OrHighHigh | 377 | 357 | 1,590 | 🟢 4.22× | 🟢 4.46× |
-| OrHighMed | 547 | 514 | 2,864 | 🟢 5.24× | 🟢 5.57× |
-| OrHighLow | 721 | 706 | 6,779 | 🟢 9.40× | 🟢 9.60× |
-| OrHighNotHigh | 320 | 315 | 821 | 🟢 2.57× | 🟢 2.61× |
-| OrHighNotMed | 722 | 693 | 1,419 | 🟢 1.97× | 🟢 2.05× |
-| OrHighNotLow | 1,212 | 1,183 | 2,043 | 🟢 1.69× | 🟢 1.73× |
-| OrNotHighHigh | 415 | 417 | 1,110 | 🟢 2.68× | 🟢 2.66× |
-| OrNotHighMed | 1,634 | 1,686 | 3,156 | 🟢 1.93× | 🟢 1.87× |
-| OrNotHighLow | 6,502 | 7,301 | 8,632 | 🟢 1.33× | 🟢 1.18× |
-| HighPhrase | 216 | 214 | 269 | 🟢 1.25× | 🟢 1.26× |
-| MedPhrase | 738 | 740 | 671 | 🔴 0.91× | 🔴 0.91× |
-| LowPhrase | 831 | 837 | 664 | 🔴 0.80× | 🔴 0.79× |
-| HighSloppyPhrase | 139 | 142 | 159 | 🟢 1.15× | 🟢 1.13× |
-| MedSloppyPhrase | 423 | 427 | 368 | 🔴 0.87× | 🔴 0.86× |
-| LowSloppyPhrase | 876 | 891 | 665 | 🔴 0.76× | 🔴 0.75× |
-| HighSpanNear | 230 | 232 | 219 | 🟡 0.95× | 🔴 0.94× |
-| MedSpanNear | 794 | 804 | 680 | 🔴 0.86× | 🔴 0.85× |
-| LowSpanNear | 780 | 790 | 662 | 🔴 0.85× | 🔴 0.84× |
-| Prefix3 | 595 | 660 | 559 | 🔴 0.94× | 🔴 0.85× |
-| Wildcard | 595 | 637 | 689 | 🟢 1.16× | 🟢 1.08× |
-| Fuzzy1 | 790 | 778 | 781 | 🟡 0.99× | 🟡 1.00× |
-| Fuzzy2 | 651 | 684 | 551 | 🔴 0.85× | 🔴 0.81× |
-| IntNRQ | 122 | 116 | 989 | 🟢 8.10× | 🟢 8.53× |
-| IntSet | 1,424 | 1,497 | 3,070 | 🟢 2.16× | 🟢 2.05× |
-| PKLookup | 11,434 | 16,117 | 6,748 | 🔴 0.59× | 🔴 0.42× |
-| BM25MSM2 | 76.8 | 76.2 | 67.4 | 🔴 0.88× | 🔴 0.88× |
-| HighTermMonthSort | 947 | 952 | 1,582 | 🟢 1.67× | 🟢 1.66× |
-| HighTermDayOfYearSort | 967 | 1,052 | 1,422 | 🟢 1.47× | 🟢 1.35× |
-| HighTermTitleSort | 880 | 893 | 1,281 | 🟢 1.46× | 🟢 1.43× |
-| TermDateTimeSort | 744 | 775 | 1,499 | 🟢 2.01× | 🟢 1.93× |
-| BrowseMonthFacets | 28.8 | 28.8 | 37.6 | 🟢 1.31× | 🟢 1.31× |
-| BrowseDayOfYearFacets | 28.6 | 28.2 | 34.4 | 🟢 1.20× | 🟢 1.22× |
-| BrowseDateFacets | 25.2 | 25.0 | 35.4 | 🟢 1.41× | 🟢 1.42× |
-| MedTermDayFacets | 598 | 596 | 924 | 🟢 1.54× | 🟢 1.55× |
-| AndHighHighDayFacets | 203 | 204 | 495 | 🟢 2.44× | 🟢 2.42× |
-| AndHighMedDayFacets | 1,253 | 1,277 | 1,245 | 🟡 0.99× | 🟡 0.97× |
-| OrHighMedDayFacets | 133 | 132 | 463 | 🟢 3.48× | 🟢 3.51× |
-| All | 428 | 432 | 769 | 🟢 1.80× | 🟢 1.78× |
+| Indexing | 212 s | 133 s | 83.0 s | 🟢 2.56× | 🟢 1.60× |
+| HighTerm | 611 q/s<br>p99 57.4 ms | 605 q/s<br>p99 58.7 ms | 1,626 q/s<br>p99 23.6 ms | 🟢 2.66× | 🟢 2.69× |
+| MedTerm | 1,893 q/s<br>p99 19.2 ms | 1,878 q/s<br>p99 18.3 ms | 2,770 q/s<br>p99 19.9 ms | 🟢 1.46× | 🟢 1.47× |
+| LowTerm | 3,463 q/s<br>p99 9.82 ms | 3,745 q/s<br>p99 15.4 ms | 2,974 q/s<br>p99 19.2 ms | 🔴 0.86× | 🔴 0.79× |
+| AndHighHigh | 1,040 q/s<br>p99 50.0 ms | 994 q/s<br>p99 51.3 ms | 1,361 q/s<br>p99 27.8 ms | 🟢 1.31× | 🟢 1.37× |
+| AndHighMed | 3,341 q/s<br>p99 9.56 ms | 3,603 q/s<br>p99 8.85 ms | 2,698 q/s<br>p99 12.2 ms | 🔴 0.81× | 🔴 0.75× |
+| AndHighLow | 5,489 q/s<br>p99 7.83 ms | 6,109 q/s<br>p99 6.81 ms | 5,941 q/s<br>p99 6.85 ms | 🟢 1.08× | 🟡 0.97× |
+| OrHighHigh | 377 q/s<br>p99 83.0 ms | 357 q/s<br>p99 90.8 ms | 1,590 q/s<br>p99 17.2 ms | 🟢 4.22× | 🟢 4.46× |
+| OrHighMed | 547 q/s<br>p99 95.2 ms | 514 q/s<br>p99 104 ms | 2,864 q/s<br>p99 10.4 ms | 🟢 5.24× | 🟢 5.57× |
+| OrHighLow | 721 q/s<br>p99 43.6 ms | 706 q/s<br>p99 43.9 ms | 6,779 q/s<br>p99 4.26 ms | 🟢 9.40× | 🟢 9.60× |
+| OrHighNotHigh | 320 q/s<br>p99 130 ms | 315 q/s<br>p99 134 ms | 821 q/s<br>p99 52.2 ms | 🟢 2.57× | 🟢 2.61× |
+| OrHighNotMed | 722 q/s<br>p99 57.1 ms | 693 q/s<br>p99 59.1 ms | 1,419 q/s<br>p99 28.3 ms | 🟢 1.97× | 🟢 2.05× |
+| OrHighNotLow | 1,212 q/s<br>p99 25.1 ms | 1,183 q/s<br>p99 26.7 ms | 2,043 q/s<br>p99 15.1 ms | 🟢 1.69× | 🟢 1.73× |
+| OrNotHighHigh | 415 q/s<br>p99 69.1 ms | 417 q/s<br>p99 67.2 ms | 1,110 q/s<br>p99 27.4 ms | 🟢 2.68× | 🟢 2.66× |
+| OrNotHighMed | 1,634 q/s<br>p99 18.0 ms | 1,686 q/s<br>p99 18.0 ms | 3,156 q/s<br>p99 10.4 ms | 🟢 1.93× | 🟢 1.87× |
+| OrNotHighLow | 6,502 q/s<br>p99 4.49 ms | 7,301 q/s<br>p99 7.11 ms | 8,632 q/s<br>p99 3.17 ms | 🟢 1.33× | 🟢 1.18× |
+| HighPhrase | 216 q/s<br>p99 279 ms | 214 q/s<br>p99 286 ms | 269 q/s<br>p99 244 ms | 🟢 1.25× | 🟢 1.26× |
+| MedPhrase | 738 q/s<br>p99 70.1 ms | 740 q/s<br>p99 69.1 ms | 671 q/s<br>p99 94.5 ms | 🔴 0.91× | 🔴 0.91× |
+| LowPhrase | 831 q/s<br>p99 67.0 ms | 837 q/s<br>p99 68.3 ms | 664 q/s<br>p99 88.0 ms | 🔴 0.80× | 🔴 0.79× |
+| HighSloppyPhrase | 139 q/s<br>p99 676 ms | 142 q/s<br>p99 674 ms | 159 q/s<br>p99 451 ms | 🟢 1.15× | 🟢 1.13× |
+| MedSloppyPhrase | 423 q/s<br>p99 205 ms | 427 q/s<br>p99 198 ms | 368 q/s<br>p99 141 ms | 🔴 0.87× | 🔴 0.86× |
+| LowSloppyPhrase | 876 q/s<br>p99 71.3 ms | 891 q/s<br>p99 72.0 ms | 665 q/s<br>p99 90.1 ms | 🔴 0.76× | 🔴 0.75× |
+| HighSpanNear | 230 q/s<br>p99 351 ms | 232 q/s<br>p99 353 ms | 219 q/s<br>p99 488 ms | 🟡 0.95× | 🔴 0.94× |
+| MedSpanNear | 794 q/s<br>p99 59.8 ms | 804 q/s<br>p99 58.5 ms | 680 q/s<br>p99 60.9 ms | 🔴 0.86× | 🔴 0.85× |
+| LowSpanNear | 780 q/s<br>p99 81.5 ms | 790 q/s<br>p99 78.6 ms | 662 q/s<br>p99 88.4 ms | 🔴 0.85× | 🔴 0.84× |
+| Prefix3 | 595 q/s<br>p99 99.2 ms | 660 q/s<br>p99 92.2 ms | 559 q/s<br>p99 198 ms | 🔴 0.94× | 🔴 0.85× |
+| Wildcard | 595 q/s<br>p99 59.9 ms | 637 q/s<br>p99 54.1 ms | 689 q/s<br>p99 67.5 ms | 🟢 1.16× | 🟢 1.08× |
+| Fuzzy1 | 790 q/s<br>p99 38.4 ms | 778 q/s<br>p99 40.9 ms | 781 q/s<br>p99 39.6 ms | 🟡 0.99× | 🟡 1.00× |
+| Fuzzy2 | 651 q/s<br>p99 55.2 ms | 684 q/s<br>p99 53.9 ms | 551 q/s<br>p99 68.0 ms | 🔴 0.85× | 🔴 0.81× |
+| IntNRQ | 122 q/s<br>p99 216 ms | 116 q/s<br>p99 231 ms | 989 q/s<br>p99 28.8 ms | 🟢 8.10× | 🟢 8.53× |
+| IntSet | 1,424 q/s<br>p99 16.6 ms | 1,497 q/s<br>p99 16.1 ms | 3,070 q/s<br>p99 11.3 ms | 🟢 2.16× | 🟢 2.05× |
+| PKLookup | 11,434 q/s<br>p99 2.83 ms | 16,117 q/s<br>p99 1.80 ms | 6,748 q/s<br>p99 11.3 ms | 🔴 0.59× | 🔴 0.42× |
+| BM25MSM2 | 76.8 q/s<br>p99 629 ms | 76.2 q/s<br>p99 619 ms | 67.4 q/s<br>p99 328 ms | 🔴 0.88× | 🔴 0.88× |
+| HighTermMonthSort | 947 q/s<br>p99 32.6 ms | 952 q/s<br>p99 33.4 ms | 1,582 q/s<br>p99 21.0 ms | 🟢 1.67× | 🟢 1.66× |
+| HighTermDayOfYearSort | 967 q/s<br>p99 45.2 ms | 1,052 q/s<br>p99 41.1 ms | 1,422 q/s<br>p99 27.3 ms | 🟢 1.47× | 🟢 1.35× |
+| HighTermTitleSort | 880 q/s<br>p99 45.7 ms | 893 q/s<br>p99 45.8 ms | 1,281 q/s<br>p99 26.8 ms | 🟢 1.46× | 🟢 1.43× |
+| TermDateTimeSort | 744 q/s<br>p99 55.4 ms | 775 q/s<br>p99 57.3 ms | 1,499 q/s<br>p99 19.2 ms | 🟢 2.01× | 🟢 1.93× |
+| BrowseMonthFacets | 28.8 q/s<br>p99 713 ms | 28.8 q/s<br>p99 711 ms | 37.6 q/s<br>p99 644 ms | 🟢 1.31× | 🟢 1.31× |
+| BrowseDayOfYearFacets | 28.6 q/s<br>p99 719 ms | 28.2 q/s<br>p99 703 ms | 34.4 q/s<br>p99 592 ms | 🟢 1.20× | 🟢 1.22× |
+| BrowseDateFacets | 25.2 q/s<br>p99 795 ms | 25.0 q/s<br>p99 837 ms | 35.4 q/s<br>p99 580 ms | 🟢 1.41× | 🟢 1.42× |
+| MedTermDayFacets | 598 q/s<br>p99 53.3 ms | 596 q/s<br>p99 55.9 ms | 924 q/s<br>p99 43.0 ms | 🟢 1.54× | 🟢 1.55× |
+| AndHighHighDayFacets | 203 q/s<br>p99 278 ms | 204 q/s<br>p99 274 ms | 495 q/s<br>p99 69.6 ms | 🟢 2.44× | 🟢 2.42× |
+| AndHighMedDayFacets | 1,253 q/s<br>p99 27.0 ms | 1,277 q/s<br>p99 27.0 ms | 1,245 q/s<br>p99 25.0 ms | 🟡 0.99× | 🟡 0.97× |
+| OrHighMedDayFacets | 133 q/s<br>p99 394 ms | 132 q/s<br>p99 398 ms | 463 q/s<br>p99 78.9 ms | 🟢 3.48× | 🟢 3.51× |
+| All | 428 q/s<br>p99 237 ms | 432 q/s<br>p99 227 ms | 769 q/s<br>p99 171 ms | 🟢 1.80× | 🟢 1.78× |
 | **Geometric mean, queries** | | | | **🟢 1.51×** | **🟢 1.48×** |
 | Index size after indexing | 9.64 GB, 70 segments | 11.01 GB, 86 segments | 12.19 GB, 84 segments | | 1.11× larger |
 
-Solr+Luxir analyzes text natively, not quite as Solr does, so some requests find slightly different counts. PKLookup and the other cheap categories finish their 3,000 queries in a second or two, so they mostly measure warm-up (in 50 times longer runs, PKLookup was 0.74×).
+Solr+Luxir analyzes text natively, not quite as Solr does: 93 of the 1,153 requests find slightly different counts. PKLookup and the other cheap categories finish their 3,000 queries in a second or two, so they mostly measure warm-up (in 50 times longer runs, PKLookup was 0.74×).
 
 ### Coverage: geonames
 
@@ -164,27 +165,27 @@ Solr+Luxir analyzes text natively, not quite as Solr does, so some requests find
 
 | Category | Stock Solr+Lucene | Solr+Lucene, SM=off | Solr+Luxir | Luxir vs stock | Luxir vs SM=off |
 |---|--:|--:|--:|--:|--:|
-| Indexing (s) | 82.5 | 49.1 | 38.7 | 🟢 2.13× | 🟢 1.27× |
-| LegacyFacetPivot | 2,015 | 1,951 | 2,359 | 🟢 1.17× | 🟢 1.21× |
-| LegacyFacetFields | 10,116 | 12,919 | 12,839 | 🟢 1.27× | 🟡 0.99× |
-| NumBucketsPrefix | 6,740 | 7,200 | 7,738 | 🟢 1.15× | 🟢 1.07× |
-| PopulationRangeFacet | 9,396 | 10,942 | 10,209 | 🟢 1.09× | 🔴 0.93× |
-| SortElevation | 11,458 | 16,619 | 17,566 | 🟢 1.53× | 🟢 1.06× |
-| MultiKeySort | 10,244 | 13,058 | 10,406 | 🟡 1.02× | 🔴 0.80× |
-| CursorMarkFirstPage | 9,027 | 11,034 | 11,918 | 🟢 1.32× | 🟢 1.08× |
-| DeepPaging | 5,311 | 5,580 | 6,048 | 🟢 1.14× | 🟢 1.08× |
-| Grouping | 4,512 | 5,003 | 4,936 | 🟢 1.09× | 🟡 0.99× |
-| Collapse | 10,609 | 13,842 | 12,755 | 🟢 1.20× | 🔴 0.92× |
-| Highlight | 5,747 | 6,535 | 6,708 | 🟢 1.17× | 🟡 1.03× |
-| EdismaxNames | 5,268 | 5,446 | 7,094 | 🟢 1.35× | 🟢 1.30× |
-| Geofilt | 9,185 | 16,247 | 16,145 | 🟢 1.76× | 🟡 0.99× |
-| MoreLikeThis | 1,677 | 1,684 | 1,724 | 🟡 1.03× | 🟡 1.02× |
-| FacetHeatmap | 153 | 152 | 156 | 🟡 1.02× | 🟡 1.02× |
-| FacetQueryNested | 9,349 | 11,025 | 11,160 | 🟢 1.19× | 🟡 1.01× |
-| PivotWithStats | 2,390 | 2,480 | 2,282 | 🟡 0.95× | 🔴 0.92× |
-| IntervalFacets | 9,298 | 11,163 | 13,391 | 🟢 1.44× | 🟢 1.20× |
-| SpellCheck | 3,131 | 3,190 | 2,569 | 🔴 0.82× | 🔴 0.81× |
-| TermsComponent | 2,151 | 2,109 | 1,929 | 🔴 0.90× | 🔴 0.91× |
+| Indexing | 82.5 s | 49.1 s | 38.7 s | 🟢 2.13× | 🟢 1.27× |
+| LegacyFacetPivot | 2,015 q/s<br>p99 35.1 ms | 1,951 q/s<br>p99 35.2 ms | 2,359 q/s<br>p99 29.7 ms | 🟢 1.17× | 🟢 1.21× |
+| LegacyFacetFields | 10,116 q/s<br>p99 3.24 ms | 12,919 q/s<br>p99 2.83 ms | 12,839 q/s<br>p99 2.72 ms | 🟢 1.27× | 🟡 0.99× |
+| NumBucketsPrefix | 6,740 q/s<br>p99 6.78 ms | 7,200 q/s<br>p99 7.09 ms | 7,738 q/s<br>p99 6.42 ms | 🟢 1.15× | 🟢 1.07× |
+| PopulationRangeFacet | 9,396 q/s<br>p99 4.06 ms | 10,942 q/s<br>p99 3.89 ms | 10,209 q/s<br>p99 4.02 ms | 🟢 1.09× | 🔴 0.93× |
+| SortElevation | 11,458 q/s<br>p99 2.60 ms | 16,619 q/s<br>p99 2.28 ms | 17,566 q/s<br>p99 2.03 ms | 🟢 1.53× | 🟢 1.06× |
+| MultiKeySort | 10,244 q/s<br>p99 3.20 ms | 13,058 q/s<br>p99 2.61 ms | 10,406 q/s<br>p99 3.59 ms | 🟡 1.02× | 🔴 0.80× |
+| CursorMarkFirstPage | 9,027 q/s<br>p99 3.41 ms | 11,034 q/s<br>p99 2.86 ms | 11,918 q/s<br>p99 3.07 ms | 🟢 1.32× | 🟢 1.08× |
+| DeepPaging | 5,311 q/s<br>p99 6.64 ms | 5,580 q/s<br>p99 6.62 ms | 6,048 q/s<br>p99 5.14 ms | 🟢 1.14× | 🟢 1.08× |
+| Grouping | 4,512 q/s<br>p99 7.88 ms | 5,003 q/s<br>p99 7.67 ms | 4,936 q/s<br>p99 9.09 ms | 🟢 1.09× | 🟡 0.99× |
+| Collapse | 10,609 q/s<br>p99 3.38 ms | 13,842 q/s<br>p99 2.97 ms | 12,755 q/s<br>p99 3.00 ms | 🟢 1.20× | 🔴 0.92× |
+| Highlight | 5,747 q/s<br>p99 6.93 ms | 6,535 q/s<br>p99 6.72 ms | 6,708 q/s<br>p99 8.15 ms | 🟢 1.17× | 🟡 1.03× |
+| EdismaxNames | 5,268 q/s<br>p99 10.6 ms | 5,446 q/s<br>p99 10.7 ms | 7,094 q/s<br>p99 8.64 ms | 🟢 1.35× | 🟢 1.30× |
+| Geofilt | 9,185 q/s<br>p99 2.57 ms | 16,247 q/s<br>p99 1.60 ms | 16,145 q/s<br>p99 2.42 ms | 🟢 1.76× | 🟡 0.99× |
+| MoreLikeThis | 1,677 q/s<br>p99 34.2 ms | 1,684 q/s<br>p99 35.6 ms | 1,724 q/s<br>p99 35.0 ms | 🟡 1.03× | 🟡 1.02× |
+| FacetHeatmap | 153 q/s<br>p99 153 ms | 152 q/s<br>p99 156 ms | 156 q/s<br>p99 147 ms | 🟡 1.02× | 🟡 1.02× |
+| FacetQueryNested | 9,349 q/s<br>p99 3.68 ms | 11,025 q/s<br>p99 3.22 ms | 11,160 q/s<br>p99 3.42 ms | 🟢 1.19× | 🟡 1.01× |
+| PivotWithStats | 2,390 q/s<br>p99 23.2 ms | 2,480 q/s<br>p99 20.9 ms | 2,282 q/s<br>p99 22.2 ms | 🟡 0.95× | 🔴 0.92× |
+| IntervalFacets | 9,298 q/s<br>p99 3.95 ms | 11,163 q/s<br>p99 3.51 ms | 13,391 q/s<br>p99 2.49 ms | 🟢 1.44× | 🟢 1.20× |
+| SpellCheck | 3,131 q/s<br>p99 12.3 ms | 3,190 q/s<br>p99 11.6 ms | 2,569 q/s<br>p99 20.8 ms | 🔴 0.82× | 🔴 0.81× |
+| TermsComponent | 2,151 q/s<br>p99 113 ms | 2,109 q/s<br>p99 121 ms | 1,929 q/s<br>p99 134 ms | 🔴 0.90× | 🔴 0.91× |
 | **Geometric mean, queries** | | | | **🟢 1.16×** | **🟡 1.01×** |
 | Index size after indexing | 4.78 GB, 64 segments | 4.82 GB, 61 segments | 7.19 GB, 78 segments | | 1.49× larger |
 
@@ -194,43 +195,43 @@ Solr+Luxir analyzes text natively, not quite as Solr does, so some requests find
 
 | Category | Stock Solr+Lucene | Solr+Lucene, SM=off | Solr+Luxir | Luxir vs stock | Luxir vs SM=off |
 |---|--:|--:|--:|--:|--:|
-| Indexing (s) | 212 | 133 | 82.2 | 🟢 2.58× | 🟢 1.62× |
-| BoostedOr | 337 | 330 | 670 | 🟢 1.99× | 🟢 2.03× |
-| NestedBoolean | 304 | 298 | 805 | 🟢 2.64× | 🟢 2.70× |
-| DisMaxTwoFields | 257 | 255 | 306 | 🟢 1.19× | 🟢 1.20× |
-| Regexp | 801 | 812 | 956 | 🟢 1.19× | 🟢 1.18× |
-| UnorderedSpanNear | 546 | 530 | 462 | 🔴 0.85× | 🔴 0.87× |
-| LongRange | 1,352 | 1,406 | 1,528 | 🟢 1.13× | 🟢 1.09× |
-| FieldExistsFilter | 1,964 | 2,045 | 3,214 | 🟢 1.64× | 🟢 1.57× |
-| Frange | 657 | 666 | 2,253 | 🟢 3.43× | 🟢 3.38× |
-| NegativeFilter | 436 | 436 | 1,676 | 🟢 3.85× | 🟢 3.84× |
-| SortLongFiltered | 864 | 861 | 1,346 | 🟢 1.56× | 🟢 1.56× |
-| MultiKeySort | 538 | 564 | 630 | 🟢 1.17× | 🟢 1.12× |
-| DeepPaging | 821 | 843 | 2,546 | 🟢 3.10× | 🟢 3.02× |
-| LegacyFacetField | 714 | 747 | 1,011 | 🟢 1.42× | 🟢 1.35× |
-| LegacyFacetRange | 730 | 714 | 995 | 🟢 1.36× | 🟢 1.39× |
-| JsonQueryNestedFacets | 66.2 | 66.0 | 224 | 🟢 3.39× | 🟢 3.40× |
-| FacetAggregations | 127 | 133 | 280 | 🟢 2.21× | 🟢 2.10× |
-| Grouping | 580 | 597 | 491 | 🔴 0.85× | 🔴 0.82× |
-| EdismaxComplex | 527 | 534 | 312 | 🔴 0.59× | 🔴 0.58× |
-| EdismaxMinMatch | 754 | 771 | 578 | 🔴 0.77× | 🔴 0.75× |
-| EdismaxPhraseBoost | 736 | 718 | 906 | 🟢 1.23× | 🟢 1.26× |
-| SpellCheck | 713 | 685 | 658 | 🔴 0.92× | 🟡 0.96× |
-| FacetTermsByAgg | 204 | 204 | 185 | 🔴 0.91× | 🔴 0.91× |
-| FacetExcludeTags | 1,097 | 1,167 | 1,161 | 🟢 1.06× | 🟡 0.99× |
-| FacetRangeNested | 286 | 286 | 252 | 🔴 0.88× | 🔴 0.88× |
-| FacetRelatedness | 97.7 | 104 | 280 | 🟢 2.87× | 🟢 2.70× |
-| LegacyMultiSelectFacets | 953 | 977 | 1,329 | 🟢 1.39× | 🟢 1.36× |
-| StatsComponent | 75.6 | 76.3 | 102 | 🟢 1.35× | 🟢 1.33× |
-| SurroundParser | 1,524 | 1,468 | 1,148 | 🔴 0.75× | 🔴 0.78× |
-| BoolParser | 345 | 332 | 344 | 🟡 1.00× | 🟡 1.04× |
-| ReRank | 615 | 572 | 552 | 🔴 0.90× | 🟡 0.96× |
-| FunctionSort | 519 | 501 | 605 | 🟢 1.17× | 🟢 1.21× |
-| PrefixTermFieldParsers | 3,984 | 4,422 | 2,718 | 🔴 0.68× | 🔴 0.61× |
-| ExistsOnText | 1,789 | 1,729 | 4,842 | 🟢 2.71× | 🟢 2.80× |
-| TimeAllowed | 662 | 611 | 575 | 🔴 0.87× | 🔴 0.94× |
-| DebugExplain | 404 | 375 | 1,217 | 🟢 3.01× | 🟢 3.24× |
-| TermsComponent | 261 | 262 | 252 | 🟡 0.97× | 🟡 0.96× |
+| Indexing | 212 s | 133 s | 82.2 s | 🟢 2.58× | 🟢 1.62× |
+| BoostedOr | 337 q/s<br>p99 97.4 ms | 330 q/s<br>p99 95.6 ms | 670 q/s<br>p99 44.2 ms | 🟢 1.99× | 🟢 2.03× |
+| NestedBoolean | 304 q/s<br>p99 109 ms | 298 q/s<br>p99 112 ms | 805 q/s<br>p99 44.2 ms | 🟢 2.64× | 🟢 2.70× |
+| DisMaxTwoFields | 257 q/s<br>p99 155 ms | 255 q/s<br>p99 151 ms | 306 q/s<br>p99 122 ms | 🟢 1.19× | 🟢 1.20× |
+| Regexp | 801 q/s<br>p99 48.5 ms | 812 q/s<br>p99 44.5 ms | 956 q/s<br>p99 42.9 ms | 🟢 1.19× | 🟢 1.18× |
+| UnorderedSpanNear | 546 q/s<br>p99 88.1 ms | 530 q/s<br>p99 90.1 ms | 462 q/s<br>p99 99.0 ms | 🔴 0.85× | 🔴 0.87× |
+| LongRange | 1,352 q/s<br>p99 51.3 ms | 1,406 q/s<br>p99 56.2 ms | 1,528 q/s<br>p99 39.0 ms | 🟢 1.13× | 🟢 1.09× |
+| FieldExistsFilter | 1,964 q/s<br>p99 12.6 ms | 2,045 q/s<br>p99 22.1 ms | 3,214 q/s<br>p99 15.9 ms | 🟢 1.64× | 🟢 1.57× |
+| Frange | 657 q/s<br>p99 58.5 ms | 666 q/s<br>p99 60.3 ms | 2,253 q/s<br>p99 18.8 ms | 🟢 3.43× | 🟢 3.38× |
+| NegativeFilter | 436 q/s<br>p99 104 ms | 436 q/s<br>p99 108 ms | 1,676 q/s<br>p99 19.4 ms | 🟢 3.85× | 🟢 3.84× |
+| SortLongFiltered | 864 q/s<br>p99 48.2 ms | 861 q/s<br>p99 52.9 ms | 1,346 q/s<br>p99 26.0 ms | 🟢 1.56× | 🟢 1.56× |
+| MultiKeySort | 538 q/s<br>p99 75.7 ms | 564 q/s<br>p99 71.2 ms | 630 q/s<br>p99 56.9 ms | 🟢 1.17× | 🟢 1.12× |
+| DeepPaging | 821 q/s<br>p99 53.4 ms | 843 q/s<br>p99 50.8 ms | 2,546 q/s<br>p99 13.9 ms | 🟢 3.10× | 🟢 3.02× |
+| LegacyFacetField | 714 q/s<br>p99 46.9 ms | 747 q/s<br>p99 46.6 ms | 1,011 q/s<br>p99 30.5 ms | 🟢 1.42× | 🟢 1.35× |
+| LegacyFacetRange | 730 q/s<br>p99 39.3 ms | 714 q/s<br>p99 37.0 ms | 995 q/s<br>p99 35.4 ms | 🟢 1.36× | 🟢 1.39× |
+| JsonQueryNestedFacets | 66.2 q/s<br>p99 370 ms | 66.0 q/s<br>p99 381 ms | 224 q/s<br>p99 121 ms | 🟢 3.39× | 🟢 3.40× |
+| FacetAggregations | 127 q/s<br>p99 375 ms | 133 q/s<br>p99 361 ms | 280 q/s<br>p99 96.9 ms | 🟢 2.21× | 🟢 2.10× |
+| Grouping | 580 q/s<br>p99 45.9 ms | 597 q/s<br>p99 45.1 ms | 491 q/s<br>p99 51.0 ms | 🔴 0.85× | 🔴 0.82× |
+| EdismaxComplex | 527 q/s<br>p99 65.7 ms | 534 q/s<br>p99 63.9 ms | 312 q/s<br>p99 106 ms | 🔴 0.59× | 🔴 0.58× |
+| EdismaxMinMatch | 754 q/s<br>p99 39.4 ms | 771 q/s<br>p99 38.3 ms | 578 q/s<br>p99 51.9 ms | 🔴 0.77× | 🔴 0.75× |
+| EdismaxPhraseBoost | 736 q/s<br>p99 34.1 ms | 718 q/s<br>p99 35.5 ms | 906 q/s<br>p99 31.9 ms | 🟢 1.23× | 🟢 1.26× |
+| SpellCheck | 713 q/s<br>p99 74.9 ms | 685 q/s<br>p99 44.5 ms | 658 q/s<br>p99 73.7 ms | 🔴 0.92× | 🟡 0.96× |
+| FacetTermsByAgg | 204 q/s<br>p99 124 ms | 204 q/s<br>p99 121 ms | 185 q/s<br>p99 143 ms | 🔴 0.91× | 🔴 0.91× |
+| FacetExcludeTags | 1,097 q/s<br>p99 24.0 ms | 1,167 q/s<br>p99 22.6 ms | 1,161 q/s<br>p99 32.7 ms | 🟢 1.06× | 🟡 0.99× |
+| FacetRangeNested | 286 q/s<br>p99 90.2 ms | 286 q/s<br>p99 92.6 ms | 252 q/s<br>p99 103 ms | 🔴 0.88× | 🔴 0.88× |
+| FacetRelatedness | 97.7 q/s<br>p99 222 ms | 104 q/s<br>p99 212 ms | 280 q/s<br>p99 82.4 ms | 🟢 2.87× | 🟢 2.70× |
+| LegacyMultiSelectFacets | 953 q/s<br>p99 68.4 ms | 977 q/s<br>p99 48.8 ms | 1,329 q/s<br>p99 19.7 ms | 🟢 1.39× | 🟢 1.36× |
+| StatsComponent | 75.6 q/s<br>p99 643 ms | 76.3 q/s<br>p99 613 ms | 102 q/s<br>p99 361 ms | 🟢 1.35× | 🟢 1.33× |
+| SurroundParser | 1,524 q/s<br>p99 21.0 ms | 1,468 q/s<br>p99 22.0 ms | 1,148 q/s<br>p99 35.7 ms | 🔴 0.75× | 🔴 0.78× |
+| BoolParser | 345 q/s<br>p99 135 ms | 332 q/s<br>p99 141 ms | 344 q/s<br>p99 131 ms | 🟡 1.00× | 🟡 1.04× |
+| ReRank | 615 q/s<br>p99 75.2 ms | 572 q/s<br>p99 82.1 ms | 552 q/s<br>p99 81.5 ms | 🔴 0.90× | 🟡 0.96× |
+| FunctionSort | 519 q/s<br>p99 79.9 ms | 501 q/s<br>p99 85.0 ms | 605 q/s<br>p99 67.0 ms | 🟢 1.17× | 🟢 1.21× |
+| PrefixTermFieldParsers | 3,984 q/s<br>p99 8.35 ms | 4,422 q/s<br>p99 7.51 ms | 2,718 q/s<br>p99 12.5 ms | 🔴 0.68× | 🔴 0.61× |
+| ExistsOnText | 1,789 q/s<br>p99 14.8 ms | 1,729 q/s<br>p99 15.5 ms | 4,842 q/s<br>p99 5.63 ms | 🟢 2.71× | 🟢 2.80× |
+| TimeAllowed | 662 q/s<br>p99 69.8 ms | 611 q/s<br>p99 77.6 ms | 575 q/s<br>p99 75.9 ms | 🔴 0.87× | 🔴 0.94× |
+| DebugExplain | 404 q/s<br>p99 95.6 ms | 375 q/s<br>p99 103 ms | 1,217 q/s<br>p99 21.7 ms | 🟢 3.01× | 🟢 3.24× |
+| TermsComponent | 261 q/s<br>p99 1,174 ms | 262 q/s<br>p99 1,291 ms | 252 q/s<br>p99 1,323 ms | 🟡 0.97× | 🟡 0.96× |
 | **Geometric mean, queries** | | | | **🟢 1.37×** | **🟢 1.37×** |
 | Index size after indexing | 10.01 GB, 73 segments | 11.22 GB, 89 segments | 12.63 GB, 88 segments | | 1.13× larger |
 
@@ -240,10 +241,10 @@ Solr+Luxir analyzes text natively, not quite as Solr does, so some requests find
 
 | Category | Stock Solr+Lucene | Solr+Lucene, SM=off | Solr+Luxir | Luxir vs stock | Luxir vs SM=off |
 |---|--:|--:|--:|--:|--:|
-| Indexing (s) | 670 | 336 | 179 | 🟢 3.75× | 🟢 1.88× |
-| FloatRangeSort | 238 | 219 | 262 | 🟢 1.10× | 🟢 1.20× |
-| FloatStats | 256 | 233 | 254 | 🟡 0.99× | 🟢 1.09× |
-| QueryFacets | 147 | 136 | 219 | 🟢 1.49× | 🟢 1.62× |
+| Indexing | 670 s | 336 s | 179 s | 🟢 3.75× | 🟢 1.88× |
+| FloatRangeSort | 238 q/s<br>p99 184 ms | 219 q/s<br>p99 196 ms | 262 q/s<br>p99 229 ms | 🟢 1.10× | 🟢 1.20× |
+| FloatStats | 256 q/s<br>p99 125 ms | 233 q/s<br>p99 136 ms | 254 q/s<br>p99 143 ms | 🟡 0.99× | 🟢 1.09× |
+| QueryFacets | 147 q/s<br>p99 220 ms | 136 q/s<br>p99 231 ms | 219 q/s<br>p99 138 ms | 🟢 1.49× | 🟢 1.62× |
 | **Geometric mean, queries** | | | | **🟢 1.18×** | **🟢 1.28×** |
 | Index size after indexing | 9.36 GB, 52 segments | 9.75 GB, 61 segments | 14.17 GB, 55 segments | | 1.45× larger |
 
@@ -253,47 +254,47 @@ Solr+Luxir analyzes text natively, not quite as Solr does, so some requests find
 
 | Category | Stock Solr+Lucene | Solr+Lucene, SM=off | Solr+Luxir | Luxir vs stock | Luxir vs SM=off |
 |---|--:|--:|--:|--:|--:|
-| Indexing (s) | 20.4 | 12.4 | 10.9 | 🟢 1.87× | 🟢 1.14× |
-| BooleanShapes | 1,762 | 1,849 | 2,503 | 🟢 1.42× | 🟢 1.35× |
-| BoostAndFunctionQueries | 343 | 348 | 368 | 🟢 1.07× | 🟢 1.06× |
-| CollapseExpand | 722 | 708 | 774 | 🟢 1.07× | 🟢 1.09× |
-| DateMath | 5,664 | 6,017 | 8,877 | 🟢 1.57× | 🟢 1.48× |
-| Dismax | 7,948 | 8,930 | 10,507 | 🟢 1.32× | 🟢 1.18× |
-| EdismaxVariants | 4,382 | 4,812 | 6,712 | 🟢 1.53× | 🟢 1.39× |
-| Elevation | 2,493 | 2,469 | 2,818 | 🟢 1.13× | 🟢 1.14× |
-| Exists | 1,604 | 1,644 | 3,163 | 🟢 1.97× | 🟢 1.92× |
-| FieldListFunctions | 3,281 | 3,171 | 4,394 | 🟢 1.34× | 🟢 1.39× |
-| Frange | 4,555 | 4,502 | 4,597 | 🟡 1.01× | 🟡 1.02× |
-| GroupingVariants | 311 | 331 | 414 | 🟢 1.33× | 🟢 1.25× |
-| HighlightVariants | 3,259 | 3,300 | 3,509 | 🟢 1.08× | 🟢 1.06× |
-| JoinGraphMlt | 1,528 | 1,512 | 1,556 | 🟡 1.02× | 🟡 1.03× |
-| JsonAggregations | 86.6 | 85.6 | 123 | 🟢 1.42× | 🟢 1.44× |
-| JsonQueryDsl | 8,187 | 9,488 | 9,591 | 🟢 1.17× | 🟡 1.01× |
-| JsonRangeFacets | 1,105 | 1,100 | 3,130 | 🟢 2.83× | 🟢 2.85× |
-| JsonTermsFacets | 231 | 234 | 257 | 🟢 1.11× | 🟢 1.10× |
-| LegacyFacetFieldVariants | 221 | 217 | 219 | 🟡 0.99× | 🟡 1.01× |
-| LegacyFacetQueryRange | 1,125 | 1,095 | 1,336 | 🟢 1.19× | 🟢 1.22× |
-| LegacyPivotIntervalHeatmap | 949 | 919 | 1,002 | 🟢 1.06× | 🟢 1.09× |
-| MultiTerm | 2,276 | 2,191 | 3,589 | 🟢 1.58× | 🟢 1.64× |
-| NestedAndFilters | 3,208 | 3,464 | 3,606 | 🟢 1.12× | 🟡 1.04× |
-| OtherParsers | 1,878 | 1,876 | 3,145 | 🟢 1.67× | 🟢 1.68× |
-| Paging | 17.6 | 18.7 | 23.5 | 🟢 1.34× | 🟢 1.26× |
-| Phrases | 11,353 | 17,682 | 19,873 | 🟢 1.75× | 🟢 1.12× |
-| PureNegative | 1,077 | 1,025 | 1,416 | 🟢 1.31× | 🟢 1.38× |
-| RangeCounts | 11,835 | 20,871 | 20,920 | 🟢 1.77× | 🟡 1.00× |
-| RangePerType | 1,527 | 1,365 | 2,469 | 🟢 1.62× | 🟢 1.81× |
-| RealTimeGet | 13,930 | 24,687 | 24,936 | 🟢 1.79× | 🟡 1.01× |
-| RequestParams | 7,481 | 8,074 | 9,816 | 🟢 1.31× | 🟢 1.22× |
-| SortFunctions | 878 | 869 | 940 | 🟢 1.07× | 🟢 1.08× |
-| SortMultiValued | 418 | 406 | 400 | 🟡 0.96× | 🟡 0.99× |
-| SortSingleValued | 1,033 | 1,006 | 2,053 | 🟢 1.99× | 🟢 2.04× |
-| Spatial | 8,050 | 9,225 | 8,919 | 🟢 1.11× | 🟡 0.97× |
-| SpellCheckVariants | 5,777 | 6,105 | 5,529 | 🟡 0.96× | 🔴 0.91× |
-| StatsVariants | 196 | 196 | 268 | 🟢 1.37× | 🟢 1.37× |
-| StreamingExpressions | 740 | 729 | 1,002 | 🟢 1.35× | 🟢 1.37× |
-| TermPerType | 2,313 | 2,182 | 3,238 | 🟢 1.40× | 🟢 1.48× |
-| TermTermsRawPrefix | 1,279 | 1,201 | 1,926 | 🟢 1.51× | 🟢 1.60× |
-| TermsComponentVariants | 437 | 439 | 433 | 🟡 0.99× | 🟡 0.99× |
+| Indexing | 20.4 s | 12.4 s | 10.9 s | 🟢 1.87× | 🟢 1.14× |
+| BooleanShapes | 1,762 q/s<br>p99 36.3 ms | 1,849 q/s<br>p99 35.1 ms | 2,503 q/s<br>p99 31.5 ms | 🟢 1.42× | 🟢 1.35× |
+| BoostAndFunctionQueries | 343 q/s<br>p99 125 ms | 348 q/s<br>p99 125 ms | 368 q/s<br>p99 127 ms | 🟢 1.07× | 🟢 1.06× |
+| CollapseExpand | 722 q/s<br>p99 55.8 ms | 708 q/s<br>p99 57.0 ms | 774 q/s<br>p99 52.2 ms | 🟢 1.07× | 🟢 1.09× |
+| DateMath | 5,664 q/s<br>p99 8.01 ms | 6,017 q/s<br>p99 7.57 ms | 8,877 q/s<br>p99 5.04 ms | 🟢 1.57× | 🟢 1.48× |
+| Dismax | 7,948 q/s<br>p99 4.54 ms | 8,930 q/s<br>p99 4.43 ms | 10,507 q/s<br>p99 3.40 ms | 🟢 1.32× | 🟢 1.18× |
+| EdismaxVariants | 4,382 q/s<br>p99 11.3 ms | 4,812 q/s<br>p99 10.5 ms | 6,712 q/s<br>p99 7.32 ms | 🟢 1.53× | 🟢 1.39× |
+| Elevation | 2,493 q/s<br>p99 12.1 ms | 2,469 q/s<br>p99 12.4 ms | 2,818 q/s<br>p99 12.8 ms | 🟢 1.13× | 🟢 1.14× |
+| Exists | 1,604 q/s<br>p99 24.8 ms | 1,644 q/s<br>p99 24.8 ms | 3,163 q/s<br>p99 15.8 ms | 🟢 1.97× | 🟢 1.92× |
+| FieldListFunctions | 3,281 q/s<br>p99 19.2 ms | 3,171 q/s<br>p99 22.8 ms | 4,394 q/s<br>p99 13.9 ms | 🟢 1.34× | 🟢 1.39× |
+| Frange | 4,555 q/s<br>p99 9.01 ms | 4,502 q/s<br>p99 9.84 ms | 4,597 q/s<br>p99 9.50 ms | 🟡 1.01× | 🟡 1.02× |
+| GroupingVariants | 311 q/s<br>p99 269 ms | 331 q/s<br>p99 232 ms | 414 q/s<br>p99 168 ms | 🟢 1.33× | 🟢 1.25× |
+| HighlightVariants | 3,259 q/s<br>p99 17.9 ms | 3,300 q/s<br>p99 17.5 ms | 3,509 q/s<br>p99 15.9 ms | 🟢 1.08× | 🟢 1.06× |
+| JoinGraphMlt | 1,528 q/s<br>p99 31.2 ms | 1,512 q/s<br>p99 31.1 ms | 1,556 q/s<br>p99 32.4 ms | 🟡 1.02× | 🟡 1.03× |
+| JsonAggregations | 86.6 q/s<br>p99 526 ms | 85.6 q/s<br>p99 533 ms | 123 q/s<br>p99 506 ms | 🟢 1.42× | 🟢 1.44× |
+| JsonQueryDsl | 8,187 q/s<br>p99 4.45 ms | 9,488 q/s<br>p99 4.03 ms | 9,591 q/s<br>p99 4.31 ms | 🟢 1.17× | 🟡 1.01× |
+| JsonRangeFacets | 1,105 q/s<br>p99 28.9 ms | 1,100 q/s<br>p99 31.4 ms | 3,130 q/s<br>p99 13.8 ms | 🟢 2.83× | 🟢 2.85× |
+| JsonTermsFacets | 231 q/s<br>p99 695 ms | 234 q/s<br>p99 664 ms | 257 q/s<br>p99 760 ms | 🟢 1.11× | 🟢 1.10× |
+| LegacyFacetFieldVariants | 221 q/s<br>p99 465 ms | 217 q/s<br>p99 496 ms | 219 q/s<br>p99 415 ms | 🟡 0.99× | 🟡 1.01× |
+| LegacyFacetQueryRange | 1,125 q/s<br>p99 70.5 ms | 1,095 q/s<br>p99 76.8 ms | 1,336 q/s<br>p99 65.7 ms | 🟢 1.19× | 🟢 1.22× |
+| LegacyPivotIntervalHeatmap | 949 q/s<br>p99 40.8 ms | 919 q/s<br>p99 40.6 ms | 1,002 q/s<br>p99 38.8 ms | 🟢 1.06× | 🟢 1.09× |
+| MultiTerm | 2,276 q/s<br>p99 20.1 ms | 2,191 q/s<br>p99 21.1 ms | 3,589 q/s<br>p99 14.7 ms | 🟢 1.58× | 🟢 1.64× |
+| NestedAndFilters | 3,208 q/s<br>p99 22.9 ms | 3,464 q/s<br>p99 22.4 ms | 3,606 q/s<br>p99 21.3 ms | 🟢 1.12× | 🟡 1.04× |
+| OtherParsers | 1,878 q/s<br>p99 37.1 ms | 1,876 q/s<br>p99 37.4 ms | 3,145 q/s<br>p99 20.8 ms | 🟢 1.67× | 🟢 1.68× |
+| Paging | 17.6 q/s<br>p99 8,995 ms | 18.7 q/s<br>p99 8,896 ms | 23.5 q/s<br>p99 6,906 ms | 🟢 1.34× | 🟢 1.26× |
+| Phrases | 11,353 q/s<br>p99 2.54 ms | 17,682 q/s<br>p99 1.50 ms | 19,873 q/s<br>p99 1.44 ms | 🟢 1.75× | 🟢 1.12× |
+| PureNegative | 1,077 q/s<br>p99 47.4 ms | 1,025 q/s<br>p99 47.4 ms | 1,416 q/s<br>p99 35.8 ms | 🟢 1.31× | 🟢 1.38× |
+| RangeCounts | 11,835 q/s<br>p99 2.23 ms | 20,871 q/s<br>p99 1.17 ms | 20,920 q/s<br>p99 1.21 ms | 🟢 1.77× | 🟡 1.00× |
+| RangePerType | 1,527 q/s<br>p99 26.1 ms | 1,365 q/s<br>p99 30.1 ms | 2,469 q/s<br>p99 21.9 ms | 🟢 1.62× | 🟢 1.81× |
+| RealTimeGet | 13,930 q/s<br>p99 2.01 ms | 24,687 q/s<br>p99 1.13 ms | 24,936 q/s<br>p99 1.17 ms | 🟢 1.79× | 🟡 1.01× |
+| RequestParams | 7,481 q/s<br>p99 5.01 ms | 8,074 q/s<br>p99 5.17 ms | 9,816 q/s<br>p99 3.91 ms | 🟢 1.31× | 🟢 1.22× |
+| SortFunctions | 878 q/s<br>p99 58.8 ms | 869 q/s<br>p99 59.6 ms | 940 q/s<br>p99 55.6 ms | 🟢 1.07× | 🟢 1.08× |
+| SortMultiValued | 418 q/s<br>p99 77.4 ms | 406 q/s<br>p99 80.0 ms | 400 q/s<br>p99 77.3 ms | 🟡 0.96× | 🟡 0.99× |
+| SortSingleValued | 1,033 q/s<br>p99 48.0 ms | 1,006 q/s<br>p99 49.0 ms | 2,053 q/s<br>p99 18.2 ms | 🟢 1.99× | 🟢 2.04× |
+| Spatial | 8,050 q/s<br>p99 4.31 ms | 9,225 q/s<br>p99 4.23 ms | 8,919 q/s<br>p99 5.05 ms | 🟢 1.11× | 🟡 0.97× |
+| SpellCheckVariants | 5,777 q/s<br>p99 6.85 ms | 6,105 q/s<br>p99 7.63 ms | 5,529 q/s<br>p99 7.91 ms | 🟡 0.96× | 🔴 0.91× |
+| StatsVariants | 196 q/s<br>p99 286 ms | 196 q/s<br>p99 282 ms | 268 q/s<br>p99 165 ms | 🟢 1.37× | 🟢 1.37× |
+| StreamingExpressions | 740 q/s<br>p99 72.5 ms | 729 q/s<br>p99 75.5 ms | 1,002 q/s<br>p99 31.3 ms | 🟢 1.35× | 🟢 1.37× |
+| TermPerType | 2,313 q/s<br>p99 24.5 ms | 2,182 q/s<br>p99 26.8 ms | 3,238 q/s<br>p99 20.9 ms | 🟢 1.40× | 🟢 1.48× |
+| TermTermsRawPrefix | 1,279 q/s<br>p99 30.1 ms | 1,201 q/s<br>p99 32.7 ms | 1,926 q/s<br>p99 30.9 ms | 🟢 1.51× | 🟢 1.60× |
+| TermsComponentVariants | 437 q/s<br>p99 167 ms | 439 q/s<br>p99 165 ms | 433 q/s<br>p99 178 ms | 🟡 0.99× | 🟡 0.99× |
 | **Geometric mean, queries** | | | | **🟢 1.32×** | **🟢 1.26×** |
 | Index size after indexing | 1.06 GB, 35 segments | 1.11 GB, 44 segments | 1.28 GB, 30 segments | | 1.15× larger |
 
@@ -303,14 +304,14 @@ Solr+Luxir analyzes text natively, not quite as Solr does, so some requests find
 
 | Category | Stock Solr+Lucene | Solr+Lucene, SM=off | Solr+Luxir | Luxir vs stock | Luxir vs SM=off |
 |---|--:|--:|--:|--:|--:|
-| Indexing (s) | 4.2 | 4.2 | 4.0 | 🟡 1.03× | 🟢 1.05× |
-| BlockJoinFacets | 2,636 | 2,849 | 2,655 | 🟡 1.01× | 🔴 0.93× |
-| ChildBlockJoin | 6,371 | 7,519 | 7,169 | 🟢 1.13× | 🟡 0.95× |
-| ChildTransformer | 5,277 | 7,931 | 8,847 | 🟢 1.68× | 🟢 1.12× |
-| FeaturesOverNested | 2,300 | 2,384 | 2,671 | 🟢 1.16× | 🟢 1.12× |
-| NestPaths | 6,629 | 7,260 | 8,729 | 🟢 1.32× | 🟢 1.20× |
-| ParentBlockJoin | 8,493 | 11,071 | 10,513 | 🟢 1.24× | 🔴 0.95× |
-| ParentsByChildren | 923 | 948 | 1,095 | 🟢 1.19× | 🟢 1.16× |
+| Indexing | 4.2 s | 4.2 s | 4.0 s | 🟡 1.03× | 🟢 1.05× |
+| BlockJoinFacets | 2,636 q/s<br>p99 25.6 ms | 2,849 q/s<br>p99 24.5 ms | 2,655 q/s<br>p99 25.9 ms | 🟡 1.01× | 🔴 0.93× |
+| ChildBlockJoin | 6,371 q/s<br>p99 9.30 ms | 7,519 q/s<br>p99 9.40 ms | 7,169 q/s<br>p99 10.4 ms | 🟢 1.13× | 🟡 0.95× |
+| ChildTransformer | 5,277 q/s<br>p99 6.54 ms | 7,931 q/s<br>p99 5.20 ms | 8,847 q/s<br>p99 5.51 ms | 🟢 1.68× | 🟢 1.12× |
+| FeaturesOverNested | 2,300 q/s<br>p99 32.0 ms | 2,384 q/s<br>p99 29.0 ms | 2,671 q/s<br>p99 29.6 ms | 🟢 1.16× | 🟢 1.12× |
+| NestPaths | 6,629 q/s<br>p99 4.74 ms | 7,260 q/s<br>p99 4.62 ms | 8,729 q/s<br>p99 4.26 ms | 🟢 1.32× | 🟢 1.20× |
+| ParentBlockJoin | 8,493 q/s<br>p99 4.14 ms | 11,071 q/s<br>p99 3.34 ms | 10,513 q/s<br>p99 4.00 ms | 🟢 1.24× | 🔴 0.95× |
+| ParentsByChildren | 923 q/s<br>p99 26.8 ms | 948 q/s<br>p99 24.8 ms | 1,095 q/s<br>p99 22.1 ms | 🟢 1.19× | 🟢 1.16× |
 | **Geometric mean, queries** | | | | **🟢 1.23×** | **🟢 1.06×** |
 | Index size after indexing | 0.12 GB, 28 segments | 0.11 GB, 25 segments | 0.14 GB, 19 segments | | 1.25× larger |
 
@@ -320,16 +321,16 @@ Solr+Luxir analyzes text natively, not quite as Solr does, so some requests find
 
 | Category | Stock Solr+Lucene | Solr+Lucene, SM=off | Solr+Luxir | Luxir vs stock | Luxir vs SM=off |
 |---|--:|--:|--:|--:|--:|
-| Indexing (s) | 24.4 | 23.9 | 21.0 | 🟢 1.16× | 🟢 1.14× |
-| KnnBasic | 1,858 | 1,825 | 984 | 🔴 0.53× | 🔴 0.54× |
-| KnnExactSmallFilters | 10,423 | 15,057 | 11,849 | 🟢 1.14× | 🔴 0.79× |
-| KnnFiltered | 3,858 | 4,138 | 2,300 | 🔴 0.60× | 🔴 0.56× |
-| KnnHybrid | 1,616 | 1,619 | 1,121 | 🔴 0.69× | 🔴 0.69× |
-| KnnParams | 8,697 | 9,889 | 6,566 | 🔴 0.75× | 🔴 0.66× |
-| KnnQuantized | 9,236 | 10,749 | 6,724 | 🔴 0.73× | 🔴 0.63× |
-| VectorFields | 8,656 | 13,913 | 14,004 | 🟢 1.62× | 🟡 1.01× |
-| VectorFunctions | 7,171 | 9,721 | 9,576 | 🟢 1.34× | 🟡 0.99× |
-| VectorThreshold | 188 | 200 | 203 | 🟢 1.08× | 🟡 1.01× |
+| Indexing | 24.4 s | 23.9 s | 21.0 s | 🟢 1.16× | 🟢 1.14× |
+| KnnBasic | 1,858 q/s<br>p99 26.0 ms | 1,825 q/s<br>p99 26.8 ms | 984 q/s<br>p99 39.4 ms | 🔴 0.53× | 🔴 0.54× |
+| KnnExactSmallFilters | 10,423 q/s<br>p99 4.91 ms | 15,057 q/s<br>p99 4.23 ms | 11,849 q/s<br>p99 4.65 ms | 🟢 1.14× | 🔴 0.79× |
+| KnnFiltered | 3,858 q/s<br>p99 8.10 ms | 4,138 q/s<br>p99 7.88 ms | 2,300 q/s<br>p99 17.1 ms | 🔴 0.60× | 🔴 0.56× |
+| KnnHybrid | 1,616 q/s<br>p99 21.0 ms | 1,619 q/s<br>p99 20.4 ms | 1,121 q/s<br>p99 28.7 ms | 🔴 0.69× | 🔴 0.69× |
+| KnnParams | 8,697 q/s<br>p99 3.50 ms | 9,889 q/s<br>p99 2.85 ms | 6,566 q/s<br>p99 4.34 ms | 🔴 0.75× | 🔴 0.66× |
+| KnnQuantized | 9,236 q/s<br>p99 3.06 ms | 10,749 q/s<br>p99 2.46 ms | 6,724 q/s<br>p99 4.14 ms | 🔴 0.73× | 🔴 0.63× |
+| VectorFields | 8,656 q/s<br>p99 3.73 ms | 13,913 q/s<br>p99 2.92 ms | 14,004 q/s<br>p99 2.81 ms | 🟢 1.62× | 🟡 1.01× |
+| VectorFunctions | 7,171 q/s<br>p99 5.47 ms | 9,721 q/s<br>p99 4.32 ms | 9,576 q/s<br>p99 5.09 ms | 🟢 1.34× | 🟡 0.99× |
+| VectorThreshold | 188 q/s<br>p99 117 ms | 200 q/s<br>p99 110 ms | 203 q/s<br>p99 111 ms | 🟢 1.08× | 🟡 1.01× |
 | **Geometric mean, queries** | | | | **🔴 0.88×** | **🔴 0.74×** |
 | Index size after indexing | 0.83 GB, 51 segments | 0.82 GB, 51 segments | 0.89 GB, 69 segments | | 1.09× larger |
 
@@ -341,15 +342,15 @@ Vector search is not yet tuned in Solr+Luxir.
 
 | Category | Stock Solr+Lucene | Solr+Lucene, SM=off | Solr+Luxir | Luxir vs stock | Luxir vs SM=off |
 |---|--:|--:|--:|--:|--:|
-| Indexing (s) | 5.5 | 4.7 | 4.6 | 🟢 1.20× | 🟡 1.01× |
-| Currency | 2,205 | 2,337 | 2,254 | 🟡 1.02× | 🟡 0.96× |
-| EnumField | 5,118 | 5,602 | 4,952 | 🟡 0.97× | 🔴 0.88× |
-| LuceneAnalyzedText | 4,946 | 5,050 | 5,112 | 🟡 1.03× | 🟡 1.01× |
-| Payloads | 9,776 | 11,938 | 13,750 | 🟢 1.41× | 🟢 1.15× |
-| RankField | 1,417 | 1,449 | 1,513 | 🟢 1.07× | 🟡 1.04× |
-| SortableText | 6,067 | 6,744 | 8,013 | 🟢 1.32× | 🟢 1.19× |
-| TermVectorHighlighting | 4,885 | 4,737 | 5,394 | 🟢 1.10× | 🟢 1.14× |
-| TermVectors | 8,507 | 8,371 | 10,561 | 🟢 1.24× | 🟢 1.26× |
+| Indexing | 5.5 s | 4.7 s | 4.6 s | 🟢 1.20× | 🟡 1.01× |
+| Currency | 2,205 q/s<br>p99 32.6 ms | 2,337 q/s<br>p99 32.0 ms | 2,254 q/s<br>p99 31.4 ms | 🟡 1.02× | 🟡 0.96× |
+| EnumField | 5,118 q/s<br>p99 6.53 ms | 5,602 q/s<br>p99 6.92 ms | 4,952 q/s<br>p99 8.91 ms | 🟡 0.97× | 🔴 0.88× |
+| LuceneAnalyzedText | 4,946 q/s<br>p99 14.8 ms | 5,050 q/s<br>p99 14.0 ms | 5,112 q/s<br>p99 14.6 ms | 🟡 1.03× | 🟡 1.01× |
+| Payloads | 9,776 q/s<br>p99 4.04 ms | 11,938 q/s<br>p99 3.38 ms | 13,750 q/s<br>p99 2.78 ms | 🟢 1.41× | 🟢 1.15× |
+| RankField | 1,417 q/s<br>p99 18.2 ms | 1,449 q/s<br>p99 17.9 ms | 1,513 q/s<br>p99 17.4 ms | 🟢 1.07× | 🟡 1.04× |
+| SortableText | 6,067 q/s<br>p99 5.33 ms | 6,744 q/s<br>p99 5.00 ms | 8,013 q/s<br>p99 3.97 ms | 🟢 1.32× | 🟢 1.19× |
+| TermVectorHighlighting | 4,885 q/s<br>p99 15.6 ms | 4,737 q/s<br>p99 17.1 ms | 5,394 q/s<br>p99 15.8 ms | 🟢 1.10× | 🟢 1.14× |
+| TermVectors | 8,507 q/s<br>p99 4.98 ms | 8,371 q/s<br>p99 5.38 ms | 10,561 q/s<br>p99 4.65 ms | 🟢 1.24× | 🟢 1.26× |
 | **Geometric mean, queries** | | | | **🟢 1.14×** | **🟢 1.07×** |
 | Index size after indexing | 0.13 GB, 22 segments | 0.11 GB, 21 segments | 0.15 GB, 22 segments | | 1.38× larger |
 
