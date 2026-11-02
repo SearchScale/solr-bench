@@ -6,7 +6,14 @@
 set -euo pipefail
 
 root=$(cd "${1:?usage: $0 /path/to/solr-luxir}" && pwd)
-image=${LUXIR_DEV_IMAGE:-luxir-dev:normal-deps}
+# The dev image is tagged by a hash of its build inputs (Luxir's tools/benchmarks/deps-key.py), so a Luxir
+# checkout with other dependencies builds its own image instead of reusing a stale one.
+if [ -z "${LUXIR_DEV_IMAGE:-}" ] && [ -f "$root/luxir/tools/benchmarks/deps-key.py" ]; then
+  image="luxir-dev:normal-deps-$(python3 "$root/luxir/tools/benchmarks/deps-key.py" "$root/luxir" | cut -c1-16)"
+else
+  image=${LUXIR_DEV_IMAGE:-luxir-dev:normal-deps}
+fi
+echo "Dev image: $image"
 shared_cache=${LUXIR_CACHE_DIR:-$HOME/.cache/luxir}
 home_dir="$root/luxir/build/container-cache/$(id -u)/home"
 mkdir -p "$home_dir" "$shared_cache/container-ccache"
