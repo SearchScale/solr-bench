@@ -1,0 +1,196 @@
+{
+  "pre-download": [
+    "https://huggingface.co/buckets/searchscale/solr-bench/resolve/ecommerce-events-150m.json.gz"
+  ],
+  "task-types": {
+    "indexing": {
+      "index-benchmark": {
+        "name": "ECOMMERCE_EVENTS",
+        "description": "E-Commerce Events dataset",
+        "replication-type": "cloud",
+        "dataset-file": "datasets/ecommerce-events-150m.json.gz",
+        "file-format": "json",
+        "max-docs": 100000000,
+        "batch-size": 50000,
+        "id-field": "id",
+        "threads": [
+          16
+        ],
+        "setups": [
+          {
+            "setup-name": "cloud_3x1",
+            "collection": "ecommerce-events",
+            "configset": "conf_ecommerce_events",
+            "replication-factor": 1,
+            "shards": 3
+          }
+        ]
+      }
+    },
+    "querying-terms": {
+      "query-benchmark": {
+        "name": "Terms facet queries",
+        "description": "event_type terms facet over a 7-day event_time range; 16 concurrent clients",
+        "collection": "ecommerce-events",
+        "query-file": "queries/facets-terms.json",
+        "threads": [
+          16
+        ],
+        "json-query": true,
+        "shuffle": false,
+        "total-count": 6020,
+        "warm-count": 20
+      }
+    },
+    "querying-range": {
+      "query-benchmark": {
+        "name": "Range facet queries",
+        "description": "price range facet (300 buckets) over purchases in a 7-day range; 16 concurrent clients",
+        "collection": "ecommerce-events",
+        "query-file": "queries/facets-range.json",
+        "threads": [
+          16
+        ],
+        "json-query": true,
+        "shuffle": false,
+        "total-count": 6020,
+        "warm-count": 20
+      }
+    },
+    "querying-product": {
+      "query-benchmark": {
+        "name": "Product facet queries",
+        "description": "product_id terms facet and avg(price) over purchases in a 7-day range; 16 concurrent clients",
+        "collection": "ecommerce-events",
+        "query-file": "queries/facets-product.json",
+        "threads": [
+          16
+        ],
+        "json-query": true,
+        "shuffle": false,
+        "total-count": 6020,
+        "warm-count": 20
+      }
+    },
+    "querying-join": {
+      "query-benchmark": {
+        "name": "Join queries",
+        "description": "all docs filtered by a join on user_session from a 1-day event_time range; 16 concurrent clients",
+        "collection": "ecommerce-events",
+        "query-file": "queries/facets-join.json",
+        "threads": [
+          16
+        ],
+        "json-query": true,
+        "shuffle": false,
+        "total-count": 103,
+        "warm-count": 3
+      }
+    },
+    "restart-solr-node": {
+      "restart-solr-node": "${NODE_INDEX}",
+      "await-recoveries": true
+    }
+  },
+  "global-variables": {
+    "collection-counter": 0,
+    "restart-counter": 0
+  },
+  "global-constants": {
+    "HOST": "localhost",
+    "PORT": "8983"
+  },
+  "execution-plan": {
+    "task1": {
+      "type": "indexing",
+      "description": "Indexing events",
+      "instances": 1,
+      "concurrency": 1,
+      "mode": "sync"
+    },
+    "task2": {
+      "description": "Restart Solr node",
+      "instances": 3,
+      "concurrency": 1,
+      "type": "restart-solr-node",
+      "parameters": {
+        "NODE_INDEX": "${restart-counter}"
+      },
+      "wait-for": "task1",
+      "mode": "sync",
+      "pre-task-evals": [
+        "inc(restart-counter,1)"
+      ]
+    },
+    "task3": {
+      "description": "Terms facet queries",
+      "type": "querying-terms",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task2",
+      "mode": "sync"
+    },
+    "task4": {
+      "description": "Range facet queries",
+      "type": "querying-range",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task3",
+      "mode": "sync"
+    },
+    "task5": {
+      "description": "Product facet queries",
+      "type": "querying-product",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task4",
+      "mode": "sync"
+    },
+    "task6": {
+      "description": "Join queries",
+      "type": "querying-join",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task5",
+      "mode": "sync"
+    }
+  },
+  "cluster": {
+    "num-solr-nodes": 3,
+    "startup-params": "-m 16g -Dsolr.searchThreads=4",
+    "environment": {
+      "OMP_NUM_THREADS": "1"
+    },
+    "provisioning-method": "local"
+  },
+  "repositories": [
+    {
+      "commit-id": "d007470bda2f70ba4e1c407ac624e21288947128",
+      "description": "Solr 8.4",
+      "name": "git-repository",
+      "package-subdir": "solr/package/",
+      "build-command": "ant ivy-bootstrap && cd solr && ant compile package",
+      "submodules": false,
+      "url": "https://github.com/apache/lucene-solr",
+      "user": "ishan"
+    },
+    {
+      "commit-id": "dfde16a004206cc92e21cc5a6cad9030fbe13c20",
+      "description": "Solr 10x",
+      "name": "solr-repository",
+      "package-subdir": "solr/packaging/",
+      "build-command": "git clean -fdx && cd solr && ../gradlew distTar",
+      "submodules": false,
+      "url": "https://github.com/apache/solr",
+      "user": "ishan"
+    }
+  ],
+  "metrics": [
+    "jvm/solr.jvm/memory.heap.usage",
+    "jvm/solr.jvm/threads.count"
+  ],
+  "zk-metrics": [
+    "sum_configs_read_per_namespace",
+    "sum_configs_write_per_namespace"
+  ]
+}

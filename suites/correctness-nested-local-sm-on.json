@@ -1,0 +1,262 @@
+{
+  "task-types": {
+    "indexing": {
+      "index-benchmark": {
+        "name": "NESTED",
+        "description": "nested: geonames as 252 country blocks of 3.9K states and 570K places",
+        "replication-type": "cloud",
+        "dataset-file": "datasets/nested.json.gz",
+        "file-format": "json",
+        "batch-size": 1,
+        "id-field": "id",
+        "threads": [
+          16
+        ],
+        "setups": [
+          {
+            "setup-name": "cloud_3x1",
+            "collection": "nested",
+            "configset": "conf_nested",
+            "replication-factor": 1,
+            "shards": 3
+          }
+        ],
+        "update-path": "/update"
+      }
+    },
+    "restart-solr-node": {
+      "restart-solr-node": "${NODE_INDEX}",
+      "await-recoveries": true
+    },
+    "querying-BlockJoinFacets": {
+      "query-benchmark": {
+        "name": "BlockJoinFacets queries",
+        "description": "correctness nested: BlockJoinFacets",
+        "collection": "nested",
+        "query-file": "queries/coverage/nested/BlockJoinFacets.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-ChildBlockJoin": {
+      "query-benchmark": {
+        "name": "ChildBlockJoin queries",
+        "description": "correctness nested: ChildBlockJoin",
+        "collection": "nested",
+        "query-file": "queries/coverage/nested/ChildBlockJoin.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-ChildTransformer": {
+      "query-benchmark": {
+        "name": "ChildTransformer queries",
+        "description": "correctness nested: ChildTransformer",
+        "collection": "nested",
+        "query-file": "queries/coverage/nested/ChildTransformer.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-FeaturesOverNested": {
+      "query-benchmark": {
+        "name": "FeaturesOverNested queries",
+        "description": "correctness nested: FeaturesOverNested",
+        "collection": "nested",
+        "query-file": "queries/coverage/nested/FeaturesOverNested.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-NestPaths": {
+      "query-benchmark": {
+        "name": "NestPaths queries",
+        "description": "correctness nested: NestPaths",
+        "collection": "nested",
+        "query-file": "queries/coverage/nested/NestPaths.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-ParentBlockJoin": {
+      "query-benchmark": {
+        "name": "ParentBlockJoin queries",
+        "description": "correctness nested: ParentBlockJoin",
+        "collection": "nested",
+        "query-file": "queries/coverage/nested/ParentBlockJoin.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-ParentsByChildren": {
+      "query-benchmark": {
+        "name": "ParentsByChildren queries",
+        "description": "correctness nested: ParentsByChildren",
+        "collection": "nested",
+        "query-file": "queries/coverage/nested/ParentsByChildren.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    }
+  },
+  "global-variables": {
+    "collection-counter": 0,
+    "restart-counter": 0
+  },
+  "global-constants": {
+    "HOST": "localhost",
+    "PORT": "8983"
+  },
+  "execution-plan": {
+    "task1": {
+      "type": "indexing",
+      "description": "Indexing nested",
+      "instances": 1,
+      "concurrency": 1,
+      "mode": "sync"
+    },
+    "task2": {
+      "description": "Restart Solr node",
+      "instances": 3,
+      "concurrency": 1,
+      "type": "restart-solr-node",
+      "parameters": {
+        "NODE_INDEX": "${restart-counter}"
+      },
+      "wait-for": "task1",
+      "mode": "sync",
+      "pre-task-evals": [
+        "inc(restart-counter,1)"
+      ]
+    },
+    "task3": {
+      "description": "BlockJoinFacets queries",
+      "type": "querying-BlockJoinFacets",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task2",
+      "mode": "sync"
+    },
+    "task4": {
+      "description": "ChildBlockJoin queries",
+      "type": "querying-ChildBlockJoin",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task3",
+      "mode": "sync"
+    },
+    "task5": {
+      "description": "ChildTransformer queries",
+      "type": "querying-ChildTransformer",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task4",
+      "mode": "sync"
+    },
+    "task6": {
+      "description": "FeaturesOverNested queries",
+      "type": "querying-FeaturesOverNested",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task5",
+      "mode": "sync"
+    },
+    "task7": {
+      "description": "NestPaths queries",
+      "type": "querying-NestPaths",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task6",
+      "mode": "sync"
+    },
+    "task8": {
+      "description": "ParentBlockJoin queries",
+      "type": "querying-ParentBlockJoin",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task7",
+      "mode": "sync"
+    },
+    "task9": {
+      "description": "ParentsByChildren queries",
+      "type": "querying-ParentsByChildren",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task8",
+      "mode": "sync"
+    }
+  },
+  "cluster": {
+    "num-solr-nodes": 3,
+    "startup-params": "-m 16g -Dsolr.searchThreads=4",
+    "environment": {
+      "OMP_NUM_THREADS": "1"
+    },
+    "provisioning-method": "local"
+  },
+  "repositories": [
+    {
+      "commit-id": "d007470bda2f70ba4e1c407ac624e21288947128",
+      "description": "Solr 8.4",
+      "name": "git-repository",
+      "package-subdir": "solr/package/",
+      "build-command": "ant ivy-bootstrap && cd solr && ant compile package",
+      "submodules": false,
+      "url": "https://github.com/apache/lucene-solr",
+      "user": "ishan"
+    },
+    {
+      "commit-id": "dfde16a004206cc92e21cc5a6cad9030fbe13c20",
+      "description": "Solr 10x",
+      "name": "solr-repository",
+      "package-subdir": "solr/packaging/",
+      "build-command": "git clean -fdx && cd solr && ../gradlew distTar",
+      "submodules": false,
+      "url": "https://github.com/apache/solr",
+      "user": "ishan"
+    }
+  ],
+  "metrics": [
+    "jvm/solr.jvm/memory.heap.usage",
+    "jvm/solr.jvm/threads.count"
+  ],
+  "zk-metrics": [
+    "sum_configs_read_per_namespace",
+    "sum_configs_write_per_namespace"
+  ]
+}

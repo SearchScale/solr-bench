@@ -1,0 +1,285 @@
+{
+  "task-types": {
+    "indexing": {
+      "index-benchmark": {
+        "name": "FEATURES",
+        "description": "features: 380K places with Solr's own types (payloads, term vectors, enum, rank, currency)",
+        "replication-type": "cloud",
+        "dataset-file": "datasets/features.json.gz",
+        "file-format": "json",
+        "batch-size": 5000,
+        "id-field": "id",
+        "threads": [
+          16
+        ],
+        "setups": [
+          {
+            "setup-name": "cloud_3x1",
+            "collection": "features",
+            "configset": "conf_features",
+            "replication-factor": 1,
+            "shards": 3
+          }
+        ]
+      }
+    },
+    "restart-solr-node": {
+      "restart-solr-node": "${NODE_INDEX}",
+      "await-recoveries": true
+    },
+    "querying-Currency": {
+      "query-benchmark": {
+        "name": "Currency queries",
+        "description": "correctness features: Currency",
+        "collection": "features",
+        "query-file": "queries/coverage/features/Currency.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-EnumField": {
+      "query-benchmark": {
+        "name": "EnumField queries",
+        "description": "correctness features: EnumField",
+        "collection": "features",
+        "query-file": "queries/coverage/features/EnumField.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-LuceneAnalyzedText": {
+      "query-benchmark": {
+        "name": "LuceneAnalyzedText queries",
+        "description": "correctness features: LuceneAnalyzedText",
+        "collection": "features",
+        "query-file": "queries/coverage/features/LuceneAnalyzedText.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-Payloads": {
+      "query-benchmark": {
+        "name": "Payloads queries",
+        "description": "correctness features: Payloads",
+        "collection": "features",
+        "query-file": "queries/coverage/features/Payloads.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-RankField": {
+      "query-benchmark": {
+        "name": "RankField queries",
+        "description": "correctness features: RankField",
+        "collection": "features",
+        "query-file": "queries/coverage/features/RankField.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-SortableText": {
+      "query-benchmark": {
+        "name": "SortableText queries",
+        "description": "correctness features: SortableText",
+        "collection": "features",
+        "query-file": "queries/coverage/features/SortableText.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-TermVectorHighlighting": {
+      "query-benchmark": {
+        "name": "TermVectorHighlighting queries",
+        "description": "correctness features: TermVectorHighlighting",
+        "collection": "features",
+        "query-file": "queries/coverage/features/TermVectorHighlighting.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST"
+      }
+    },
+    "querying-TermVectors": {
+      "query-benchmark": {
+        "name": "TermVectors queries",
+        "description": "correctness features: TermVectors",
+        "collection": "features",
+        "query-file": "queries/coverage/features/TermVectors.txt",
+        "threads": [
+          16
+        ],
+        "shuffle": false,
+        "duration-secs": 10,
+        "warm-count": 16,
+        "http-method": "POST",
+        "uri": "/tvrh"
+      }
+    }
+  },
+  "global-variables": {
+    "collection-counter": 0,
+    "restart-counter": 0
+  },
+  "global-constants": {
+    "HOST": "localhost",
+    "PORT": "8983"
+  },
+  "execution-plan": {
+    "task1": {
+      "type": "indexing",
+      "description": "Indexing features",
+      "instances": 1,
+      "concurrency": 1,
+      "mode": "sync"
+    },
+    "task2": {
+      "description": "Restart Solr node",
+      "instances": 3,
+      "concurrency": 1,
+      "type": "restart-solr-node",
+      "parameters": {
+        "NODE_INDEX": "${restart-counter}"
+      },
+      "wait-for": "task1",
+      "mode": "sync",
+      "pre-task-evals": [
+        "inc(restart-counter,1)"
+      ]
+    },
+    "task3": {
+      "description": "Currency queries",
+      "type": "querying-Currency",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task2",
+      "mode": "sync"
+    },
+    "task4": {
+      "description": "EnumField queries",
+      "type": "querying-EnumField",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task3",
+      "mode": "sync"
+    },
+    "task5": {
+      "description": "LuceneAnalyzedText queries",
+      "type": "querying-LuceneAnalyzedText",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task4",
+      "mode": "sync"
+    },
+    "task6": {
+      "description": "Payloads queries",
+      "type": "querying-Payloads",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task5",
+      "mode": "sync"
+    },
+    "task7": {
+      "description": "RankField queries",
+      "type": "querying-RankField",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task6",
+      "mode": "sync"
+    },
+    "task8": {
+      "description": "SortableText queries",
+      "type": "querying-SortableText",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task7",
+      "mode": "sync"
+    },
+    "task9": {
+      "description": "TermVectorHighlighting queries",
+      "type": "querying-TermVectorHighlighting",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task8",
+      "mode": "sync"
+    },
+    "task10": {
+      "description": "TermVectors queries",
+      "type": "querying-TermVectors",
+      "instances": 1,
+      "concurrency": 1,
+      "wait-for": "task9",
+      "mode": "sync"
+    }
+  },
+  "cluster": {
+    "num-solr-nodes": 3,
+    "startup-params": "-m 16g -Dsolr.searchThreads=4",
+    "environment": {
+      "OMP_NUM_THREADS": "1"
+    },
+    "provisioning-method": "local"
+  },
+  "repositories": [
+    {
+      "commit-id": "d007470bda2f70ba4e1c407ac624e21288947128",
+      "description": "Solr 8.4",
+      "name": "git-repository",
+      "package-subdir": "solr/package/",
+      "build-command": "ant ivy-bootstrap && cd solr && ant compile package",
+      "submodules": false,
+      "url": "https://github.com/apache/lucene-solr",
+      "user": "ishan"
+    },
+    {
+      "commit-id": "dfde16a004206cc92e21cc5a6cad9030fbe13c20",
+      "description": "Solr 10x",
+      "name": "solr-repository",
+      "package-subdir": "solr/packaging/",
+      "build-command": "git clean -fdx && cd solr && ../gradlew distTar",
+      "submodules": false,
+      "url": "https://github.com/apache/solr",
+      "user": "ishan"
+    }
+  ],
+  "metrics": [
+    "jvm/solr.jvm/memory.heap.usage",
+    "jvm/solr.jvm/threads.count"
+  ],
+  "zk-metrics": [
+    "sum_configs_read_per_namespace",
+    "sum_configs_write_per_namespace"
+  ]
+}
